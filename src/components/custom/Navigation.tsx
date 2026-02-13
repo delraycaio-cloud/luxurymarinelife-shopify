@@ -32,6 +32,18 @@ export function Navigation() {
     setIsMobileMenuOpen(false);
   };
 
+  const handleCheckout = () => {
+    const checkoutItems = items.filter((item) => item.variantId);
+    if (checkoutItems.length === 0) return;
+
+    const cartPath = checkoutItems
+      .map((item) => `${item.variantId}:${item.quantity}`)
+      .join(',');
+
+    const checkoutUrl = `https://9zuae1-uh.myshopify.com/cart/${cartPath}`;
+    window.location.href = checkoutUrl;
+  };
+
   return (
     <>
       <nav
@@ -150,7 +162,11 @@ export function Navigation() {
                           <p className="text-xs text-white/40 mb-4">
                             Shipping calculated at checkout. 10% donated to ocean restoration.
                           </p>
-                          <Button className="w-full bg-teal hover:bg-teal-light text-marine-900 font-semibold py-6">
+                          <Button
+                            onClick={handleCheckout}
+                            disabled={items.length === 0}
+                            className="w-full bg-teal hover:bg-teal-light text-marine-900 font-semibold py-6 disabled:opacity-50 disabled:cursor-not-allowed"
+                          >
                             Checkout
                           </Button>
                         </div>

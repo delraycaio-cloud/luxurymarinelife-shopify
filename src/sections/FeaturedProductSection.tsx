@@ -9,6 +9,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const product = {
   id: "nano-oil-complex",
+  variantId: "42522752254023",
   name: "Nano-Emulsified Super Oil Complex",
   description:
     "Fast-absorbing, clean ingredients designed for recovery and focus—built for travelers and athletes.",
