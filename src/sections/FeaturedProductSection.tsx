@@ -141,13 +141,18 @@ export function FeaturedProductSection() {
 
             {/* CTAs */}
             <div className="mt-8 flex flex-col sm:flex-row gap-4">
-              <Button
-                onClick={handleAddToCart}
-                className="inline-flex items-center gap-2 bg-teal hover:bg-teal-light text-marine-900 font-semibold px-6 py-6 rounded-full transition-all duration-300 hover:translate-y-[-2px]"
+              <a
+                target="_blank"
+                href="https://shearsciences.com/cart/46818496282869:1?ref=ANGELINA_VIP"
               >
-                <ShoppingBag className="w-5 h-5" />
-                Add to Cart
-              </Button>
+                <Button
+                  onClick={handleAddToCart}
+                  className="inline-flex items-center gap-2 bg-teal hover:bg-teal-light text-marine-900 font-semibold px-6 py-6 rounded-full transition-all duration-300 hover:translate-y-[-2px]"
+                >
+                  <ShoppingBag className="w-5 h-5" />
+                  Buy Now
+                </Button>
+              </a>
               <button className="inline-flex items-center gap-2 text-white/80 hover:text-teal font-medium transition-colors">
                 View Full Details
                 <ArrowRight className="w-4 h-4" />
