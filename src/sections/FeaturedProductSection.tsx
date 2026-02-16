@@ -13,7 +13,8 @@ const product = {
   name: "Nano-Emulsified Super Oil Complex",
   description:
     "Fast-absorbing, clean ingredients designed for recovery and focus—built for travelers and athletes.",
-  price: 79.99,
+  originalPrice: 79.99,
+  price: 63.0,
   image: "/oil.png",
   category: "Supplements",
   features: [
@@ -129,9 +130,12 @@ export function FeaturedProductSection() {
             </ul>
 
             {/* Price */}
-            <div className="mt-8">
+            <div className="mt-8 flex items-baseline gap-3">
+              <span className="text-white/50 font-display font-semibold text-xl lg:text-2xl line-through">
+                ${product.originalPrice.toFixed(2)}
+              </span>
               <span className="text-white font-display font-bold text-3xl lg:text-4xl">
-                ${product.price}
+                ${product.price.toFixed(2)}
               </span>
             </div>
 
