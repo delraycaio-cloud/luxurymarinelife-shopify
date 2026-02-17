@@ -23,7 +23,7 @@ function HomePage() {
   };
 
   const handleCategoryClick = (categoryId: string) => {
-    if (categoryId === 'biohacking') navigate('/biohacking');
+    if (categoryId === 'biohacking') navigate('/ultra-shear');
   };
 
   return (
@@ -136,7 +136,7 @@ function RoutedApp() {
         <main className="relative">
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/biohacking" element={<BiohackingBundlesPage onBack={handleBackToHome} />} />
+            <Route path="/ultra-shear" element={<BiohackingBundlesPage onBack={handleBackToHome} />} />
           </Routes>
         </main>
       </div>
