@@ -10,7 +10,7 @@ import { ShopSection } from '@/sections/ShopSection';
 import { FeaturedProductSection } from '@/sections/FeaturedProductSection';
 import { ConnectSection } from '@/sections/ConnectSection';
 import { Footer } from '@/sections/Footer';
-import { BiohackingBundlesPage } from '@/sections/BiohackingBundlesPage';
+import { UltraShearPage } from '@/features/ultra-shear/UltraShearPage';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -75,12 +75,7 @@ function HomePage() {
 
 function RoutedApp() {
   const location = useLocation();
-  const navigate = useNavigate();
-
-  const handleBackToHome = () => {
-    navigate('/');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+  const isUltraShearRoute = location.pathname === '/ultra-shear';
 
   useEffect(() => {
     if (location.pathname !== '/') return;
@@ -129,14 +124,14 @@ function RoutedApp() {
 
   return (
     <CartProvider>
-      <div className="relative bg-marine-900 min-h-screen">
-        <div className="grain-overlay" />
-        <Navigation />
+      <div className={`relative min-h-screen ${isUltraShearRoute ? 'bg-white' : 'bg-marine-900'}`}>
+        {!isUltraShearRoute && <div className="grain-overlay" />}
+        {!isUltraShearRoute && <Navigation />}
 
         <main className="relative">
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/ultra-shear" element={<BiohackingBundlesPage onBack={handleBackToHome} />} />
+            <Route path="/ultra-shear" element={<UltraShearPage />} />
           </Routes>
         </main>
       </div>

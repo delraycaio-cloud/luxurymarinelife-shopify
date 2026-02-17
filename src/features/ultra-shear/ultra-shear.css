@@ -1,0 +1,145 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap");
+
+.ultra-shear-root {
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  font-family: "Montserrat", sans-serif;
+}
+
+.ultra-shear-root h1,
+.ultra-shear-root h2,
+.ultra-shear-root h3,
+.ultra-shear-root h4,
+.ultra-shear-root h5,
+.ultra-shear-root h6,
+.ultra-shear-root .font-serif {
+  font-family: "Cormorant Garamond", serif;
+}
+
+.ultra-shear-root .label-text {
+  font-family: "Montserrat", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+}
+
+.ultra-shear-root .nav-text {
+  font-family: "Montserrat", sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+}
+
+.ultra-shear-root .btn-primary {
+  @apply bg-[#8B1A1A] text-white px-8 py-4 text-xs uppercase tracking-[0.15em] font-medium;
+  transition: all 0.3s var(--ease-out-quart);
+}
+
+.ultra-shear-root .btn-primary:hover {
+  @apply bg-[#6d1515] scale-[1.02];
+}
+
+.ultra-shear-root .btn-outline {
+  @apply border border-[#1A1A1A] text-[#1A1A1A] px-8 py-4 text-xs uppercase tracking-[0.15em] font-medium bg-transparent;
+  transition: all 0.3s var(--ease-out-quart);
+}
+
+.ultra-shear-root .btn-outline:hover {
+  @apply bg-[#1A1A1A] text-white;
+}
+
+.ultra-shear-root .btn-outline-white {
+  @apply border border-white text-white px-8 py-4 text-xs uppercase tracking-[0.15em] font-medium bg-transparent;
+  transition: all 0.3s var(--ease-out-quart);
+}
+
+.ultra-shear-root .btn-outline-white:hover {
+  @apply bg-white text-[#1A1A1A];
+}
+
+.ultra-shear-root .section-padding {
+  @apply py-20 md:py-28 lg:py-32;
+}
+
+.ultra-shear-root .container-luxury {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+.ultra-shear-root .animate-fade-up {
+  animation: ultraShearFadeUp 0.6s var(--ease-out-expo) forwards;
+}
+
+.ultra-shear-root .animate-fade-in {
+  animation: ultraShearFadeIn 0.5s var(--ease-out-quart) forwards;
+}
+
+.ultra-shear-root .animate-slide-down {
+  animation: ultraShearSlideDown 0.6s var(--ease-out-expo) forwards;
+}
+
+.ultra-shear-root .animate-pulse-subtle {
+  animation: ultraShearPulseSubtle 2s ease-in-out infinite;
+}
+
+.ultra-shear-root .animate-countdown {
+  animation: ultraShearCountdownPulse 1s ease-in-out infinite;
+}
+
+@keyframes ultraShearFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ultraShearFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes ultraShearSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ultraShearPulseSubtle {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes ultraShearCountdownPulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.ultra-shear-root ::selection {
+  background: rgba(139, 26, 26, 0.2);
+  color: #1a1a1a;
+}
