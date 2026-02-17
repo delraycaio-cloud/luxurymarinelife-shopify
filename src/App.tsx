@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import { CartProvider } from '@/context/CartContext';
 import { Navigation } from '@/components/custom/Navigation';
 import { HeroSection } from '@/sections/HeroSection';
@@ -13,22 +14,76 @@ import { BiohackingBundlesPage } from '@/sections/BiohackingBundlesPage';
 
 gsap.registerPlugin(ScrollTrigger);
 
-function App() {
-  const [currentPage, setCurrentPage] = useState<'home' | 'biohacking'>('home');
+function HomePage() {
+  const navigate = useNavigate();
+
+  const scrollToShop = () => {
+    const shopSection = document.querySelector('#shop');
+    if (shopSection) shopSection.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const handleCategoryClick = (categoryId: string) => {
+    if (categoryId === 'biohacking') navigate('/biohacking');
+  };
+
+  return (
+    <>
+      <HeroSection />
+
+      <StatementSection
+        id="impact"
+        headline="HEALTHY WATER"
+        body="We fund reef restoration and reduce marine impact-so the places you love stay pristine."
+        backgroundImage="/statement_water_bg.jpg"
+        zIndex={20}
+      />
+
+      <StatementSection
+        id="animals"
+        headline="HEALTHY ANIMALS"
+        body="Every purchase supports coral restoration and cleaner coastlines-because thriving ecosystems matter."
+        backgroundImage="/statement_animals_bg.jpg"
+        zIndex={30}
+      />
+
+      <StatementSection
+        id="experience"
+        headline="THE ERA OF THE SPA YACHT IS OVER. ENTER THE ERA OF THE BIOLOGICAL AMPLIFIER."
+        body="A floating system for recovery, focus, and performance-designed for high performers who refuse to compromise."
+        backgroundImage="/experience_yacht_bg.jpg"
+        zIndex={40}
+        cta={{ text: 'Book a Consultation', onClick: scrollToShop }}
+        secondaryCta={{ text: 'View the Experience', onClick: scrollToShop }}
+      />
+
+      <StatementSection
+        id="philanthropy"
+        headline="10% TO THE OCEAN"
+        body="We donate 10% of every purchase to marine restoration-reefs, coastlines, and the wildlife that depends on them."
+        backgroundImage="/impact_reef_bg.jpg"
+        zIndex={50}
+        cta={{ text: 'Shop with Purpose', onClick: scrollToShop }}
+      />
+
+      <ShopSection onCategoryClick={handleCategoryClick} />
+      <FeaturedProductSection />
+      <ConnectSection />
+      <Footer />
+    </>
+  );
+}
+
+function RoutedApp() {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleBackToHome = () => {
+    navigate('/');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   useEffect(() => {
-    const syncPageFromHash = () => {
-      setCurrentPage(window.location.hash === '#biohacking' ? 'biohacking' : 'home');
-    };
-
-    syncPageFromHash();
-    window.addEventListener('hashchange', syncPageFromHash);
-
-    return () => window.removeEventListener('hashchange', syncPageFromHash);
-  }, []);
-
-  useEffect(() => {
-    if (currentPage !== 'home') return;
+    if (location.pathname !== '/') return;
 
     const setupGlobalSnap = () => {
       const pinned = ScrollTrigger.getAll()
@@ -70,21 +125,7 @@ function App() {
       clearTimeout(timer);
       ScrollTrigger.getAll().forEach((st) => st.kill());
     };
-  }, [currentPage]);
-
-  const scrollToShop = () => {
-    const shopSection = document.querySelector('#shop');
-    if (shopSection) shopSection.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  const handleCategoryClick = (categoryId: string) => {
-    if (categoryId === 'biohacking') window.location.hash = 'biohacking';
-  };
-
-  const handleBackToHome = () => {
-    window.location.hash = '';
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+  }, [location.pathname]);
 
   return (
     <CartProvider>
@@ -93,57 +134,14 @@ function App() {
         <Navigation />
 
         <main className="relative">
-          {currentPage === 'biohacking' ? (
-            <BiohackingBundlesPage onBack={handleBackToHome} />
-          ) : (
-            <>
-              <HeroSection />
-
-              <StatementSection
-                id="impact"
-                headline="HEALTHY WATER"
-                body="We fund reef restoration and reduce marine impact-so the places you love stay pristine."
-                backgroundImage="/statement_water_bg.jpg"
-                zIndex={20}
-              />
-
-              <StatementSection
-                id="animals"
-                headline="HEALTHY ANIMALS"
-                body="Every purchase supports coral restoration and cleaner coastlines-because thriving ecosystems matter."
-                backgroundImage="/statement_animals_bg.jpg"
-                zIndex={30}
-              />
-
-              <StatementSection
-                id="experience"
-                headline="THE ERA OF THE SPA YACHT IS OVER. ENTER THE ERA OF THE BIOLOGICAL AMPLIFIER."
-                body="A floating system for recovery, focus, and performance-designed for high performers who refuse to compromise."
-                backgroundImage="/experience_yacht_bg.jpg"
-                zIndex={40}
-                cta={{ text: 'Book a Consultation', onClick: scrollToShop }}
-                secondaryCta={{ text: 'View the Experience', onClick: scrollToShop }}
-              />
-
-              <StatementSection
-                id="philanthropy"
-                headline="10% TO THE OCEAN"
-                body="We donate 10% of every purchase to marine restoration-reefs, coastlines, and the wildlife that depends on them."
-                backgroundImage="/impact_reef_bg.jpg"
-                zIndex={50}
-                cta={{ text: 'Shop with Purpose', onClick: scrollToShop }}
-              />
-
-              <ShopSection onCategoryClick={handleCategoryClick} />
-              <FeaturedProductSection />
-              <ConnectSection />
-              <Footer />
-            </>
-          )}
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/biohacking" element={<BiohackingBundlesPage onBack={handleBackToHome} />} />
+          </Routes>
         </main>
       </div>
     </CartProvider>
   );
 }
 
-export default App;
+export default RoutedApp;

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   Search,
   ShoppingBag,
@@ -28,6 +29,8 @@ const navLinks = [
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
   const {
     items,
     totalItems,
@@ -47,10 +50,20 @@ export function Navigation() {
   }, []);
 
   const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+    if (location.pathname !== "/") {
+      navigate("/");
+      setTimeout(() => {
+        const element = document.querySelector(href);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 100);
+      setIsMobileMenuOpen(false);
+      return;
     }
+
+    const element = document.querySelector(href);
+    if (element) element.scrollIntoView({ behavior: "smooth" });
     setIsMobileMenuOpen(false);
   };
 
@@ -79,10 +92,14 @@ export function Navigation() {
           <div className="flex items-center justify-between h-16 lg:h-20">
             {/* Logo */}
             <a
-              href="#"
+              href="/"
               className="font-display text-lg lg:text-xl font-bold text-white tracking-tight"
               onClick={(e) => {
                 e.preventDefault();
+                if (location.pathname !== "/") {
+                  navigate("/");
+                  return;
+                }
                 window.scrollTo({ top: 0, behavior: "smooth" });
               }}
             >
