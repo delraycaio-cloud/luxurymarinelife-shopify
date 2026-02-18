@@ -63,13 +63,6 @@ const pricingPlans = [
   },
 ];
 
-const trustSignals = [
-  "Free Shipping on Stacks",
-  "30-Day Guarantee",
-  "Pharmaceutical-Grade Manufacturing",
-  "40,000 PSI Certified Process",
-];
-
 export function Pricing() {
   const [ref, isInView] = useInView<HTMLDivElement>({ threshold: 0.1 });
 
@@ -87,34 +80,7 @@ export function Pricing() {
     <section ref={ref} id="pricing" className="section-padding bg-white">
       <div className="container-luxury">
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2
-            className={`font-serif text-4xl md:text-5xl text-[#1A1A1A] mb-4 transition-all duration-700 ${
-              isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-            }`}
-          >
-            LIMITED-TIME FOUNDERS OPPORTUNITY
-          </h2>
-          <p
-            className={`text-[#8B1A1A] font-medium text-lg mb-6 transition-all duration-700 ${
-              isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-            }`}
-            style={{ transitionDelay: "100ms" }}
-          >
-            Lock in UltraShear Technology™ at Historic Pricing
-          </p>
-          <p
-            className={`text-gray-600 transition-all duration-700 ${
-              isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-            }`}
-            style={{ transitionDelay: "200ms" }}
-          >
-            Due to unprecedented demand and a commitment to our earliest
-            supporters, we are extending this exclusive, limited-number Founders
-            pricing. Once this batch is sold, prices will return to standard
-            retail.
-          </p>
-        </div>
+        <div className="text-center max-w-3xl mx-auto mb-16"></div>
 
         {/* Pricing Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
@@ -181,31 +147,6 @@ export function Pricing() {
           ))}
         </div>
 
-        {/* Trust Signals */}
-        <div
-          className={`flex flex-wrap justify-center gap-6 md:gap-10 mb-8 transition-all duration-700 ${
-            isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}
-          style={{ transitionDelay: "1000ms" }}
-        >
-          {trustSignals.map((signal) => (
-            <div key={signal} className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-[#8B1A1A] rounded-full" />
-              <span className="text-sm text-gray-600">{signal}</span>
-            </div>
-          ))}
-        </div>
-
-        {/* Urgency Note */}
-        <p
-          className={`text-center text-sm text-gray-500 italic transition-all duration-700 ${
-            isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}
-          style={{ transitionDelay: "1100ms" }}
-        >
-          Stock is limited to 100 annual memberships. Pricing will expire when
-          current inventory hits 50 units.
-        </p>
       </div>
     </section>
   );

@@ -11,7 +11,6 @@ import { FullWidthBanner } from "./sections/FullWidthBanner";
 import { Protocol } from "./sections/Protocol";
 import { SupplementFacts } from "./sections/SupplementFacts";
 import { Testimonials } from "./sections/Testimonials";
-import { Pricing } from "./sections/Pricing";
 import { About } from "./sections/About";
 import { Features } from "./sections/Features";
 import { Contact } from "./sections/Contact";
@@ -48,7 +47,6 @@ function HomePage() {
       <Protocol />
       <SupplementFacts />
       <Testimonials />
-      <Pricing />
       <About onNavigate={() => {}} />
       <Features />
       <Contact />
@@ -60,7 +58,6 @@ function ProductsPage() {
   return (
     <>
       <ProductGrid onNavigate={() => {}} />
-      <Pricing />
     </>
   );
 }
@@ -78,11 +75,11 @@ function DiscoverPage() {
               <p className="text-gray-600 leading-relaxed mb-6">
                 At Shear Sciences, we're revolutionizing the way your body
                 absorbs essential nutrients. Our revolutionary, patented
-                UltraShear Technology™ (UST) transforms oil-based supplements
+                UltraShear Technologyâ„¢ (UST) transforms oil-based supplements
                 into highly bioavailable nanoemulsions.
               </p>
               <p className="text-gray-600 leading-relaxed mb-6">
-                Traditional supplements suffer from poor absorption rates—as low
+                Traditional supplements suffer from poor absorption rates as low
                 as 5-10% for oil-based pills. UST nanoemulsions offer 4-10X
                 greater bioavailability, delivering nutrients directly to your
                 bloodstream in just 3-5 minutes.
