@@ -14,7 +14,7 @@ const ingredients = [
 
 const stats = [
   { value: "0%", label: "Preservatives" },
-  { value: "100%", label: "Clean Label" },
+  { value: "100%", label: "Clean-Label" },
   { value: "4-10X", label: "Bioavailability" },
   { value: "3-5 Min", label: "Absorption" },
 ];
@@ -35,8 +35,8 @@ export function InsideFormula() {
                   : "opacity-0 translate-y-8"
               }`}
             >
-              FIVE SUPEROILS PLUS MULTIPLE BIOACTIVES. ONE SIMPLE CLEAN LABEL
-              DELIVERY.
+              FIVE SUPEROILS PLUS MULTIPLE BIOACTIVES. ONE SIMPLE BUT POWERFUL
+              CLEAN-LABEL DELIVERY.
             </h2>
             <p
               className={`text-gray-600 leading-relaxed mb-8 transition-all duration-700 ${
@@ -46,31 +46,11 @@ export function InsideFormula() {
               }`}
               style={{ transitionDelay: "200ms" }}
             >
-              Each ingredient is carefully selected for its synergistic effect.
               UST processing preserves the integrity of every compound while
-              dramatically enhancing absorption. These six are examples - there
-              are dozens upon dozens of additional potent bioactives shown to
-              support antioxidant, anti-inflammatory, and broader health and
-              wellness benefits.
+              dramatically enhancing absorption. Product contains SuperOils and
+              Bioactives shown to offer antioxidant, anti-inflammatory, and
+              broader health and wellness benefits. Clean-Label Ingredients Include:
             </p>
-
-            <div
-              className={`bg-[#FAFAFA] p-6 mb-10 transition-all duration-700 ${
-                isInView
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-8"
-              }`}
-              style={{ transitionDelay: "300ms" }}
-            >
-              <p className="label-text text-[#8B1A1A] mb-2">
-                THE SHEAR SCIENCE DIFFERENCE
-              </p>
-              <p className="text-gray-600">
-                All natural. 100% plant based. No artificial chemicals.
-                Preservative-free. 4-10X standard bioavailability. Longterm
-                stable.
-              </p>
-            </div>
 
             {/* Ingredient Cards */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -94,6 +74,24 @@ export function InsideFormula() {
                   <p className="text-sm text-gray-500">{ingredient.benefit}</p>
                 </div>
               ))}
+            </div>
+
+            <div
+              className={`bg-[#FAFAFA] p-6 mb-10 mt-10 transition-all duration-700 ${
+                isInView
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-8"
+              }`}
+              style={{ transitionDelay: "300ms" }}
+            >
+              <p className="label-text text-[#8B1A1A] mb-2">
+                THE SHEAR SCIENCES DIFFERENCE
+              </p>
+              <p className="text-gray-600">
+                All natural. 100% plant based. No artificial chemicals.
+                Preservative-free. 4-10X standard bioavailability. Longterm
+                stable.
+              </p>
             </div>
 
             {/* Stats */}
@@ -138,3 +136,4 @@ export function InsideFormula() {
     </section>
   );
 }
+

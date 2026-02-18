@@ -53,7 +53,7 @@ const trustSignals = [
   "Free Shipping on Stacks",
   "30-Day Guarantee",
   "Pharmaceutical-Grade Manufacturing",
-  "40,000 PSI Certified Process",
+  "Processed by UltraShear Technology™ (UST)",
 ];
 
 interface ProductGridProps {
@@ -151,7 +151,7 @@ export function ProductGrid({ onNavigate }: ProductGridProps) {
 
               <div className="bg-[#FAFAFA] p-6">
                 <p className="label-text text-gray-500 mb-3">
-                  CLEAN LABEL INGREDIENTS INCLUDE
+                  CLEAN-LABEL INGREDIENTS INCLUDE
                 </p>
                 <ul className="space-y-2 text-gray-600">
                   <li>- Coenzyme Q10 (CoQ10)</li>
@@ -302,3 +302,4 @@ export function ProductGrid({ onNavigate }: ProductGridProps) {
     </section>
   );
 }
+

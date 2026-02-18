@@ -9,7 +9,7 @@ const features = [
   },
   {
     icon: Leaf,
-    title: 'CLEAN LABEL',
+    title: 'CLEAN-LABEL',
     description: 'Zero Preservatives, Zero Synthetics',
   },
   {
@@ -55,4 +55,5 @@ export function Features() {
     </section>
   );
 }
+
 

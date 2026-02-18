@@ -18,13 +18,14 @@ const slides: Slide[] = [
   {
     image: "/images/oil_hero2.jpeg",
     category: "NATURAL POTENCY",
-    tagline: "FIVE SUPEROILS. PLUS, ADD'L POWERFUL ANTIOXIDANTS.",
+    tagline:
+      "FIVE SUPEROILS. PLUS, ADD'L POWERFUL ANTIOXIDANTS AND OTHER BIOACTIVES",
     cta: "EXPLORE",
   },
   {
     image: "/images/oil_hero3.jpeg",
     category: "DAILY RITUAL",
-    tagline: "SIX SIMPLE ORAL SPRAYS. TOTAL PROTECTION.",
+    tagline: "SIX QUICK AND EASY ORAL SPRAYS. NEARLY IMMEDIATE PROTECTION.",
     cta: "BUY NOW",
   },
 ];

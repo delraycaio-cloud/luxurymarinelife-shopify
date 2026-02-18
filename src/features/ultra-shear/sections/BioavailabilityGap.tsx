@@ -1,21 +1,21 @@
-import { useInView } from '@/hooks/useInView';
-import { Droplets, Flame, Clock } from 'lucide-react';
+import { useInView } from "@/hooks/useInView";
+import { Droplets, Flame, Clock } from "lucide-react";
 
 const iconCards = [
   {
     icon: Droplets,
-    title: 'Low Absorption',
-    description: 'Usually less than 10% reaches your bloodstream',
+    title: "Low Absorption",
+    description: "Usually less than 10% reaches your bloodstream",
   },
   {
     icon: Flame,
-    title: 'Wasted Potency',
-    description: 'In some cases, as much as 95% can be wasted',
+    title: "Wasted Potency",
+    description: "In some cases, as much as 95% can be wasted",
   },
   {
     icon: Clock,
-    title: 'Sluggish Uptake',
-    description: 'Can take as long as 45-90 minutes for full absorption',
+    title: "Sluggish Uptake",
+    description: "Can take as long as 45-90 minutes for full absorption",
   },
 ];
 
@@ -31,8 +31,8 @@ export function BioavailabilityGap() {
             <h2
               className={`font-serif text-4xl md:text-5xl text-[#1A1A1A] mb-4 transition-all duration-700 ${
                 isInView
-                  ? 'opacity-100 translate-y-0'
-                  : 'opacity-0 translate-y-8'
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-8"
               }`}
             >
               THE BIOAVAILABILITY GAP
@@ -40,23 +40,23 @@ export function BioavailabilityGap() {
             <p
               className={`text-[#8B1A1A] font-medium text-lg mb-8 transition-all duration-700 ${
                 isInView
-                  ? 'opacity-100 translate-y-0'
-                  : 'opacity-0 translate-y-8'
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-8"
               }`}
-              style={{ transitionDelay: '200ms' }}
+              style={{ transitionDelay: "200ms" }}
             >
               YOUR BODY IS 70% WATER. OIL DOESN'T MIX.
             </p>
             <p
               className={`text-gray-600 leading-relaxed mb-8 transition-all duration-700 ${
                 isInView
-                  ? 'opacity-100 translate-y-0'
-                  : 'opacity-0 translate-y-8'
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-8"
               }`}
-              style={{ transitionDelay: '300ms' }}
+              style={{ transitionDelay: "300ms" }}
             >
-              Traditional oil-based pills have absorption rates as low as 5-10%. In
-              some cases, as much as 95% of potency is wasted. Your body is
+              Traditional oil-based pills have absorption rates as low as 5-10%.
+              In some cases, as much as 95% of potency is wasted. Your body is
               approximately 70% water - it poorly absorbs hydrophobic,
               water-repelling, oil-based vitamins and supplements.
             </p>
@@ -64,10 +64,10 @@ export function BioavailabilityGap() {
             <div
               className={`mb-8 transition-all duration-700 ${
                 isInView
-                  ? 'opacity-100 translate-y-0'
-                  : 'opacity-0 translate-y-8'
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-8"
               }`}
-              style={{ transitionDelay: '400ms' }}
+              style={{ transitionDelay: "400ms" }}
             >
               <h3 className="label-text text-[#1A1A1A] mb-3">
                 FIRST-PASS METABOLISM
@@ -87,13 +87,12 @@ export function BioavailabilityGap() {
                 <div
                   key={card.title}
                   className={`text-center p-6 bg-[#FAFAFA] transition-all duration-700 hover:shadow-lg hover:-translate-y-1 ${
-                    isInView
-                      ? 'opacity-100 scale-100'
-                      : 'opacity-0 scale-90'
+                    isInView ? "opacity-100 scale-100" : "opacity-0 scale-90"
                   }`}
                   style={{
                     transitionDelay: `${500 + index * 100}ms`,
-                    transitionTimingFunction: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+                    transitionTimingFunction:
+                      "cubic-bezier(0.175, 0.885, 0.32, 1.275)",
                   }}
                 >
                   <card.icon className="w-8 h-8 text-[#8B1A1A] mx-auto mb-4" />
@@ -110,12 +109,16 @@ export function BioavailabilityGap() {
           <div
             className={`transition-all duration-1000 ${
               isInView
-                ? 'opacity-100 translate-x-0'
-                : 'opacity-0 translate-x-20'
+                ? "opacity-100 translate-x-0"
+                : "opacity-0 translate-x-20"
             }`}
-            style={{ transitionDelay: '600ms' }}
+            style={{ transitionDelay: "600ms" }}
           >
             <div className="bg-[#FAFAFA] p-8 md:p-12">
+              <h3 className="font-serif text-2xl text-[#1A1A1A] text-center mb-8">
+                Oil-Soluble Bioactives
+              </h3>
+
               <div className="space-y-8">
                 {/* Traditional Pills */}
                 <div>
@@ -198,4 +201,3 @@ export function BioavailabilityGap() {
     </section>
   );
 }
-

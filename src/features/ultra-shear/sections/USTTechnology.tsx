@@ -1,7 +1,7 @@
 import { useInView } from "@/hooks/useInView";
 
 const stats = [
-  { value: "40,000+", label: "PSI", sublabel: "2.5× Marianas Trench pressure" },
+  { value: "40K+", label: "psi", sublabel: "2.5× Marianas Trench pressure" },
   { value: "20-80", label: "nm", sublabel: "Nano-droplet size" },
   { value: "3-5", label: "min", sublabel: "Absorption onset" },
   { value: "4-10X", label: "", sublabel: "Bioavailability vs pills" },
@@ -54,8 +54,8 @@ export function USTTechnology() {
               }`}
               style={{ transitionDelay: "400ms" }}
             >
-              WE DON'T USE SYNTHETIC CHEMICALS. WE ARE ALL NATURAL. WE USE
-              PHYSICS.
+              We use Physics to Make the World’s first, Super Antioxidant Oil
+              Complex Oral NanoSpray.
             </p>
 
             <div
@@ -70,7 +70,7 @@ export function USTTechnology() {
                 The Physics Engine: UST subjects oil to intense pressure — over
                 40,000 PSI, that's 2.5× the pressure at the bottom of the
                 Marianas Trench — at controlled temperatures, forcing it through
-                a revolutionary, patented NanoGap Valve.
+                a revolutionary, patented NanoGap Valve™.
               </p>
               <p>
                 This mechanical transformation uses physics, not synthetic
@@ -102,9 +102,13 @@ export function USTTechnology() {
                   className="text-center"
                   style={{ animationDelay: `${1200 + index * 100}ms` }}
                 >
-                  <div className="font-serif text-3xl md:text-4xl text-[#8B1A1A] mb-1">
+                  <div className="font-serif text-2xl md:text-3xl text-[#8B1A1A] mb-1 whitespace-nowrap leading-none">
                     {stat.value}
-                    <span className="text-xl">{stat.label}</span>
+                    {stat.label ? (
+                      <span className="text-sm md:text-base ml-1">
+                        {stat.label}
+                      </span>
+                    ) : null}
                   </div>
                   <p className="text-xs text-gray-500">{stat.sublabel}</p>
                 </div>
@@ -121,11 +125,11 @@ export function USTTechnology() {
               style={{ transitionDelay: "900ms" }}
             >
               <p className="text-sm text-gray-600">
-                <span className="font-medium text-[#1A1A1A]">CLEAN LABEL:</span>{" "}
-                UST nanoemulsions are processed under GMP into next-generation
-                spray bottles that uniquely keep the nanoemulsion microbial-free
-                during its entire shelf-life without the need for synthetic
-                additives and preservatives.
+                <span className="font-medium text-[#1A1A1A]">CLEAN-LABEL:</span>{" "}
+                UST nanoemulsions are processed under GMP and sterile-filled
+                into special spray bottles that uniquely keep the nanoemulsion
+                microbial-free during its entire shelf-life without the need
+                for synthetic additives and preservatives.
               </p>
             </div>
           </div>
@@ -134,3 +138,5 @@ export function USTTechnology() {
     </section>
   );
 }
+
+

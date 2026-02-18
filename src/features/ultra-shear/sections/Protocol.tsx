@@ -5,7 +5,7 @@ const steps = [
   {
     number: '01',
     icon: Droplets,
-    title: 'Spray Under the Tongue and on Inner Cheeks',
+    title: 'Spray Under Tongue / Inner Cheeks',
     description: 'Target oral mucosa for direct absorption',
   },
   {
@@ -58,7 +58,7 @@ export function Protocol() {
                 <step.icon className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 text-[#8B1A1A]" />
               </div>
 
-              <h3 className="font-serif text-2xl text-[#1A1A1A] mb-3">
+              <h3 className="font-serif text-xl md:text-2xl text-[#1A1A1A] mb-3 md:whitespace-nowrap">
                 {step.title}
               </h3>
               <p className="text-gray-600">{step.description}</p>
@@ -82,3 +82,4 @@ export function Protocol() {
     </section>
   );
 }
+
