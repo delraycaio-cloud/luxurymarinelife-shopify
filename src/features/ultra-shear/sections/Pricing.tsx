@@ -1,5 +1,4 @@
 import { useInView } from "@/hooks/useInView";
-import { useCartStore } from "@/store/cartStore";
 import { Sparkles, Zap, Trophy, Flame } from "lucide-react";
 
 const pricingPlans = [
@@ -9,12 +8,14 @@ const pricingPlans = [
     subtitle: "FIRST-TIME BUYER EXCLUSIVE",
     description: "1x Super Antioxidant NanoSpray",
     originalPrice: 79,
-    foundersPrice: 63,
+    foundersPrice: 64,
     savings: "Save $16 (20% off)",
     supply: "30-Day Supply",
     badge: "SUPER SALE",
     badgeIcon: Flame,
     badgeColor: "bg-orange-500",
+    checkoutUrl:
+      "https://shearsciences.com/discount/MARINE20?redirect=%2Fcart%2F46818496282869%3A1%3Fref%3DANGELINA_VIP",
   },
   {
     id: "biohacker",
@@ -24,11 +25,12 @@ const pricingPlans = [
     originalPrice: 237,
     foundersPrice: 189,
     savings: "Save $48 (20% off)",
-    supply: "90-Day Supply — $63/bottle",
+    supply: "90-Day Supply — $64/bottle",
     badge: "FOUNDERS OFFER",
     badgeIcon: Zap,
     badgeColor: "bg-[#D4A84B]",
     popular: true,
+    variantId: "47621010030837",
   },
   {
     id: "executive",
@@ -42,6 +44,7 @@ const pricingPlans = [
     badge: "MAXIMIZED VALUE",
     badgeIcon: Sparkles,
     badgeColor: "bg-purple-500",
+    variantId: "47621066424565",
   },
   {
     id: "ceo",
@@ -56,6 +59,7 @@ const pricingPlans = [
     badgeIcon: Trophy,
     badgeColor: "bg-[#D4A84B]",
     bestValue: true,
+    variantId: "47621098799349",
   },
 ];
 
@@ -68,17 +72,15 @@ const trustSignals = [
 
 export function Pricing() {
   const [ref, isInView] = useInView<HTMLDivElement>({ threshold: 0.1 });
-  const { addItem } = useCartStore();
 
   const handleAddToCart = (plan: (typeof pricingPlans)[0]) => {
-    addItem({
-      id: plan.id,
-      name: plan.name,
-      price: plan.foundersPrice,
-      originalPrice: plan.originalPrice,
-      image: "/images/product-1.png",
-      subtitle: plan.description,
-    });
+    if (plan.checkoutUrl) {
+      window.location.href = plan.checkoutUrl;
+      return;
+    }
+
+    if (!plan.variantId) return;
+    window.location.href = `https://shearsciences.com/cart/${plan.variantId}:1?ref=ANGELINA_VIP`;
   };
 
   return (

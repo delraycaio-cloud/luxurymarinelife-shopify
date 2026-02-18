@@ -5,7 +5,7 @@ export function SupplementFacts() {
 
   const handleBuyNow = () => {
     window.location.href =
-      "https://shearsciences.com/cart/46818496282869:1?ref=ANGELINA_VIP";
+      "https://shearsciences.com/discount/MARINE20?redirect=%2Fcart%2F46818496282869%3A1%3Fref%3DANGELINA_VIP";
   };
 
   return (
@@ -41,7 +41,7 @@ export function SupplementFacts() {
                   $79.99
                 </span>
                 <span className="font-serif text-3xl text-[#8B1A1A]">
-                  $63.00
+                  $64.00
                 </span>
               </div>
               <p className="text-sm text-gray-500 mb-1">30-Day Supply</p>

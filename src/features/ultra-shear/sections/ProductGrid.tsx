@@ -1,5 +1,4 @@
 import { useInView } from "@/hooks/useInView";
-import { useCartStore } from "@/store/cartStore";
 import { ArrowRight } from "lucide-react";
 
 interface Product {
@@ -11,47 +10,42 @@ interface Product {
   originalPrice: number;
   foundersPrice: number;
   badge: string;
+  variantId: string;
 }
 
 const products: Product[] = [
-  // {
-  //   id: 'single',
-  //   image: '/images/product-1.png',
-  //   vendor: 'Shear Sciences',
-  //   name: 'Super Antioxidant Oil Complex Oral NanoSpray',
-  //   originalPrice: 79.99,
-  //   foundersPrice: 63.0,
-  //   badge: 'FOUNDERS PRICE',
-  // },
   {
     id: "biohacker",
     image: "/images/oil_table3.jpeg",
     vendor: "Shear Sciences",
-    name: "The Biohacker's Stack — 90-Day Supply",
+    name: "The Biohacker's Stack - 90-Day Supply",
     subtitle: "3x NanoSpray Bottles",
     originalPrice: 237.0,
     foundersPrice: 189.0,
     badge: "SAVE $48",
+    variantId: "47621010030837",
   },
   {
     id: "executive",
     image: "/images/12b.png",
     vendor: "Shear Sciences",
-    name: "Executive Longevity Stack — 6-Month Supply",
+    name: "Executive Longevity Stack - 6-Month Supply",
     subtitle: "6x NanoSpray Bottles",
     originalPrice: 474.0,
     foundersPrice: 367.0,
     badge: "SAVE $107",
+    variantId: "47621066424565",
   },
   {
     id: "ceo",
     image: "/images/oil_12.png",
     vendor: "Shear Sciences",
-    name: "Health CEO Annual Supply — 12-Month",
+    name: "Health CEO Annual Supply - 12-Month",
     subtitle: "12x NanoSpray Bottles",
     originalPrice: 948.0,
     foundersPrice: 719.0,
-    badge: "BEST VALUE — SAVE $229",
+    badge: "BEST VALUE - SAVE $229",
+    variantId: "47621098799349",
   },
 ];
 
@@ -61,17 +55,9 @@ interface ProductGridProps {
 
 export function ProductGrid({ onNavigate }: ProductGridProps) {
   const [ref, isInView] = useInView<HTMLDivElement>({ threshold: 0.1 });
-  const { addItem } = useCartStore();
 
   const handleAddToCart = (product: Product) => {
-    addItem({
-      id: product.id,
-      name: product.name,
-      price: product.foundersPrice,
-      originalPrice: product.originalPrice,
-      image: product.image,
-      subtitle: product.subtitle,
-    });
+    window.location.href = `https://shearsciences.com/cart/${product.variantId}:1?ref=ANGELINA_VIP`;
   };
 
   return (
@@ -101,9 +87,7 @@ export function ProductGrid({ onNavigate }: ProductGridProps) {
             <div
               key={product.id}
               className={`group transition-all duration-700 ${
-                isInView
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-16"
+                isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-16"
               }`}
               style={{
                 transitionDelay: `${200 + index * 100}ms`,
@@ -125,16 +109,12 @@ export function ProductGrid({ onNavigate }: ProductGridProps) {
 
               {/* Product Info */}
               <div className="text-center">
-                <p className="label-text text-gray-500 mb-2">
-                  {product.vendor}
-                </p>
+                <p className="label-text text-gray-500 mb-2">{product.vendor}</p>
                 <h3 className="font-serif text-lg text-[#1A1A1A] mb-1 line-clamp-2">
                   {product.name}
                 </h3>
                 {product.subtitle && (
-                  <p className="text-sm text-gray-500 mb-3">
-                    {product.subtitle}
-                  </p>
+                  <p className="text-sm text-gray-500 mb-3">{product.subtitle}</p>
                 )}
 
                 {/* Pricing */}
@@ -158,7 +138,6 @@ export function ProductGrid({ onNavigate }: ProductGridProps) {
             </div>
           ))}
         </div>
-
       </div>
     </section>
   );

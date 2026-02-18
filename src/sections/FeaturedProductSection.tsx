@@ -14,7 +14,7 @@ const product = {
   description:
     "Fast-absorbing, clean ingredients designed for recovery and focus—built for travelers and athletes.",
   originalPrice: 79.99,
-  price: 63.0,
+  price: 64.0,
   image: "/oil.png",
   category: "Supplements",
   features: [
@@ -143,7 +143,7 @@ export function FeaturedProductSection() {
             <div className="mt-8 flex flex-col sm:flex-row gap-4">
               <a
                 target="_blank"
-                href="https://shearsciences.com/cart/46818496282869:1?ref=ANGELINA_VIP"
+                href="https://shearsciences.com/discount/MARINE20?redirect=%2Fcart%2F46818496282869%3A1%3Fref%3DANGELINA_VIP"
               >
                 <Button
                   onClick={handleAddToCart}
