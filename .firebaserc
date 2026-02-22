@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "ac-godmode-titan"
+  },
+  "targets": {
+    "ac-godmode-titan": {
+      "hosting": {
+        "luxurymarinelife-shopify": [
+          "luxurymarinelife-shopify"
+        ]
+      }
+    }
+  }
+}
