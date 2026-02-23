@@ -1,18 +1,24 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Luxury Marine Life — Elite ocean wellness, premium sustainable tech, and world-class yacht charters. Healthy people. Healthy water. Healthy animals. Your marine lifestyle, elevated.">
-    <meta name="keywords" content="luxury marine life, ocean wellness, yacht charter, marine supplements, NanoSpray, UltraShear, sustainable marine tech, ocean health">
+    <meta name="description"
+        content="Luxury Marine Life — Elite ocean wellness, premium sustainable tech, and world-class yacht charters. Healthy people. Healthy water. Healthy animals. Your marine lifestyle, elevated.">
+    <meta name="keywords"
+        content="luxury marine life, ocean wellness, yacht charter, marine supplements, NanoSpray, UltraShear, sustainable marine tech, ocean health">
     <meta property="og:title" content="Luxury Marine Life | Ocean Wellness & Elite Charters">
-    <meta property="og:description" content="Your signature ocean wellness brand. Premium supplements, world-class charters, and sustainability-first marine technology.">
+    <meta property="og:description"
+        content="Your signature ocean wellness brand. Premium supplements, world-class charters, and sustainability-first marine technology.">
     <meta property="og:type" content="website">
     <link rel="canonical" href="https://luxurymarinelife.com/">
     <title>Luxury Marine Life | Ocean Wellness & Elite Charters</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;600;700;800;900&display=swap"
+        rel="stylesheet">
 
     <script type="application/ld+json">
     {
@@ -43,11 +49,22 @@
             --text-main: #f8fafc;
             --text-muted: #cbd5e1;
             --text-sub: #94a3b8;
-            --glass-bg: rgba(255,255,255,0.03);
-            --glass-border: rgba(255,255,255,0.07);
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.07);
         }
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             background: var(--deep-ocean);
             color: var(--text-main);
@@ -59,407 +76,823 @@
         /* Ambient glow */
         body::before {
             content: '';
-            position: fixed; inset: 0;
+            position: fixed;
+            inset: 0;
             background:
-                radial-gradient(ellipse 100% 50% at 50% 0%, rgba(56,189,248,0.07) 0%, transparent 60%),
-                radial-gradient(circle at 15% 50%, rgba(6,182,212,0.05) 0%, transparent 45%),
-                radial-gradient(circle at 85% 80%, rgba(20,184,166,0.05) 0%, transparent 45%);
-            pointer-events: none; z-index: 0;
+                radial-gradient(ellipse 100% 50% at 50% 0%, rgba(56, 189, 248, 0.07) 0%, transparent 60%),
+                radial-gradient(circle at 15% 50%, rgba(6, 182, 212, 0.05) 0%, transparent 45%),
+                radial-gradient(circle at 85% 80%, rgba(20, 184, 166, 0.05) 0%, transparent 45%);
+            pointer-events: none;
+            z-index: 0;
         }
 
         /* ─── HEADER / NAV ─── */
         header {
-            position: sticky; top: 0; z-index: 100;
+            position: sticky;
+            top: 0;
+            z-index: 100;
             padding: 1.25rem 3rem;
-            display: flex; align-items: center; justify-content: space-between;
-            background: rgba(6,13,24,0.88);
-            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255,255,255,0.06);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(6, 13, 24, 0.88);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
         }
+
         .nav-logo {
-            font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.15rem;
-            letter-spacing: 2px; color: var(--text-main); text-decoration: none; text-transform: uppercase;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            font-size: 1.15rem;
+            letter-spacing: 2px;
+            color: var(--text-main);
+            text-decoration: none;
+            text-transform: uppercase;
         }
-        .nav-logo span { color: var(--biolum-cyan); }
-        .nav-links { display: flex; align-items: center; gap: 2rem; }
+
+        .nav-logo span {
+            color: var(--biolum-cyan);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
         .nav-links a {
-            color: var(--text-sub); text-decoration: none; font-size: 0.875rem;
-            font-weight: 500; letter-spacing: 0.5px; transition: color 0.3s;
+            color: var(--text-sub);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: color 0.3s;
         }
-        .nav-links a:hover { color: var(--biolum-cyan); }
+
+        .nav-links a:hover {
+            color: var(--biolum-cyan);
+        }
+
         .nav-cta {
             background: linear-gradient(135deg, var(--biolum-cyan), #0284c7) !important;
-            color: #fff !important; padding: 0.6rem 1.25rem !important; border-radius: 8px !important;
-            font-weight: 700 !important; letter-spacing: 1px !important;
-            box-shadow: 0 4px 15px rgba(6,182,212,0.25) !important;
+            color: #fff !important;
+            padding: 0.6rem 1.25rem !important;
+            border-radius: 8px !important;
+            font-weight: 700 !important;
+            letter-spacing: 1px !important;
+            box-shadow: 0 4px 15px rgba(6, 182, 212, 0.25) !important;
             transition: all 0.3s !important;
         }
-        .nav-cta:hover { box-shadow: 0 6px 25px rgba(6,182,212,0.5) !important; transform: translateY(-1px) !important; }
+
+        .nav-cta:hover {
+            box-shadow: 0 6px 25px rgba(6, 182, 212, 0.5) !important;
+            transform: translateY(-1px) !important;
+        }
+
         @media (max-width: 768px) {
-            header { padding: 1rem 1.5rem; }
-            .nav-links { gap: 1rem; }
-            .nav-links a:not(.nav-cta) { display: none; }
+            header {
+                padding: 1rem 1.5rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .nav-links a:not(.nav-cta) {
+                display: none;
+            }
         }
 
         /* ─── HERO ─── */
         .hero {
-            position: relative; min-height: 90vh;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            text-align: center; padding: 6rem 2rem 4rem;
+            position: relative;
+            min-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 6rem 2rem 4rem;
             overflow: hidden;
         }
+
         .hero-bg {
-            position: absolute; inset: 0;
+            position: absolute;
+            inset: 0;
             background:
-                linear-gradient(180deg, rgba(6,13,24,0.3) 0%, rgba(6,13,24,0.6) 70%, var(--deep-ocean) 100%),
-                radial-gradient(ellipse at 50% 40%, rgba(56,189,248,0.12) 0%, transparent 60%),
+                linear-gradient(180deg, rgba(6, 13, 24, 0.3) 0%, rgba(6, 13, 24, 0.6) 70%, var(--deep-ocean) 100%),
+                radial-gradient(ellipse at 50% 40%, rgba(56, 189, 248, 0.12) 0%, transparent 60%),
                 linear-gradient(160deg, #0a1628 0%, #0f2040 35%, #071525 65%, #040c1a 100%);
         }
+
         /* Animated ocean shimmer */
         .hero-bg::after {
             content: '';
-            position: absolute; inset: 0;
+            position: absolute;
+            inset: 0;
             background-image:
-                radial-gradient(1px 1px at 20% 30%, rgba(56,189,248,0.5), transparent),
-                radial-gradient(1.5px 1.5px at 60% 65%, rgba(6,182,212,0.5), transparent),
-                radial-gradient(1px 1px at 85% 20%, rgba(20,184,166,0.4), transparent),
-                radial-gradient(1px 1px at 40% 80%, rgba(56,189,248,0.4), transparent),
-                radial-gradient(2px 2px at 10% 60%, rgba(148,163,184,0.3), transparent);
+                radial-gradient(1px 1px at 20% 30%, rgba(56, 189, 248, 0.5), transparent),
+                radial-gradient(1.5px 1.5px at 60% 65%, rgba(6, 182, 212, 0.5), transparent),
+                radial-gradient(1px 1px at 85% 20%, rgba(20, 184, 166, 0.4), transparent),
+                radial-gradient(1px 1px at 40% 80%, rgba(56, 189, 248, 0.4), transparent),
+                radial-gradient(2px 2px at 10% 60%, rgba(148, 163, 184, 0.3), transparent);
             animation: starField 10s ease-in-out infinite alternate;
         }
-        @keyframes starField { from { opacity: 0.3; } to { opacity: 0.8; } }
+
+        @keyframes starField {
+            from {
+                opacity: 0.3;
+            }
+
+            to {
+                opacity: 0.8;
+            }
+        }
 
         /* Hero image strip (existing assets preserved) */
         .hero-visual {
-            position: absolute; bottom: 0; left: 0; right: 0; height: 55%;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 55%;
             background:
                 linear-gradient(to top, var(--deep-ocean) 0%, transparent 60%),
                 url('/hero_wellness_bg.jpg') center/cover no-repeat;
             opacity: 0.35;
         }
 
-        .hero-content { position: relative; z-index: 5; max-width: 800px; }
+        .hero-content {
+            position: relative;
+            z-index: 5;
+            max-width: 800px;
+        }
+
         .hero-eyebrow {
-            display: inline-flex; align-items: center; gap: 0.75rem;
-            color: var(--biolum-teal); font-size: 0.78rem; font-weight: 700;
-            letter-spacing: 4px; text-transform: uppercase; margin-bottom: 1.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--biolum-teal);
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
         }
-        .hero-eyebrow::before, .hero-eyebrow::after {
-            content: ''; display: block; width: 20px; height: 1px; background: var(--biolum-teal);
+
+        .hero-eyebrow::before,
+        .hero-eyebrow::after {
+            content: '';
+            display: block;
+            width: 20px;
+            height: 1px;
+            background: var(--biolum-teal);
         }
+
         h1 {
             font-family: 'Outfit', sans-serif;
-            font-size: clamp(2.8rem, 6vw, 5rem); font-weight: 900; line-height: 1.05;
-            letter-spacing: -1px; margin-bottom: 1.25rem;
+            font-size: clamp(2.8rem, 6vw, 5rem);
+            font-weight: 900;
+            line-height: 1.05;
+            letter-spacing: -1px;
+            margin-bottom: 1.25rem;
             background: linear-gradient(135deg, #f8fafc 0%, var(--sky-blue) 45%, var(--biolum-teal) 100%);
-            -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
+
         .hero p {
-            font-size: 1.15rem; color: var(--text-muted); max-width: 580px;
-            margin: 0 auto 2.5rem; line-height: 1.8;
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            max-width: 580px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.8;
         }
-        .hero-cta-group { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+        .hero-cta-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
 
         /* Buttons */
         .btn-hero-primary {
-            display: inline-flex; align-items: center; gap: 0.5rem;
-            background: var(--text-main); color: #0f172a;
-            padding: 14px 32px; border-radius: 10px; font-weight: 800;
-            font-size: 0.9rem; letter-spacing: 1px; text-decoration: none; text-transform: uppercase;
-            transition: all 0.35s; box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--text-main);
+            color: #0f172a;
+            padding: 14px 32px;
+            border-radius: 10px;
+            font-weight: 800;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-decoration: none;
+            text-transform: uppercase;
+            transition: all 0.35s;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         }
-        .btn-hero-primary:hover { background: #e0f2fe; box-shadow: 0 8px 30px rgba(56,189,248,0.4); transform: translateY(-2px); }
+
+        .btn-hero-primary:hover {
+            background: #e0f2fe;
+            box-shadow: 0 8px 30px rgba(56, 189, 248, 0.4);
+            transform: translateY(-2px);
+        }
+
         .btn-hero-secondary {
-            display: inline-flex; align-items: center; gap: 0.5rem;
-            background: transparent; border: 1.5px solid rgba(255,255,255,0.25);
-            color: var(--text-main); padding: 14px 28px; border-radius: 10px;
-            font-weight: 600; font-size: 0.9rem; letter-spacing: 0.5px; text-decoration: none;
-            transition: all 0.3s; backdrop-filter: blur(8px);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: transparent;
+            border: 1.5px solid rgba(255, 255, 255, 0.25);
+            color: var(--text-main);
+            padding: 14px 28px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            text-decoration: none;
+            transition: all 0.3s;
+            backdrop-filter: blur(8px);
         }
-        .btn-hero-secondary:hover { border-color: var(--biolum-cyan); color: var(--biolum-cyan); background: rgba(6,182,212,0.06); }
+
+        .btn-hero-secondary:hover {
+            border-color: var(--biolum-cyan);
+            color: var(--biolum-cyan);
+            background: rgba(6, 182, 212, 0.06);
+        }
 
         /* ─── CHARTERS SECTION ─── */
         .charters-section {
-            position: relative; z-index: 1; overflow: hidden;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
             padding: 7rem 2rem;
         }
+
         .charters-bg {
-            position: absolute; inset: 0;
+            position: absolute;
+            inset: 0;
             background:
                 linear-gradient(135deg, #0a2535 0%, #0e3a5a 40%, #0a2d4a 70%, #071f35 100%);
         }
+
         .charters-bg::before {
-            content: ''; position: absolute; inset: 0;
+            content: '';
+            position: absolute;
+            inset: 0;
             background: url('/experience_yacht_bg.jpg') center/cover no-repeat;
             opacity: 0.18;
         }
+
         .charters-bg::after {
-            content: ''; position: absolute; inset: 0;
-            background: radial-gradient(ellipse at 50% 50%, rgba(6,182,212,0.12) 0%, transparent 60%);
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 50% 50%, rgba(6, 182, 212, 0.12) 0%, transparent 60%);
         }
+
         .charters-content {
-            position: relative; z-index: 5; text-align: center; max-width: 700px; margin: 0 auto;
+            position: relative;
+            z-index: 5;
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
         }
+
         .charters-label {
-            color: rgba(255,255,255,0.5); font-size: 0.75rem; font-weight: 700;
-            letter-spacing: 4px; text-transform: uppercase; margin-bottom: 1rem;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
         }
+
         .charters-section h2 {
-            font-family: 'Outfit', sans-serif; font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 800;
-            color: #fff; margin-bottom: 1.25rem; line-height: 1.15;
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 1.25rem;
+            line-height: 1.15;
         }
+
         .charters-section p {
-            font-size: 1.05rem; color: rgba(255,255,255,0.65);
-            max-width: 560px; margin: 0 auto 2.5rem; line-height: 1.8;
+            font-size: 1.05rem;
+            color: rgba(255, 255, 255, 0.65);
+            max-width: 560px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.8;
         }
-        .charters-cta-group { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+        .charters-cta-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
         .btn-charter {
-            display: inline-flex; align-items: center; gap: 0.5rem;
-            border: 1.5px solid rgba(255,255,255,0.4); background: rgba(255,255,255,0.08);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: 1.5px solid rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.08);
             backdrop-filter: blur(10px);
-            color: #fff; padding: 13px 28px; border-radius: 10px;
-            font-weight: 700; font-size: 0.875rem; letter-spacing: 1px; text-transform: uppercase;
-            text-decoration: none; transition: all 0.3s;
+            color: #fff;
+            padding: 13px 28px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.875rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: all 0.3s;
         }
-        .btn-charter:hover { background: rgba(255,255,255,0.15); border-color: #fff; transform: translateY(-2px); }
+
+        .btn-charter:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: #fff;
+            transform: translateY(-2px);
+        }
 
         /* ─── PILLARS GRID ─── */
-        .pillars-section { position: relative; z-index: 1; padding: 6rem 2rem; }
+        .pillars-section {
+            position: relative;
+            z-index: 1;
+            padding: 6rem 2rem;
+        }
+
         .pillars-label {
-            text-align: center; color: var(--biolum-teal); font-size: 0.75rem;
-            font-weight: 700; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 1rem;
+            text-align: center;
+            color: var(--biolum-teal);
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
         }
+
         .pillars-section h2 {
-            font-family: 'Outfit', sans-serif; text-align: center; font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-            font-weight: 800; color: var(--text-main); margin-bottom: 0.75rem;
+            font-family: 'Outfit', sans-serif;
+            text-align: center;
+            font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 0.75rem;
         }
-        .pillars-tagline { text-align: center; color: var(--text-sub); font-size: 1rem; margin-bottom: 3.5rem; }
+
+        .pillars-tagline {
+            text-align: center;
+            color: var(--text-sub);
+            font-size: 1rem;
+            margin-bottom: 3.5rem;
+        }
 
         .pillars-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem; max-width: 1160px; margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            max-width: 1160px;
+            margin: 0 auto;
         }
+
         .pillar-card {
             position: relative;
             background: var(--glass-bg);
-            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-            padding: 2.25rem 2rem; border-radius: 18px;
-            border: 1px solid var(--glass-border); text-align: center;
-            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1); overflow: hidden;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 2.25rem 2rem;
+            border-radius: 18px;
+            border: 1px solid var(--glass-border);
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            overflow: hidden;
         }
+
         .pillar-card::before {
-            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
-            background: linear-gradient(90deg, var(--biolum-teal), var(--biolum-cyan)); opacity: 0; transition: opacity 0.3s;
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--biolum-teal), var(--biolum-cyan));
+            opacity: 0;
+            transition: opacity 0.3s;
         }
-        .pillar-card:hover { transform: translateY(-8px); border-color: rgba(6,182,212,0.25); background: rgba(6,182,212,0.04); box-shadow: 0 16px 50px rgba(0,0,0,0.4); }
-        .pillar-card:hover::before { opacity: 1; }
+
+        .pillar-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(6, 182, 212, 0.25);
+            background: rgba(6, 182, 212, 0.04);
+            box-shadow: 0 16px 50px rgba(0, 0, 0, 0.4);
+        }
+
+        .pillar-card:hover::before {
+            opacity: 1;
+        }
 
         /* Supplement pillar highlight */
         .pillar-card.featured-pillar {
-            border-color: rgba(6,182,212,0.25);
-            background: rgba(6,182,212,0.04);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.3), 0 0 30px rgba(6,182,212,0.06);
+            border-color: rgba(6, 182, 212, 0.25);
+            background: rgba(6, 182, 212, 0.04);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3), 0 0 30px rgba(6, 182, 212, 0.06);
         }
-        .pillar-card.featured-pillar::before { opacity: 1; }
+
+        .pillar-card.featured-pillar::before {
+            opacity: 1;
+        }
 
         .pillar-bg-img {
-            position: absolute; inset: 0; border-radius: 18px; overflow: hidden;
+            position: absolute;
+            inset: 0;
+            border-radius: 18px;
+            overflow: hidden;
         }
-        .pillar-bg-img img { width: 100%; height: 100%; object-fit: cover; opacity: 0.06; transition: opacity 0.4s; }
-        .pillar-card:hover .pillar-bg-img img { opacity: 0.1; }
 
-        .pillar-icon { font-size: 2.25rem; margin-bottom: 1rem; display: block; position: relative; z-index: 2; }
-        .pillar-card h3 {
-            position: relative; z-index: 2;
-            font-family: 'Outfit', sans-serif; font-size: 1.3rem; font-weight: 700;
-            color: var(--biolum-cyan); margin-bottom: 0.6rem;
+        .pillar-bg-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.06;
+            transition: opacity 0.4s;
         }
-        .pillar-card p { position: relative; z-index: 2; color: var(--text-sub); font-size: 0.92rem; line-height: 1.6; margin-bottom: 1.5rem; }
+
+        .pillar-card:hover .pillar-bg-img img {
+            opacity: 0.1;
+        }
+
+        .pillar-icon {
+            font-size: 2.25rem;
+            margin-bottom: 1rem;
+            display: block;
+            position: relative;
+            z-index: 2;
+        }
+
+        .pillar-card h3 {
+            position: relative;
+            z-index: 2;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--biolum-cyan);
+            margin-bottom: 0.6rem;
+        }
+
+        .pillar-card p {
+            position: relative;
+            z-index: 2;
+            color: var(--text-sub);
+            font-size: 0.92rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
         .pillar-link {
-            position: relative; z-index: 2;
-            display: inline-flex; align-items: center; gap: 0.4rem;
-            color: var(--sky-blue); text-decoration: none; font-size: 0.875rem; font-weight: 600;
+            position: relative;
+            z-index: 2;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: var(--sky-blue);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 600;
             transition: gap 0.3s, color 0.3s;
         }
-        .pillar-link:hover { gap: 0.7rem; color: var(--biolum-cyan); }
+
+        .pillar-link:hover {
+            gap: 0.7rem;
+            color: var(--biolum-cyan);
+        }
 
         /* Supplement CTA button inside pillar */
         .pillar-supplement-btn {
-            position: relative; z-index: 2;
-            display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 0.75rem;
+            position: relative;
+            z-index: 2;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.75rem;
             background: linear-gradient(135deg, var(--biolum-cyan), #0284c7);
-            color: #fff; padding: 11px 22px; border-radius: 8px;
-            font-weight: 700; font-size: 0.82rem; letter-spacing: 1px; text-transform: uppercase;
-            text-decoration: none; transition: all 0.3s;
-            box-shadow: 0 4px 15px rgba(6,182,212,0.3);
+            color: #fff;
+            padding: 11px 22px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.82rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(6, 182, 212, 0.3);
         }
-        .pillar-supplement-btn:hover { box-shadow: 0 6px 25px rgba(6,182,212,0.55); transform: scale(1.04); }
+
+        .pillar-supplement-btn:hover {
+            box-shadow: 0 6px 25px rgba(6, 182, 212, 0.55);
+            transform: scale(1.04);
+        }
 
         /* ─── IMPACT SECTION ─── */
         .impact-section {
-            position: relative; z-index: 1; padding: 5rem 2rem;
-            border-top: 1px solid rgba(255,255,255,0.05);
+            position: relative;
+            z-index: 1;
+            padding: 5rem 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
+
         .impact-bg {
-            position: absolute; inset: 0;
+            position: absolute;
+            inset: 0;
             background: url('/impact_reef_bg.jpg') center/cover no-repeat;
             opacity: 0.08;
         }
-        .impact-content { position: relative; z-index: 5; text-align: center; max-width: 680px; margin: 0 auto; }
-        .impact-section h2 { font-family: 'Outfit', sans-serif; font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 800; margin-bottom: 1rem; color: var(--text-main); }
-        .impact-section p { color: var(--text-sub); font-size: 1rem; line-height: 1.75; }
+
+        .impact-content {
+            position: relative;
+            z-index: 5;
+            text-align: center;
+            max-width: 680px;
+            margin: 0 auto;
+        }
+
+        .impact-section h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(1.8rem, 3vw, 2.8rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--text-main);
+        }
+
+        .impact-section p {
+            color: var(--text-sub);
+            font-size: 1rem;
+            line-height: 1.75;
+        }
+
         .pledge-badge {
-            display: inline-block; margin-top: 1.5rem;
-            background: rgba(20,184,166,0.1); border: 1px solid rgba(20,184,166,0.25);
-            color: var(--biolum-teal); padding: 0.6rem 1.4rem; border-radius: 100px;
-            font-size: 0.82rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+            display: inline-block;
+            margin-top: 1.5rem;
+            background: rgba(20, 184, 166, 0.1);
+            border: 1px solid rgba(20, 184, 166, 0.25);
+            color: var(--biolum-teal);
+            padding: 0.6rem 1.4rem;
+            border-radius: 100px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
         /* ─── FOOTER ─── */
         footer {
-            position: relative; z-index: 1; padding: 3rem 2rem;
-            border-top: 1px solid rgba(255,255,255,0.05); text-align: center;
+            position: relative;
+            z-index: 1;
+            padding: 3rem 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            text-align: center;
         }
-        .footer-logo { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.1rem; letter-spacing: 2px; color: var(--text-main); text-transform: uppercase; margin-bottom: 1.5rem; }
-        .footer-links { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-bottom: 2rem; }
-        .footer-links a { color: var(--text-sub); text-decoration: none; font-size: 0.82rem; transition: color 0.3s; }
-        .footer-links a:hover { color: var(--biolum-cyan); }
-        footer p { color: var(--text-sub); font-size: 0.78rem; }
 
-        @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
-        .fade-up { opacity: 0; animation: fadeUp 0.7s ease forwards; }
-        .d1 { animation-delay: 0.1s; } .d2 { animation-delay: 0.2s; } .d3 { animation-delay: 0.35s; } .d4 { animation-delay: 0.5s; }
+        .footer-logo {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            color: var(--text-main);
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .footer-links a {
+            color: var(--text-sub);
+            text-decoration: none;
+            font-size: 0.82rem;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--biolum-cyan);
+        }
+
+        footer p {
+            color: var(--text-sub);
+            font-size: 0.78rem;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-up {
+            opacity: 0;
+            animation: fadeUp 0.7s ease forwards;
+        }
+
+        .d1 {
+            animation-delay: 0.1s;
+        }
+
+        .d2 {
+            animation-delay: 0.2s;
+        }
+
+        .d3 {
+            animation-delay: 0.35s;
+        }
+
+        .d4 {
+            animation-delay: 0.5s;
+        }
 
         @media (max-width: 600px) {
-            h1 { font-size: 2.4rem; } .hero { padding: 4rem 1.25rem 3rem; }
-            .hero-cta-group { flex-direction: column; align-items: center; }
-            .charters-cta-group { flex-direction: column; align-items: center; }
+            h1 {
+                font-size: 2.4rem;
+            }
+
+            .hero {
+                padding: 4rem 1.25rem 3rem;
+            }
+
+            .hero-cta-group {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .charters-cta-group {
+                flex-direction: column;
+                align-items: center;
+            }
         }
     </style>
 </head>
+
 <body>
 
-<!-- HEADER NAV -->
-<header>
-    <a href="/" class="nav-logo">Luxury <span>Marine Life</span></a>
-    <nav class="nav-links" aria-label="Primary Navigation">
-        <a href="#">Charters</a>
-        <a href="#">Learning</a>
-        <a href="#">Tech</a>
-        <a href="/ultra-shear" class="nav-cta" id="nav-cta-supplements">Shop Supplements</a>
-    </nav>
-</header>
+    <!-- HEADER NAV -->
+    <header>
+        <a href="/" class="nav-logo">Luxury <span>Marine Life</span></a>
+        <nav class="nav-links" aria-label="Primary Navigation">
+            <a href="#">Charters</a>
+            <a href="#">Learning</a>
+            <a href="#">Tech</a>
+            <a href="/ultra-shear-classic" id="nav-link-classic">UltraShear Classic</a>
+            <a href="/ultra-shear" class="nav-cta" id="nav-cta-supplements">H2O Edition</a>
+        </nav>
+    </header>
 
-<!-- HERO -->
-<section class="hero" aria-label="Luxury Marine Life Hero">
-    <div class="hero-bg"></div>
-    <div class="hero-visual" role="presentation" aria-hidden="true"></div>
+    <!-- HERO -->
+    <section class="hero" aria-label="Luxury Marine Life Hero">
+        <div class="hero-bg"></div>
+        <div class="hero-visual" role="presentation" aria-hidden="true"></div>
 
-    <div class="hero-content">
-        <div class="hero-eyebrow fade-up d1">Signature Ocean Program</div>
-        <h1 class="fade-up d2">Health on the Water</h1>
-        <p class="fade-up d3">Healthy People. Healthy Water. Healthy Animals. Wellness journeys designed for life on the ocean — movement, recovery, and mindful routines at the highest level.</p>
-        <div class="hero-cta-group fade-up d4">
-            <a href="/ultra-shear" id="hero-cta-nanospray" class="btn-hero-primary" aria-label="Explore UltraShear NanoSpray Technology">
-                Explore NanoSpray Technology
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </a>
-            <a href="#" class="btn-hero-secondary" aria-label="Book a luxury charter experience">
-                Book a Charter
-            </a>
-        </div>
-    </div>
-</section>
-
-<!-- CHARTERS SECTION -->
-<section class="charters-section" aria-label="Yacht Charters">
-    <div class="charters-bg"></div>
-    <div class="charters-content">
-        <div class="charters-label">World-Class Experiences</div>
-        <h2>Unforgettable Ocean Adventures</h2>
-        <p>Experience the ultimate marine journey. Book your exclusive Luxury Marine Life Charter and explore pristine ecosystems in unparalleled comfort.</p>
-        <div class="charters-cta-group">
-            <a href="#" class="btn-charter" id="cta-book-charter" aria-label="Book a charter">
-                🚢 Book a Charter
-            </a>
-            <a href="#" class="btn-charter" id="cta-view-fleet" aria-label="View our fleet">
-                ⚓ View Fleet
-            </a>
-        </div>
-    </div>
-</section>
-
-<!-- PILLARS SECTION -->
-<section class="pillars-section" aria-labelledby="pillars-heading">
-    <div class="pillars-label">Our Ecosystem</div>
-    <h2 id="pillars-heading">The Pillars of the Marine Life</h2>
-    <p class="pillars-tagline">Three pathways to a richer, healthier, more purposeful life on the water.</p>
-
-    <div class="pillars-grid">
-
-        <!-- Pillar 1: Learning -->
-        <article class="pillar-card" id="pillar-learning">
-            <div class="pillar-bg-img"><img src="/category_learning.jpg" alt="" aria-hidden="true" loading="lazy"></div>
-            <span class="pillar-icon">📡</span>
-            <h3>Immersive Learning</h3>
-            <p>Master-level skills that keep you sharp, safe, and sovereign on the water. From navigation to marine ecology.</p>
-            <a href="#" class="pillar-link" id="cta-learning" aria-label="Explore marine learning courses">
-                Explore Courses
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </a>
-        </article>
-
-        <!-- Pillar 2: Supplements — FEATURED (formerly "Bio-Hacking") -->
-        <article class="pillar-card featured-pillar" id="pillar-supplements">
-            <span class="pillar-icon">💧</span>
-            <h3>Healthy Supplements &amp; Products</h3>
-            <p>Premium nano-emulsified formulas for recovery, sleep, and peak performance. Engineered for life at sea and beyond.</p>
-            <div>
-                <a href="/ultra-shear" class="pillar-supplement-btn" id="cta-pillar-supplements" aria-label="Shop UltraShear and marine wellness supplements">
-                    Shop Supplements
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        <div class="hero-content">
+            <div class="hero-eyebrow fade-up d1">Signature Ocean Program</div>
+            <h1 class="fade-up d2">Health on the Water</h1>
+            <p class="fade-up d3">Healthy People. Healthy Water. Healthy Animals. Wellness journeys designed for life on
+                the ocean — movement, recovery, and mindful routines at the highest level.</p>
+            <div class="hero-cta-group fade-up d4">
+                <a href="/ultra-shear" id="hero-cta-nanospray" class="btn-hero-primary"
+                    aria-label="Explore UltraShear NanoSpray Technology">
+                    Explore NanoSpray Technology
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2.5">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                </a>
+                <a href="#" class="btn-hero-secondary" aria-label="Book a luxury charter experience">
+                    Book a Charter
                 </a>
             </div>
-        </article>
+        </div>
+    </section>
 
-        <!-- Pillar 3: Sustainable Tech -->
-        <article class="pillar-card" id="pillar-tech">
-            <div class="pillar-bg-img"><img src="/category_tech.jpg" alt="" aria-hidden="true" loading="lazy"></div>
-            <span class="pillar-icon">🌊</span>
-            <h3>Sustainable Marine Tech</h3>
-            <p>Ocean-first innovations that protect the ecosystems you love. SmartYacht technology meets conservation-grade hardware.</p>
-            <a href="#" class="pillar-link" id="cta-tech" aria-label="Explore sustainable marine technology">
-                Shop Tech
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </a>
-        </article>
+    <!-- CHARTERS SECTION -->
+    <section class="charters-section" aria-label="Yacht Charters">
+        <div class="charters-bg"></div>
+        <div class="charters-content">
+            <div class="charters-label">World-Class Experiences</div>
+            <h2>Unforgettable Ocean Adventures</h2>
+            <p>Experience the ultimate marine journey. Book your exclusive Luxury Marine Life Charter and explore
+                pristine ecosystems in unparalleled comfort.</p>
+            <div class="charters-cta-group">
+                <a href="#" class="btn-charter" id="cta-book-charter" aria-label="Book a charter">
+                    🚢 Book a Charter
+                </a>
+                <a href="#" class="btn-charter" id="cta-view-fleet" aria-label="View our fleet">
+                    ⚓ View Fleet
+                </a>
+            </div>
+        </div>
+    </section>
 
-    </div>
-</section>
+    <!-- PILLARS SECTION -->
+    <section class="pillars-section" aria-labelledby="pillars-heading">
+        <div class="pillars-label">Our Ecosystem</div>
+        <h2 id="pillars-heading">The Pillars of the Marine Life</h2>
+        <p class="pillars-tagline">Three pathways to a richer, healthier, more purposeful life on the water.</p>
 
-<!-- MISSION / IMPACT -->
-<section class="impact-section" aria-label="Ocean Impact and Mission">
-    <div class="impact-bg" role="presentation" aria-hidden="true"></div>
-    <div class="impact-content">
-        <h2>10% for the Ocean.</h2>
-        <p>Every purchase made through Luxury Marine Life contributes to GARMN — the Global Aquatic Resource Management Network. Protecting the ecosystems that make this lifestyle possible.</p>
-        <span class="pledge-badge">🌊 10% Ocean Pledge — Active</span>
-    </div>
-</section>
+        <div class="pillars-grid">
 
-<!-- FOOTER -->
-<footer>
-    <div class="footer-logo">Luxury Marine Life</div>
-    <div class="footer-links">
-        <a href="/ultra-shear">Supplements</a>
-        <a href="#">Charters</a>
-        <a href="#">Learning</a>
-        <a href="#">Sustainable Tech</a>
-        <a href="#">GARMN Impact</a>
-        <a href="#">Contact</a>
-    </div>
-    <p>© 2026 Luxury Marine Life. Marine-Grade Wellness. Ocean-First Mission.</p>
-</footer>
+            <!-- Pillar 1: Learning -->
+            <article class="pillar-card" id="pillar-learning">
+                <div class="pillar-bg-img"><img src="/category_learning.jpg" alt="" aria-hidden="true" loading="lazy">
+                </div>
+                <span class="pillar-icon">📡</span>
+                <h3>Immersive Learning</h3>
+                <p>Master-level skills that keep you sharp, safe, and sovereign on the water. From navigation to marine
+                    ecology.</p>
+                <a href="#" class="pillar-link" id="cta-learning" aria-label="Explore marine learning courses">
+                    Explore Courses
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2.5">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                </a>
+            </article>
+
+            <!-- Pillar 2: Supplements — FEATURED (formerly "Bio-Hacking") -->
+            <article class="pillar-card featured-pillar" id="pillar-supplements">
+                <span class="pillar-icon">💧</span>
+                <h3>Healthy Supplements &amp; Products</h3>
+                <p>Premium nano-emulsified formulas for recovery, sleep, and peak performance. Engineered for life at
+                    sea and beyond.</p>
+                <div>
+                    <a href="/ultra-shear" class="pillar-supplement-btn" id="cta-pillar-supplements"
+                        aria-label="Shop UltraShear and marine wellness supplements">
+                        Shop Supplements
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5">
+                            <path d="M5 12h14M12 5l7 7-7 7" />
+                        </svg>
+                    </a>
+                </div>
+            </article>
+
+            <!-- Pillar 3: Sustainable Tech -->
+            <article class="pillar-card" id="pillar-tech">
+                <div class="pillar-bg-img"><img src="/category_tech.jpg" alt="" aria-hidden="true" loading="lazy"></div>
+                <span class="pillar-icon">🌊</span>
+                <h3>Sustainable Marine Tech</h3>
+                <p>Ocean-first innovations that protect the ecosystems you love. SmartYacht technology meets
+                    conservation-grade hardware.</p>
+                <a href="#" class="pillar-link" id="cta-tech" aria-label="Explore sustainable marine technology">
+                    Shop Tech
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2.5">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                </a>
+            </article>
+
+        </div>
+    </section>
+
+    <!-- MISSION / IMPACT -->
+    <section class="impact-section" aria-label="Ocean Impact and Mission">
+        <div class="impact-bg" role="presentation" aria-hidden="true"></div>
+        <div class="impact-content">
+            <h2>10% for the Ocean.</h2>
+            <p>Every purchase made through Luxury Marine Life contributes to GARMN — the Global Aquatic Resource
+                Management Network. Protecting the ecosystems that make this lifestyle possible.</p>
+            <span class="pledge-badge">🌊 10% Ocean Pledge — Active</span>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-logo">Luxury Marine Life</div>
+        <div class="footer-links">
+            <a href="/ultra-shear">Supplements</a>
+            <a href="#">Charters</a>
+            <a href="#">Learning</a>
+            <a href="#">Sustainable Tech</a>
+            <a href="#">GARMN Impact</a>
+            <a href="#">Contact</a>
+        </div>
+        <p>© 2026 Luxury Marine Life. Marine-Grade Wellness. Ocean-First Mission.</p>
+    </footer>
 
 </body>
+
 </html>
