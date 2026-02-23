@@ -1,37 +1,21 @@
-{
-    "hosting": {
-        "target": "luxurymarinelife-shopify",
-        "public": "dist",
-        "ignore": [
-            "firebase.json",
-            "**/.*",
-            "**/node_modules/**"
-        ],
-        "rewrites": [
-            {
-                "source": "**",
-                "destination": "/index.html"
-            }
-        ],
-        "headers": [
-            {
-                "source": "**/*.@(js|css|woff2|woff|ttf)",
-                "headers": [
-                    {
-                        "key": "Cache-Control",
-                        "value": "max-age=31536000"
-                    }
-                ]
-            },
-            {
-                "source": "**/*.html",
-                "headers": [
-                    {
-                        "key": "Cache-Control",
-                        "value": "no-cache"
-                    }
-                ]
-            }
-        ]
-    }
+﻿{
+  "hosting": {
+    "site": "luxurymarinelife-shopify",
+    "public": "dist",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "/ultra-shear",
+        "destination": "/ultra-shear.html"
+      },
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
 }

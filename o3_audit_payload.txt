@@ -1,0 +1,8 @@
+TARGET FILE: public/ultra-shear.html
+ROLE: Elite Front-End Architect & Technical SEO Master.
+INTENT: Perform a 150% Vanguard Audit and UI/UX Optimization of the UltraShear landing page.
+PARAMETERS:
+1. Structural Perfection: Deep audit of the existing HTML/CSS. Ensure flawless semantic HTML5, exact flexbox/grid alignments, and absolute mobile responsiveness across all viewports.
+2. Aesthetic Domination: Upgrade the visual hierarchy. Deepen the luxury oceanic aesthetic (premium dark navy backgrounds, subtle cyan bioluminescent accents, high-end glassmorphism). Ensure all product images and the 3 NanoSpray Stacks pop with sophisticated CSS drop-shadows and smooth hover micro-interactions.
+3. Conversion Engine: Optimize CTA placement and typography. Ensure the Founders Price ($64.00) and the '100 Annual Memberships' scarcity tag are visually magnetic and drive immediate action.
+4. Execution: Retain all existing image links and product copy. Overwrite the target file directly with the optimized, deployment-ready code. Output raw code only; zero markdown.

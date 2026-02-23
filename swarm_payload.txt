@@ -1,0 +1,8 @@
+TARGET FILE: public/ultra-shear.html
+INTENT: Re-architect the 'UltraShear Technology' landing page.
+BRAND CONTEXT: Featured product under the 'Healthy People' pillar of Luxury Marine Life.
+AESTHETIC: Premium, deep-ocean luxury. Dark navy to cyan gradients, subtle bioluminescent glows. Retain all original product images.
+TASKS:
+1. Update primary NanoSpray price to Founders Price: $64.00 (crossed out $79.99).
+2. Build 3 NanoSpray Stacks below the main product: 90-Day at $189, 6-Month at $367, 12-Month at $719.
+3. Output native, responsive HTML/CSS. Overwrite the target file directly with the new code. Do not output markdown.
