@@ -48,14 +48,27 @@ export function Header({ onNavigate }: HeaderProps) {
         style={{ transitionTimingFunction: 'cubic-bezier(0.25, 1, 0.5, 1)' }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-20">
-            {/* Left Navigation */}
-            <nav className="hidden lg:flex items-center gap-8">
+          <div className="flex items-center justify-between h-20 w-full">
+            {/* Logo - Always Left Aligned */}
+            <button
+              onClick={() => handleNavClick('home')}
+              className="flex shrink-0 transition-all duration-300 hover:scale-105 flex-col items-start lg:items-center leading-none z-10"
+            >
+              <span className={`font-serif text-base sm:text-lg lg:text-2xl tracking-[0.1em] sm:tracking-[0.12em] uppercase shrink-0 whitespace-nowrap ${isScrolled ? 'text-[#1A1A1A]' : 'text-white'}`}>
+                LUXURY MARINE LIFE
+              </span>
+              <span className={`nav-text text-[7px] sm:text-[9px] tracking-[0.15em] sm:tracking-[0.25em] mt-0.5 sm:mt-1 block text-left lg:text-center uppercase font-medium whitespace-nowrap shrink-0 ${isScrolled ? 'text-[#8B1A1A]' : 'text-white/60'}`}>
+                · LUXURYMARINELIFE.SHOP ·
+              </span>
+            </button>
+
+            {/* Desktop Navigation - Center Aligned */}
+            <nav className="hidden lg:flex items-center justify-center flex-1 gap-6 xl:gap-10 px-6">
               {navItems.map((item) => (
                 <button
                   key={item.page}
                   onClick={() => handleNavClick(item.page)}
-                  className={`nav-text relative group ${isScrolled ? 'text-[#1A1A1A]' : 'text-white'
+                  className={`nav-text relative group whitespace-nowrap text-sm xl:text-base ${isScrolled ? 'text-[#1A1A1A]' : 'text-white'
                     }`}
                 >
                   {item.label}
@@ -67,60 +80,36 @@ export function Header({ onNavigate }: HeaderProps) {
               ))}
             </nav>
 
-            {/* Logo */}
-            <button
-              onClick={() => handleNavClick('home')}
-              className={`absolute left-1/2 -translate-x-1/2 transition-all duration-300 hover:scale-105 flex flex-col items-center leading-none`}
-            >
-              <span className={`font-serif text-xl sm:text-2xl tracking-[0.12em] uppercase ${isScrolled ? 'text-[#1A1A1A]' : 'text-white'}`}>
-                LUXURY MARINE LIFE
-              </span>
-              <span className={`nav-text text-[9px] tracking-[0.25em] mt-0.5 font-medium ${isScrolled ? 'text-[#8B1A1A]' : 'text-white/60'}`}>
-                · LUXURYMARINELIFE.SHOP ·
-              </span>
-            </button>
+            {/* Right Navigation & Mobile Hamburger */}
+            <div className="flex items-center justify-end gap-4 lg:gap-6 shrink-0 z-10">
+              <div className="hidden lg:flex items-center gap-6">
+                <button
+                  className={`transition-transform hover:scale-110 ${isScrolled ? 'text-[#1A1A1A]' : 'text-white'
+                    }`}
+                >
+                  <Search className="w-5 h-5" />
+                </button>
+                <button
+                  className={`transition-transform hover:scale-110 ${isScrolled ? 'text-[#1A1A1A]' : 'text-white'
+                    }`}
+                >
+                  <User className="w-5 h-5" />
+                </button>
+              </div>
 
-            {/* Right Navigation */}
-            <div className="hidden lg:flex items-center gap-6">
+              {/* Mobile Menu Button - ALWAYS SHOWN ON MOBILE */}
               <button
-                className={`transition-transform hover:scale-110 ${isScrolled ? 'text-[#1A1A1A]' : 'text-white'
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className={`lg:hidden p-2 shrink-0 ${isScrolled ? 'text-[#1A1A1A]' : 'text-white'
                   }`}
               >
-                <Search className="w-5 h-5" />
-              </button>
-              <button
-                className={`transition-transform hover:scale-110 ${isScrolled ? 'text-[#1A1A1A]' : 'text-white'
-                  }`}
-              >
-                <User className="w-5 h-5" />
-              </button>
-              {/* <button
-                onClick={toggleCart}
-                className={`relative transition-transform hover:scale-110 ${
-                  isScrolled ? 'text-[#1A1A1A]' : 'text-white'
-                }`}
-              >
-                <ShoppingBag className="w-5 h-5" />
-                {cartCount > 0 && (
-                  <span className="absolute -top-2 -right-2 w-5 h-5 bg-[#8B1A1A] text-white text-xs rounded-full flex items-center justify-center">
-                    {cartCount}
-                  </span>
+                {isMobileMenuOpen ? (
+                  <X className="w-6 h-6" />
+                ) : (
+                  <Menu className="w-6 h-6" />
                 )}
-              </button> */}
+              </button>
             </div>
-
-            {/* Mobile Menu Button */}
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className={`lg:hidden p-2 ${isScrolled ? 'text-[#1A1A1A]' : 'text-white'
-                }`}
-            >
-              {isMobileMenuOpen ? (
-                <X className="w-6 h-6" />
-              ) : (
-                <Menu className="w-6 h-6" />
-              )}
-            </button>
           </div>
         </div>
       </header>
