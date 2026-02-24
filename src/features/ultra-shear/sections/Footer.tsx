@@ -16,26 +16,19 @@ export function Footer({ onNavigate }: FooterProps) {
   const footerLinks = {
     shop: [
       { label: 'All Products', page: 'products' },
-      { label: 'Single Bottle', page: 'products' },
-      { label: 'Biohacker Stack', page: 'products' },
-      { label: 'Executive Stack', page: 'products' },
+      { label: 'UltraShear NanoSpray', page: 'products' },
     ],
     discover: [
       { label: 'The Science', page: 'science' },
       { label: 'Our Story', page: 'discover' },
       { label: 'Ingredients', page: 'discover' },
-      { label: 'Blog', page: 'discover' },
     ],
     support: [
       { label: 'Contact Us', page: 'contact' },
-      { label: 'FAQs', page: 'discover' },
-      { label: 'Shipping', page: 'discover' },
-      { label: 'Returns', page: 'discover' },
     ],
     legal: [
       { label: 'Privacy Policy', page: 'discover' },
       { label: 'Terms of Service', page: 'discover' },
-      { label: 'Cookie Policy', page: 'discover' },
     ],
   };
 
@@ -48,7 +41,7 @@ export function Footer({ onNavigate }: FooterProps) {
           <div className="lg:col-span-2">
             <h3 className="font-serif text-2xl mb-2">SHEAR SCIENCES</h3>
             <p className="text-gray-400 text-sm mb-6">THE SCIENCE OF WELLNESS</p>
-            
+
             {/* Social Icons */}
             <div className="flex gap-4">
               <a

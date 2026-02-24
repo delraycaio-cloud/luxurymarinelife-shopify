@@ -91,8 +91,8 @@ export function Navigation() {
     <>
       <nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled
-            ? "bg-marine-900/95 backdrop-blur-md border-b border-white/5"
-            : "bg-transparent"
+          ? "bg-marine-900/95 backdrop-blur-md border-b border-white/5"
+          : "bg-transparent"
           }`}
       >
         <div className="w-full px-6 lg:px-12">
@@ -100,7 +100,7 @@ export function Navigation() {
             {/* Logo */}
             <a
               href="/"
-              className="flex flex-col items-center justify-center transition-transform hover:scale-105"
+              className="flex flex-col items-center justify-center transition-transform hover:scale-105 shrink-0 z-10"
               onClick={(e) => {
                 e.preventDefault();
                 if (location.pathname !== "/") {
@@ -110,10 +110,10 @@ export function Navigation() {
                 window.scrollTo({ top: 0, behavior: "smooth" });
               }}
             >
-              <span className="font-serif text-xl sm:text-2xl tracking-[0.12em] uppercase block text-center leading-none text-white">
+              <span className="font-serif text-base sm:text-lg lg:text-2xl tracking-[0.1em] sm:tracking-[0.12em] uppercase block text-center leading-none text-white whitespace-nowrap">
                 LUXURY MARINE LIFE
               </span>
-              <span className="text-[9px] tracking-[0.25em] mt-1 text-white/60 block text-center uppercase font-medium">
+              <span className="text-[7px] sm:text-[9px] tracking-[0.15em] sm:tracking-[0.25em] mt-1 text-white/60 block text-center uppercase font-medium whitespace-nowrap">
                 · LUXURYMARINELIFE.SHOP ·
               </span>
             </a>

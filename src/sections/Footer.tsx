@@ -7,25 +7,19 @@ gsap.registerPlugin(ScrollTrigger);
 
 const footerLinks = {
   shop: [
-    { label: 'Courses', href: '#courses' },
-    { label: 'Supplements', href: '#supplements' },
-    { label: 'Tech', href: '#tech' },
-    { label: 'Apparel', href: '#apparel' },
+    { label: 'UltraShear™ NanoSpray', href: '/ultra-shear' },
+    { label: 'All Supplements', href: '#shop' },
   ],
   learn: [
-    { label: 'The Framework', href: '#framework' },
-    { label: 'Safety', href: '#safety' },
-    { label: 'Maintenance', href: '#maintenance' },
+    { label: 'Bio-Hacking', href: '#learn' },
+    { label: 'Our Framework', href: '#framework' },
   ],
   company: [
     { label: 'About', href: '#about' },
-    { label: 'Impact', href: '#impact' },
-    { label: 'Careers', href: '#careers' },
+    { label: 'Impact (GARMN)', href: '#impact' },
   ],
   support: [
     { label: 'Contact', href: '#contact' },
-    { label: 'Shipping', href: '#shipping' },
-    { label: 'Returns', href: '#returns' },
   ],
 };
 
@@ -44,7 +38,7 @@ export function Footer() {
 
     const ctx = gsap.context(() => {
       const columns = footer.querySelectorAll('.footer-column');
-      
+
       gsap.fromTo(columns,
         { opacity: 0, y: 18 },
         {
@@ -81,7 +75,7 @@ export function Footer() {
             <p className="mt-4 text-white/60 text-sm leading-relaxed max-w-xs">
               Healthy People. Healthy Water. Healthy Animals.
             </p>
-            
+
             {/* Social Links */}
             <div className="mt-6 flex items-center gap-4">
               {socialLinks.map((social) => (
