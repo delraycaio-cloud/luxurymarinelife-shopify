@@ -20,10 +20,14 @@ export function About({ onNavigate }: AboutProps) {
             }`}
           >
             <div className="aspect-[4/5] overflow-hidden rounded-xl">
-              <img
-                src="/images/oil_1.jpg"
-                alt="About Shear Sciences"
+              <video
+                src="/images/droplets_gone.mp4"
+                aria-label="About Shear Sciences"
                 className="w-full h-full object-cover"
+                autoPlay
+                muted
+                loop
+                playsInline
               />
             </div>
           </div>

@@ -4,6 +4,7 @@ import { ArrowRight } from "lucide-react";
 interface Product {
   id: string;
   image: string;
+  defaultImage?: string;
   vendor: string;
   name: string;
   subtitle?: string;
@@ -17,6 +18,7 @@ const products: Product[] = [
   {
     id: "biohacker",
     image: "/images/oil_table3.jpeg",
+    defaultImage: "/images/kids.jpeg",
     vendor: "Shear Sciences",
     name: "The Biohacker's Stack - 90-Day Supply",
     subtitle: "3x NanoSpray Bottles",
@@ -28,6 +30,7 @@ const products: Product[] = [
   {
     id: "executive",
     image: "/images/12b.png",
+    defaultImage: "/images/elder.jpeg",
     vendor: "Shear Sciences",
     name: "Executive Longevity Stack - 6-Month Supply",
     subtitle: "6x NanoSpray Bottles",
@@ -39,6 +42,7 @@ const products: Product[] = [
   {
     id: "ceo",
     image: "/images/oil_12.png",
+    defaultImage: "/images/ceo.jpeg",
     vendor: "Shear Sciences",
     name: "Health CEO Annual Supply - 12-Month",
     subtitle: "12x NanoSpray Bottles",
@@ -231,11 +235,26 @@ export function ProductGrid({ onNavigate }: ProductGridProps) {
             >
               {/* Image Container */}
               <div className="relative aspect-square bg-[#FAFAFA] mb-6 overflow-hidden">
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="w-full h-full object-contain p-6 transition-transform duration-500 group-hover:scale-108 scale-125"
-                />
+                {product.defaultImage ? (
+                  <>
+                    <img
+                      src={product.defaultImage}
+                      alt={`${product.name} lifestyle`}
+                      className="absolute inset-0 w-full h-full object-contain p-6 transition-opacity duration-500 opacity-100 group-hover:opacity-0 scale-125"
+                    />
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className="absolute inset-0 w-full h-full object-contain p-6 transition-all duration-500 opacity-0 group-hover:opacity-100 group-hover:scale-108 scale-125"
+                    />
+                  </>
+                ) : (
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="w-full h-full object-contain p-6 transition-transform duration-500 group-hover:scale-108 scale-125"
+                  />
+                )}
                 {/* Badge */}
                 <span className="absolute top-4 left-4 label-text text-[#8B1A1A] bg-white/90 px-3 py-1.5">
                   {product.badge}

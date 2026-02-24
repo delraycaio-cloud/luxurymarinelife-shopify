@@ -7,7 +7,7 @@ const pricingPlans = [
     name: "The Single",
     subtitle: "FIRST-TIME BUYER EXCLUSIVE",
     description: "1x Super Antioxidant NanoSpray",
-    image: "/images/oil_1.jpg",
+    video: "/images/droplets_gone.mp4",
     originalPrice: 79,
     foundersPrice: 64,
     savings: "Save $16 (20% off)",
@@ -23,7 +23,8 @@ const pricingPlans = [
     name: "The Biohacker's Stack",
     subtitle: "MOST POPULAR",
     description: "3x Super Antioxidant NanoSpray",
-    image: "/images/oil_3.jpg",
+    image: "/images/oil_3.jpeg",
+    defaultImage: "/images/kids.jpeg",
     originalPrice: 237,
     foundersPrice: 189,
     savings: "Save $48 (20% off)",
@@ -40,6 +41,7 @@ const pricingPlans = [
     subtitle: "MAXIMIZED VALUE",
     description: "6x Super Antioxidant NanoSpray",
     image: "/images/oil_6.jpg",
+    defaultImage: "/images/elder.jpeg",
     originalPrice: 474,
     foundersPrice: 367,
     savings: "Save $107 (22.5% off)",
@@ -55,6 +57,7 @@ const pricingPlans = [
     subtitle: "BEST VALUE",
     description: "12x Super Antioxidant NanoSpray",
     image: "/images/oil_12.png",
+    defaultImage: "/images/ceo.jpeg",
     originalPrice: 948,
     foundersPrice: 719,
     savings: "Save $229 (24% off)",
@@ -117,8 +120,37 @@ export function Pricing() {
 
               <div className="p-6 pt-8 flex flex-col h-full">
                 {/* Product Image */}
-                <div className="mb-6 flex justify-center items-center h-48 py-4">
-                  <img src={plan.image} alt={plan.name} className="h-full object-contain drop-shadow-xl transition-transform duration-500 hover:scale-110" />
+                <div className="mb-6 flex justify-center items-center h-48 py-4 group/media">
+                  {plan.video ? (
+                    <video
+                      src={plan.video}
+                      className="h-full object-contain drop-shadow-xl"
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      aria-label={plan.name}
+                    />
+                  ) : (
+                    <div className="relative h-full w-full flex items-center justify-center">
+                      {plan.defaultImage ? (
+                        <>
+                          <img
+                            src={plan.defaultImage}
+                            alt={`${plan.name} lifestyle`}
+                            className="absolute inset-0 h-full w-full object-contain drop-shadow-xl transition-opacity duration-500 group-hover/media:opacity-0"
+                          />
+                          <img
+                            src={plan.image}
+                            alt={plan.name}
+                            className="absolute inset-0 h-full w-full object-contain drop-shadow-xl transition-opacity duration-500 opacity-0 group-hover/media:opacity-100"
+                          />
+                        </>
+                      ) : (
+                        <img src={plan.image} alt={plan.name} className="h-full object-contain drop-shadow-xl transition-transform duration-500 hover:scale-110" />
+                      )}
+                    </div>
+                  )}
                 </div>
 
                 {/* Plan Info */}

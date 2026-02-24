@@ -28,9 +28,6 @@ export function Header({ onNavigate, currentPage }: HeaderProps) {
   const navItems = [
     { label: 'Home', page: 'home' },
     { label: 'Our Products', page: 'products' },
-    { label: 'Discover', page: 'discover' },
-    { label: 'UltraShear', page: 'products' },
-    { label: 'The Science', page: 'science' },
   ];
 
   const handleNavClick = (page: string) => {

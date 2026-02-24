@@ -23,13 +23,13 @@ export function DualMediaBanners({ onNavigate }: DualMediaBannersProps) {
 
   const panels = [
     {
-      image: "/images/oil_3.jpeg",
+      image: "/images/precision_oils.jpeg",
       title: "THE SCIENCE",
       subtitle: "PRECISION AT THE MOLECULAR LEVEL.",
       cta: "EXPLORE",
     },
     {
-      image: "/images/oil_2.jpeg",
+      image: "/images/5_oils.jpeg",
       title: "THE FORMULA",
       subtitle: "FIVE SUPEROILS. MULTIPLE BIOACTIVES.",
       cta: "DISCOVER",

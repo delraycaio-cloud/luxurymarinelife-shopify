@@ -24,10 +24,13 @@ function HomePage() {
     <>
       <HeroSlideshow onNavigate={() => {}} />
       <DualMediaBanners onNavigate={() => {}} />
-      <section className="hidden lg:block pt-6 bg-white">
+      <section className="hidden lg:block pt-12 bg-white">
         <div className="container-luxury flex justify-center">
           <div className="w-full flex flex-col items-center gap-4">
-            <p className="label-text text-[#1A1A1A]">Check out our podcast</p>
+            <p className="font-serif text-4xl md:text-5xl text-center uppercase">
+              <span className="text-[#1A1A1A]">Check out our </span>
+              <span className="text-[#8B1A1A]">podcast</span>
+            </p>
             <iframe
               data-testid="embed-iframe"
               style={{ borderRadius: "12px" }}
