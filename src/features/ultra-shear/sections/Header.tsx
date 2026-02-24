@@ -27,6 +27,7 @@ export function Header({ onNavigate }: HeaderProps) {
     { label: 'Home', page: 'home' },
     { label: 'Our Products', page: 'products' },
     { label: 'Discover', page: 'discover' },
+    { label: 'UltraShear', page: 'products' },
     { label: 'The Science', page: 'science' },
   ];
 
@@ -39,13 +40,11 @@ export function Header({ onNavigate }: HeaderProps) {
   return (
     <>
       <header
-        className={`fixed left-0 right-0 z-50 transition-all duration-400 ${
-          isScrolled ? 'top-0' : 'top-16 sm:top-10'
-        } ${
-          isScrolled
+        className={`fixed left-0 right-0 z-50 transition-all duration-400 ${isScrolled ? 'top-0' : 'top-16 sm:top-10'
+          } ${isScrolled
             ? 'bg-white/95 backdrop-blur-md shadow-sm'
             : 'bg-transparent'
-        }`}
+          }`}
         style={{ transitionTimingFunction: 'cubic-bezier(0.25, 1, 0.5, 1)' }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -56,15 +55,13 @@ export function Header({ onNavigate }: HeaderProps) {
                 <button
                   key={item.page}
                   onClick={() => handleNavClick(item.page)}
-                  className={`nav-text relative group ${
-                    isScrolled ? 'text-[#1A1A1A]' : 'text-white'
-                  }`}
+                  className={`nav-text relative group ${isScrolled ? 'text-[#1A1A1A]' : 'text-white'
+                    }`}
                 >
                   {item.label}
                   <span
-                    className={`absolute -bottom-1 left-0 w-0 h-px transition-all duration-300 group-hover:w-full ${
-                      isScrolled ? 'bg-[#1A1A1A]' : 'bg-white'
-                    }`}
+                    className={`absolute -bottom-1 left-0 w-0 h-px transition-all duration-300 group-hover:w-full ${isScrolled ? 'bg-[#1A1A1A]' : 'bg-white'
+                      }`}
                   />
                 </button>
               ))}
@@ -73,26 +70,27 @@ export function Header({ onNavigate }: HeaderProps) {
             {/* Logo */}
             <button
               onClick={() => handleNavClick('home')}
-              className={`absolute left-1/2 -translate-x-1/2 font-serif text-2xl sm:text-3xl tracking-wide transition-all duration-300 hover:scale-105 ${
-                isScrolled ? 'text-[#1A1A1A]' : 'text-white'
-              }`}
+              className={`absolute left-1/2 -translate-x-1/2 transition-all duration-300 hover:scale-105 flex flex-col items-center leading-none`}
             >
-              SHEAR SCIENCES
+              <span className={`font-serif text-xl sm:text-2xl tracking-[0.12em] uppercase ${isScrolled ? 'text-[#1A1A1A]' : 'text-white'}`}>
+                LUXURY MARINE LIFE
+              </span>
+              <span className={`nav-text text-[9px] tracking-[0.25em] mt-0.5 font-medium ${isScrolled ? 'text-[#8B1A1A]' : 'text-white/60'}`}>
+                · LUXURYMARINELIFE.SHOP ·
+              </span>
             </button>
 
             {/* Right Navigation */}
             <div className="hidden lg:flex items-center gap-6">
               <button
-                className={`transition-transform hover:scale-110 ${
-                  isScrolled ? 'text-[#1A1A1A]' : 'text-white'
-                }`}
+                className={`transition-transform hover:scale-110 ${isScrolled ? 'text-[#1A1A1A]' : 'text-white'
+                  }`}
               >
                 <Search className="w-5 h-5" />
               </button>
               <button
-                className={`transition-transform hover:scale-110 ${
-                  isScrolled ? 'text-[#1A1A1A]' : 'text-white'
-                }`}
+                className={`transition-transform hover:scale-110 ${isScrolled ? 'text-[#1A1A1A]' : 'text-white'
+                  }`}
               >
                 <User className="w-5 h-5" />
               </button>
@@ -114,9 +112,8 @@ export function Header({ onNavigate }: HeaderProps) {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className={`lg:hidden p-2 ${
-                isScrolled ? 'text-[#1A1A1A]' : 'text-white'
-              }`}
+              className={`lg:hidden p-2 ${isScrolled ? 'text-[#1A1A1A]' : 'text-white'
+                }`}
             >
               {isMobileMenuOpen ? (
                 <X className="w-6 h-6" />
@@ -130,23 +127,20 @@ export function Header({ onNavigate }: HeaderProps) {
 
       {/* Mobile Menu */}
       <div
-        className={`fixed inset-0 z-40 lg:hidden transition-all duration-500 ${
-          isMobileMenuOpen ? 'visible' : 'invisible'
-        }`}
+        className={`fixed inset-0 z-40 lg:hidden transition-all duration-500 ${isMobileMenuOpen ? 'visible' : 'invisible'
+          }`}
       >
         {/* Backdrop */}
         <div
-          className={`absolute inset-0 bg-black/50 transition-opacity duration-500 ${
-            isMobileMenuOpen ? 'opacity-100' : 'opacity-0'
-          }`}
+          className={`absolute inset-0 bg-black/50 transition-opacity duration-500 ${isMobileMenuOpen ? 'opacity-100' : 'opacity-0'
+            }`}
           onClick={() => setIsMobileMenuOpen(false)}
         />
 
         {/* Menu Panel */}
         <div
-          className={`absolute right-0 top-0 h-full w-80 bg-white shadow-2xl transition-transform duration-500 ${
-            isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
-          }`}
+          className={`absolute right-0 top-0 h-full w-80 bg-white shadow-2xl transition-transform duration-500 ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
+            }`}
           style={{ transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)' }}
         >
           <div className="p-8 pt-24">

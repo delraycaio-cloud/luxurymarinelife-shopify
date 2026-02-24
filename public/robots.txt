@@ -1,0 +1,8 @@
+# robots.txt for AI Search & Agents
+User-agent: *
+Allow: /
+Allow: /llms.txt
+Allow: /ultra-shear
+Allow: /collections/all
+
+Sitemap: https://luxurymarinelife-shopify.web.app/sitemap.xml

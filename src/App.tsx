@@ -122,6 +122,32 @@ function RoutedApp() {
     };
   }, [location.pathname]);
 
+  useEffect(() => {
+    // Phase 2: Technical SEO & Agentic Search Dynamic Updates
+    const canonicalLink = document.querySelector('link[rel="canonical"]') || document.createElement('link');
+    canonicalLink.setAttribute('rel', 'canonical');
+    canonicalLink.setAttribute('href', `https://luxurymarinelife-shopify.web.app${location.pathname}`);
+    if (!document.querySelector('link[rel="canonical"]')) {
+      document.head.appendChild(canonicalLink);
+    }
+
+    const metaDescription = document.querySelector('meta[name="description"]') || document.createElement('meta');
+    metaDescription.setAttribute('name', 'description');
+
+    if (isUltraShearRoute) {
+      document.title = "UltraShear | Luxury Marine Life Bio-Hacking";
+      metaDescription.setAttribute('content', 'UltraShear Technology™ transforms oil-based supplements into highly bioavailable nanoemulsions for marine life high performers.');
+    } else {
+      document.title = "Luxury Marine Life | Health on the Water";
+      metaDescription.setAttribute('content', 'Wellness journeys designed for life on the water—movement, recovery, and mindful routines.');
+    }
+
+    if (!document.querySelector('meta[name="description"]')) {
+      document.head.appendChild(metaDescription);
+    }
+
+  }, [location.pathname, isUltraShearRoute]);
+
   return (
     <CartProvider>
       <div className={`relative min-h-screen ${isUltraShearRoute ? 'bg-white' : 'bg-marine-900'}`}>

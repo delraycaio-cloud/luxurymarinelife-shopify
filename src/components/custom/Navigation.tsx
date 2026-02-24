@@ -21,6 +21,7 @@ import { Button } from "@/components/ui/button";
 
 const navLinks = [
   { label: "Shop", href: "#shop" },
+  { label: "UltraShear", href: "/ultra-shear" },
   { label: "Learn", href: "#learn" },
   { label: "Impact", href: "#impact" },
   { label: "Contact", href: "#contact" },
@@ -50,6 +51,13 @@ export function Navigation() {
   }, []);
 
   const scrollToSection = (href: string) => {
+    if (href.startsWith("/")) {
+      navigate(href);
+      setIsMobileMenuOpen(false);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+
     if (location.pathname !== "/") {
       navigate("/");
       setTimeout(() => {
@@ -82,18 +90,17 @@ export function Navigation() {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          isScrolled
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled
             ? "bg-marine-900/95 backdrop-blur-md border-b border-white/5"
             : "bg-transparent"
-        }`}
+          }`}
       >
         <div className="w-full px-6 lg:px-12">
           <div className="flex items-center justify-between h-16 lg:h-20">
             {/* Logo */}
             <a
               href="/"
-              className="font-display text-lg lg:text-xl font-bold text-white tracking-tight"
+              className="flex flex-col items-center justify-center transition-transform hover:scale-105"
               onClick={(e) => {
                 e.preventDefault();
                 if (location.pathname !== "/") {
@@ -103,7 +110,12 @@ export function Navigation() {
                 window.scrollTo({ top: 0, behavior: "smooth" });
               }}
             >
-              Health on the Water
+              <span className="font-serif text-xl sm:text-2xl tracking-[0.12em] uppercase block text-center leading-none text-white">
+                LUXURY MARINE LIFE
+              </span>
+              <span className="text-[9px] tracking-[0.25em] mt-1 text-white/60 block text-center uppercase font-medium">
+                · LUXURYMARINELIFE.SHOP ·
+              </span>
             </a>
 
             {/* Desktop Navigation */}

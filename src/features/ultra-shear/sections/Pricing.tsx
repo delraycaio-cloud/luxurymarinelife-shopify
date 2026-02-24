@@ -7,6 +7,7 @@ const pricingPlans = [
     name: "The Single",
     subtitle: "FIRST-TIME BUYER EXCLUSIVE",
     description: "1x Super Antioxidant NanoSpray",
+    image: "/images/oil_1.jpg",
     originalPrice: 79,
     foundersPrice: 64,
     savings: "Save $16 (20% off)",
@@ -22,6 +23,7 @@ const pricingPlans = [
     name: "The Biohacker's Stack",
     subtitle: "MOST POPULAR",
     description: "3x Super Antioxidant NanoSpray",
+    image: "/images/oil_3.jpg",
     originalPrice: 237,
     foundersPrice: 189,
     savings: "Save $48 (20% off)",
@@ -37,6 +39,7 @@ const pricingPlans = [
     name: "Executive Longevity Stack",
     subtitle: "MAXIMIZED VALUE",
     description: "6x Super Antioxidant NanoSpray",
+    image: "/images/oil_6.jpg",
     originalPrice: 474,
     foundersPrice: 367,
     savings: "Save $107 (22.5% off)",
@@ -51,6 +54,7 @@ const pricingPlans = [
     name: "Health CEO Annual Supply",
     subtitle: "BEST VALUE",
     description: "12x Super Antioxidant NanoSpray",
+    image: "/images/oil_12.png",
     originalPrice: 948,
     foundersPrice: 719,
     savings: "Save $229 (24% off)",
@@ -80,22 +84,23 @@ export function Pricing() {
     <section ref={ref} id="pricing" className="section-padding bg-white">
       <div className="container-luxury">
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16"></div>
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <h2 className="font-serif text-4xl sm:text-5xl text-[#1A1A1A] mb-4">Choose Your Protocol</h2>
+          <p className="text-lg text-gray-600 max-w-xl mx-auto font-medium">Every Protocol. One Goal: Maximum Health.</p>
+        </div>
 
         {/* Pricing Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
           {pricingPlans.map((plan, index) => (
             <div
               key={plan.id}
-              className={`relative bg-white border h-full flex flex-col transition-all duration-700 hover:shadow-xl hover:-translate-y-3 ${
-                plan.popular || plan.bestValue
+              className={`relative bg-white border h-full flex flex-col transition-all duration-700 hover:shadow-xl hover:-translate-y-3 ${plan.popular || plan.bestValue
                   ? "border-[#D4A84B]"
                   : "border-gray-200"
-              } ${
-                isInView
+                } ${isInView
                   ? "opacity-100 translate-y-0"
                   : "opacity-0 translate-y-20"
-              }`}
+                }`}
               style={{
                 transitionDelay: `${300 + index * 150}ms`,
                 transitionTimingFunction:
@@ -111,6 +116,11 @@ export function Pricing() {
               </div>
 
               <div className="p-6 pt-8 flex flex-col h-full">
+                {/* Product Image */}
+                <div className="mb-6 flex justify-center items-center h-48 py-4">
+                  <img src={plan.image} alt={plan.name} className="h-full object-contain drop-shadow-xl transition-transform duration-500 hover:scale-110" />
+                </div>
+
                 {/* Plan Info */}
                 <p className="label-text text-gray-500 mb-2">{plan.subtitle}</p>
                 <h3 className="font-serif text-xl text-[#1A1A1A] mb-2">

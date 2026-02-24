@@ -65,25 +65,27 @@ export function HeroSlideshow({ onNavigate }: HeroSlideshowProps) {
       {slides.map((slide, index) => (
         <div
           key={index}
-          className={`absolute inset-0 transition-opacity duration-1000 ${
-            index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"
-          }`}
+          className={`absolute inset-0 transition-opacity duration-1000 ${index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"
+            }`}
         >
           {/* Background Image with Ken Burns effect */}
           <div
-            className={`absolute inset-0 transition-transform duration-[8000ms] ease-linear ${
-              index === currentSlide ? "scale-100" : "scale-110"
-            }`}
+            className={`absolute inset-0 transition-transform duration-[8000ms] ease-linear ${index === currentSlide ? "scale-100" : "scale-110"
+              }`}
           >
             <img
               src={slide.image}
               alt={slide.category}
               className="w-full h-full object-cover"
+              loading={index === 0 ? "eager" : "lazy"}
+              fetchPriority={index === 0 ? "high" : "auto"}
+              decoding={index === 0 ? "sync" : "async"}
             />
           </div>
 
-          {/* Dark Overlay */}
-          <div className="absolute inset-0 bg-black/30" />
+          {/* Dark Overlay with Gradient Wipe */}
+          <div className="absolute inset-0 bg-black/20" />
+          <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-white to-transparent z-[5]" />
         </div>
       ))}
 
@@ -93,11 +95,10 @@ export function HeroSlideshow({ onNavigate }: HeroSlideshowProps) {
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8">
             {/* Left Content */}
             <div
-              className={`transition-all duration-700 ${
-                isInView
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-8"
-              }`}
+              className={`transition-all duration-700 ${isInView
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-8"
+                }`}
               style={{ transitionDelay: "500ms" }}
             >
               <span className="label-text text-white/90 block mb-3">
@@ -108,7 +109,7 @@ export function HeroSlideshow({ onNavigate }: HeroSlideshowProps) {
               </h2>
               <button
                 onClick={() => onNavigate("products")}
-                className="btn-outline-white"
+                className="btn-outline-amber px-8 hover:bg-amber-500 hover:text-white transition-all text-sm tracking-wider uppercase"
               >
                 {slides[currentSlide].cta}
               </button>
@@ -123,11 +124,10 @@ export function HeroSlideshow({ onNavigate }: HeroSlideshowProps) {
           <button
             key={index}
             onClick={() => goToSlide(index)}
-            className={`w-2 h-2 rounded-full transition-all duration-300 ${
-              index === currentSlide
-                ? "bg-white w-8"
-                : "bg-white/50 hover:bg-white/70"
-            }`}
+            className={`w-2 h-2 rounded-full transition-all duration-300 ${index === currentSlide
+              ? "bg-white w-8"
+              : "bg-white/50 hover:bg-white/70"
+              }`}
           />
         ))}
       </div>

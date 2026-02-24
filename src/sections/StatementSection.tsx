@@ -127,6 +127,8 @@ export function StatementSection({
           src={backgroundImage}
           alt={headline}
           className="w-full h-full object-cover"
+          loading="lazy"
+          decoding="async"
         />
         <div className="absolute inset-0 bg-marine-900/50" />
       </div>
@@ -140,7 +142,7 @@ export function StatementSection({
           >
             {headline}
           </h2>
-          
+
           <p
             ref={bodyRef}
             className="mt-6 lg:mt-8 text-white/80 text-base lg:text-lg max-w-[56vw] mx-auto leading-relaxed"

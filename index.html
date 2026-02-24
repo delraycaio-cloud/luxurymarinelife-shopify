@@ -1,12 +1,46 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Health on the Water</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Luxury Marine Life | Health on the Water</title>
+
+  <!-- Open Graph & Twitter Cards -->
+  <meta property="og:title" content="Luxury Marine Life | Health on the Water" />
+  <meta property="og:description"
+    content="Wellness journeys designed for life on the water—movement, recovery, and mindful routines." />
+  <meta property="og:image" content="https://luxurymarinelife-shopify.web.app/hero_wellness_bg.jpg" />
+  <meta property="og:url" content="https://luxurymarinelife-shopify.web.app/" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- JSON-LD Product Schema -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org/",
+      "@type": "Product",
+      "name": "Super Antioxidant NanoSpray",
+      "image": "https://luxurymarinelife-shopify.web.app/images/oil_hero1.jpeg",
+      "description": "Six quick and easy oral sprays for near immediate protection and bioavailable wellness.",
+      "brand": {
+        "@type": "Brand",
+        "name": "Luxury Marine Life"
+      },
+      "offers": {
+        "@type": "AggregateOffer",
+        "lowPrice": "64.00",
+        "highPrice": "719.00",
+        "priceCurrency": "USD",
+        "offerCount": "4"
+      }
+    }
+    </script>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+
 </html>
