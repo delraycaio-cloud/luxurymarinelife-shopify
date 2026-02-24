@@ -165,7 +165,7 @@ export function InsideFormula() {
             <div className="sticky top-32 space-y-8 mt-12">
               <div className="aspect-[4/5] overflow-hidden w-[600px] mx-auto">
                 <img
-                  src="/images/oil_5.jpg"
+                  src="/images/oil_5.webp"
                   alt="Supplement Facts"
                   className="w-full h-full object-contain"
                 />

@@ -34,7 +34,7 @@ function HomePage() {
         id="impact"
         headline="HEALTHY WATER"
         body="We fund reef restoration and reduce marine impact-so the places you love stay pristine."
-        backgroundImage="/statement_water_bg.jpg"
+        backgroundImage="/statement_water_bg.webp"
         zIndex={20}
       />
 
@@ -42,7 +42,7 @@ function HomePage() {
         id="animals"
         headline="HEALTHY ANIMALS"
         body="Every purchase supports coral restoration and cleaner coastlines-because thriving ecosystems matter."
-        backgroundImage="/statement_animals_bg.jpg"
+        backgroundImage="/statement_animals_bg.webp"
         zIndex={30}
       />
 
@@ -50,7 +50,7 @@ function HomePage() {
         id="experience"
         headline="THE ERA OF THE SPA YACHT IS OVER. ENTER THE ERA OF THE BIOLOGICAL AMPLIFIER."
         body="A floating system for recovery, focus, and performance-designed for high performers who refuse to compromise."
-        backgroundImage="/experience_yacht_bg.jpg"
+        backgroundImage="/experience_yacht_bg.webp"
         zIndex={40}
         cta={{ text: 'Book a Consultation', onClick: scrollToShop }}
         secondaryCta={{ text: 'View the Experience', onClick: scrollToShop }}
@@ -60,7 +60,7 @@ function HomePage() {
         id="philanthropy"
         headline="10% TO THE OCEAN"
         body="We donate 10% of every purchase to marine restoration-reefs, coastlines, and the wildlife that depends on them."
-        backgroundImage="/impact_reef_bg.jpg"
+        backgroundImage="/impact_reef_bg.webp"
         zIndex={50}
         cta={{ text: 'Shop with Purpose', onClick: scrollToShop }}
       />

@@ -12,11 +12,10 @@ import { Protocol } from "./sections/Protocol";
 import { SupplementFacts } from "./sections/SupplementFacts";
 import { Testimonials } from "./sections/Testimonials";
 import { Features } from "./sections/Features";
-import { Contact } from "./sections/Contact";
 import { Footer } from "./sections/Footer";
 import "./ultra-shear.css";
 
-type Page = "home" | "products" | "discover" | "science" | "contact";
+type Page = "home" | "products" | "discover" | "science";
 
 function HomePage() {
   return (
@@ -53,7 +52,6 @@ function HomePage() {
       <SupplementFacts />
       <Testimonials />
       <Features />
-      <Contact />
     </>
   );
 }
@@ -91,7 +89,7 @@ function DiscoverPage() {
             </div>
             <div className="h-[500px] bg-[#FAFAFA]">
               <img
-                src="/images/oil_14.jpg"
+                src="/images/oil_14.webp"
                 alt="Shear Sciences"
                 className="w-full h-full object-cover"
               />
@@ -142,18 +140,6 @@ export function UltraShearPage() {
         {currentPage === "products" && <ProductsPage />}
         {currentPage === "discover" && <DiscoverPage />}
         {currentPage === "science" && <SciencePage />}
-        {currentPage === "contact" && (
-          <>
-            <div className="pt-32 pb-10 bg-white">
-              <div className="container-luxury">
-                <h1 className="font-serif text-5xl text-[#1A1A1A] mb-8">
-                  Contact Us
-                </h1>
-              </div>
-            </div>
-            <Contact />
-          </>
-        )}
       </main>
 
       <Footer onNavigate={handleNavigate} />

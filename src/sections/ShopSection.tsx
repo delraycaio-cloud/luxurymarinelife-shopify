@@ -7,10 +7,10 @@ import type { Category } from '@/types';
 gsap.registerPlugin(ScrollTrigger);
 
 const categories: Category[] = [
-  { id: 'learning', name: 'Immersive Learning', description: 'Skills and protocols that keep your edge razor-sharp.', image: '/category_learning.jpg', link: '#courses' },
-  { id: 'biohacking', name: 'Supplements & Performance', description: 'Nano-emulsified recovery, focus, and longevity essentials.', image: '/category_biohacking.jpg', link: '/ultra-shear' },
-  { id: 'tech', name: 'Sustainable Tech', description: 'Protect the water you love — clean innovations that last.', image: '/category_tech.jpg', link: '#tech' },
-  { id: 'apparel', name: 'Apparel', description: 'Climate-ready layers engineered for high-performance living.', image: '/category_apparel.jpg', link: '#apparel' },
+  { id: 'learning', name: 'Immersive Learning', description: 'Skills and protocols that keep your edge razor-sharp.', image: '/category_learning.webp', link: '#courses' },
+  { id: 'biohacking', name: 'Supplements & Performance', description: 'Nano-emulsified recovery, focus, and longevity essentials.', image: '/category_biohacking.webp', link: '/ultra-shear' },
+  { id: 'tech', name: 'Sustainable Tech', description: 'Protect the water you love — clean innovations that last.', image: '/category_tech.webp', link: '#tech' },
+  { id: 'apparel', name: 'Apparel', description: 'Climate-ready layers engineered for high-performance living.', image: '/category_apparel.webp', link: '#apparel' },
 ];
 
 type ShopSectionProps = { onCategoryClick?: (categoryId: string) => void; };

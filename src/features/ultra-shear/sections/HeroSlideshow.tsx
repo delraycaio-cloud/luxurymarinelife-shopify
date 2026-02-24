@@ -10,20 +10,20 @@ interface Slide {
 
 const slides: Slide[] = [
   {
-    image: "/images/hero_image_on_wood.jpeg",
+    image: "/images/hero_image_on_wood.webp",
     category: "NANOSCIENCE",
     tagline: "THE FUTURE OF BIOAVAILABLE WELLNESS",
     cta: "SHOP NOW",
   },
   {
-    image: "/images/hero_image_on_table.jpeg",
+    image: "/images/hero_image_on_table.webp",
     category: "NATURAL POTENCY",
     tagline:
       "FIVE SUPEROILS. PLUS, ADD'L POWERFUL ANTIOXIDANTS AND OTHER BIOACTIVES",
     cta: "EXPLORE",
   },
   {
-    image: "/images/hero_image_in_water.jpeg",
+    image: "/images/hero_image_in_water.webp",
     category: "DAILY RITUAL",
     tagline: "SIX QUICK AND EASY ORAL SPRAYS. NEARLY IMMEDIATE PROTECTION.",
     cta: "BUY NOW",

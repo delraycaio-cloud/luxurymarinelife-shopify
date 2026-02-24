@@ -16,7 +16,7 @@ export function FullWidthBanner({ onNavigate }: FullWidthBannerProps) {
         }`}
       >
         <img
-          src="/images/wide_banner.jpeg"
+          src="/images/wide_banner.webp"
           alt="UST Processed Nanoemulsions"
           className="w-full h-full object-cover"
         />

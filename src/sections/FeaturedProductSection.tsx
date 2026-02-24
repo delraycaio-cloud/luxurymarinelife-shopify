@@ -15,7 +15,7 @@ const product = {
   description: "Patented UST™ technology forces oil through 40,000 PSI to create particles 20–80 nm — small enough to bypass the gut and flood your bloodstream in minutes, not hours.",
   originalPrice: 79.99,
   price: 64.0,
-  image: "/oil.png",
+  image: "/oil.webp",
   category: "Supplements",
   badge: "Founder's Pricing",
   features: [

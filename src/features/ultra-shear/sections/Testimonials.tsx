@@ -113,7 +113,8 @@ export function Testimonials() {
           <div className="flex items-center justify-center gap-4 mt-8">
             <button
               onClick={prevTestimonial}
-              className="p-3 border border-gray-200 hover:border-[#8B1A1A] hover:text-[#8B1A1A] transition-colors"
+              className="p-3 border border-gray-200 text-[#1A1A1A] bg-white hover:border-[#8B1A1A] hover:text-[#8B1A1A] transition-colors"
+              aria-label="Previous testimonial"
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
@@ -134,7 +135,8 @@ export function Testimonials() {
 
             <button
               onClick={nextTestimonial}
-              className="p-3 border border-gray-200 hover:border-[#8B1A1A] hover:text-[#8B1A1A] transition-colors"
+              className="p-3 border border-gray-200 text-[#1A1A1A] bg-white hover:border-[#8B1A1A] hover:text-[#8B1A1A] transition-colors"
+              aria-label="Next testimonial"
             >
               <ChevronRight className="w-5 h-5" />
             </button>

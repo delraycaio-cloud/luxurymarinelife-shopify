@@ -16,8 +16,8 @@ interface Product {
 const products: Product[] = [
   {
     id: "biohacker",
-    image: "/images/oil_table3.jpeg",
-    defaultImage: "/images/kids.jpeg",
+    image: "/images/oil_table3.webp",
+    defaultImage: "/images/kids.webp",
     vendor: "Shear Sciences",
     name: "The Biohacker's Stack - 90-Day Supply",
     subtitle: "3x NanoSpray Bottles",
@@ -28,8 +28,8 @@ const products: Product[] = [
   },
   {
     id: "executive",
-    image: "/images/12b.png",
-    defaultImage: "/images/elder.jpeg",
+    image: "/images/12b.webp",
+    defaultImage: "/images/elder.webp",
     vendor: "Shear Sciences",
     name: "Executive Longevity Stack - 6-Month Supply",
     subtitle: "6x NanoSpray Bottles",
@@ -40,8 +40,8 @@ const products: Product[] = [
   },
   {
     id: "ceo",
-    image: "/images/oil_12.png",
-    defaultImage: "/images/ceo.jpeg",
+    image: "/images/oil_12.webp",
+    defaultImage: "/images/ceo.webp",
     vendor: "Shear Sciences",
     name: "Health CEO Annual Supply - 12-Month",
     subtitle: "12x NanoSpray Bottles",

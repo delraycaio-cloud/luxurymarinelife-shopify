@@ -96,7 +96,7 @@ export function BiohackingBundlesPage({ onBack }: BiohackingBundlesPageProps) {
 
               <div className="mt-5 h-48 rounded-xl border border-white/10 bg-marine-900/60 overflow-hidden">
                 <img
-                  src="/oil.png"
+                  src="/oil.webp"
                   alt="Super Antioxidant NanoSpray"
                   className="h-full w-full rounded-2xl object-cover mix-blend-multiply contrast-110 saturate-110"
                 />

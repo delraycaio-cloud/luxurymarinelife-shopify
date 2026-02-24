@@ -111,7 +111,7 @@ export function HeroSection() {
         style={{ opacity: 0 }}
       >
         <img
-          src="/hero_wellness_bg.jpg"
+          src="/hero_wellness_bg.webp"
           alt="Luxury wellness on superyacht"
           className="w-full h-full object-cover"
           fetchPriority="high"
@@ -194,7 +194,7 @@ export function HeroSection() {
               style={{ opacity: 0 }}
             >
               <img
-                src="/hero_wellness_card.jpg"
+                src="/hero_wellness_card.webp"
                 alt="Luxury supplement ritual on superyacht"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
               />
