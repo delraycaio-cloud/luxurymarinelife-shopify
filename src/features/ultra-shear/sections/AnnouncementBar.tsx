@@ -10,8 +10,8 @@ export function AnnouncementBar() {
     <div className="bg-[#8B1A1A] text-white py-2 sm:py-2.5 px-3 sm:px-4 animate-slide-down">
       <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-1.5 sm:gap-6 text-center">
         <p className="text-[10px] leading-tight sm:text-sm font-medium tracking-wide">
-          <span className="sm:hidden">FOUNDERS ACCESS ENDING</span>
-          <span className="hidden sm:inline">FOUNDERS ACCESS ENDING - Lock in UltraShear Technology™ at Historic Pricing</span>
+          <span className="sm:hidden">LIMITED-TIME ACCESS ENDING</span>
+          <span className="hidden sm:inline">LIMITED-TIME ACCESS ENDING - Lock in UltraShear Technology™ at Historic Pricing</span>
         </p>
 
         <div className="flex items-center gap-2 sm:gap-3">

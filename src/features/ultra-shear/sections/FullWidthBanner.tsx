@@ -21,13 +21,9 @@ export function FullWidthBanner({ onNavigate }: FullWidthBannerProps) {
           className="w-full h-full object-cover"
         />
       </div>
-
-      {/* Dark Overlay */}
-      <div className="absolute inset-0 bg-black/50" />
-
       {/* Content */}
       <div className="relative z-10 h-full flex items-center justify-center">
-        <div className="text-center px-4 max-w-4xl">
+        <div className="text-center px-6 md:px-8 w-[340px] h-[300px] md:w-[560px] md:h-[420px] mx-auto flex flex-col items-center justify-center [border-radius:44%_56%_52%_48%/56%_44%_60%_40%] [background:radial-gradient(ellipse_at_center,rgba(11,34,54,0.72)_0%,rgba(11,34,54,0.42)_30%,rgba(11,34,54,0.18)_52%,rgba(11,34,54,0.06)_68%,rgba(11,34,54,0)_86%)]">
           <h2
             className={`font-serif text-3xl md:text-5xl lg:text-6xl text-white mb-6 transition-all duration-700 ${
               isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"

@@ -30,8 +30,8 @@ export function DualMediaBanners({ onNavigate }: DualMediaBannersProps) {
     },
     {
       image: "/images/5_oils.jpeg",
-      title: "THE FORMULA",
-      subtitle: "FIVE SUPEROILS. MULTIPLE BIOACTIVES.",
+      title: "THE ABSORPTION",
+      subtitle: "RAPID UPTAKE. MAMXIMUM BIOAVAILABILITY.",
       cta: "DISCOVER",
     },
   ];

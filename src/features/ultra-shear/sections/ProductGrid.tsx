@@ -1,5 +1,4 @@
 import { useInView } from "@/hooks/useInView";
-import { ArrowRight } from "lucide-react";
 
 interface Product {
   id: string;
@@ -60,11 +59,7 @@ const trustSignals = [
   "Processed by UltraShear Technology™ (UST)",
 ];
 
-interface ProductGridProps {
-  onNavigate: (page: string) => void;
-}
-
-export function ProductGrid({ onNavigate }: ProductGridProps) {
+export function ProductGrid() {
   const [ref, isInView] = useInView<HTMLDivElement>({ threshold: 0.1 });
   const singleBottleCheckoutUrl =
     "https://shearsciences.com/discount/MARINE20?redirect=%2Fcart%2F46818496282869%3A1%3Fref%3DANGELINA_VIP";
@@ -86,13 +81,17 @@ export function ProductGrid({ onNavigate }: ProductGridProps) {
           >
             <div className="bg-[#FAFAFA] border border-gray-200 p-8">
               <span className="inline-block label-text text-[#8B1A1A] bg-white border border-[#8B1A1A]/20 px-3 py-1.5 mb-5">
-                FOUNDERS PRICE - LIMITED TIME
+                LIMITED-TIME PRICE
               </span>
-              <div className="aspect-square bg-white border border-gray-200 mb-5 overflow-hidden">
-                <img
-                  src="/images/oil_4.jpg"
-                  alt="Super Antioxidant Oil Complex Oral NanoSpray"
+              <div className="aspect-square bg-white mb-5 overflow-hidden">
+                <video
+                  src="/images/droplets_gone.mp4"
                   className="w-full h-full object-cover scale-95"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  aria-label="Super Antioxidant Oil Complex Oral NanoSpray"
                 />
               </div>
               <p className="label-text text-gray-500 mb-2">Shear Sciences</p>
@@ -154,18 +153,18 @@ export function ProductGrid({ onNavigate }: ProductGridProps) {
               </div>
 
               <div className="bg-[#FAFAFA] p-6">
-                <p className="label-text text-gray-500 mb-3">
-                  CLEAN-LABEL INGREDIENTS INCLUDE
+                <p className="label-text text-gray-500 mb-3">ABOUT</p>
+                <p className="text-gray-600 mb-4">
+                  Pressure BioSciences, Inc. (PBIO) is a pioneer in the
+                  development of novel, broadly enabling, high-pressure-based
+                  instruments and topical/ingestible consumer products.
                 </p>
-                <ul className="space-y-2 text-gray-600">
-                  <li>- Coenzyme Q10 (CoQ10)</li>
-                  <li>- Astaxanthin</li>
-                  <li>- Curcumin</li>
-                  <li>- Tocopherols (Vitamin E)</li>
-                  <li>- Acai Berry Extract</li>
-                  <li>- Sea Buckthorn Oil</li>
-                  <li>- Multiple others</li>
-                </ul>
+                <p className="text-gray-600">
+                  PBIO&apos;s unique, multi-patented UltraShear Technology™
+                  (UST) platform is revolutionizing the delivery of
+                  nanoemulsified products for the health &amp; wellness,
+                  cosmeceutical, and other consumer industries.
+                </p>
               </div>
 
               <div className="border-l-4 border-[#8B1A1A] pl-6 py-2">
@@ -190,32 +189,15 @@ export function ProductGrid({ onNavigate }: ProductGridProps) {
           }`}
         >
           <h2 className="font-serif text-4xl md:text-5xl text-[#1A1A1A] mb-4">
-            LIMITED-TIME FOUNDERS OPPORTUNITY
+            LIMITED-TIME OPPORTUNITY
           </h2>
           <p className="text-[#8B1A1A] font-medium text-lg mb-4">
             Lock in UltraShear Technology™ at Historic Pricing
           </p>
           <p className="text-gray-600">
             Due to unprecedented demand and a commitment to our earliest
-            supporters, we are extending this exclusive, limited-number Founders
-            pricing. Once this batch is sold, prices will return to standard
-            retail.
+            supporters, we are Offering this exclusive, limited-Time pricing.
           </p>
-        </div>
-
-        {/* Header */}
-        <div
-          className={`flex items-center justify-between mb-12 transition-all duration-700 ${
-            isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}
-        >
-          <button
-            onClick={() => onNavigate("products")}
-            className="label-text text-[#1A1A1A] hover:text-[#8B1A1A] transition-colors flex items-center gap-2 group"
-          >
-            VIEW ALL
-            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-          </button>
         </div>
 
         {/* Product Grid */}
@@ -310,14 +292,6 @@ export function ProductGrid({ onNavigate }: ProductGridProps) {
           ))}
         </div>
 
-        <p
-          className={`text-center text-sm text-gray-500 italic transition-all duration-700 ${
-            isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}
-        >
-          Stock is limited to 100 annual memberships. Pricing will expire when
-          current inventory hits 50 units.
-        </p>
       </div>
     </section>
   );

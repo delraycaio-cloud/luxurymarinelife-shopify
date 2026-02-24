@@ -29,7 +29,7 @@ const pricingPlans = [
     foundersPrice: 189,
     savings: "Save $48 (20% off)",
     supply: "90-Day Supply — $64/bottle",
-    badge: "FOUNDERS OFFER",
+    badge: "LIMITED-TIME OFFER",
     badgeIcon: Zap,
     badgeColor: "bg-[#D4A84B]",
     popular: true,

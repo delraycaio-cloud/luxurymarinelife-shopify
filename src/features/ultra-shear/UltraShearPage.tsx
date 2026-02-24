@@ -11,7 +11,6 @@ import { FullWidthBanner } from "./sections/FullWidthBanner";
 import { Protocol } from "./sections/Protocol";
 import { SupplementFacts } from "./sections/SupplementFacts";
 import { Testimonials } from "./sections/Testimonials";
-import { About } from "./sections/About";
 import { Features } from "./sections/Features";
 import { Contact } from "./sections/Contact";
 import { Footer } from "./sections/Footer";
@@ -46,14 +45,13 @@ function HomePage() {
         </div>
       </section>
       <BioavailabilityGap />
-      <ProductGrid onNavigate={() => {}} />
+      <ProductGrid />
       <USTTechnology />
       <InsideFormula />
       <FullWidthBanner onNavigate={() => {}} />
       <Protocol />
       <SupplementFacts />
       <Testimonials />
-      <About onNavigate={() => {}} />
       <Features />
       <Contact />
     </>
@@ -63,7 +61,7 @@ function HomePage() {
 function ProductsPage() {
   return (
     <>
-      <ProductGrid onNavigate={() => {}} />
+      <ProductGrid />
     </>
   );
 }
@@ -101,7 +99,6 @@ function DiscoverPage() {
           </div>
         </div>
       </div>
-      <About onNavigate={() => {}} />
       <Features />
       <Testimonials />
     </>

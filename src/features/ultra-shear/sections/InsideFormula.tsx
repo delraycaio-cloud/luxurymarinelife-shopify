@@ -1,22 +1,54 @@
 import { useInView } from "@/hooks/useInView";
 
-const ingredients = [
-  { name: "CoQ10", benefit: "Mitochondrial Energy" },
+const ingredientGroups = [
   {
-    name: "Astaxanthin",
-    benefit: "Oxidative Defense — 6,000× stronger than vitamin C",
+    title: "The Bioactive Powerhouse",
+    items: [
+      { name: "CoQ10", benefit: "Mitochondrial Energy and Heart Health" },
+      {
+        name: "Astaxanthin",
+        benefit: "Oxidative Defense - 6,000x stronger than Vitamin C",
+      },
+      { name: "Curcumin", benefit: "Systemic Inflammation and Joint Balance" },
+      { name: "Lycopene", benefit: "Cardiovascular and Cellular Protection" },
+      {
+        name: "Vitamin D3 + K2",
+        benefit: "Immune Modulation and Targeted Bone Support",
+      },
+    ],
   },
-  { name: "Curcumin", benefit: "Systemic Balance" },
-  { name: "Tocopherols", benefit: "Cellular Protection" },
-  { name: "Açaí", benefit: "Polyphenol Support" },
-  { name: "Sea Buckthorn", benefit: "Skin + Membrane Nourishment" },
+  {
+    title: "The Five-SuperOil Complex",
+    items: [
+      {
+        name: "Sea Buckthorn",
+        benefit: "Omega-7 for Skin + Membrane Nourishment",
+      },
+      {
+        name: "Acai Berry",
+        benefit: "Deep Polyphenol and Anthocyanin Support",
+      },
+      {
+        name: "Buah Merah",
+        benefit: "Rare Alpha-Tocopherols for Immune Resilience",
+      },
+      {
+        name: "Pequi Fruit",
+        benefit: "Heart-Healthy Monounsaturated Fatty Acids",
+      },
+      {
+        name: "MCT Oil",
+        benefit: "Rapid-Onset Bio-Fuel and Nano-Carrier Stability",
+      },
+    ],
+  },
 ];
 
 const stats = [
   { value: "0%", label: "Preservatives" },
   { value: "100%", label: "Clean-Label" },
-  { value: "4-10X", label: "Bioavailability" },
-  { value: "3-5 Min", label: "Absorption" },
+  { value: "3-5 Min", label: "Absorption Onset" },
+  { value: "Long-Term", label: "Shelf Stability" },
 ];
 
 export function InsideFormula() {
@@ -25,11 +57,11 @@ export function InsideFormula() {
   return (
     <section ref={ref} className="section-padding bg-white">
       <div className="container-luxury">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+        <div className="grid grid-cols-1 xl:grid-cols-3  items-start">
           {/* Left Content */}
-          <div>
+          <div className="xl:col-span-2 xl:w-[90%]">
             <h2
-              className={`font-serif text-4xl md:text-5xl text-[#1A1A1A] mb-6 transition-all duration-700 ${
+              className={`font-serif text-4xl md:text-5xl text-[#1A1A1A] mb-5 transition-all duration-700 ${
                 isInView
                   ? "opacity-100 translate-y-0"
                   : "opacity-0 translate-y-8"
@@ -47,31 +79,37 @@ export function InsideFormula() {
               style={{ transitionDelay: "200ms" }}
             >
               UST processing preserves the integrity of every compound while
-              dramatically enhancing absorption. Product contains SuperOils and
-              Bioactives shown to offer antioxidant, anti-inflammatory, and
-              broader health and wellness benefits. Clean-Label Ingredients Include:
+              dramatically enhancing absorption. This synergistic stack of
+              SuperOils and Bioactives is engineered to offer comprehensive
+              antioxidant, anti-inflammatory, and systemic wellness benefits.
             </p>
 
             {/* Ingredient Cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {ingredients.map((ingredient, index) => (
-                <div
-                  key={ingredient.name}
-                  className={`p-6 bg-[#FAFAFA] hover:bg-white hover:shadow-lg transition-all duration-500 group cursor-default ${
-                    isInView
-                      ? "opacity-100 translate-y-0"
-                      : "opacity-0 translate-y-8"
-                  }`}
-                  style={{
-                    transitionDelay: `${400 + index * 80}ms`,
-                    transitionTimingFunction:
-                      "cubic-bezier(0.175, 0.885, 0.32, 1.275)",
-                  }}
-                >
-                  <h4 className="font-serif text-xl text-[#1A1A1A] mb-2 group-hover:text-[#8B1A1A] transition-colors">
-                    {ingredient.name}
-                  </h4>
-                  <p className="text-sm text-gray-500">{ingredient.benefit}</p>
+            <div className="grid grid-cols-1 xl:grid-cols-2 gap-0">
+              {ingredientGroups.map((group) => (
+                <div key={group.title}>
+                  <h3 className="font-serif text-2xl text-[#1A1A1A] mb-0.5 leading-tight">
+                    {group.title}
+                  </h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-0">
+                    {group.items.map((ingredient) => (
+                      <div
+                        key={ingredient.name}
+                        className={`p-2 bg-[#FAFAFA] ${
+                          isInView
+                            ? "opacity-100 translate-y-0"
+                            : "opacity-0 translate-y-8"
+                        }`}
+                      >
+                        <h4 className="font-serif text-base text-[#1A1A1A] mb-0.5 leading-tight">
+                          {ingredient.name}
+                        </h4>
+                        <p className="text-xs text-gray-500 leading-tight">
+                          {ingredient.benefit}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               ))}
             </div>
@@ -88,9 +126,10 @@ export function InsideFormula() {
                 THE SHEAR SCIENCES DIFFERENCE
               </p>
               <p className="text-gray-600">
-                All natural. 100% plant based. No artificial chemicals.
-                Preservative-free. 4-10X standard bioavailability. Longterm
-                stable.
+                All Natural. 100% Plant-Based. No Artificial Chemicals. Our
+                patented UltraShear Technology (UST) uses high-pressure physics
+                to create 20-80 nm droplets that bypass the gut for 4-10x
+                standard bioavailability.
               </p>
             </div>
 
@@ -114,21 +153,23 @@ export function InsideFormula() {
             </div>
           </div>
 
-          {/* Right Image */}
+          {/* Right Images */}
           <div
-            className={`transition-all duration-1000 ${
+            className={`xl:col-span-1 transition-all duration-1000 ${
               isInView
                 ? "opacity-100 translate-x-0"
                 : "opacity-0 translate-x-20"
             }`}
             style={{ transitionDelay: "400ms" }}
           >
-            <div className="aspect-[4/5] overflow-hidden sticky top-32">
-              <img
-                src="/images/oil_5.jpg"
-                alt="Supplement Facts"
-                className="w-full h-full object-cover scale-125"
-              />
+            <div className="sticky top-32 space-y-8 mt-12">
+              <div className="aspect-[4/5] overflow-hidden w-[600px] mx-auto">
+                <img
+                  src="/images/oil_5.jpg"
+                  alt="Supplement Facts"
+                  className="w-full h-full object-contain"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -136,4 +177,3 @@ export function InsideFormula() {
     </section>
   );
 }
-
