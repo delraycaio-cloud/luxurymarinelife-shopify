@@ -10,20 +10,20 @@ interface Slide {
 
 const slides: Slide[] = [
   {
-    image: "/images/oil_hero1.jpeg",
+    image: "/images/hero_image_on_wood.jpeg",
     category: "NANOSCIENCE",
     tagline: "THE FUTURE OF BIOAVAILABLE WELLNESS",
     cta: "SHOP NOW",
   },
   {
-    image: "/images/oil_hero2.jpeg",
+    image: "/images/hero_image_on_table.jpeg",
     category: "NATURAL POTENCY",
     tagline:
       "FIVE SUPEROILS. PLUS, ADD'L POWERFUL ANTIOXIDANTS AND OTHER BIOACTIVES",
     cta: "EXPLORE",
   },
   {
-    image: "/images/oil_hero3.jpeg",
+    image: "/images/hero_image_in_water.jpeg",
     category: "DAILY RITUAL",
     tagline: "SIX QUICK AND EASY ORAL SPRAYS. NEARLY IMMEDIATE PROTECTION.",
     cta: "BUY NOW",
@@ -59,19 +59,36 @@ export function HeroSlideshow({ onNavigate }: HeroSlideshowProps) {
     setTimeout(() => setIsTransitioning(false), 1000);
   };
 
+  const scrollToFounders = () => {
+    const foundersSection = document.querySelector("#founders-opportunity");
+    if (foundersSection) {
+      const headerOffset = 110;
+      const targetY =
+        foundersSection.getBoundingClientRect().top +
+        window.pageYOffset -
+        headerOffset;
+      window.scrollTo({ top: targetY, behavior: "smooth" });
+      return;
+    }
+
+    onNavigate("products");
+  };
+
   return (
     <section ref={ref} className="relative h-screen w-full overflow-hidden">
       {/* Slides */}
       {slides.map((slide, index) => (
         <div
           key={index}
-          className={`absolute inset-0 transition-opacity duration-1000 ${index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"
-            }`}
+          className={`absolute inset-0 transition-opacity duration-1000 ${
+            index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"
+          }`}
         >
           {/* Background Image with Ken Burns effect */}
           <div
-            className={`absolute inset-0 transition-transform duration-[8000ms] ease-linear ${index === currentSlide ? "scale-100" : "scale-110"
-              }`}
+            className={`absolute inset-0 transition-transform duration-[8000ms] ease-linear ${
+              index === currentSlide ? "scale-100" : "scale-110"
+            }`}
           >
             <img
               src={slide.image}
@@ -85,7 +102,7 @@ export function HeroSlideshow({ onNavigate }: HeroSlideshowProps) {
 
           {/* Dark Overlay with Gradient Wipe */}
           <div className="absolute inset-0 bg-black/20" />
-          <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-white to-transparent z-[5]" />
+          <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-black/40 to-transparent z-[5]" />
         </div>
       ))}
 
@@ -95,10 +112,11 @@ export function HeroSlideshow({ onNavigate }: HeroSlideshowProps) {
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8">
             {/* Left Content */}
             <div
-              className={`transition-all duration-700 ${isInView
-                ? "opacity-100 translate-y-0"
-                : "opacity-0 translate-y-8"
-                }`}
+              className={`transition-all duration-700 ${
+                isInView
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-8"
+              }`}
               style={{ transitionDelay: "500ms" }}
             >
               <span className="label-text text-white/90 block mb-3">
@@ -108,8 +126,8 @@ export function HeroSlideshow({ onNavigate }: HeroSlideshowProps) {
                 {slides[currentSlide].tagline}
               </h2>
               <button
-                onClick={() => onNavigate("products")}
-                className="btn-outline-amber px-8 hover:bg-amber-500 hover:text-white transition-all text-sm tracking-wider uppercase"
+                onClick={scrollToFounders}
+                className="border border-white/70 text-white bg-transparent px-8 py-4 hover:border-white hover:bg-transparent transition-all text-sm tracking-wider uppercase"
               >
                 {slides[currentSlide].cta}
               </button>
@@ -124,10 +142,11 @@ export function HeroSlideshow({ onNavigate }: HeroSlideshowProps) {
           <button
             key={index}
             onClick={() => goToSlide(index)}
-            className={`w-2 h-2 rounded-full transition-all duration-300 ${index === currentSlide
-              ? "bg-white w-8"
-              : "bg-white/50 hover:bg-white/70"
-              }`}
+            className={`w-2 h-2 rounded-full transition-all duration-300 ${
+              index === currentSlide
+                ? "bg-white w-8"
+                : "bg-white/50 hover:bg-white/70"
+            }`}
           />
         ))}
       </div>

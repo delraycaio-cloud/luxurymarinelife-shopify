@@ -19,7 +19,7 @@ export function About({ onNavigate }: AboutProps) {
                 : "opacity-0 -translate-x-20"
             }`}
           >
-            <div className="aspect-[4/5] overflow-hidden">
+            <div className="aspect-[4/5] overflow-hidden rounded-xl">
               <img
                 src="/images/oil_1.jpg"
                 alt="About Shear Sciences"

@@ -6,21 +6,33 @@ interface DualMediaBannersProps {
 
 export function DualMediaBanners({ onNavigate }: DualMediaBannersProps) {
   const [ref, isInView] = useInView<HTMLDivElement>({ threshold: 0.2 });
+  const scrollToFounders = () => {
+    const foundersSection = document.querySelector("#founders-opportunity");
+    if (foundersSection) {
+      const headerOffset = 110;
+      const targetY =
+        foundersSection.getBoundingClientRect().top +
+        window.pageYOffset -
+        headerOffset;
+      window.scrollTo({ top: targetY, behavior: "smooth" });
+      return;
+    }
+
+    onNavigate("products");
+  };
 
   const panels = [
     {
-      image: "/images/oil_3.jpg",
+      image: "/images/oil_3.jpeg",
       title: "THE SCIENCE",
       subtitle: "PRECISION AT THE MOLECULAR LEVEL.",
       cta: "EXPLORE",
-      page: "science",
     },
     {
-      image: "/images/oil_2.jpg",
+      image: "/images/oil_2.jpeg",
       title: "THE FORMULA",
       subtitle: "FIVE SUPEROILS. MULTIPLE BIOACTIVES.",
       cta: "DISCOVER",
-      page: "discover",
     },
   ];
 
@@ -30,7 +42,7 @@ export function DualMediaBanners({ onNavigate }: DualMediaBannersProps) {
         {panels.map((panel, index) => (
           <div
             key={index}
-            className={`relative aspect-[2/3] overflow-hidden group cursor-pointer transition-all duration-1000 ${
+            className={`relative aspect-[10/11] overflow-hidden group cursor-pointer transition-all duration-1000 ${
               isInView
                 ? "opacity-100"
                 : index === 0
@@ -41,7 +53,7 @@ export function DualMediaBanners({ onNavigate }: DualMediaBannersProps) {
               transitionDelay: `${index * 200}ms`,
               transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
             }}
-            onClick={() => onNavigate(panel.page)}
+            onClick={scrollToFounders}
           >
             {/* Background Image */}
             <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-105">

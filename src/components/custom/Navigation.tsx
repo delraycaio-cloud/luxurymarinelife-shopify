@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import {
-  Search,
   ShoppingBag,
   Menu,
   X,
@@ -133,9 +132,9 @@ export function Navigation() {
 
             {/* Right Actions */}
             <div className="flex items-center gap-4">
-              <button className="p-2 text-white/80 hover:text-white transition-colors">
+              {/* <button className="p-2 text-white/80 hover:text-white transition-colors">
                 <Search className="w-5 h-5" />
-              </button>
+              </button> */}
 
               {/* Cart */}
               <Sheet open={isCartOpen} onOpenChange={setIsCartOpen}>

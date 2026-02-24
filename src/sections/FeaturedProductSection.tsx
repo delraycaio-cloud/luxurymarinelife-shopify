@@ -64,11 +64,17 @@ export function FeaturedProductSection() {
       <div className="px-6 lg:px-[7vw]">
         <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
           <div ref={imageRef} className="w-full lg:w-[48vw] relative">
-            <div className="absolute inset-0 rounded-3xl" style={{ background: 'radial-gradient(ellipse at center, rgba(45,212,191,0.12) 0%, transparent 70%)', filter: 'blur(24px)' }} aria-hidden="true" />
-            <div className="relative lg:h-[72vh] rounded-2xl overflow-hidden bg-marine-800/40 flex items-center justify-center">
-              <img src={product.image} alt={product.name} className="w-full h-full object-contain p-6 lg:p-10 animate-float" loading="lazy" />
+            <div className="relative lg:h-[72vh] bg-transparent flex items-center justify-center">
+              <div className="rounded-2xl overflow-hidden inline-block">
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="block max-w-[390px] sm:max-w-[500px] lg:max-w-[620px] w-full h-auto rounded-2xl mix-blend-multiply contrast-110 saturate-110"
+                  loading="lazy"
+                />
+              </div>
             </div>
-            <div className="absolute bottom-4 right-4 glass-card rounded-xl p-4 max-w-[220px] hidden lg:block">
+            <div className="absolute bottom-4 right-4 p-3 max-w-[260px] hidden lg:block rounded-xl bg-marine-900/35 backdrop-blur-md border border-white/10">
               <div className="stars mb-1.5" aria-label="5 out of 5 stars">
                 {Array.from({ length: 5 }).map((_, i) => (
                   <Star key={i} className="w-3.5 h-3.5" fill="currentColor" aria-hidden="true" />
@@ -110,11 +116,11 @@ export function FeaturedProductSection() {
 
             <div className="mt-8 flex flex-col sm:flex-row gap-3" data-anim>
               <a target="_blank" rel="noopener noreferrer" href="https://shearsciences.com/discount/MARINE20?redirect=%2Fcart%2F46818496282869%3A1%3Fref%3DANGELINA_VIP">
-                <Button onClick={() => addToCart(product)} className="btn-primary-luxury w-full sm:w-auto !rounded-full gap-2" id="featured-product-buy-cta">
+                <Button onClick={() => addToCart(product)} className="btn-primary-luxury w-full sm:w-auto !rounded-full min-h-12 px-6 gap-2" id="featured-product-buy-cta">
                   <ShoppingBag className="w-4 h-4" aria-hidden="true" />Buy Now — $64
                 </Button>
               </a>
-              <a href="/ultra-shear" className="btn-ghost-luxury">View Full Details <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" /></a>
+              <a href="/ultra-shear" className="btn-ghost-luxury min-h-12 px-6 inline-flex items-center justify-center">View Full Details <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" /></a>
             </div>
 
             <p className="mt-5 text-white/30 text-xs tracking-wide" data-anim>Free US shipping · 30-day satisfaction guarantee · 10% to ocean restoration</p>

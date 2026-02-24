@@ -1,14 +1,16 @@
 import { useState, useEffect } from 'react';
 import { useScrollPosition } from '@/hooks/useScrollPosition';
-import { Search, User, Menu, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
 interface HeaderProps {
   onNavigate: (page: string) => void;
+  currentPage: string;
 }
 
-export function Header({ onNavigate }: HeaderProps) {
+export function Header({ onNavigate, currentPage }: HeaderProps) {
   const { isScrolled } = useScrollPosition();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const useDarkText = isScrolled || currentPage !== 'home';
   // const { getTotalItems, toggleCart } = useCartStore();
   // const cartCount = getTotalItems();
 
@@ -54,10 +56,10 @@ export function Header({ onNavigate }: HeaderProps) {
               onClick={() => handleNavClick('home')}
               className="flex shrink-0 transition-all duration-300 hover:scale-105 flex-col items-start lg:items-center leading-none z-10"
             >
-              <span className={`font-serif text-base sm:text-lg lg:text-2xl tracking-[0.1em] sm:tracking-[0.12em] uppercase shrink-0 whitespace-nowrap ${isScrolled ? 'text-[#1A1A1A]' : 'text-white'}`}>
+              <span className={`font-serif text-base sm:text-lg lg:text-2xl tracking-[0.1em] sm:tracking-[0.12em] uppercase shrink-0 whitespace-nowrap ${useDarkText ? 'text-[#1A1A1A]' : 'text-white'}`}>
                 LUXURY MARINE LIFE
               </span>
-              <span className={`nav-text text-[7px] sm:text-[9px] tracking-[0.15em] sm:tracking-[0.25em] mt-0.5 sm:mt-1 block text-left lg:text-center uppercase font-medium whitespace-nowrap shrink-0 ${isScrolled ? 'text-[#8B1A1A]' : 'text-white/60'}`}>
+              <span className={`nav-text text-[7px] sm:text-[9px] tracking-[0.15em] sm:tracking-[0.25em] mt-0.5 sm:mt-1 block text-left lg:text-center uppercase font-medium whitespace-nowrap shrink-0 ${useDarkText ? 'text-[#8B1A1A]' : 'text-white/60'}`}>
                 · LUXURYMARINELIFE.SHOP ·
               </span>
             </button>
@@ -68,12 +70,12 @@ export function Header({ onNavigate }: HeaderProps) {
                 <button
                   key={item.page}
                   onClick={() => handleNavClick(item.page)}
-                  className={`nav-text relative group whitespace-nowrap text-sm xl:text-base ${isScrolled ? 'text-[#1A1A1A]' : 'text-white'
+                  className={`nav-text relative group whitespace-nowrap text-sm xl:text-base ${useDarkText ? 'text-[#1A1A1A]' : 'text-white'
                     }`}
                 >
                   {item.label}
                   <span
-                    className={`absolute -bottom-1 left-0 w-0 h-px transition-all duration-300 group-hover:w-full ${isScrolled ? 'bg-[#1A1A1A]' : 'bg-white'
+                    className={`absolute -bottom-1 left-0 w-0 h-px transition-all duration-300 group-hover:w-full ${useDarkText ? 'bg-[#1A1A1A]' : 'bg-white'
                       }`}
                   />
                 </button>
@@ -82,25 +84,25 @@ export function Header({ onNavigate }: HeaderProps) {
 
             {/* Right Navigation & Mobile Hamburger */}
             <div className="flex items-center justify-end gap-4 lg:gap-6 shrink-0 z-10">
-              <div className="hidden lg:flex items-center gap-6">
+              {/* <div className="hidden lg:flex items-center gap-6">
                 <button
-                  className={`transition-transform hover:scale-110 ${isScrolled ? 'text-[#1A1A1A]' : 'text-white'
+                  className={`transition-transform hover:scale-110 ${useDarkText ? 'text-[#1A1A1A]' : 'text-white'
                     }`}
                 >
                   <Search className="w-5 h-5" />
                 </button>
                 <button
-                  className={`transition-transform hover:scale-110 ${isScrolled ? 'text-[#1A1A1A]' : 'text-white'
+                  className={`transition-transform hover:scale-110 ${useDarkText ? 'text-[#1A1A1A]' : 'text-white'
                     }`}
                 >
                   <User className="w-5 h-5" />
                 </button>
-              </div>
+              </div> */}
 
               {/* Mobile Menu Button - ALWAYS SHOWN ON MOBILE */}
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className={`lg:hidden p-2 shrink-0 ${isScrolled ? 'text-[#1A1A1A]' : 'text-white'
+                className={`lg:hidden p-2 shrink-0 ${useDarkText ? 'text-[#1A1A1A]' : 'text-white'
                   }`}
               >
                 {isMobileMenuOpen ? (
@@ -147,34 +149,11 @@ export function Header({ onNavigate }: HeaderProps) {
                 </button>
               ))}
             </nav>
-
-            <div className="mt-12 pt-8 border-t border-gray-200">
-              <div className="flex items-center gap-6">
-                <button className="text-[#1A1A1A] hover:text-[#8B1A1A] transition-colors">
-                  <Search className="w-6 h-6" />
-                </button>
-                <button className="text-[#1A1A1A] hover:text-[#8B1A1A] transition-colors">
-                  <User className="w-6 h-6" />
-                </button>
-                {/* <button
-                  onClick={() => {
-                    toggleCart();
-                    setIsMobileMenuOpen(false);
-                  }}
-                  className="relative text-[#1A1A1A] hover:text-[#8B1A1A] transition-colors"
-                >
-                  <ShoppingBag className="w-6 h-6" />
-                  {cartCount > 0 && (
-                    <span className="absolute -top-2 -right-2 w-5 h-5 bg-[#8B1A1A] text-white text-xs rounded-full flex items-center justify-center">
-                      {cartCount}
-                    </span>
-                  )}
-                </button> */}
-              </div>
-            </div>
           </div>
         </div>
       </div>
     </>
   );
 }
+
+

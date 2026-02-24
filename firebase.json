@@ -9,10 +9,6 @@
     ],
     "rewrites": [
       {
-        "source": "/ultra-shear",
-        "destination": "/ultra-shear.html"
-      },
-      {
         "source": "/ultra-shear-classic",
         "destination": "/ultra-shear-classic.html"
       },

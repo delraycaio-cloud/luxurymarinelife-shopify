@@ -53,7 +53,7 @@ const trustSignals = [
   "Free Shipping on Stacks",
   "30-Day Guarantee",
   "Pharmaceutical-Grade Manufacturing",
-  "Processed by UltraShear Technology™ (UST)",
+  "Processed by UltraShear Technologyâ„¢ (UST)",
 ];
 
 interface ProductGridProps {
@@ -180,6 +180,7 @@ export function ProductGrid({ onNavigate }: ProductGridProps) {
 
         {/* Intro Copy */}
         <div
+          id="founders-opportunity"
           className={`text-center max-w-3xl mx-auto mb-10 transition-all duration-700 ${
             isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
@@ -218,7 +219,7 @@ export function ProductGrid({ onNavigate }: ProductGridProps) {
           {products.map((product, index) => (
             <div
               key={product.id}
-              className={`group transition-all duration-700 ${
+              className={`group h-full flex flex-col transition-all duration-700 ${
                 isInView
                   ? "opacity-100 translate-y-0"
                   : "opacity-0 translate-y-16"
@@ -242,7 +243,7 @@ export function ProductGrid({ onNavigate }: ProductGridProps) {
               </div>
 
               {/* Product Info */}
-              <div className="text-center">
+              <div className="text-center flex flex-col flex-1">
                 <p className="label-text text-gray-500 mb-2">
                   {product.vendor}
                 </p>
@@ -268,7 +269,7 @@ export function ProductGrid({ onNavigate }: ProductGridProps) {
                 {/* Add to Cart */}
                 <button
                   onClick={() => handleAddToCart(product)}
-                  className="btn-outline w-full"
+                  className="btn-outline w-full mt-auto"
                 >
                   BUY NOW
                 </button>
@@ -302,4 +303,3 @@ export function ProductGrid({ onNavigate }: ProductGridProps) {
     </section>
   );
 }
-
