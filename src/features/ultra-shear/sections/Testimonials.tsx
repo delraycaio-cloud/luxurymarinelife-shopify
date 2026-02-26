@@ -4,28 +4,18 @@ import { Star, ChevronLeft, ChevronRight, BadgeCheck } from 'lucide-react';
 
 const testimonials = [
   {
-    text: "This antioxidant spray tastes great and is insanely easy to use. Way better than pills — fast, simple, and something I actually look forward to taking every day.",
-    author: 'Anonymous',
-    verified: false,
-  },
-  {
-    text: "My nails and skin have dramatically changed. Having a family with kids being sick multiple times during school year is problematic and not getting sick myself lends me to believe this isn't luck. This is one product I can't live without now.",
-    author: 'R.J.',
+    text: "As an athlete and person who deeply cares about health and wellness, I am very careful about what I put into my body. The ingredients in the Super Antioxidant are nothing short of impressive, the taste is awesome, the delivery method is unique and powerful, and it's all natural, plant-based, and preservative-free. It has also helped me better cope with my painful arthritis. It's about time a product with these major attributes has found its way to the market. Where have you been all my life!",
+    author: 'David "Super Dave" Vitak',
     verified: true,
   },
   {
-    text: 'Very effective in lowering my lipid panel results by 10 to 15 percent.',
-    author: 'Robert V.',
+    text: 'In just three months of daily use, my total cholesterol and LDL both went down more than 15% and my HDL increased by the same percentage. My doc was amazed!',
+    author: 'R. Vilker, Laguna Niguel, CA',
     verified: true,
   },
   {
-    text: "Over the 6 months I've been using it, I've never had so much as a sniffle — and this includes a virulent flu and Covid season where many around me have been caught.",
-    author: 'Jeffrey P.',
-    verified: true,
-  },
-  {
-    text: "Clearly this company cares about the quality of what they are selling. Five super oils and multiple potent antioxidants, all in a highly bioavailable, entirely unique NanoSpray. All natural and preservative-free. AMAZING!",
-    author: 'Anonymous',
+    text: "Having a family with kids who have gotten sick multiple times during the current school year is problematic, and not getting sick myself leads me to believe that taking the Super Antioxidant NanoSpray routinely over this time isn't luck of the draw. This is one product I can't live without now.",
+    author: 'R. Jenson, Phoenix, AZ',
     verified: false,
   },
 ];
@@ -68,7 +58,7 @@ export function Testimonials() {
               ))}
             </div>
             <span className="font-medium text-[#1A1A1A]">5.00</span>
-            <span className="text-gray-500">(7 reviews)</span>
+            <span className="text-gray-500">(3 reviews)</span>
             <BadgeCheck className="w-5 h-5 text-[#8B1A1A] ml-2" />
           </div>
         </div>
@@ -98,7 +88,7 @@ export function Testimonials() {
 
             <div className="flex items-center gap-2">
               <span className="font-medium text-[#1A1A1A]">
-                — {testimonials[currentIndex].author}
+                - {testimonials[currentIndex].author}
               </span>
               {testimonials[currentIndex].verified && (
                 <span className="inline-flex items-center gap-1 text-xs text-[#8B1A1A]">
