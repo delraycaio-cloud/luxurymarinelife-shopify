@@ -6,6 +6,20 @@ interface FullWidthBannerProps {
 
 export function FullWidthBanner({ onNavigate }: FullWidthBannerProps) {
   const [ref, isInView] = useInView<HTMLDivElement>({ threshold: 0.3 });
+  const handleShopNowClick = () => {
+    const packagesSection = document.getElementById("founders-opportunity");
+    if (packagesSection) {
+      const headerOffset = 130;
+      const targetY =
+        packagesSection.getBoundingClientRect().top +
+        window.pageYOffset -
+        headerOffset;
+      window.scrollTo({ top: targetY, behavior: "smooth" });
+      return;
+    }
+
+    onNavigate("products");
+  };
 
   return (
     <section ref={ref} className="relative h-[600px] overflow-hidden">
@@ -42,7 +56,7 @@ export function FullWidthBanner({ onNavigate }: FullWidthBannerProps) {
             Bloodstream Entry via Oral Mucosa.
           </p>
           <button
-            onClick={() => onNavigate("products")}
+            onClick={handleShopNowClick}
             className={`btn-primary transition-all duration-700 ${
               isInView ? "opacity-100 scale-100" : "opacity-0 scale-90"
             }`}
