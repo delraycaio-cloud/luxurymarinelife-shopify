@@ -53,7 +53,7 @@ type BiohackingBundlesPageProps = {
 
 export function BiohackingBundlesPage({ onBack }: BiohackingBundlesPageProps) {
   const startBundleCheckout = (variantId: string, quantity: number) => {
-    window.location.href = `${SHOPIFY_DOMAIN}/cart/${variantId}:${quantity}`;
+    window.location.href = `${SHOPIFY_DOMAIN}/cart/${variantId}:${quantity}?utm_source=luxurymarinelife&utm_medium=partner&utm_campaign=ultrashear`;
   };
 
   return (

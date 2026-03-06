@@ -16,7 +16,7 @@ const pricingPlans = [
     badgeIcon: Flame,
     badgeColor: "bg-orange-500",
     checkoutUrl:
-      "https://shearsciences.com/discount/MARINE20?redirect=%2Fcart%2F46818496282869%3A1%3Fref%3DANGELINA_VIP",
+      "https://shearsciences.com/discount/MARINE20?utm_source=luxurymarinelife&utm_medium=partner&utm_campaign=ultrashear&redirect=%2Fcart%2F46818496282869%3A1%3Fref%3DANGELINA_VIP",
   },
   {
     id: "biohacker",
@@ -80,7 +80,7 @@ export function Pricing() {
     }
 
     if (!plan.variantId) return;
-    window.location.href = `https://shearsciences.com/cart/${plan.variantId}:1?ref=ANGELINA_VIP`;
+    window.location.href = `https://shearsciences.com/cart/${plan.variantId}:1?ref=ANGELINA_VIP&utm_source=luxurymarinelife&utm_medium=partner&utm_campaign=ultrashear`;
   };
 
   return (

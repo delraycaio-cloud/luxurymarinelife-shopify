@@ -62,10 +62,10 @@ const trustSignals = [
 export function ProductGrid() {
   const [ref, isInView] = useInView<HTMLDivElement>({ threshold: 0.1 });
   const singleBottleCheckoutUrl =
-    "https://shearsciences.com/discount/MARINE20?redirect=%2Fcart%2F46818496282869%3A1%3Fref%3DANGELINA_VIP";
+    "https://shearsciences.com/discount/MARINE20?utm_source=luxurymarinelife&utm_medium=partner&utm_campaign=ultrashear&redirect=%2Fcart%2F46818496282869%3A1%3Fref%3DANGELINA_VIP";
 
   const handleAddToCart = (product: Product) => {
-    window.location.href = `https://shearsciences.com/cart/${product.variantId}:1?ref=ANGELINA_VIP`;
+    window.location.href = `https://shearsciences.com/cart/${product.variantId}:1?ref=ANGELINA_VIP&utm_source=luxurymarinelife&utm_medium=partner&utm_campaign=ultrashear`;
   };
 
   return (

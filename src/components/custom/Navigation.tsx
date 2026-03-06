@@ -82,7 +82,7 @@ export function Navigation() {
       .map((item) => `${item.variantId}:${item.quantity}`)
       .join(",");
 
-    const checkoutUrl = `https://9zuae1-uh.myshopify.com/cart/${cartPath}`;
+    const checkoutUrl = `https://9zuae1-uh.myshopify.com/cart/${cartPath}?utm_source=luxurymarinelife&utm_medium=partner&utm_campaign=ultrashear`;
     window.location.href = checkoutUrl;
   };
 
