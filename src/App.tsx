@@ -11,6 +11,7 @@ import { FeaturedProductSection } from '@/sections/FeaturedProductSection';
 import { ConnectSection } from '@/sections/ConnectSection';
 import { Footer } from '@/sections/Footer';
 import { UltraShearPage } from '@/features/ultra-shear/UltraShearPage';
+import { ApparelBrandsPage } from '@/features/apparel-brands/ApparelBrandsPage';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -24,6 +25,7 @@ function HomePage() {
 
   const handleCategoryClick = (categoryId: string) => {
     if (categoryId === 'biohacking') navigate('/ultra-shear');
+    if (categoryId === 'apparel') navigate('/apparel-brands');
   };
 
   return (
@@ -76,6 +78,7 @@ function HomePage() {
 function RoutedApp() {
   const location = useLocation();
   const isUltraShearRoute = location.pathname === '/ultra-shear';
+  const isApparelBrandsRoute = location.pathname === '/apparel-brands';
 
   useEffect(() => {
     if (location.pathname !== '/') return;
@@ -137,6 +140,9 @@ function RoutedApp() {
     if (isUltraShearRoute) {
       document.title = "UltraShear | Luxury Marine Life Bio-Hacking";
       metaDescription.setAttribute('content', 'UltraShear Technology™ transforms oil-based supplements into highly bioavailable nanoemulsions for marine life high performers.');
+    } else if (isApparelBrandsRoute) {
+      document.title = "Apparel Brands | Luxury Marine Life";
+      metaDescription.setAttribute('content', 'Explore our apparel capsules: Hottie Yachtie Yacht Club, Ac Yacht Club, and Luxury Marine Life.');
     } else {
       document.title = "Luxury Marine Life | Health on the Water";
       metaDescription.setAttribute('content', 'Wellness journeys designed for life on the water—movement, recovery, and mindful routines.');
@@ -158,6 +164,7 @@ function RoutedApp() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/ultra-shear" element={<UltraShearPage />} />
+            <Route path="/apparel-brands" element={<ApparelBrandsPage />} />
           </Routes>
         </main>
       </div>
