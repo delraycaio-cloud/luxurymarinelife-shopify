@@ -1,17 +1,18 @@
-import { useEffect } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
-import { CartProvider } from '@/context/CartContext';
-import { Navigation } from '@/components/custom/Navigation';
-import { HeroSection } from '@/sections/HeroSection';
-import { StatementSection } from '@/sections/StatementSection';
-import { ShopSection } from '@/sections/ShopSection';
-import { FeaturedProductSection } from '@/sections/FeaturedProductSection';
-import { ConnectSection } from '@/sections/ConnectSection';
-import { Footer } from '@/sections/Footer';
-import { UltraShearPage } from '@/features/ultra-shear/UltraShearPage';
-import { ApparelBrandsPage } from '@/features/apparel-brands/ApparelBrandsPage';
+import { useEffect } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
+import { CartProvider } from "@/context/CartContext";
+import { Navigation } from "@/components/custom/Navigation";
+import { HeroSection } from "@/sections/HeroSection";
+import { StatementSection } from "@/sections/StatementSection";
+import { ShopSection } from "@/sections/ShopSection";
+import { FeaturedProductSection } from "@/sections/FeaturedProductSection";
+import { ConnectSection } from "@/sections/ConnectSection";
+import { Footer } from "@/sections/Footer";
+import { UltraShearPage } from "@/features/ultra-shear/UltraShearPage";
+import { ApparelBrandsPage } from "@/features/apparel-brands/ApparelBrandsPage";
+import { LuxuryMarineLifeBrandPage } from "@/features/apparel-brands/luxury-marine-life/LuxuryMarineLifeBrandPage";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -19,13 +20,13 @@ function HomePage() {
   const navigate = useNavigate();
 
   const scrollToShop = () => {
-    const shopSection = document.querySelector('#shop');
-    if (shopSection) shopSection.scrollIntoView({ behavior: 'smooth' });
+    const shopSection = document.querySelector("#shop");
+    if (shopSection) shopSection.scrollIntoView({ behavior: "smooth" });
   };
 
   const handleCategoryClick = (categoryId: string) => {
-    if (categoryId === 'biohacking') navigate('/ultra-shear');
-    if (categoryId === 'apparel') navigate('/apparel-brands');
+    if (categoryId === "biohacking") navigate("/ultra-shear");
+    if (categoryId === "apparel") navigate("/apparel-brands");
   };
 
   return (
@@ -54,8 +55,8 @@ function HomePage() {
         body="A floating system for recovery, focus, and performance-designed for high performers who refuse to compromise."
         backgroundImage="/experience_yacht_bg.webp"
         zIndex={40}
-        cta={{ text: 'Book a Consultation', onClick: scrollToShop }}
-        secondaryCta={{ text: 'View the Experience', onClick: scrollToShop }}
+        cta={{ text: "Book a Consultation", onClick: scrollToShop }}
+        secondaryCta={{ text: "View the Experience", onClick: scrollToShop }}
       />
 
       <StatementSection
@@ -64,7 +65,7 @@ function HomePage() {
         body="We donate 10% of every purchase to marine restoration-reefs, coastlines, and the wildlife that depends on them."
         backgroundImage="/impact_reef_bg.webp"
         zIndex={50}
-        cta={{ text: 'Shop with Purpose', onClick: scrollToShop }}
+        cta={{ text: "Shop with Purpose", onClick: scrollToShop }}
       />
 
       <ShopSection onCategoryClick={handleCategoryClick} />
@@ -77,11 +78,12 @@ function HomePage() {
 
 function RoutedApp() {
   const location = useLocation();
-  const isUltraShearRoute = location.pathname === '/ultra-shear';
-  const isApparelBrandsRoute = location.pathname === '/apparel-brands';
+  const isUltraShearRoute = location.pathname === "/ultra-shear";
+  const isApparelBrandsRoute = location.pathname === "/apparel-brands";
+  const isLmlRoute = location.pathname === "/luxury-marine-life-brand";
 
   useEffect(() => {
-    if (location.pathname !== '/') return;
+    if (location.pathname !== "/") return;
 
     const setupGlobalSnap = () => {
       const pinned = ScrollTrigger.getAll()
@@ -94,26 +96,29 @@ function RoutedApp() {
       const pinnedRanges = pinned.map((st) => ({
         start: st.start / maxScroll,
         end: (st.end ?? st.start) / maxScroll,
-        center: (st.start + ((st.end ?? st.start) - st.start) * 0.5) / maxScroll,
+        center:
+          (st.start + ((st.end ?? st.start) - st.start) * 0.5) / maxScroll,
       }));
 
       ScrollTrigger.create({
         snap: {
           snapTo: (value: number) => {
             const inPinned = pinnedRanges.some(
-              (r) => value >= r.start - 0.02 && value <= r.end + 0.02
+              (r) => value >= r.start - 0.02 && value <= r.end + 0.02,
             );
             if (!inPinned) return value;
 
             return pinnedRanges.reduce(
               (closest, r) =>
-                Math.abs(r.center - value) < Math.abs(closest - value) ? r.center : closest,
-              pinnedRanges[0]?.center ?? 0
+                Math.abs(r.center - value) < Math.abs(closest - value)
+                  ? r.center
+                  : closest,
+              pinnedRanges[0]?.center ?? 0,
             );
           },
           duration: { min: 0.15, max: 0.35 },
           delay: 0,
-          ease: 'power1.out',
+          ease: "power1.out",
         },
       });
     };
@@ -127,36 +132,63 @@ function RoutedApp() {
 
   useEffect(() => {
     // Phase 2: Technical SEO & Agentic Search Dynamic Updates
-    const canonicalLink = document.querySelector('link[rel="canonical"]') || document.createElement('link');
-    canonicalLink.setAttribute('rel', 'canonical');
-    canonicalLink.setAttribute('href', `https://luxurymarinelife-shopify.web.app${location.pathname}`);
+    const canonicalLink =
+      document.querySelector('link[rel="canonical"]') ||
+      document.createElement("link");
+    canonicalLink.setAttribute("rel", "canonical");
+    canonicalLink.setAttribute(
+      "href",
+      `https://luxurymarinelife-shopify.web.app${location.pathname}`,
+    );
     if (!document.querySelector('link[rel="canonical"]')) {
       document.head.appendChild(canonicalLink);
     }
 
-    const metaDescription = document.querySelector('meta[name="description"]') || document.createElement('meta');
-    metaDescription.setAttribute('name', 'description');
+    const metaDescription =
+      document.querySelector('meta[name="description"]') ||
+      document.createElement("meta");
+    metaDescription.setAttribute("name", "description");
 
     if (isUltraShearRoute) {
       document.title = "UltraShear | Luxury Marine Life Bio-Hacking";
-      metaDescription.setAttribute('content', 'UltraShear Technology™ transforms oil-based supplements into highly bioavailable nanoemulsions for marine life high performers.');
+      metaDescription.setAttribute(
+        "content",
+        "UltraShear Technology™ transforms oil-based supplements into highly bioavailable nanoemulsions for marine life high performers.",
+      );
     } else if (isApparelBrandsRoute) {
       document.title = "Apparel Brands | Luxury Marine Life";
-      metaDescription.setAttribute('content', 'Explore our apparel capsules: Hottie Yachtie Yacht Club, Ac Yacht Club, and Luxury Marine Life.');
+      metaDescription.setAttribute(
+        "content",
+        "Explore our apparel capsules: Hottie Yachtie Yacht Club, Ac Yacht Club, and Luxury Marine Life.",
+      );
+    } else if (isLmlRoute) {
+      document.title = "Luxury Marine Life Apparel | Shop the Collection";
+      metaDescription.setAttribute(
+        "content",
+        "Shop the official Luxury Marine Life apparel collection—premium tees, sustainable fabrics, and ocean-inspired designs.",
+      );
     } else {
       document.title = "Luxury Marine Life | Health on the Water";
-      metaDescription.setAttribute('content', 'Wellness journeys designed for life on the water—movement, recovery, and mindful routines.');
+      metaDescription.setAttribute(
+        "content",
+        "Wellness journeys designed for life on the water—movement, recovery, and mindful routines.",
+      );
     }
 
     if (!document.querySelector('meta[name="description"]')) {
       document.head.appendChild(metaDescription);
     }
+  }, [location.pathname, isUltraShearRoute, isApparelBrandsRoute, isLmlRoute]);
 
-  }, [location.pathname, isUltraShearRoute]);
+  if (isLmlRoute) {
+    return <LuxuryMarineLifeBrandPage />;
+  }
 
   return (
     <CartProvider>
-      <div className={`relative min-h-screen ${isUltraShearRoute ? 'bg-white' : 'bg-marine-900'}`}>
+      <div
+        className={`relative min-h-screen ${isUltraShearRoute ? "bg-white" : "bg-marine-900"}`}
+      >
         {!isUltraShearRoute && <div className="grain-overlay" />}
         {!isUltraShearRoute && <Navigation />}
 
@@ -165,6 +197,7 @@ function RoutedApp() {
             <Route path="/" element={<HomePage />} />
             <Route path="/ultra-shear" element={<UltraShearPage />} />
             <Route path="/apparel-brands" element={<ApparelBrandsPage />} />
+            <Route path="/luxury-marine-life-brand" element={<LuxuryMarineLifeBrandPage />} />
           </Routes>
         </main>
       </div>

@@ -191,8 +191,11 @@ export function ApparelBrandsPage() {
                             a.ring,
                           ].join(" ")}
                           onClick={() => {
-                            // Placeholder until brand-specific pages/collections are wired.
-                            // Keeps UX responsive without breaking routing expectations.
+                            if (brand.id === "luxury-marine-life") {
+                              navigate("/luxury-marine-life-brand");
+                              return;
+                            }
+
                             window.scrollTo({ top: 0, behavior: "smooth" });
                           }}
                           aria-label={`View ${brand.name}`}
