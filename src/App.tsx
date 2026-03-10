@@ -13,6 +13,7 @@ import { Footer } from "@/sections/Footer";
 import { UltraShearPage } from "@/features/ultra-shear/UltraShearPage";
 import { ApparelBrandsPage } from "@/features/apparel-brands/ApparelBrandsPage";
 import { LuxuryMarineLifeBrandPage } from "@/features/apparel-brands/luxury-marine-life/LuxuryMarineLifeBrandPage";
+import HottieYachtieBrandPage from "@/features/apparel-brands/hottie-yachtie/HottieYachtieBrandPage";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -81,6 +82,7 @@ function RoutedApp() {
   const isUltraShearRoute = location.pathname === "/ultra-shear";
   const isApparelBrandsRoute = location.pathname === "/apparel-brands";
   const isLmlRoute = location.pathname === "/luxury-marine-life-brand";
+  const isHyycRoute = location.pathname === "/hottie-yachtie-brand";
 
   useEffect(() => {
     if (location.pathname !== "/") return;
@@ -167,6 +169,12 @@ function RoutedApp() {
         "content",
         "Shop the official Luxury Marine Life apparel collection—premium tees, sustainable fabrics, and ocean-inspired designs.",
       );
+    } else if (isHyycRoute) {
+      document.title = "Hottie Yachtie | Party Wear for the open sea";
+      metaDescription.setAttribute(
+        "content",
+        "Shop the official Hottie Yachtie apparel collection—party wear for the open sea.",
+      );
     } else {
       document.title = "Luxury Marine Life | Health on the Water";
       metaDescription.setAttribute(
@@ -178,10 +186,14 @@ function RoutedApp() {
     if (!document.querySelector('meta[name="description"]')) {
       document.head.appendChild(metaDescription);
     }
-  }, [location.pathname, isUltraShearRoute, isApparelBrandsRoute, isLmlRoute]);
+  }, [location.pathname, isUltraShearRoute, isApparelBrandsRoute, isLmlRoute, isHyycRoute]);
 
   if (isLmlRoute) {
     return <LuxuryMarineLifeBrandPage />;
+  }
+
+  if (isHyycRoute) {
+    return <HottieYachtieBrandPage />;
   }
 
   return (
@@ -198,6 +210,7 @@ function RoutedApp() {
             <Route path="/ultra-shear" element={<UltraShearPage />} />
             <Route path="/apparel-brands" element={<ApparelBrandsPage />} />
             <Route path="/luxury-marine-life-brand" element={<LuxuryMarineLifeBrandPage />} />
+            <Route path="/hottie-yachtie-brand" element={<HottieYachtieBrandPage />} />
           </Routes>
         </main>
       </div>

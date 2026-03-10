@@ -195,6 +195,10 @@ export function ApparelBrandsPage() {
                               navigate("/luxury-marine-life-brand");
                               return;
                             }
+                            if (brand.id === "hottie-yachtie-yacht-club") {
+                              navigate("/hottie-yachtie-brand");
+                              return;
+                            }
 
                             window.scrollTo({ top: 0, behavior: "smooth" });
                           }}
