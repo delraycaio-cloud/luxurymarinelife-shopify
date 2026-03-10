@@ -43,8 +43,17 @@ export function ShopSection({ onCategoryClick }: ShopSectionProps) {
   }, []);
 
   const handleCardClick = (cat: Category) => {
-    if (cat.id === 'biohacking') { window.location.href = '/ultra-shear'; }
-    else { onCategoryClick?.(cat.id); }
+    if (cat.id === 'biohacking') {
+      window.location.href = '/ultra-shear';
+      return;
+    }
+
+    if (cat.id === 'learning') {
+      window.location.href = 'https://garmn2.web.app';
+      return;
+    }
+
+    onCategoryClick?.(cat.id);
   };
 
   return (
