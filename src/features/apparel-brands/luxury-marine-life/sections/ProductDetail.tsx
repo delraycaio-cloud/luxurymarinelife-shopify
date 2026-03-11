@@ -1,7 +1,6 @@
 import { useState } from "react";
 import {
   ArrowLeft,
-  Check,
   Heart,
   RotateCcw,
   Share2,
@@ -11,28 +10,39 @@ import {
   Truck,
 } from "lucide-react";
 import { useStore } from "../context/StoreContext";
-import { products } from "../data/products";
 
 export default function ProductDetail() {
   const { selectedProduct, setCurrentView, addToCart, setIsCartOpen } =
     useStore();
-  const [selectedSize, setSelectedSize] = useState(
-    selectedProduct?.sizes[1] || "M",
-  );
-  const [selectedColor, setSelectedColor] = useState(
-    selectedProduct?.colors[0] || { name: "", hex: "" },
-  );
+  
   const [selectedImage, setSelectedImage] = useState(0);
   const [isWishlisted, setIsWishlisted] = useState(false);
 
-  const product = selectedProduct || products[0];
+  if (!selectedProduct) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-[#f8f6f3]">
+        <button onClick={() => setCurrentView("home")} className="text-[#0a1628] underline">
+          Select a product first
+        </button>
+      </div>
+    );
+  }
+
+  const { node } = selectedProduct;
+  const price = node.priceRange.minVariantPrice.amount;
+  const images = node.images.edges.map(e => e.node.url);
+  
+  // Extract options
+  const colorOption = node.options.find(o => o.name.toLowerCase().includes('color'));
+  const sizeOption = node.options.find(o => o.name.toLowerCase().includes('size'));
+  
+  const [selectedColor, setSelectedColor] = useState(colorOption?.values[0] || "Default");
+  const [selectedSize, setSelectedSize] = useState(sizeOption?.values[0] || "M");
 
   const handleAddToCart = () => {
-    addToCart(product, 1, selectedSize, selectedColor.name);
+    addToCart(selectedProduct, 1, selectedSize, selectedColor);
     setIsCartOpen(true);
   };
-
-  const relatedProducts = products.filter((p) => p.id !== product.id).slice(0, 3);
 
   return (
     <div className="min-h-screen bg-[#f8f6f3] pt-24 pb-20">
@@ -52,7 +62,7 @@ export default function ProductDetail() {
             Collection
           </button>
           <span className="text-[#0a1628]/30">/</span>
-          <span className="text-[#0a1628]">{product.name}</span>
+          <span className="text-[#0a1628]">{node.title}</span>
         </div>
 
         <button
@@ -69,18 +79,18 @@ export default function ProductDetail() {
           <div>
             <div className="aspect-square bg-[#e8e6e3] overflow-hidden mb-4">
               <img
-                src={product.images[selectedImage]}
-                alt={product.name}
+                src={images[selectedImage]}
+                alt={node.title}
                 className="w-full h-full object-cover"
               />
             </div>
 
-            <div className="flex gap-3">
-              {product.images.map((img, index) => (
+            <div className="flex gap-3 overflow-x-auto pb-2">
+              {images.map((img, index) => (
                 <button
                   key={index}
                   onClick={() => setSelectedImage(index)}
-                  className={`w-20 h-20 bg-[#e8e6e3] overflow-hidden transition-all duration-300 ${
+                  className={`w-20 h-20 bg-[#e8e6e3] flex-shrink-0 overflow-hidden transition-all duration-300 ${
                     selectedImage === index
                       ? "ring-2 ring-[#0a1628]"
                       : "opacity-60 hover:opacity-100"
@@ -94,12 +104,12 @@ export default function ProductDetail() {
 
           <div>
             <div className="flex gap-2 mb-4">
-              {product.isNew && (
+              {node.tags?.includes('new') && (
                 <span className="px-3 py-1 bg-[#0a1628] text-white text-xs uppercase tracking-wider">
                   New
                 </span>
               )}
-              {product.isLimited && (
+              {node.tags?.includes('limited') && (
                 <span className="px-3 py-1 bg-[#c9a962] text-[#0a1628] text-xs uppercase tracking-wider">
                   Limited Edition
                 </span>
@@ -115,86 +125,68 @@ export default function ProductDetail() {
                   />
                 ))}
               </div>
-              <span className="text-sm text-[#0a1628]/50">(127 reviews)</span>
+              <span className="text-sm text-[#0a1628]/50">(Premium Quality)</span>
             </div>
 
             <h1 className="text-3xl md:text-4xl lg:text-5xl text-[#0a1628] font-light mb-4">
-              {product.name}
+              {node.title}
             </h1>
 
             <div className="flex items-baseline gap-4 mb-6">
               <span className="text-2xl md:text-3xl text-[#0a1628] font-medium">
-                ${product.price}
+                ${parseFloat(price).toFixed(0)}
               </span>
-              {product.originalPrice && (
-                <span className="text-lg text-[#0a1628]/40 line-through">
-                  ${product.originalPrice}
-                </span>
-              )}
             </div>
 
             <p className="text-[#0a1628]/70 leading-relaxed mb-8">
-              {product.description}
+              {node.description}
             </p>
 
-            <div className="mb-8">
-              <h3 className="text-sm text-[#0a1628]/60 uppercase tracking-wider mb-4">
-                Key Features
-              </h3>
-              <div className="grid grid-cols-2 gap-3">
-                {product.features.map((feature) => (
-                  <div key={feature} className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-[#1e6b7a]" />
-                    <span className="text-sm text-[#0a1628]/60">
-                      {feature}
-                    </span>
-                  </div>
-                ))}
+            {colorOption && (
+              <div className="mb-6">
+                <label className="text-sm text-[#0a1628]/60 uppercase tracking-wider mb-3 block">
+                  Color: <span className="text-[#0a1628]">{selectedColor}</span>
+                </label>
+                <div className="flex flex-wrap gap-3">
+                  {colorOption.values.map((val) => (
+                    <button
+                      key={val}
+                      onClick={() => setSelectedColor(val)}
+                      className={`px-4 py-2 border text-sm transition-all duration-300 ${
+                        selectedColor === val
+                          ? "bg-[#0a1628] text-white"
+                          : "border-[#0a1628]/20 text-[#0a1628] hover:border-[#0a1628]"
+                      }`}
+                    >
+                      {val}
+                    </button>
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
 
-            <div className="mb-6">
-              <label className="text-sm text-[#0a1628]/60 uppercase tracking-wider mb-3 block">
-                Color:{" "}
-                <span className="text-[#0a1628]">{selectedColor.name}</span>
-              </label>
-              <div className="flex gap-3">
-                {product.colors.map((color) => (
-                  <button
-                    key={color.name}
-                    onClick={() => setSelectedColor(color)}
-                    className={`w-10 h-10 rounded-full border-2 transition-all duration-300 ${
-                      selectedColor.name === color.name
-                        ? "border-[#0a1628] scale-110"
-                        : "border-transparent hover:scale-105"
-                    }`}
-                    style={{ backgroundColor: color.hex }}
-                    title={color.name}
-                  />
-                ))}
+            {sizeOption && (
+              <div className="mb-8">
+                <label className="text-sm text-[#0a1628]/60 uppercase tracking-wider mb-3 block">
+                  Size: <span className="text-[#0a1628]">{selectedSize}</span>
+                </label>
+                <div className="flex flex-wrap gap-2">
+                  {sizeOption.values.map((size) => (
+                    <button
+                      key={size}
+                      onClick={() => setSelectedSize(size)}
+                      className={`w-12 h-12 flex items-center justify-center text-sm font-medium transition-all duration-300 ${
+                        selectedSize === size
+                          ? "bg-[#0a1628] text-white"
+                          : "bg-white border border-[#0a1628]/20 text-[#0a1628] hover:border-[#0a1628]"
+                      }`}
+                    >
+                      {size}
+                    </button>
+                  ))}
+                </div>
               </div>
-            </div>
-
-            <div className="mb-8">
-              <label className="text-sm text-[#0a1628]/60 uppercase tracking-wider mb-3 block">
-                Size: <span className="text-[#0a1628]">{selectedSize}</span>
-              </label>
-              <div className="flex flex-wrap gap-2">
-                {product.sizes.map((size) => (
-                  <button
-                    key={size}
-                    onClick={() => setSelectedSize(size)}
-                    className={`w-12 h-12 flex items-center justify-center text-sm font-medium transition-all duration-300 ${
-                      selectedSize === size
-                        ? "bg-[#0a1628] text-white"
-                        : "bg-white border border-[#0a1628]/20 text-[#0a1628] hover:border-[#0a1628]"
-                    }`}
-                  >
-                    {size}
-                  </button>
-                ))}
-              </div>
-            </div>
+            )}
 
             <div className="flex flex-col sm:flex-row gap-4 mb-8">
               <button
@@ -245,38 +237,7 @@ export default function ProductDetail() {
             </div>
           </div>
         </div>
-
-        <div className="border-t border-[#0a1628]/10 pt-16">
-          <h2 className="text-2xl md:text-3xl text-[#0a1628] font-light mb-8">
-            You May Also{" "}
-            <span className="italic text-[#1e6b7a]">Like</span>
-          </h2>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {relatedProducts.map((product) => (
-              <div
-                key={product.id}
-                className="group cursor-pointer"
-                onClick={() => {
-                  window.scrollTo({ top: 0, behavior: "smooth" });
-                }}
-              >
-                <div className="aspect-[3/4] bg-[#e8e6e3] overflow-hidden mb-4">
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                </div>
-                <h3 className="text-[#0a1628] font-medium group-hover:text-[#1e6b7a] transition-colors">
-                  {product.name}
-                </h3>
-                <p className="text-[#0a1628]/50">${product.price}</p>
-              </div>
-            ))}
-          </div>
-        </div>
       </div>
     </div>
   );
 }
-

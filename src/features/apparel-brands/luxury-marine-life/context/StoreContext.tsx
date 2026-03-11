@@ -1,19 +1,18 @@
-import React, { createContext, useCallback, useContext, useState } from "react";
-import type { CartItem, Product, View } from "../types";
+import React, { createContext, useCallback, useContext, useState, useMemo } from "react";
+import type { View } from "../types";
+import type { ShopifyProduct } from "@/lib/shopify";
+import { useCartStore } from "@/store/cartStore";
 
 interface StoreContextType {
-  cart: CartItem[];
   addToCart: (
-    product: Product,
+    product: ShopifyProduct,
     quantity: number,
     size: string,
     color: string,
   ) => void;
-  removeFromCart: (productId: string, size: string, color: string) => void;
+  removeFromCart: (variantId: string) => void;
   updateQuantity: (
-    productId: string,
-    size: string,
-    color: string,
+    variantId: string,
     quantity: number,
   ) => void;
   clearCart: () => void;
@@ -21,8 +20,8 @@ interface StoreContextType {
   cartCount: number;
   currentView: View;
   setCurrentView: (view: View) => void;
-  selectedProduct: Product | null;
-  setSelectedProduct: (product: Product | null) => void;
+  selectedProduct: ShopifyProduct | null;
+  setSelectedProduct: (product: ShopifyProduct | null) => void;
   isCartOpen: boolean;
   setIsCartOpen: (open: boolean) => void;
 }
@@ -30,89 +29,66 @@ interface StoreContextType {
 const StoreContext = createContext<StoreContextType | undefined>(undefined);
 
 export function StoreProvider({ children }: { children: React.ReactNode }) {
-  const [cart, setCart] = useState<CartItem[]>([]);
   const [currentView, setCurrentView] = useState<View>("home");
-  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [selectedProduct, setSelectedProduct] = useState<ShopifyProduct | null>(null);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  
+  const addItem = useCartStore(state => state.addItem);
+  const removeItem = useCartStore(state => state.removeItem);
+  const updateQty = useCartStore(state => state.updateQuantity);
+  const clear = useCartStore(state => state.clearCart);
+  const items = useCartStore(state => state.items);
+
+  const cartTotal = useMemo(() => 
+    items.reduce((total, item) => total + (parseFloat(item.price.amount) * item.quantity), 0)
+  , [items]);
+
+  const cartCount = useMemo(() => 
+    items.reduce((count, item) => count + item.quantity, 0)
+  , [items]);
 
   const addToCart = useCallback(
-    (product: Product, quantity: number, size: string, color: string) => {
-      setCart((prev) => {
-        const existingItem = prev.find(
-          (item) =>
-            item.product.id === product.id &&
-            item.size === size &&
-            item.color === color,
-        );
+    (product: ShopifyProduct, quantity: number, size: string, color: string) => {
+      const variant = product.node.variants.edges.find(v => 
+        v.node.title.toLowerCase().includes(size.toLowerCase()) || 
+        v.node.title.toLowerCase().includes(color.toLowerCase())
+      ) || product.node.variants.edges[0];
 
-        if (existingItem) {
-          return prev.map((item) =>
-            item.product.id === product.id &&
-            item.size === size &&
-            item.color === color
-              ? { ...item, quantity: item.quantity + quantity }
-              : item,
-          );
-        }
-
-        return [...prev, { product, quantity, size, color }];
-      });
+      if (variant) {
+        addItem({
+          product,
+          variantId: variant.node.id,
+          variantTitle: variant.node.title,
+          price: variant.node.price,
+          quantity,
+          selectedOptions: variant.node.selectedOptions
+        });
+      }
     },
-    [],
+    [addItem],
   );
 
   const removeFromCart = useCallback(
-    (productId: string, size: string, color: string) => {
-      setCart((prev) =>
-        prev.filter(
-          (item) =>
-            !(
-              item.product.id === productId &&
-              item.size === size &&
-              item.color === color
-            ),
-        ),
-      );
+    (variantId: string) => {
+      removeItem(variantId);
     },
-    [],
+    [removeItem],
   );
 
   const updateQuantity = useCallback(
-    (productId: string, size: string, color: string, quantity: number) => {
-      if (quantity <= 0) {
-        removeFromCart(productId, size, color);
-        return;
-      }
-      setCart((prev) =>
-        prev.map((item) =>
-          item.product.id === productId &&
-          item.size === size &&
-          item.color === color
-            ? { ...item, quantity }
-            : item,
-        ),
-      );
+    (variantId: string, quantity: number) => {
+      updateQty(variantId, quantity);
     },
-    [removeFromCart],
+    [updateQty],
   );
 
   const clearCart = useCallback(() => {
-    setCart([]);
-  }, []);
-
-  const cartTotal = cart.reduce(
-    (total, item) => total + item.product.price * item.quantity,
-    0,
-  );
-  const cartCount = cart.reduce(
-    (count, item) => count + item.quantity,
-    0,
-  );
+    clear();
+  }, [clear]);
 
   return (
     <StoreContext.Provider
       value={{
-        cart,
         addToCart,
         removeFromCart,
         updateQuantity,
@@ -139,4 +115,3 @@ export function useStore() {
   }
   return context;
 }
-

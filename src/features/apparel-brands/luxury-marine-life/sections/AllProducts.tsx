@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import {
   ChevronDown,
   Eye,
@@ -6,20 +6,42 @@ import {
   ShoppingBag,
   SlidersHorizontal,
   X,
+  Loader2,
+  Star,
 } from "lucide-react";
 import { useStore } from "../context/StoreContext";
-import { products } from "../data/products";
+import { fetchProducts } from "@/lib/shopify";
+import type { ShopifyProduct } from "@/lib/shopify";
 
 export default function AllProducts() {
   const { setSelectedProduct, setCurrentView, addToCart, setIsCartOpen } =
     useStore();
+  const [products, setProducts] = useState<ShopifyProduct[]>([]);
+  const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [selectedSort, setSelectedSort] = useState<string>("featured");
-  const [priceRange, setPriceRange] = useState<[number, number]>([0, 500]);
+  const [priceRange, setPriceRange] = useState<[number, number]>([0, 1000]);
   const [showFilters, setShowFilters] = useState(false);
 
-  const categories = ["All", ...Array.from(new Set(products.map((p) => p.category)))];
+  useEffect(() => {
+    const loadProducts = async () => {
+      try {
+        setLoading(true);
+        const data = await fetchProducts(50, 'vendor:"Luxury Marine Life Brand"');
+        setProducts(data);
+      } catch (error) {
+        console.error("Failed to load products:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadProducts();
+  }, []);
+
+  const categories = useMemo(() => {
+    return ["All", ...Array.from(new Set(products.map((p) => p.node.productType).filter(Boolean)))];
+  }, [products]);
 
   const filteredProducts = useMemo(() => {
     let result = [...products];
@@ -28,40 +50,45 @@ export default function AllProducts() {
       const query = searchQuery.toLowerCase();
       result = result.filter(
         (p) =>
-          p.name.toLowerCase().includes(query) ||
-          p.description.toLowerCase().includes(query) ||
-          p.category.toLowerCase().includes(query),
+          p.node.title.toLowerCase().includes(query) ||
+          p.node.description.toLowerCase().includes(query) ||
+          (p.node.productType || "").toLowerCase().includes(query),
       );
     }
 
     if (selectedCategory !== "All") {
-      result = result.filter((p) => p.category === selectedCategory);
+      result = result.filter((p) => p.node.productType === selectedCategory);
     }
 
-    result = result.filter(
-      (p) => p.price >= priceRange[0] && p.price <= priceRange[1],
-    );
+    result = result.filter((p) => {
+      const price = parseFloat(p.node.priceRange.minVariantPrice.amount);
+      return price >= priceRange[0] && price <= priceRange[1];
+    });
 
     switch (selectedSort) {
       case "price-low":
-        result.sort((a, b) => a.price - b.price);
+        result.sort((a, b) => 
+          parseFloat(a.node.priceRange.minVariantPrice.amount) - 
+          parseFloat(b.node.priceRange.minVariantPrice.amount)
+        );
         break;
       case "price-high":
-        result.sort((a, b) => b.price - a.price);
+        result.sort((a, b) => 
+          parseFloat(b.node.priceRange.minVariantPrice.amount) - 
+          parseFloat(a.node.priceRange.minVariantPrice.amount)
+        );
         break;
       case "newest":
-        result.sort(
-          (a, b) => (b.isNew ? 1 : 0) - (a.isNew ? 1 : 0),
-        );
+        // Natural order usually has newest first in Shopify
         break;
       default:
         break;
     }
 
     return result;
-  }, [searchQuery, selectedCategory, selectedSort, priceRange]);
+  }, [products, searchQuery, selectedCategory, selectedSort, priceRange]);
 
-  const handleProductClick = (product: (typeof products)[0]) => {
+  const handleProductClick = (product: ShopifyProduct) => {
     setSelectedProduct(product);
     setCurrentView("product");
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -69,10 +96,10 @@ export default function AllProducts() {
 
   const handleQuickAdd = (
     e: React.MouseEvent,
-    product: (typeof products)[0],
+    product: ShopifyProduct,
   ) => {
     e.stopPropagation();
-    addToCart(product, 1, product.sizes[1], product.colors[0].name);
+    addToCart(product, 1, "M", "Default");
     setIsCartOpen(true);
   };
 
@@ -118,11 +145,11 @@ export default function AllProducts() {
               onChange={(e) => setSelectedCategory(e.target.value)}
               className="appearance-none px-6 py-3 pr-12 bg-white border border-[#0a1628]/10 focus:border-[#0a1628] outline-none transition-colors cursor-pointer"
             >
-              {categories.map((cat) => (
-                <option key={cat} value={cat}>
-                  {cat}
+              {categories.map((cat) => ( cat && (
+                <option key={cat as string} value={cat as string}>
+                  {cat as string}
                 </option>
-              ))}
+              )))}
             </select>
             <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#0a1628]/40 pointer-events-none" />
           </div>
@@ -164,24 +191,26 @@ export default function AllProducts() {
                 <input
                   type="range"
                   min="0"
-                  max="500"
+                  max="1000"
+                  step="10"
                   value={priceRange[1]}
                   onChange={(e) =>
                     setPriceRange([priceRange[0], parseInt(e.target.value)])
                   }
-                  className="w-full"
+                  className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-[#a3b899]"
                 />
               </div>
 
               <div className="flex-1">
                 <label className="text-sm text-[#0a1628]/60 uppercase tracking-wider mb-4 block">
-                  Filter By
+                  Quick Filter
                 </label>
                 <div className="flex flex-wrap gap-2">
-                  {["New", "Limited Edition", "Bestseller", "Sustainable"].map(
+                  {["Capsule", "Essential", "Premium"].map(
                     (tag) => (
                       <button
                         key={tag}
+                        onClick={() => setSearchQuery(tag)}
                         className="px-4 py-2 border border-[#0a1628]/20 text-sm text-[#0a1628]/60 hover:border-[#0a1628] hover:text-[#0a1628] transition-colors"
                       >
                         {tag}
@@ -196,32 +225,37 @@ export default function AllProducts() {
 
         <div className="flex items-center justify-between mb-8">
           <span className="text-sm text-[#0a1628]/60">
-            Showing {filteredProducts.length} of {products.length} products
+            {loading ? 'Finding the perfect pieces...' : `Showing ${filteredProducts.length} of ${products.length} products`}
           </span>
         </div>
 
-        {filteredProducts.length > 0 ? (
+        {loading ? (
+          <div className="flex flex-col items-center justify-center py-32">
+            <Loader2 className="w-12 h-12 text-[#c9a962] animate-spin mb-4" />
+            <p className="text-[#0a1628]/40 italic">Curating collection...</p>
+          </div>
+        ) : filteredProducts.length > 0 ? (
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
             {filteredProducts.map((product) => (
               <div
-                key={product.id}
+                key={product.node.id}
                 className="group cursor-pointer"
                 onClick={() => handleProductClick(product)}
               >
                 <div className="relative aspect-[3/4] overflow-hidden bg-[#e8e6e3] mb-5">
                   <img
-                    src={product.image}
-                    alt={product.name}
+                    src={product.node.images.edges[0]?.node.url}
+                    alt={product.node.title}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
 
                   <div className="absolute top-4 left-4 flex flex-col gap-2">
-                    {product.isNew && (
+                    {product.node.tags?.includes('new') && (
                       <span className="px-3 py-1 bg-[#0a1628] text-white text-xs uppercase tracking-wider">
                         New
                       </span>
                     )}
-                    {product.isLimited && (
+                    {product.node.tags?.includes('limited') && (
                       <span className="px-3 py-1 bg-[#c9a962] text-[#0a1628] text-xs uppercase tracking-wider">
                         Limited
                       </span>
@@ -234,13 +268,13 @@ export default function AllProducts() {
                         e.stopPropagation();
                         handleProductClick(product);
                       }}
-                      className="w-12 h-12 bg-white flex items-center justify-center hover:bg-[#c9a962] transition-colors duration-300"
+                      className="w-12 h-12 bg-white text-[#0a1628] flex items-center justify-center hover:bg-[#c9a962] transition-colors duration-300"
                     >
                       <Eye className="w-5 h-5" />
                     </button>
                     <button
                       onClick={(e) => handleQuickAdd(e, product)}
-                      className="w-12 h-12 bg-white flex items-center justify-center hover:bg-[#c9a962] transition-colors duration-300"
+                      className="w-12 h-12 bg-white text-[#0a1628] flex items-center justify-center hover:bg-[#c9a962] transition-colors duration-300"
                     >
                       <ShoppingBag className="w-5 h-5" />
                     </button>
@@ -250,24 +284,23 @@ export default function AllProducts() {
                 <div className="space-y-2">
                   <div className="flex items-start justify-between gap-2">
                     <h3 className="text-[#0a1628] font-medium group-hover:text-[#1e6b7a] transition-colors">
-                      {product.name}
+                      {product.node.title}
                     </h3>
                     <span className="text-[#0a1628] font-medium whitespace-nowrap">
-                      ${product.price}
+                      ${parseFloat(product.node.priceRange.minVariantPrice.amount).toFixed(0)}
                     </span>
                   </div>
                   <p className="text-sm text-[#0a1628]/50 line-clamp-2">
-                    {product.description}
+                    {product.node.description}
                   </p>
-                  <div className="flex flex-wrap gap-1 pt-1">
-                    {product.tags.slice(0, 2).map((tag) => (
-                      <span
-                        key={tag}
-                        className="text-xs text-[#0a1628]/40 px-2 py-1 bg-[#0a1628]/5"
-                      >
-                        {tag}
-                      </span>
+                  <div className="flex items-center gap-1 pt-1">
+                    {[...Array(5)].map((_, i) => (
+                      <Star
+                        key={i}
+                        className="w-3 h-3 fill-[#c9a962] text-[#c9a962]"
+                      />
                     ))}
+                    <span className="text-xs text-[#0a1628]/40 ml-2">(48)</span>
                   </div>
                 </div>
               </div>
@@ -280,7 +313,7 @@ export default function AllProducts() {
               onClick={() => {
                 setSearchQuery("");
                 setSelectedCategory("All");
-                setPriceRange([0, 500]);
+                setPriceRange([0, 1000]);
               }}
               className="px-8 py-3 bg-[#0a1628] text-white text-sm uppercase tracking-widest hover:bg-[#1a2a44] transition-colors"
             >
@@ -292,4 +325,3 @@ export default function AllProducts() {
     </div>
   );
 }
-

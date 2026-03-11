@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import { ShoppingBag, Eye, Star } from "lucide-react";
+import { ShoppingBag, Eye, Star, Loader2 } from "lucide-react";
 import { useStore } from "../context/StoreContext";
-import { products } from "../data/products";
+import { fetchProducts } from "@/lib/shopify";
+import type { ShopifyProduct } from "@/lib/shopify";
 
 export default function CollectionGrid() {
   const { setSelectedProduct, setCurrentView, addToCart, setIsCartOpen } =
@@ -9,6 +10,23 @@ export default function CollectionGrid() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [hoveredProduct, setHoveredProduct] = useState<string | null>(null);
+  const [products, setProducts] = useState<ShopifyProduct[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadProducts = async () => {
+      try {
+        setLoading(true);
+        const data = await fetchProducts(20, 'vendor:"Luxury Marine Life Brand"');
+        setProducts(data);
+      } catch (error) {
+        console.error("Failed to load products:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadProducts();
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -30,14 +48,14 @@ export default function CollectionGrid() {
 
   const handleQuickAdd = (
     e: React.MouseEvent,
-    product: (typeof products)[0],
+    product: ShopifyProduct,
   ) => {
     e.stopPropagation();
-    addToCart(product, 1, product.sizes[1], product.colors[0].name);
+    addToCart(product, 1, "M", "Default"); // Placeholder options if not available
     setIsCartOpen(true);
   };
 
-  const handleProductClick = (product: (typeof products)[0]) => {
+  const handleProductClick = (product: ShopifyProduct) => {
     setSelectedProduct(product);
     setCurrentView("product");
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -85,90 +103,97 @@ export default function CollectionGrid() {
           </button>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
-          {featuredProducts.map((product, index) => (
-            <div
-              key={product.id}
-              className={`group cursor-pointer transition-all duration-700 ${
-                isVisible
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-8"
-              }`}
-              style={{ transitionDelay: `${300 + index * 100}ms` }}
-              onMouseEnter={() => setHoveredProduct(product.id)}
-              onMouseLeave={() => setHoveredProduct(null)}
-              onClick={() => handleProductClick(product)}
-            >
-              <div className="relative aspect-[3/4] overflow-hidden bg-[#e8e6e3] mb-5">
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
+        {loading ? (
+          <div className="flex justify-center py-20">
+            <Loader2 className="w-10 h-10 text-[#c9a962] animate-spin" />
+          </div>
+        ) : (
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+            {featuredProducts.map((product, index) => (
+              <div
+                key={product.node.id}
+                className={`group cursor-pointer transition-all duration-700 ${
+                  isVisible
+                    ? "opacity-100 translate-y-0"
+                    : "opacity-0 translate-y-8"
+                }`}
+                style={{ transitionDelay: `${300 + index * 100}ms` }}
+                onMouseEnter={() => setHoveredProduct(product.node.id)}
+                onMouseLeave={() => setHoveredProduct(null)}
+                onClick={() => handleProductClick(product)}
+              >
+                <div className="relative aspect-[3/4] overflow-hidden bg-[#e8e6e3] mb-5">
+                  <img
+                    src={product.node.images.edges[0]?.node.url}
+                    alt={product.node.title}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
 
-                <div className="absolute top-4 left-4 flex flex-col gap-2">
-                  {product.isNew && (
-                    <span className="px-3 py-1 bg-[#0a1628] text-white text-xs uppercase tracking-wider">
-                      New
-                    </span>
-                  )}
-                  {product.isLimited && (
-                    <span className="px-3 py-1 bg-[#c9a962] text-[#0a1628] text-xs uppercase tracking-wider">
-                      Limited
-                    </span>
-                  )}
+                  <div className="absolute top-4 left-4 flex flex-col gap-2">
+                    {/* Placeholder badges based on Shopify tags if needed */}
+                    {product.node.tags?.includes('new') && (
+                      <span className="px-3 py-1 bg-[#0a1628] text-white text-xs uppercase tracking-wider">
+                        New
+                      </span>
+                    )}
+                    {product.node.tags?.includes('limited') && (
+                      <span className="px-3 py-1 bg-[#c9a962] text-[#0a1628] text-xs uppercase tracking-wider">
+                        Limited
+                      </span>
+                    )}
+                  </div>
+
+                  <div
+                    className={`absolute inset-0 bg-[#0a1628]/40 flex items-center justify-center gap-4 transition-opacity duration-500 ${
+                      hoveredProduct === product.node.id ? "opacity-100" : "opacity-0"
+                    }`}
+                  >
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleProductClick(product);
+                      }}
+                      className="w-12 h-12 bg-white text-[#0a1628] flex items-center justify-center hover:bg-[#c9a962] transition-colors duration-300"
+                      title="Quick View"
+                    >
+                      <Eye className="w-5 h-5" />
+                    </button>
+                    <button
+                      onClick={(e) => handleQuickAdd(e, product)}
+                      className="w-12 h-12 bg-white text-[#0a1628] flex items-center justify-center hover:bg-[#c9a962] transition-colors duration-300"
+                      title="Quick Add"
+                    >
+                      <ShoppingBag className="w-5 h-5" />
+                    </button>
+                  </div>
                 </div>
 
-                <div
-                  className={`absolute inset-0 bg-[#0a1628]/40 flex items-center justify-center gap-4 transition-opacity duration-500 ${
-                    hoveredProduct === product.id ? "opacity-100" : "opacity-0"
-                  }`}
-                >
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleProductClick(product);
-                    }}
-                    className="w-12 h-12 bg-white flex items-center justify-center hover:bg-[#c9a962] transition-colors duration-300"
-                    title="Quick View"
-                  >
-                    <Eye className="w-5 h-5" />
-                  </button>
-                  <button
-                    onClick={(e) => handleQuickAdd(e, product)}
-                    className="w-12 h-12 bg-white flex items-center justify-center hover:bg-[#c9a962] transition-colors duration-300"
-                    title="Quick Add"
-                  >
-                    <ShoppingBag className="w-5 h-5" />
-                  </button>
+                <div className="space-y-2">
+                  <div className="flex items-start justify-between gap-2">
+                    <h3 className="text-[#0a1628] font-medium group-hover:text-[#1e6b7a] transition-colors">
+                      {product.node.title}
+                    </h3>
+                    <span className="text-[#0a1628] font-medium whitespace-nowrap">
+                      ${parseFloat(product.node.priceRange.minVariantPrice.amount).toFixed(0)}
+                    </span>
+                  </div>
+                  <p className="text-sm text-[#0a1628]/50 line-clamp-2">
+                    {product.node.description}
+                  </p>
+                  <div className="flex items-center gap-1 pt-1">
+                    {[...Array(5)].map((_, i) => (
+                      <Star
+                        key={i}
+                        className="w-3 h-3 fill-[#c9a962] text-[#c9a962]"
+                      />
+                    ))}
+                    <span className="text-xs text-[#0a1628]/40 ml-2">(48)</span>
+                  </div>
                 </div>
               </div>
-
-              <div className="space-y-2">
-                <div className="flex items-start justify-between gap-2">
-                  <h3 className="text-[#0a1628] font-medium group-hover:text-[#1e6b7a] transition-colors">
-                    {product.name}
-                  </h3>
-                  <span className="text-[#0a1628] font-medium whitespace-nowrap">
-                    ${product.price}
-                  </span>
-                </div>
-                <p className="text-sm text-[#0a1628]/50 line-clamp-2">
-                  {product.description}
-                </p>
-                <div className="flex items-center gap-1 pt-1">
-                  {[...Array(5)].map((_, i) => (
-                    <Star
-                      key={i}
-                      className="w-3 h-3 fill-[#c9a962] text-[#c9a962]"
-                    />
-                  ))}
-                  <span className="text-xs text-[#0a1628]/40 ml-2">(48)</span>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
 
         <div
           className={`mt-16 text-center transition-all duration-700 delay-700 ${
@@ -186,4 +211,3 @@ export default function CollectionGrid() {
     </section>
   );
 }
-

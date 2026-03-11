@@ -3,11 +3,7 @@ import Navigation from "./sections/Navigation";
 import Hero from "./sections/Hero";
 import LifestyleAuthority from "./sections/LifestyleAuthority";
 import CollectionGrid from "./sections/CollectionGrid";
-import FabricTechnology from "./sections/FabricTechnology";
 import SustainabilityStory from "./sections/SustainabilityStory";
-import FeaturedProduct from "./sections/FeaturedProduct";
-import Testimonials from "./sections/Testimonials";
-import StickyCTABar from "./sections/StickyCTABar";
 import CartDrawer from "./sections/CartDrawer";
 import ProductDetail from "./sections/ProductDetail";
 import AllProducts from "./sections/AllProducts";
@@ -28,10 +24,7 @@ function LmlHome() {
             <Hero />
             <LifestyleAuthority />
             <CollectionGrid />
-            <FabricTechnology />
             <SustainabilityStory />
-            <FeaturedProduct />
-            <Testimonials />
           </>
         )}
         {currentView === "product" && <ProductDetail />}
@@ -41,7 +34,6 @@ function LmlHome() {
       {currentView === "home" && (
         <>
           <Footer />
-          <StickyCTABar />
         </>
       )}
       {currentView !== "home" && <Footer />}
