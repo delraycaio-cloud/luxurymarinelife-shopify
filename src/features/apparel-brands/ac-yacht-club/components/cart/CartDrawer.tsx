@@ -102,7 +102,7 @@ export function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
               </div>
 
               {/* Cart Footer */}
-              <div className="mt-8 pt-6 border-t border-gold/20 space-y-4">
+              <div className="mt-8 pt-6 px-6 border-t border-gold/20 space-y-4">
                 <div className="flex items-center justify-between">
                   <span className="text-sm text-slate">Subtotal</span>
                   <span className="font-mono text-xl text-gold">

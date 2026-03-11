@@ -12,8 +12,6 @@ import { Footer } from '@/features/apparel-brands/ac-yacht-club/components/Foote
 import { HeroSection } from '@/features/apparel-brands/ac-yacht-club/sections/HeroSection';
 import { NewArrivalsSection } from '@/features/apparel-brands/ac-yacht-club/sections/NewArrivalsSection';
 import { ShopSection } from '@/features/apparel-brands/ac-yacht-club/sections/ShopSection';
-import { CollectionsSection } from '@/features/apparel-brands/ac-yacht-club/sections/CollectionsSection';
-import { LookbookSection } from '@/features/apparel-brands/ac-yacht-club/sections/LookbookSection';
 import { AboutSection } from '@/features/apparel-brands/ac-yacht-club/sections/AboutSection';
 import { NewsletterSection } from '@/features/apparel-brands/ac-yacht-club/sections/NewsletterSection';
 
@@ -65,12 +63,6 @@ function AppContent() {
           
           {/* Shop All with Filters */}
           <ShopSection onProductClick={handleProductClick} />
-          
-          {/* Collections */}
-          <CollectionsSection />
-          
-          {/* Lookbook */}
-          <LookbookSection onProductClick={handleProductClick} />
           
           {/* About / Brand Story */}
           <AboutSection />

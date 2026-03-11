@@ -63,7 +63,7 @@ export function StickyPurchaseBar({ onShopClick }: StickyPurchaseBarProps) {
         <div className="flex items-center gap-3">
           <button
             onClick={onShopClick}
-            className="btn-primary text-sm py-2 px-4 lg:px-6"
+            className="px-4 lg:px-6 py-2 bg-gold text-harbor font-medium text-sm tracking-wider uppercase transition-all duration-300 hover:bg-gold-light shadow-glow"
           >
             {totalItems > 0 ? 'View Cart' : 'Shop Now'}
           </button>

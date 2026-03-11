@@ -282,7 +282,7 @@ export function ProductModal({ product, isOpen, onClose }: ProductModalProps) {
               className={`mt-8 w-full py-4 flex items-center justify-center gap-2 transition-all ${
                 isAdded
                   ? 'bg-green-600 text-white'
-                  : 'btn-primary'
+                  : 'bg-gold text-harbor font-medium text-sm tracking-wider uppercase transition-all duration-300 hover:bg-gold-light shadow-glow'
               }`}
             >
               {isAdded ? (

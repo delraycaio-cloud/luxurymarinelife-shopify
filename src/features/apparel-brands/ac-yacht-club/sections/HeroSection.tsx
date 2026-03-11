@@ -79,12 +79,9 @@ export function HeroSection({ onProductClick }: HeroSectionProps) {
                   From the deck to the dinner party, dress with distinction.
                 </p>
                 <div className="mt-8 flex flex-wrap gap-4">
-                  <button onClick={scrollToShop} className="btn-primary flex items-center gap-2">
+                  <button onClick={scrollToShop} className="px-8 py-3 bg-gold text-harbor font-medium text-sm tracking-wider uppercase transition-all duration-300 hover:bg-gold-light shadow-glow flex items-center gap-2">
                     Shop Collection
                     <ArrowRight className="w-4 h-4" strokeWidth={1.5} />
-                  </button>
-                  <button onClick={scrollToShop} className="btn-outline">
-                    View Lookbook
                   </button>
                 </div>
 

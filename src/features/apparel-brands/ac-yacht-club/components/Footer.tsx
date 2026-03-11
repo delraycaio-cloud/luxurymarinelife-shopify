@@ -12,8 +12,6 @@ export function Footer() {
     shop: [
       { label: 'All Products', href: '#shop' },
       { label: 'New Arrivals', href: '#new' },
-      { label: 'Collections', href: '#collections' },
-      { label: 'Lookbook', href: '#lookbook' },
     ],
     help: [
       { label: 'Size Guide', href: '#' },
