@@ -14,6 +14,7 @@ import { UltraShearPage } from "@/features/ultra-shear/UltraShearPage";
 import { ApparelBrandsPage } from "@/features/apparel-brands/ApparelBrandsPage";
 import { LuxuryMarineLifeBrandPage } from "@/features/apparel-brands/luxury-marine-life/LuxuryMarineLifeBrandPage";
 import HottieYachtieBrandPage from "@/features/apparel-brands/hottie-yachtie/HottieYachtieBrandPage";
+import AcYachtClubBrandPage from "@/features/apparel-brands/ac-yacht-club/AcYachtClubBrandPage";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -83,9 +84,12 @@ function RoutedApp() {
   const isApparelBrandsRoute = location.pathname === "/apparel-brands";
   const isLmlRoute = location.pathname === "/luxury-marine-life-brand";
   const isHyycRoute = location.pathname === "/hottie-yachtie-brand";
+  const isAcYcRoute = location.pathname === "/ac-yacht-club-apparel";
 
   useEffect(() => {
     if (location.pathname !== "/") return;
+
+    let globalSnap: globalThis.ScrollTrigger | null = null;
 
     const setupGlobalSnap = () => {
       const pinned = ScrollTrigger.getAll()
@@ -102,7 +106,7 @@ function RoutedApp() {
           (st.start + ((st.end ?? st.start) - st.start) * 0.5) / maxScroll,
       }));
 
-      ScrollTrigger.create({
+      globalSnap = ScrollTrigger.create({
         snap: {
           snapTo: (value: number) => {
             const inPinned = pinnedRanges.some(
@@ -128,7 +132,7 @@ function RoutedApp() {
     const timer = setTimeout(setupGlobalSnap, 500);
     return () => {
       clearTimeout(timer);
-      ScrollTrigger.getAll().forEach((st) => st.kill());
+      if (globalSnap) globalSnap.kill();
     };
   }, [location.pathname]);
 
@@ -175,6 +179,12 @@ function RoutedApp() {
         "content",
         "Shop the official Hottie Yachtie apparel collection—party wear for the open sea.",
       );
+    } else if (isAcYcRoute) {
+      document.title = "AC Yacht Club | High-Performance Apparel";
+      metaDescription.setAttribute(
+        "content",
+        "Shop the official AC Yacht Club apparel collection—clean lines, quiet flex.",
+      );
     } else {
       document.title = "Luxury Marine Life | Health on the Water";
       metaDescription.setAttribute(
@@ -186,7 +196,7 @@ function RoutedApp() {
     if (!document.querySelector('meta[name="description"]')) {
       document.head.appendChild(metaDescription);
     }
-  }, [location.pathname, isUltraShearRoute, isApparelBrandsRoute, isLmlRoute, isHyycRoute]);
+  }, [location.pathname, isUltraShearRoute, isApparelBrandsRoute, isLmlRoute, isHyycRoute, isAcYcRoute]);
 
   if (isLmlRoute) {
     return <LuxuryMarineLifeBrandPage />;
@@ -194,6 +204,10 @@ function RoutedApp() {
 
   if (isHyycRoute) {
     return <HottieYachtieBrandPage />;
+  }
+
+  if (isAcYcRoute) {
+    return <AcYachtClubBrandPage />;
   }
 
   return (
@@ -211,6 +225,7 @@ function RoutedApp() {
             <Route path="/apparel-brands" element={<ApparelBrandsPage />} />
             <Route path="/luxury-marine-life-brand" element={<LuxuryMarineLifeBrandPage />} />
             <Route path="/hottie-yachtie-brand" element={<HottieYachtieBrandPage />} />
+            <Route path="/ac-yacht-club-apparel" element={<AcYachtClubBrandPage />} />
           </Routes>
         </main>
       </div>

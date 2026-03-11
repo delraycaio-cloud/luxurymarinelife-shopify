@@ -199,6 +199,10 @@ export function ApparelBrandsPage() {
                               navigate("/hottie-yachtie-brand");
                               return;
                             }
+                            if (brand.id === "ac-yacht-club") {
+                              navigate("/ac-yacht-club-apparel");
+                              return;
+                            }
 
                             window.scrollTo({ top: 0, behavior: "smooth" });
                           }}

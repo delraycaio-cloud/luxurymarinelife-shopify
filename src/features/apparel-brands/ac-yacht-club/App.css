@@ -1,0 +1,58 @@
+/* AC Yacht Club - App Styles */
+
+/* Ensure full-width sections */
+.ac-yc-page .section-pinned {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Image optimization */
+.ac-yc-page img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Button reset */
+.ac-yc-page button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+}
+
+/* Link reset */
+.ac-yc-page a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Focus styles for accessibility */
+.ac-yc-page button:focus-visible,
+.ac-yc-page a:focus-visible,
+.ac-yc-page input:focus-visible,
+.ac-yc-page textarea:focus-visible {
+  outline: 2px solid #C8A35F;
+  outline-offset: 2px;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .ac-yc-page *,
+  .ac-yc-page *::before,
+  .ac-yc-page *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Mobile touch optimization */
+@media (hover: none) {
+  .ac-yc-page .btn-primary:hover,
+  .ac-yc-page .btn-outline:hover {
+    transform: none;
+  }
+}
