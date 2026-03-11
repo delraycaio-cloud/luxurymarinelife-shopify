@@ -1,4 +1,4 @@
-import { useEffect, useRef, useLayoutEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowRight } from 'lucide-react';
@@ -21,6 +21,7 @@ export default function HeroSection({ bgImage, circleImages, zIndex, onShopClick
   const circlesRef = useRef<HTMLDivElement>(null);
   const bgRef = useRef<HTMLDivElement>(null);
 
+  // Entrance animation
   useEffect(() => {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
@@ -36,32 +37,7 @@ export default function HeroSection({ bgImage, circleImages, zIndex, onShopClick
     return () => ctx.revert();
   }, []);
 
-  useLayoutEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
-    const ctx = gsap.context(() => {
-      const scrollTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: section,
-          start: 'top top',
-          end: '+=130%',
-          pin: true,
-          scrub: 0.6,
-          onLeaveBack: () => {
-            gsap.set([ribbonRef.current, headlineRef.current, subheadlineRef.current, ctaRef.current, circlesRef.current], { opacity: 1, x: 0, y: 0 });
-            gsap.set(bgRef.current, { scale: 1, opacity: 1 });
-          },
-        },
-      });
-      scrollTl.fromTo(headlineRef.current, { x: 0, opacity: 1 }, { x: '-18vw', opacity: 0, ease: 'power2.in' }, 0.70);
-      scrollTl.fromTo(subheadlineRef.current, { x: 0, opacity: 1 }, { x: '-18vw', opacity: 0, ease: 'power2.in' }, 0.72);
-      scrollTl.fromTo(ctaRef.current, { y: 0, opacity: 1 }, { y: '10vh', opacity: 0, ease: 'power2.in' }, 0.74);
-      scrollTl.fromTo(circlesRef.current, { x: 0, opacity: 1 }, { x: '22vw', opacity: 0, ease: 'power2.in' }, 0.70);
-      scrollTl.fromTo(ribbonRef.current, { x: 0, opacity: 1 }, { x: '-18vw', opacity: 0, ease: 'power2.in' }, 0.75);
-      scrollTl.fromTo(bgRef.current, { scale: 1, opacity: 1 }, { scale: 1.06, opacity: 0.7, ease: 'power2.in' }, 0.70);
-    }, section);
-    return () => ctx.revert();
-  }, []);
+  // Removed layout effect pinning
 
   return (
     <section ref={sectionRef} className="hyyc-section-pinned" style={{ zIndex }}>

@@ -15,6 +15,7 @@ import { ApparelBrandsPage } from "@/features/apparel-brands/ApparelBrandsPage";
 import { LuxuryMarineLifeBrandPage } from "@/features/apparel-brands/luxury-marine-life/LuxuryMarineLifeBrandPage";
 import HottieYachtieBrandPage from "@/features/apparel-brands/hottie-yachtie/HottieYachtieBrandPage";
 import AcYachtClubBrandPage from "@/features/apparel-brands/ac-yacht-club/AcYachtClubBrandPage";
+import ShopifyDemoPage from "@/features/shopify-demo/ShopifyDemoPage";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -226,6 +227,7 @@ function RoutedApp() {
             <Route path="/luxury-marine-life-brand" element={<LuxuryMarineLifeBrandPage />} />
             <Route path="/hottie-yachtie-brand" element={<HottieYachtieBrandPage />} />
             <Route path="/ac-yacht-club-apparel" element={<AcYachtClubBrandPage />} />
+            <Route path="/shopify-demo" element={<ShopifyDemoPage />} />
           </Routes>
         </main>
       </div>

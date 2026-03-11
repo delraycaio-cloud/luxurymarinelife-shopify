@@ -1,85 +1,141 @@
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { persist, createJSONStorage } from 'zustand/middleware';
+import { storefrontApiRequest, CART_CREATE_MUTATION } from '@/lib/shopify';
+import type { ShopifyProduct } from '@/lib/shopify';
 
 export interface CartItem {
-  id: string;
-  name: string;
-  price: number;
-  originalPrice: number;
+  product: ShopifyProduct;
+  variantId: string;
+  variantTitle: string;
+  price: {
+    amount: string;
+    currencyCode: string;
+  };
   quantity: number;
-  image: string;
-  subtitle?: string;
+  selectedOptions: Array<{
+    name: string;
+    value: string;
+  }>;
 }
 
-interface CartState {
+interface CartStore {
   items: CartItem[];
-  isOpen: boolean;
-  addItem: (item: Omit<CartItem, 'quantity'>) => void;
-  removeItem: (id: string) => void;
-  updateQuantity: (id: string, quantity: number) => void;
+  cartId: string | null;
+  checkoutUrl: string | null;
+  isLoading: boolean;
+  
+  // Actions
+  addItem: (item: CartItem) => void;
+  updateQuantity: (variantId: string, quantity: number) => void;
+  removeItem: (variantId: string) => void;
   clearCart: () => void;
-  toggleCart: () => void;
-  setCartOpen: (open: boolean) => void;
-  getTotalItems: () => number;
-  getTotalPrice: () => number;
+  setCartId: (cartId: string) => void;
+  setCheckoutUrl: (url: string) => void;
+  setLoading: (loading: boolean) => void;
+  createCheckout: () => Promise<string | null>;
 }
 
-export const useCartStore = create<CartState>()(
+async function createStorefrontCheckout(items: CartItem[]): Promise<string> {
+  const lines = items.map(item => ({
+    quantity: item.quantity,
+    merchandiseId: item.variantId,
+  }));
+
+  const cartData = await storefrontApiRequest(CART_CREATE_MUTATION, {
+    input: { lines },
+  });
+
+  if (!cartData) {
+    throw new Error('Failed to create cart');
+  }
+
+  if (cartData.data.cartCreate.userErrors.length > 0) {
+    throw new Error(`Cart creation failed: ${cartData.data.cartCreate.userErrors.map((e: { message: string }) => e.message).join(', ')}`);
+  }
+
+  const cart = cartData.data.cartCreate.cart;
+  
+  if (!cart.checkoutUrl) {
+    throw new Error('No checkout URL returned from Shopify');
+  }
+
+  const url = new URL(cart.checkoutUrl);
+  url.searchParams.set('channel', 'online_store');
+  return url.toString();
+}
+
+export const useCartStore = create<CartStore>()(
   persist(
     (set, get) => ({
       items: [],
-      isOpen: false,
-      
+      cartId: null,
+      checkoutUrl: null,
+      isLoading: false,
+
       addItem: (item) => {
         const { items } = get();
-        const existingItem = items.find((i) => i.id === item.id);
+        const existingItem = items.find(i => i.variantId === item.variantId);
         
         if (existingItem) {
           set({
-            items: items.map((i) =>
-              i.id === item.id ? { ...i, quantity: i.quantity + 1 } : i
-            ),
+            items: items.map(i =>
+              i.variantId === item.variantId
+                ? { ...i, quantity: i.quantity + item.quantity }
+                : i
+            )
           });
         } else {
-          set({ items: [...items, { ...item, quantity: 1 }] });
+          set({ items: [...items, item] });
         }
       },
-      
-      removeItem: (id) => {
-        set({ items: get().items.filter((i) => i.id !== id) });
-      },
-      
-      updateQuantity: (id, quantity) => {
+
+      updateQuantity: (variantId, quantity) => {
         if (quantity <= 0) {
-          get().removeItem(id);
+          get().removeItem(variantId);
           return;
         }
+        
         set({
-          items: get().items.map((i) =>
-            i.id === id ? { ...i, quantity } : i
-          ),
+          items: get().items.map(item =>
+            item.variantId === variantId ? { ...item, quantity } : item
+          )
         });
       },
-      
-      clearCart: () => set({ items: [] }),
-      
-      toggleCart: () => set((state) => ({ isOpen: !state.isOpen })),
-      
-      setCartOpen: (open) => set({ isOpen: open }),
-      
-      getTotalItems: () => {
-        return get().items.reduce((total, item) => total + item.quantity, 0);
+
+      removeItem: (variantId) => {
+        set({
+          items: get().items.filter(item => item.variantId !== variantId)
+        });
       },
-      
-      getTotalPrice: () => {
-        return get().items.reduce(
-          (total, item) => total + item.price * item.quantity,
-          0
-        );
+
+      clearCart: () => {
+        set({ items: [], cartId: null, checkoutUrl: null });
       },
+
+      setCartId: (cartId) => set({ cartId }),
+      setCheckoutUrl: (checkoutUrl) => set({ checkoutUrl }),
+      setLoading: (isLoading) => set({ isLoading }),
+
+      createCheckout: async () => {
+        const { items, setLoading, setCheckoutUrl } = get();
+        if (items.length === 0) return null;
+
+        setLoading(true);
+        try {
+          const checkoutUrl = await createStorefrontCheckout(items);
+          setCheckoutUrl(checkoutUrl);
+          return checkoutUrl;
+        } catch (error) {
+          console.error('Failed to create checkout:', error);
+          return null;
+        } finally {
+          setLoading(false);
+        }
+      }
     }),
     {
-      name: 'shear-sciences-cart',
+      name: 'garmn-cart',
+      storage: createJSONStorage(() => localStorage),
     }
   )
 );

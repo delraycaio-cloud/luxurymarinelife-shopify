@@ -12,15 +12,15 @@ type ApparelBrand = {
 
 const brands: ApparelBrand[] = [
   {
-    id: "hottie-yachtie-yacht-club",
-    name: "Hottie Yachtie Yacht Club",
+    id: "luxury-marine-life",
+    name: "Luxury Marine Life",
     blurb:
-      "After-dark deck energy. Pieces built to read premium from twenty feet away.",
+      "Core essentials for life on the water—engineered, refined, and philanthropic.",
     image: {
-      src: "/images/hyyc-brand.png",
-      alt: "Hottie Yachtie Yacht Club brand image",
+      src: "/images/lml-brand-image.png",
+      alt: "Luxury Marine Life brand image",
     },
-    accent: "crimson",
+    accent: "teal",
   },
   {
     id: "ac-yacht-club",
@@ -34,15 +34,15 @@ const brands: ApparelBrand[] = [
     accent: "gold",
   },
   {
-    id: "luxury-marine-life",
-    name: "Luxury Marine Life",
+    id: "hottie-yachtie-yacht-club",
+    name: "Hottie Yachtie Yacht Club",
     blurb:
-      "Core essentials for life on the water—engineered, refined, and philanthropic.",
+      "After-dark deck energy. Pieces built to read premium from twenty feet away.",
     image: {
-      src: "/images/lml-brand-image.png",
-      alt: "Luxury Marine Life brand image",
+      src: "/images/hyyc-brand.png",
+      alt: "Hottie Yachtie Yacht Club brand image",
     },
-    accent: "teal",
+    accent: "crimson",
   },
 ];
 
