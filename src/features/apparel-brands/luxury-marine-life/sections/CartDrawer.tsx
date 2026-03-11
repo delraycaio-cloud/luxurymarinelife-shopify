@@ -7,7 +7,6 @@ import {
   X,
 } from "lucide-react";
 import { useStore } from "../context/StoreContext";
-import { useCartStore } from "@/store/cartStore";
 
 export default function CartDrawer() {
   const { 
@@ -15,9 +14,11 @@ export default function CartDrawer() {
     setIsCartOpen, 
     cartTotal, 
     removeFromCart, 
-    updateQuantity 
+    updateQuantity,
+    items,
+    createCheckout,
+    isLoading
   } = useStore();
-  const { items, createCheckout, isLoading } = useCartStore();
 
   if (!isCartOpen) return null;
 

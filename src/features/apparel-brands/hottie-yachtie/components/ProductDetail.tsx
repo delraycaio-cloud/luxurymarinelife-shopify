@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { ShoppingBag, Heart, ChevronLeft, ChevronRight, Star, Truck, Shield, RotateCcw } from 'lucide-react';
 import type { ShopifyProduct } from '@/lib/shopify';
-import { useCartStore } from '@/store/cartStore';
+import { useBrandCart } from '@/store/cartStore';
 import { toast } from 'sonner';
 
 interface ProductDetailProps {
@@ -21,7 +21,7 @@ export default function ProductDetail({ product, onClose }: ProductDetailProps) 
   const [isWishlisted, setIsWishlisted] = useState(false);
   const [addedToCart, setAddedToCart] = useState(false);
 
-  const addItem = useCartStore(state => state.addItem);
+  const { addItem } = useBrandCart('hyyc');
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';

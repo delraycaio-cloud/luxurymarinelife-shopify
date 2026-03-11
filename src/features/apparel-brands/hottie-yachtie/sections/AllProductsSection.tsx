@@ -4,7 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ShoppingBag, Search, Star, Loader2 } from 'lucide-react';
 import { fetchProducts } from '@/lib/shopify';
 import type { ShopifyProduct } from '@/lib/shopify';
-import { useCartStore } from '@/store/cartStore';
+import { useBrandCart } from '@/store/cartStore';
 import { toast } from 'sonner';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -24,7 +24,7 @@ export default function AllProductsSection({ zIndex, onProductClick }: AllProduc
   const [searchQuery, setSearchQuery] = useState('');
   const [sortBy, setSortBy] = useState('featured');
 
-  const addItem = useCartStore(state => state.addItem);
+  const { addItem } = useBrandCart('hyyc');
 
   useEffect(() => {
     const loadProducts = async () => {

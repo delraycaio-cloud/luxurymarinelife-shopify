@@ -1,7 +1,7 @@
 import React, { createContext, useCallback, useContext, useState, useMemo } from "react";
 import type { View } from "../types";
 import type { ShopifyProduct } from "@/lib/shopify";
-import { useCartStore } from "@/store/cartStore";
+import { useBrandCart } from "@/store/cartStore";
 
 interface StoreContextType {
   addToCart: (
@@ -16,6 +16,9 @@ interface StoreContextType {
     quantity: number,
   ) => void;
   clearCart: () => void;
+  createCheckout: () => Promise<string | null>;
+  isLoading: boolean;
+  items: any[];
   cartTotal: number;
   cartCount: number;
   currentView: View;
@@ -33,11 +36,7 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
   const [selectedProduct, setSelectedProduct] = useState<ShopifyProduct | null>(null);
   const [isCartOpen, setIsCartOpen] = useState(false);
   
-  const addItem = useCartStore(state => state.addItem);
-  const removeItem = useCartStore(state => state.removeItem);
-  const updateQty = useCartStore(state => state.updateQuantity);
-  const clear = useCartStore(state => state.clearCart);
-  const items = useCartStore(state => state.items);
+  const { items, addItem, removeItem, updateQuantity: updateQty, clearCart: clear, createCheckout, isLoading } = useBrandCart('lml');
 
   const cartTotal = useMemo(() => 
     items.reduce((total, item) => total + (parseFloat(item.price.amount) * item.quantity), 0)
@@ -93,6 +92,9 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
         removeFromCart,
         updateQuantity,
         clearCart,
+        createCheckout,
+        isLoading,
+        items,
         cartTotal,
         cartCount,
         currentView,

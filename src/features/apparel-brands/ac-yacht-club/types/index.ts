@@ -1,3 +1,7 @@
+import type { ShopifyProduct } from '@/lib/shopify';
+
+export type ACProduct = Product | ShopifyProduct;
+
 export interface Product {
   id: string;
   name: string;

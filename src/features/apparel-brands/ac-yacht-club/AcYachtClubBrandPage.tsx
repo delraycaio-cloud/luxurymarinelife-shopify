@@ -6,11 +6,9 @@ import { CartProvider } from '@/features/apparel-brands/ac-yacht-club/context/Ca
 import { Navigation } from '@/features/apparel-brands/ac-yacht-club/components/navigation/Navigation';
 import { CartDrawer } from '@/features/apparel-brands/ac-yacht-club/components/cart/CartDrawer';
 import { ProductModal } from '@/features/apparel-brands/ac-yacht-club/components/ProductModal';
-import { StickyPurchaseBar } from '@/features/apparel-brands/ac-yacht-club/components/StickyPurchaseBar';
 import { Footer } from '@/features/apparel-brands/ac-yacht-club/components/Footer';
 
 import { HeroSection } from '@/features/apparel-brands/ac-yacht-club/sections/HeroSection';
-import { NewArrivalsSection } from '@/features/apparel-brands/ac-yacht-club/sections/NewArrivalsSection';
 import { ShopSection } from '@/features/apparel-brands/ac-yacht-club/sections/ShopSection';
 import { AboutSection } from '@/features/apparel-brands/ac-yacht-club/sections/AboutSection';
 import { NewsletterSection } from '@/features/apparel-brands/ac-yacht-club/sections/NewsletterSection';
@@ -40,12 +38,6 @@ function AppContent() {
     setTimeout(() => setSelectedProduct(null), 300);
   }, []);
 
-  const scrollToShop = useCallback(() => {
-    const shopSection = document.querySelector('#shop');
-    if (shopSection) {
-      shopSection.scrollIntoView({ behavior: 'smooth' });
-    }
-  }, []);
 
   return (
     <CartProvider>
@@ -56,10 +48,8 @@ function AppContent() {
         {/* Main Content */}
         <main className="relative">
           {/* Hero - Product Focused */}
-          <HeroSection onProductClick={handleProductClick} />
+          <HeroSection />
           
-          {/* New Arrivals */}
-          <NewArrivalsSection onProductClick={handleProductClick} />
           
           {/* Shop All with Filters */}
           <ShopSection onProductClick={handleProductClick} />
@@ -74,8 +64,6 @@ function AppContent() {
         {/* Footer */}
         <Footer />
 
-        {/* Sticky Purchase Bar */}
-        <StickyPurchaseBar onShopClick={scrollToShop} />
 
         {/* Cart Drawer */}
         <CartDrawer isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />

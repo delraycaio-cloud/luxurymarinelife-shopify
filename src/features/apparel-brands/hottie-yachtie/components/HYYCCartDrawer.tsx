@@ -1,4 +1,4 @@
-import { useCartStore } from "@/store/cartStore";
+import { useBrandCart } from "@/store/cartStore";
 import { ShoppingBag, X, Minus, Plus, Loader2 } from "lucide-react";
 import {
   Sheet,
@@ -11,7 +11,7 @@ import {
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 export function HYYCCartDrawer() {
-  const { items, updateQuantity, removeItem, createCheckout, isLoading } = useCartStore();
+  const { items, updateQuantity, removeItem, createCheckout, isLoading } = useBrandCart('hyyc');
   
   const total = items.reduce((acc, item) => acc + parseFloat(item.price.amount) * item.quantity, 0);
 

@@ -1,59 +1,11 @@
 import React, { createContext, useContext, useState, useCallback, useMemo } from 'react';
-import type { Product, CartItem, CartContextType } from '@/features/apparel-brands/ac-yacht-club/types';
+import { useBrandCart } from '@/store/cartStore';
 
-const CartContext = createContext<CartContextType | undefined>(undefined);
+const CartContext = createContext<any | undefined>(undefined);
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
-  const [items, setItems] = useState<CartItem[]>([]);
+  const { items, addItem, updateQuantity, removeItem, clearCart, createCheckout, isLoading, checkoutUrl } = useBrandCart('acyc');
   const [isCartOpen, setIsCartOpen] = useState(false);
-
-  const addToCart = useCallback((product: Product, quantity: number, size: string, color: string) => {
-    setItems((prevItems) => {
-      const existingItem = prevItems.find(
-        (item) => 
-          item.product.id === product.id && 
-          item.size === size && 
-          item.color === color
-      );
-
-      if (existingItem) {
-        return prevItems.map((item) =>
-          item.product.id === product.id && item.size === size && item.color === color
-            ? { ...item, quantity: item.quantity + quantity }
-            : item
-        );
-      }
-
-      return [...prevItems, { product, quantity, size, color }];
-    });
-    setIsCartOpen(true);
-  }, []);
-
-  const removeFromCart = useCallback((productId: string, size: string, color: string) => {
-    setItems((prevItems) => 
-      prevItems.filter((item) => 
-        !(item.product.id === productId && item.size === size && item.color === color)
-      )
-    );
-  }, []);
-
-  const updateQuantity = useCallback((productId: string, size: string, color: string, quantity: number) => {
-    if (quantity <= 0) {
-      removeFromCart(productId, size, color);
-      return;
-    }
-    setItems((prevItems) =>
-      prevItems.map((item) =>
-        item.product.id === productId && item.size === size && item.color === color
-          ? { ...item, quantity }
-          : item
-      )
-    );
-  }, [removeFromCart]);
-
-  const clearCart = useCallback(() => {
-    setItems([]);
-  }, []);
 
   const totalItems = useMemo(
     () => items.reduce((sum, item) => sum + item.quantity, 0),
@@ -61,23 +13,58 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   );
 
   const totalPrice = useMemo(
-    () => items.reduce((sum, item) => sum + item.product.price * item.quantity, 0),
+    () => items.reduce((sum, item) => sum + (parseFloat(item.price.amount) * item.quantity), 0),
     [items]
   );
+
+  const addToCart = useCallback((product: any, quantity: number, size: string, color: string) => {
+    const variant = product.node.variants.edges.find((v: any) => {
+      const sizeMatch = v.node.selectedOptions.some((opt: any) => opt.name === 'Size' && opt.value === size);
+      const colorMatch = v.node.selectedOptions.some((opt: any) => opt.name === 'Color' && opt.value === color);
+      return sizeMatch && colorMatch;
+    }) || product.node.variants.edges[0];
+
+    addItem({
+      product,
+      variantId: variant.node.id,
+      variantTitle: variant.node.title,
+      price: variant.node.price,
+      quantity,
+      selectedOptions: variant.node.selectedOptions
+    });
+    setIsCartOpen(true);
+  }, [addItem]);
 
   const value = useMemo(
     () => ({
       items,
       addToCart,
-      removeFromCart,
-      updateQuantity,
+      removeFromCart: (productId: string, size: string, color: string) => {
+        const item = items.find(i => 
+          i.product.node.id === productId && 
+          i.selectedOptions.some(opt => opt.name === 'Size' && opt.value === size) &&
+          i.selectedOptions.some(opt => opt.name === 'Color' && opt.value === color)
+        );
+        if (item) removeItem(item.variantId);
+      },
+      updateQuantity: (productId: string, size: string, color: string, quantity: number) => {
+        const item = items.find(i => 
+          i.product.node.id === productId && 
+          i.selectedOptions.some(opt => opt.name === 'Size' && opt.value === size) &&
+          i.selectedOptions.some(opt => opt.name === 'Color' && opt.value === color)
+        );
+        if (item) updateQuantity(item.variantId, quantity);
+      },
       clearCart,
+      createCheckout,
+      isLoading,
+      checkoutUrl,
       totalItems,
       totalPrice,
       isCartOpen,
       setIsCartOpen,
     }),
-    [items, addToCart, removeFromCart, updateQuantity, clearCart, totalItems, totalPrice, isCartOpen]
+    [items, addToCart, updateQuantity, removeItem, clearCart, createCheckout, isLoading, checkoutUrl, totalItems, totalPrice, isCartOpen]
   );
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

@@ -3,7 +3,6 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
-import { useCartStore } from '@/store/cartStore';
 import type { ShopifyProduct } from '@/lib/shopify';
 
 // STYLES
@@ -20,7 +19,6 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function HottieYachtieBrandPage() {
   const navigate = useNavigate();
-  useCartStore();
 
   const [selectedProduct, setSelectedProduct] = useState<ShopifyProduct | null>(null);
   const navRef = useRef<HTMLDivElement>(null);
