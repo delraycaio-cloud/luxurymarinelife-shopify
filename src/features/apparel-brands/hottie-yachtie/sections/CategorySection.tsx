@@ -44,13 +44,13 @@ export default function CategorySection({
     if (!section) return;
 
     const ctx = gsap.context(() => {
+      // Entrance based animations
       const scrollTl = gsap.timeline({
         scrollTrigger: {
           trigger: section,
-          start: 'top top',
-          end: '+=120%',
-          pin: true,
-          scrub: 0.6,
+          start: 'top 80%',
+          end: 'bottom 20%',
+          toggleActions: 'play none none reverse',
         }
       });
 

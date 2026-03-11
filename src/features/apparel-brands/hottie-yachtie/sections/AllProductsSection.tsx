@@ -1,51 +1,83 @@
-import { useRef, useLayoutEffect, useState } from 'react';
+import { useRef, useEffect, useState, useMemo } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ShoppingBag, Filter, Search, Star, ChevronDown } from 'lucide-react';
-import { products, productCategories } from '../data/products';
-import type { Product } from '../types';
+import { ShoppingBag, Search, Star, Loader2 } from 'lucide-react';
+import { fetchProducts } from '@/lib/shopify';
+import type { ShopifyProduct } from '@/lib/shopify';
+import { useCartStore } from '@/store/cartStore';
+import { toast } from 'sonner';
 
 gsap.registerPlugin(ScrollTrigger);
 
 interface AllProductsSectionProps {
   zIndex: number;
-  onProductClick: (product: Product) => void;
-  onAddToCart: () => void;
+  onProductClick: (product: ShopifyProduct) => void;
 }
 
-export default function AllProductsSection({ zIndex, onProductClick, onAddToCart }: AllProductsSectionProps) {
+export default function AllProductsSection({ zIndex, onProductClick }: AllProductsSectionProps) {
   const sectionRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
-  
+  const [products, setProducts] = useState<ShopifyProduct[]>([]);
+  const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
   const [sortBy, setSortBy] = useState('featured');
-  const [showFilters, setShowFilters] = useState(false);
+
+  const addItem = useCartStore(state => state.addItem);
+
+  useEffect(() => {
+    const loadProducts = async () => {
+      try {
+        setLoading(true);
+        const data = await fetchProducts(50);
+        // Filter by HYYC vendor
+        const filtered = data.filter(p => 
+          p.node.vendor?.toLowerCase().includes('yachtie') || 
+          p.node.vendor?.toLowerCase().includes('hottie yachtie yacht club')
+        );
+        setProducts(filtered);
+      } catch (error) {
+        console.error("Failed to load products:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadProducts();
+  }, []);
+
+  const productCategories = useMemo(() => 
+    ['All', ...new Set(products.map(p => p.node.productType || 'Uncategorized'))].filter(Boolean)
+  , [products]);
 
   // Filter products
-  const filteredProducts = products.filter(product => {
-    const matchesCategory = selectedCategory === 'All' || product.category === selectedCategory;
-    const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         product.category.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesCategory && matchesSearch;
-  });
+  const filteredProducts = useMemo(() => 
+    products.filter(product => {
+      const matchesCategory = selectedCategory === 'All' || (product.node.productType || 'Uncategorized') === selectedCategory;
+      const matchesSearch = product.node.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                           (product.node.productType || '').toLowerCase().includes(searchQuery.toLowerCase());
+      return matchesCategory && matchesSearch;
+    })
+  , [products, selectedCategory, searchQuery]);
 
   // Sort products
-  const sortedProducts = [...filteredProducts].sort((a, b) => {
-    switch (sortBy) {
-      case 'price-low':
-        return a.price - b.price;
-      case 'price-high':
-        return b.price - a.price;
-      case 'newest':
-        return (b.isNew ? 1 : 0) - (a.isNew ? 1 : 0);
-      default:
-        return (b.isBestseller ? 1 : 0) - (a.isBestseller ? 1 : 0);
-    }
-  });
+  const sortedProducts = useMemo(() => {
+    return [...filteredProducts].sort((a, b) => {
+      const priceA = parseFloat(a.node.priceRange.minVariantPrice.amount);
+      const priceB = parseFloat(b.node.priceRange.minVariantPrice.amount);
+      switch (sortBy) {
+        case 'price-low':
+          return priceA - priceB;
+        case 'price-high':
+          return priceB - priceA;
+        default:
+          return 0; // Natural Shopify order
+      }
+    });
+  }, [filteredProducts, sortBy]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
+    if (loading) return;
     const section = sectionRef.current;
     if (!section) return;
 
@@ -66,25 +98,23 @@ export default function AllProductsSection({ zIndex, onProductClick, onAddToCart
 
       const cards = gridRef.current?.querySelectorAll('.product-card');
       if (cards) {
-        gsap.fromTo(cards,
-          { y: 40, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 0.5,
-            stagger: 0.08,
-            scrollTrigger: {
-              trigger: gridRef.current,
-              start: 'top 80%',
-              toggleActions: 'play none none reverse',
-            }
+        gsap.set(cards, { y: 40, opacity: 0 });
+        gsap.to(cards, {
+          y: 0,
+          opacity: 1,
+          duration: 0.5,
+          stagger: 0.08,
+          scrollTrigger: {
+            trigger: gridRef.current,
+            start: 'top 80%',
+            toggleActions: 'play none none reverse',
           }
-        );
+        });
       }
     }, section);
 
     return () => ctx.revert();
-  }, [sortedProducts]);
+  }, [loading, products.length, selectedCategory, sortBy]); // Removed searchQuery and the sortedProducts reference to prevent redraws on typing/cart updates
 
   return (
     <section
@@ -103,60 +133,26 @@ export default function AllProductsSection({ zIndex, onProductClick, onAddToCart
           {/* Search & Filter Bar */}
           <div className="flex flex-col lg:flex-row gap-4 lg:items-center lg:justify-between">
             {/* Search */}
-            <div className="relative flex-1 max-w-md">
-              <Search size={20} className="absolute left-4 top-1/2 -translate-y-1/2 text-[#F6F6F8]/50" />
+            <div className="relative flex-1 max-w-md group">
+              <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-[#F6F6F8]/50 transition-colors group-focus-within:text-[#FF1F3D]" />
               <input
                 type="text"
                 placeholder="Search products..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-12 pr-4 py-3 bg-[#1a1a1a] border border-[#F6F6F8]/10 text-[#F6F6F8] placeholder:text-[#F6F6F8]/40 focus:border-[#FF1F3D] transition-colors"
+                className="w-full pl-12 pr-4 py-3 bg-[#1a1a1a] border-b border-[#F6F6F8]/10 text-[#F6F6F8] placeholder:text-[#F6F6F8]/40 focus:border-[#FF1F3D] transition-colors outline-none"
               />
             </div>
 
             {/* Filters */}
             <div className="flex flex-wrap gap-3">
-              {/* Category Filter */}
-              <div className="relative">
-                <button
-                  onClick={() => setShowFilters(!showFilters)}
-                  className="flex items-center gap-2 px-4 py-3 bg-[#1a1a1a] border border-[#F6F6F8]/10 text-[#F6F6F8] hover:border-[#FF1F3D] transition-colors"
-                >
-                  <Filter size={18} />
-                  <span className="text-sm">{selectedCategory}</span>
-                  <ChevronDown size={16} className={`transition-transform ${showFilters ? 'rotate-180' : ''}`} />
-                </button>
-                
-                {showFilters && (
-                  <div className="absolute top-full left-0 mt-2 w-48 bg-[#1a1a1a] border border-[#F6F6F8]/10 z-20">
-                    {productCategories.map((cat) => (
-                      <button
-                        key={cat}
-                        onClick={() => {
-                          setSelectedCategory(cat);
-                          setShowFilters(false);
-                        }}
-                        className={`w-full text-left px-4 py-2 text-sm transition-colors ${
-                          selectedCategory === cat
-                            ? 'bg-[#FF1F3D] text-[#F6F6F8]'
-                            : 'text-[#F6F6F8]/70 hover:bg-[#F6F6F8]/10'
-                        }`}
-                      >
-                        {cat}
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
-
               {/* Sort */}
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="px-4 py-3 bg-[#1a1a1a] border border-[#F6F6F8]/10 text-[#F6F6F8] text-sm focus:border-[#FF1F3D] transition-colors cursor-pointer"
+                className="px-4 py-3 bg-[#1a1a1a] border border-[#F6F6F8]/10 text-[#F6F6F8] text-sm focus:border-[#FF1F3D] transition-colors cursor-pointer outline-none rounded-lg"
               >
                 <option value="featured">Featured</option>
-                <option value="newest">Newest</option>
                 <option value="price-low">Price: Low to High</option>
                 <option value="price-high">Price: High to Low</option>
               </select>
@@ -165,7 +161,7 @@ export default function AllProductsSection({ zIndex, onProductClick, onAddToCart
 
           {/* Category Pills */}
           <div className="flex flex-wrap gap-2 mt-6">
-            {productCategories.map((cat) => (
+            {productCategories.map((cat) => ( cat && (
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
@@ -177,35 +173,53 @@ export default function AllProductsSection({ zIndex, onProductClick, onAddToCart
               >
                 {cat}
               </button>
-            ))}
+            )))}
           </div>
 
           {/* Results Count */}
           <div className="mt-4 text-[#F6F6F8]/50 text-sm">
-            Showing {sortedProducts.length} products
+            {loading ? 'Fetching gear...' : `Showing ${sortedProducts.length} products`}
           </div>
         </div>
 
         {/* Product Grid */}
-        <div
-          ref={gridRef}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
-        >
-          {sortedProducts.map((product) => (
-            <ProductCard
-              key={product.id}
-              product={product}
-              onClick={() => onProductClick(product)}
-              onAddToCart={(e) => {
-                e.stopPropagation();
-                onAddToCart();
-              }}
-            />
-          ))}
-        </div>
+        {loading ? (
+          <div className="flex flex-col items-center justify-center py-20">
+            <Loader2 className="w-10 h-10 text-[#FF1F3D] animate-spin mb-4" />
+            <span className="text-white/30 text-sm italic">Loading Collection...</span>
+          </div>
+        ) : (
+          <div
+            ref={gridRef}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+          >
+            {sortedProducts.map((product) => (
+              <ProductCard
+                key={product.node.id}
+                product={product}
+                onClick={() => onProductClick(product)}
+                onAddToCart={(e) => {
+                  e.stopPropagation();
+                  const firstVariant = product.node.variants.edges[0]?.node;
+                  if (firstVariant) {
+                    addItem({
+                      product,
+                      variantId: firstVariant.id,
+                      variantTitle: firstVariant.title,
+                      price: firstVariant.price,
+                      quantity: 1,
+                      selectedOptions: firstVariant.selectedOptions || []
+                    });
+                    toast.success("Added to cart");
+                  }
+                }}
+              />
+            ))}
+          </div>
+        )}
 
         {/* Empty State */}
-        {sortedProducts.length === 0 && (
+        {!loading && sortedProducts.length === 0 && (
           <div className="text-center py-20">
             <div className="text-[#F6F6F8]/50 text-lg mb-2">No products found</div>
             <div className="text-[#F6F6F8]/30 text-sm">Try adjusting your filters</div>
@@ -216,15 +230,18 @@ export default function AllProductsSection({ zIndex, onProductClick, onAddToCart
   );
 }
 
-// Product Card Component
+// Product Card Component (Restored to original design)
 interface ProductCardProps {
-  product: Product;
+  product: ShopifyProduct;
   onClick: () => void;
   onAddToCart: (e: React.MouseEvent) => void;
 }
 
 function ProductCard({ product, onClick, onAddToCart }: ProductCardProps) {
   const [isHovered, setIsHovered] = useState(false);
+  const { node } = product;
+  const price = node.priceRange.minVariantPrice.amount;
+  const image = node.images.edges[0]?.node?.url;
 
   return (
     <div
@@ -235,31 +252,18 @@ function ProductCard({ product, onClick, onAddToCart }: ProductCardProps) {
     >
       {/* Image */}
       <div className="relative aspect-[3/4] bg-[#1a1a1a] overflow-hidden mb-4 rounded-lg">
-        <img
-          src={product.image}
-          alt={product.name}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-        />
+        {image ? (
+          <img
+            src={image}
+            alt={node.title}
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center bg-white/5">
+            <ShoppingBag className="text-white/10 w-10 h-10" />
+          </div>
+        )}
         
-        {/* Badges */}
-        <div className="absolute top-3 left-3 flex flex-col gap-1">
-          {product.isNew && (
-            <span className="bg-[#FF1F3D] text-[#F6F6F8] px-2 py-1 text-xs hyyc-font-display uppercase tracking-wider">
-              New
-            </span>
-          )}
-          {product.isBestseller && (
-            <span className="bg-[#F6F6F8] text-[#0B0B0D] px-2 py-1 text-xs hyyc-font-display uppercase tracking-wider">
-              Bestseller
-            </span>
-          )}
-          {product.originalPrice && (
-            <span className="bg-[#8B0000] text-[#F6F6F8] px-2 py-1 text-xs hyyc-font-display uppercase tracking-wider">
-              Sale
-            </span>
-          )}
-        </div>
-
         {/* Quick Add Button */}
         <button
           onClick={onAddToCart}
@@ -269,35 +273,23 @@ function ProductCard({ product, onClick, onAddToCart }: ProductCardProps) {
         >
           <ShoppingBag size={18} />
         </button>
-
-        {/* Out of Stock Overlay */}
-        {!product.inStock && (
-          <div className="absolute inset-0 bg-[#0B0B0D]/70 flex items-center justify-center">
-            <span className="text-[#F6F6F8] hyyc-font-display uppercase tracking-wider">Out of Stock</span>
-          </div>
-        )}
       </div>
 
       {/* Info */}
       <div>
-        <div className="hyyc-micro-label text-[#F6F6F8]/50 mb-1">{product.category}</div>
+        <div className="hyyc-micro-label text-[#F6F6F8]/50 mb-1">{node.productType || 'Capsule'}</div>
         <h3 className="text-[#F6F6F8] font-medium mb-2 group-hover:text-[#FF1F3D] transition-colors line-clamp-1">
-          {product.name}
+          {node.title}
         </h3>
         
         <div className="flex items-center gap-2">
-          <span className="text-[#F6F6F8] font-bold">${product.price}</span>
-          {product.originalPrice && (
-            <span className="text-[#F6F6F8]/50 line-through text-sm">
-              ${product.originalPrice}
-            </span>
-          )}
+          <span className="text-[#F6F6F8] font-bold">${parseFloat(price).toFixed(0)}</span>
         </div>
 
         {/* Rating */}
         <div className="flex items-center gap-1 mt-2">
           <Star size={12} className="fill-[#FF1F3D] text-[#FF1F3D]" />
-          <span className="text-[#F6F6F8]/50 text-xs">4.9</span>
+          <span className="text-[#F6F6F8]/50 text-xs">Premium Quality</span>
         </div>
       </div>
     </div>

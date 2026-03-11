@@ -35,23 +35,23 @@ export default function JoinClubSection({ bgImage, circleImages, zIndex }: JoinC
     if (!section) return;
 
     const ctx = gsap.context(() => {
-      const scrollTl = gsap.timeline({ scrollTrigger: { trigger: section, start: 'top top', end: '+=140%', pin: true, scrub: 0.6 } });
-      scrollTl.fromTo(ribbonRef.current, { x: '-60vw', opacity: 0 }, { x: 0, opacity: 1, ease: 'none' }, 0);
-      scrollTl.fromTo(headlineRef.current, { y: '12vh', opacity: 0 }, { y: 0, opacity: 1, ease: 'none' }, 0);
-      scrollTl.fromTo(bodyRef.current, { y: '8vh', opacity: 0 }, { y: 0, opacity: 1, ease: 'none' }, 0.05);
+      const scrollTl = gsap.timeline({ 
+        scrollTrigger: { 
+          trigger: section, 
+          start: 'top 80%', 
+          end: 'bottom 20%', 
+          toggleActions: 'play none none reverse' 
+        } 
+      });
+      scrollTl.fromTo(ribbonRef.current, { x: '-60vw', opacity: 0 }, { x: 0, opacity: 1, ease: 'power3.out', duration: 1 }, 0);
+      scrollTl.fromTo(headlineRef.current, { y: '12vh', opacity: 0 }, { y: 0, opacity: 1, ease: 'power3.out', duration: 1 }, 0);
+      scrollTl.fromTo(bodyRef.current, { y: '8vh', opacity: 0 }, { y: 0, opacity: 1, ease: 'power3.out', duration: 1 }, 0.05);
 
       const fields = formRef.current?.querySelectorAll('.form-field');
-      if (fields) scrollTl.fromTo(fields, { y: '6vh', opacity: 0 }, { y: 0, opacity: 1, stagger: 0.02, ease: 'none' }, 0.08);
+      if (fields) scrollTl.fromTo(fields, { y: '6vh', opacity: 0 }, { y: 0, opacity: 1, stagger: 0.05, ease: 'power2.out', duration: 0.8 }, 0.1);
 
-      scrollTl.fromTo(circlesRef.current, { x: '40vw', scale: 0.85, opacity: 0 }, { x: 0, scale: 1, opacity: 1, ease: 'none' }, 0);
-      scrollTl.fromTo(bgRef.current, { scale: 1.08, opacity: 0.8 }, { scale: 1, opacity: 1, ease: 'none' }, 0);
-
-      scrollTl.fromTo(headlineRef.current, { x: 0, opacity: 1 }, { x: '-18vw', opacity: 0, ease: 'power2.in' }, 0.70);
-      scrollTl.fromTo(bodyRef.current, { x: 0, opacity: 1 }, { x: '-18vw', opacity: 0, ease: 'power2.in' }, 0.72);
-      if (fields) scrollTl.fromTo(fields, { x: 0, opacity: 1 }, { x: '-18vw', opacity: 0, ease: 'power2.in' }, 0.73);
-      scrollTl.fromTo(circlesRef.current, { x: 0, opacity: 1 }, { x: '22vw', opacity: 0, ease: 'power2.in' }, 0.70);
-      scrollTl.fromTo(ribbonRef.current, { x: 0, opacity: 1 }, { x: '-18vw', opacity: 0, ease: 'power2.in' }, 0.75);
-      scrollTl.fromTo(bgRef.current, { scale: 1, opacity: 1 }, { scale: 1.06, opacity: 0.7, ease: 'power2.in' }, 0.70);
+      scrollTl.fromTo(circlesRef.current, { x: '40vw', scale: 0.85, opacity: 0 }, { x: 0, scale: 1, opacity: 1, ease: 'back.out(1.2)', duration: 1 }, 0.1);
+      scrollTl.fromTo(bgRef.current, { scale: 1.08, opacity: 0.8 }, { scale: 1, opacity: 1, ease: 'power2.out', duration: 1.2 }, 0);
     }, section);
 
     return () => ctx.revert();

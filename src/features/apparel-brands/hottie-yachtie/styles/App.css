@@ -85,7 +85,8 @@
   background: transparent;
   border-bottom: 2px solid rgba(246,246,248,0.3);
   color: #F6F6F8;
-  padding: 0.75rem 0;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
   outline: none;
   transition: border-color 0.3s;
   font-family: 'Inter', sans-serif;

@@ -1,20 +1,27 @@
 import { useState, useEffect } from 'react';
-import { ShoppingBag, Heart, Share2, ChevronLeft, ChevronRight, Star, Truck, Shield, RotateCcw } from 'lucide-react';
-import type { Product } from '../types';
+import { ShoppingBag, Heart, ChevronLeft, ChevronRight, Star, Truck, Shield, RotateCcw } from 'lucide-react';
+import type { ShopifyProduct } from '@/lib/shopify';
+import { useCartStore } from '@/store/cartStore';
+import { toast } from 'sonner';
 
 interface ProductDetailProps {
-  product: Product;
+  product: ShopifyProduct;
   onClose: () => void;
-  onAddToCart: () => void;
 }
 
-export default function ProductDetail({ product, onClose, onAddToCart }: ProductDetailProps) {
-  const [selectedSize, setSelectedSize] = useState(product.sizes[0]);
-  const [selectedColor, setSelectedColor] = useState(product.colors?.[0] || '');
+export default function ProductDetail({ product, onClose }: ProductDetailProps) {
+  const { node } = product;
+  const images = node.images.edges.map(edge => edge.node.url);
+  const variants = node.variants.edges.map(edge => edge.node);
+  const firstVariant = variants[0];
+  
+  const [selectedVariantId, setSelectedVariantId] = useState(firstVariant?.id || '');
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [isWishlisted, setIsWishlisted] = useState(false);
   const [addedToCart, setAddedToCart] = useState(false);
+
+  const addItem = useCartStore(state => state.addItem);
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';
@@ -24,18 +31,31 @@ export default function ProductDetail({ product, onClose, onAddToCart }: Product
   }, []);
 
   const handleAddToCart = () => {
-    onAddToCart();
-    setAddedToCart(true);
-    setTimeout(() => setAddedToCart(false), 2000);
+    const variant = variants.find(v => v.id === selectedVariantId) || firstVariant;
+    if (variant) {
+      addItem({
+        product,
+        variantId: variant.id,
+        variantTitle: variant.title,
+        price: variant.price,
+        quantity: quantity,
+        selectedOptions: variant.selectedOptions || []
+      });
+      setAddedToCart(true);
+      toast.success("Added to bag");
+      setTimeout(() => setAddedToCart(false), 2000);
+    }
   };
 
   const nextImage = () => {
-    setCurrentImageIndex((prev) => (prev + 1) % product.images.length);
+    setCurrentImageIndex((prev) => (prev + 1) % images.length);
   };
 
   const prevImage = () => {
-    setCurrentImageIndex((prev) => (prev - 1 + product.images.length) % product.images.length);
+    setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
   };
+
+  const selectedVariant = variants.find(v => v.id === selectedVariantId) || firstVariant;
 
   return (
     <div className="fixed inset-0 z-[200] bg-[#0B0B0D]/95 backdrop-blur-lg overflow-y-auto hyyc-page">
@@ -59,15 +79,15 @@ export default function ProductDetail({ product, onClose, onAddToCart }: Product
           {/* Image Gallery */}
           <div className="space-y-4">
             {/* Main Image */}
-            <div className="relative aspect-square bg-[#1a1a1a] rounded-lg overflow-hidden">
+            <div className="relative aspect-square bg-[#141417] rounded-lg overflow-hidden border border-white/5">
               <img
-                src={product.images[currentImageIndex]}
-                alt={product.name}
+                src={images[currentImageIndex]}
+                alt={node.title}
                 className="w-full h-full object-cover"
               />
               
               {/* Image Navigation */}
-              {product.images.length > 1 && (
+              {images.length > 1 && (
                 <>
                   <button
                     onClick={prevImage}
@@ -86,28 +106,21 @@ export default function ProductDetail({ product, onClose, onAddToCart }: Product
 
               {/* Badges */}
               <div className="absolute top-4 left-4 flex gap-2">
-                {product.isNew && (
-                  <span className="bg-[#FF1F3D] text-[#F6F6F8] px-3 py-1 text-xs hyyc-font-display uppercase tracking-wider">
-                    New
-                  </span>
-                )}
-                {product.isBestseller && (
+                <span className="bg-[#FF1F3D] text-[#F6F6F8] px-3 py-1 text-xs hyyc-font-display uppercase tracking-wider">
+                  Live Collection
+                </span>
+                {node.vendor && (
                   <span className="bg-[#F6F6F8] text-[#0B0B0D] px-3 py-1 text-xs hyyc-font-display uppercase tracking-wider">
-                    Bestseller
-                  </span>
-                )}
-                {product.originalPrice && (
-                  <span className="bg-[#8B0000] text-[#F6F6F8] px-3 py-1 text-xs hyyc-font-display uppercase tracking-wider">
-                    Sale
+                    {node.vendor}
                   </span>
                 )}
               </div>
             </div>
 
             {/* Thumbnail Gallery */}
-            {product.images.length > 1 && (
-              <div className="flex gap-2 overflow-x-auto pb-2">
-                {product.images.map((img: string, idx: number) => (
+            {images.length > 1 && (
+              <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-none">
+                {images.map((img: string, idx: number) => (
                   <button
                     key={idx}
                     onClick={() => setCurrentImageIndex(idx)}
@@ -126,101 +139,74 @@ export default function ProductDetail({ product, onClose, onAddToCart }: Product
           <div className="space-y-6">
             {/* Category & Title */}
             <div>
-              <div className="hyyc-micro-label text-[#FF1F3D] mb-2">{product.category}</div>
-              <h1 className="hyyc-font-display text-3xl sm:text-4xl font-bold text-[#F6F6F8] mb-2">
-                {product.name}
+              <div className="hyyc-micro-label text-[#FF1F3D] mb-2">{node.productType || 'Apparel'}</div>
+              <h1 className="hyyc-font-display text-3xl sm:text-4xl font-bold text-[#F6F6F8] mb-2 uppercase tracking-tight">
+                {node.title}
               </h1>
               
-              {/* Rating */}
+              {/* Rating Mock */}
               <div className="flex items-center gap-2">
                 <div className="flex">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} size={16} className="fill-[#FF1F3D] text-[#FF1F3D]" />
+                    <Star key={i} size={14} className="fill-[#FF1F3D] text-[#FF1F3D]" />
                   ))}
                 </div>
-                <span className="text-[#F6F6F8]/60 text-sm">(128 reviews)</span>
+                <span className="text-[#F6F6F8]/60 text-xs uppercase tracking-widest font-bold font-sans">Premium Quality</span>
               </div>
             </div>
 
             {/* Price */}
             <div className="flex items-center gap-3">
-              <span className="hyyc-font-display text-3xl font-bold text-[#F6F6F8]">
-                ${product.price}
+              <span className="hyyc-font-display text-4xl font-bold text-[#F6F6F8]">
+                ${parseFloat(selectedVariant?.price.amount || '0').toFixed(0)}
               </span>
-              {product.originalPrice && (
-                <span className="text-xl text-[#F6F6F8]/50 line-through">
-                  ${product.originalPrice}
-                </span>
-              )}
+              <span className="text-white/30 text-xs font-mono">{selectedVariant?.price.currencyCode}</span>
             </div>
 
             {/* Description */}
-            <p className="text-[#F6F6F8]/80 leading-relaxed">
-              {product.description}
-            </p>
+            <div 
+              className="text-[#F6F6F8]/80 leading-relaxed font-sans text-sm"
+              dangerouslySetInnerHTML={{ __html: node.description }}
+            />
 
-            {/* Colors */}
-            {product.colors && product.colors.length > 0 && (
+            {/* Variants / Options */}
+            {variants.length > 1 && (
               <div>
-                <div className="flex justify-between items-center mb-3">
-                  <span className="text-[#F6F6F8] font-medium">Color</span>
-                  <span className="text-[#F6F6F8]/60 text-sm">{selectedColor}</span>
+                <div className="flex justify-between items-center mb-4">
+                  <span className="text-[#F6F6F8] font-bold uppercase tracking-widest text-xs">Select Option</span>
                 </div>
-                <div className="flex gap-2">
-                  {product.colors.map((color: string) => (
+                <div className="flex flex-wrap gap-2">
+                  {variants.map((variant) => (
                     <button
-                      key={color}
-                      onClick={() => setSelectedColor(color)}
-                      className={`px-4 py-2 border-2 text-sm font-medium transition-colors ${
-                        selectedColor === color
-                          ? 'border-[#FF1F3D] text-[#FF1F3D]'
-                          : 'border-[#F6F6F8]/20 text-[#F6F6F8] hover:border-[#F6F6F8]/50'
+                      key={variant.id}
+                      onClick={() => setSelectedVariantId(variant.id)}
+                      className={`px-4 py-3 border-2 text-xs font-bold uppercase tracking-widest transition-all ${
+                        selectedVariantId === variant.id
+                          ? 'border-[#FF1F3D] bg-[#FF1F3D] text-[#F6F6F8]'
+                          : 'border-[#F6F6F8]/10 text-[#F6F6F8] hover:border-[#F6F6F8]/30'
                       }`}
                     >
-                      {color}
+                      {variant.title}
                     </button>
                   ))}
                 </div>
               </div>
             )}
 
-            {/* Sizes */}
-            <div>
-              <div className="flex justify-between items-center mb-3">
-                <span className="text-[#F6F6F8] font-medium">Size</span>
-                <button className="text-[#FF1F3D] text-sm hover:underline">Size Guide</button>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {product.sizes.map((size: string) => (
-                  <button
-                    key={size}
-                    onClick={() => setSelectedSize(size)}
-                    className={`w-12 h-12 border-2 font-medium transition-colors ${
-                      selectedSize === size
-                        ? 'border-[#FF1F3D] bg-[#FF1F3D] text-[#F6F6F8]'
-                        : 'border-[#F6F6F8]/20 text-[#F6F6F8] hover:border-[#F6F6F8]/50'
-                    }`}
-                  >
-                    {size}
-                  </button>
-                ))}
-              </div>
-            </div>
-
             {/* Quantity */}
             <div>
-              <span className="text-[#F6F6F8] font-medium mb-3 block">Quantity</span>
-              <div className="flex items-center gap-4">
+              <span className="text-[#F6F6F8] font-bold uppercase tracking-widest text-xs mb-4 block">Quantity</span>
+              <div className="flex items-center gap-6">
                 <button
                   onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                  className="w-10 h-10 border border-[#F6F6F8]/20 text-[#F6F6F8] hover:border-[#FF1F3D] hover:text-[#FF1F3D] transition-colors"
+                  className="w-10 h-10 border border-[#F6F6F8]/10 text-[#F6F6F8] hover:border-[#FF1F3D] hover:text-[#FF1F3D] transition-colors flex items-center justify-center font-bold"
                 >
                   -
                 </button>
-                <span className="text-[#F6F6F8] font-medium w-8 text-center">{quantity}</span>
+                <span className="text-[#F6F6F8] font-bold w-4 text-center">{quantity}</span>
                 <button
                   onClick={() => setQuantity(quantity + 1)}
-                  className="w-10 h-10 border border-[#F6F6F8]/20 text-[#F6F6F8] hover:border-[#FF1F3D] hover:text-[#FF1F3D] transition-colors"
+                  className="w-10 h-10 border border-[#F6F6F8]/10 text-[#F6F6F8] hover:border-[#FF1F3D] hover:text-[#FF1F3D] transition-colors flex items-center justify-center font-bold"
                 >
                   +
                 </button>
@@ -228,24 +214,27 @@ export default function ProductDetail({ product, onClose, onAddToCart }: Product
             </div>
 
             {/* Actions */}
-            <div className="flex gap-3 pt-4">
+            <div className="flex gap-4 pt-6">
               <button
                 onClick={handleAddToCart}
-                className={`flex-1 py-4 px-6 hyyc-font-display font-bold text-sm uppercase tracking-wider flex items-center justify-center gap-3 transition-all ${
+                disabled={!selectedVariant?.availableForSale && selectedVariant !== undefined}
+                className={`flex-1 py-5 px-6 hyyc-font-display font-bold text-sm uppercase tracking-widest flex items-center justify-center gap-3 transition-all ${
                   addedToCart
                     ? 'bg-green-600 text-[#F6F6F8]'
-                    : 'bg-[#FF1F3D] text-[#F6F6F8] hover:bg-[#FF5A73]'
+                    : !selectedVariant?.availableForSale && selectedVariant !== undefined
+                    ? 'bg-neutral-800 text-white/20 cursor-not-allowed'
+                    : 'bg-[#FF1F3D] text-[#F6F6F8] hover:bg-neutral-100 hover:text-[#0B0B0D]'
                 }`}
               >
-                <ShoppingBag size={20} />
-                {addedToCart ? 'Added!' : 'Add to Cart'}
+                <ShoppingBag size={18} />
+                {addedToCart ? 'Added to bag' : !selectedVariant?.availableForSale && selectedVariant !== undefined ? 'Sold Out' : 'Add to Collection'}
               </button>
               <button
                 onClick={() => setIsWishlisted(!isWishlisted)}
-                className={`w-14 h-14 border-2 flex items-center justify-center transition-colors ${
+                className={`w-16 h-16 border border-[#F6F6F8]/10 flex items-center justify-center transition-all ${
                   isWishlisted
-                    ? 'border-[#FF1F3D] bg-[#FF1F3D]'
-                    : 'border-[#F6F6F8]/20 hover:border-[#FF1F3D]'
+                    ? 'bg-[#FF1F3D] border-[#FF1F3D]'
+                    : 'hover:border-[#FF1F3D]'
                 }`}
               >
                 <Heart
@@ -253,27 +242,24 @@ export default function ProductDetail({ product, onClose, onAddToCart }: Product
                   className={isWishlisted ? 'fill-[#F6F6F8] text-[#F6F6F8]' : 'text-[#F6F6F8]'}
                 />
               </button>
-              <button className="w-14 h-14 border-2 border-[#F6F6F8]/20 text-[#F6F6F8] hover:border-[#FF1F3D] hover:text-[#FF1F3D] flex items-center justify-center transition-colors">
-                <Share2 size={20} />
-              </button>
             </div>
 
             {/* Shipping Info */}
-            <div className="grid grid-cols-3 gap-4 pt-6 border-t border-[#F6F6F8]/10">
+            <div className="grid grid-cols-3 gap-4 pt-10 border-t border-[#F6F6F8]/10">
               <div className="text-center">
-                <Truck size={24} className="mx-auto mb-2 text-[#FF1F3D]" />
-                <div className="text-[#F6F6F8] text-sm">Free Shipping</div>
-                <div className="text-[#F6F6F8]/50 text-xs">Over $100</div>
+                <Truck size={20} className="mx-auto mb-3 text-[#FF1F3D]" />
+                <div className="text-[#F6F6F8] text-[10px] font-bold uppercase tracking-widest mb-1">Worldwide</div>
+                <div className="text-[#F6F6F8]/30 text-[9px] uppercase tracking-tighter">Shipping</div>
               </div>
               <div className="text-center">
-                <Shield size={24} className="mx-auto mb-2 text-[#FF1F3D]" />
-                <div className="text-[#F6F6F8] text-sm">Secure</div>
-                <div className="text-[#F6F6F8]/50 text-xs">Checkout</div>
+                <Shield size={20} className="mx-auto mb-3 text-[#FF1F3D]" />
+                <div className="text-[#F6F6F8] text-[10px] font-bold uppercase tracking-widest mb-1">Authentic</div>
+                <div className="text-[#F6F6F8]/30 text-[9px] uppercase tracking-tighter">Guaranteed</div>
               </div>
               <div className="text-center">
-                <RotateCcw size={24} className="mx-auto mb-2 text-[#FF1F3D]" />
-                <div className="text-[#F6F6F8] text-sm">Easy Returns</div>
-                <div className="text-[#F6F6F8]/50 text-xs">30 Days</div>
+                <RotateCcw size={20} className="mx-auto mb-3 text-[#FF1F3D]" />
+                <div className="text-[#F6F6F8] text-[10px] font-bold uppercase tracking-widest mb-1">Private</div>
+                <div className="text-[#F6F6F8]/30 text-[9px] uppercase tracking-tighter">Exclusive</div>
               </div>
             </div>
           </div>

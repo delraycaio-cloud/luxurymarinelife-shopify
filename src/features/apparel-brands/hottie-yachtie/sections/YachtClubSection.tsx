@@ -25,19 +25,20 @@ export default function YachtClubSection({ bgImage, circleImages, zIndex, onExpl
     const section = sectionRef.current;
     if (!section) return;
     const ctx = gsap.context(() => {
-      const scrollTl = gsap.timeline({ scrollTrigger: { trigger: section, start: 'top top', end: '+=130%', pin: true, scrub: 0.6 } });
-      scrollTl.fromTo(ribbonRef.current, { x: '60vw', opacity: 0 }, { x: 0, opacity: 1, ease: 'none' }, 0);
-      scrollTl.fromTo(headlineRef.current, { x: '18vw', opacity: 0 }, { x: 0, opacity: 1, ease: 'none' }, 0);
-      scrollTl.fromTo(bodyRef.current, { y: '8vh', opacity: 0 }, { y: 0, opacity: 1, ease: 'none' }, 0.05);
-      scrollTl.fromTo(ctaRef.current, { y: '8vh', opacity: 0 }, { y: 0, opacity: 1, ease: 'none' }, 0.1);
-      scrollTl.fromTo(circlesRef.current, { x: '-40vw', scale: 0.85, opacity: 0 }, { x: 0, scale: 1, opacity: 1, ease: 'none' }, 0);
-      scrollTl.fromTo(bgRef.current, { scale: 1.08, opacity: 0.8 }, { scale: 1, opacity: 1, ease: 'none' }, 0);
-      scrollTl.fromTo(headlineRef.current, { x: 0, opacity: 1 }, { x: '18vw', opacity: 0, ease: 'power2.in' }, 0.70);
-      scrollTl.fromTo(bodyRef.current, { x: 0, opacity: 1 }, { x: '18vw', opacity: 0, ease: 'power2.in' }, 0.72);
-      scrollTl.fromTo(ctaRef.current, { x: 0, opacity: 1 }, { x: '18vw', opacity: 0, ease: 'power2.in' }, 0.74);
-      scrollTl.fromTo(circlesRef.current, { x: 0, opacity: 1 }, { x: '-22vw', opacity: 0, ease: 'power2.in' }, 0.70);
-      scrollTl.fromTo(ribbonRef.current, { x: 0, opacity: 1 }, { x: '22vw', opacity: 0, ease: 'power2.in' }, 0.75);
-      scrollTl.fromTo(bgRef.current, { scale: 1, opacity: 1 }, { scale: 1.06, opacity: 0.7, ease: 'power2.in' }, 0.70);
+      const scrollTl = gsap.timeline({ 
+        scrollTrigger: { 
+          trigger: section, 
+          start: 'top 80%', 
+          end: 'bottom 20%', 
+          toggleActions: 'play none none reverse' 
+        } 
+      });
+      scrollTl.fromTo(ribbonRef.current, { x: '60vw', opacity: 0 }, { x: 0, opacity: 1, ease: 'power3.out', duration: 1 }, 0);
+      scrollTl.fromTo(headlineRef.current, { x: '18vw', opacity: 0 }, { x: 0, opacity: 1, ease: 'power3.out', duration: 1 }, 0);
+      scrollTl.fromTo(bodyRef.current, { y: '8vh', opacity: 0 }, { y: 0, opacity: 1, ease: 'power3.out', duration: 1 }, 0.2);
+      scrollTl.fromTo(ctaRef.current, { y: '8vh', opacity: 0 }, { y: 0, opacity: 1, ease: 'power3.out', duration: 1 }, 0.3);
+      scrollTl.fromTo(circlesRef.current, { x: '-40vw', scale: 0.85, opacity: 0 }, { x: 0, scale: 1, opacity: 1, ease: 'back.out(1.2)', duration: 1 }, 0.1);
+      scrollTl.fromTo(bgRef.current, { scale: 1.08, opacity: 0.8 }, { scale: 1, opacity: 1, ease: 'power2.out', duration: 1.2 }, 0);
     }, section);
     return () => ctx.revert();
   }, []);

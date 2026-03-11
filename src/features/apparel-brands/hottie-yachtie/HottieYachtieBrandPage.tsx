@@ -2,7 +2,9 @@ import { useState, useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, ShoppingBag } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
+import { useCartStore } from '@/store/cartStore';
+import type { ShopifyProduct } from '@/lib/shopify';
 
 // STYLES
 import './styles/App.css';
@@ -12,16 +14,15 @@ import HeroSection from './sections/HeroSection';
 import AllProductsSection from './sections/AllProductsSection';
 import FooterSection from './sections/FooterSection';
 import ProductDetail from './components/ProductDetail';
-
-import type { Product } from './types';
+import { HYYCCartDrawer } from './components/HYYCCartDrawer';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function HottieYachtieBrandPage() {
   const navigate = useNavigate();
+  useCartStore();
 
-  const [cartCount, setCartCount] = useState(0);
-  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [selectedProduct, setSelectedProduct] = useState<ShopifyProduct | null>(null);
   const navRef = useRef<HTMLDivElement>(null);
 
   // Scroll to top on mount
@@ -32,9 +33,11 @@ export default function HottieYachtieBrandPage() {
     }, 100);
   }, []);
 
-  const scrollToProducts = () => {
-    const productsEl = document.getElementById('all-products');
-    productsEl?.scrollIntoView({ behavior: 'smooth' });
+  const scrollToSection = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   return (
@@ -48,7 +51,7 @@ export default function HottieYachtieBrandPage() {
           className="flex items-center gap-2 group cursor-pointer text-[#F6F6F8] hover:text-[#FF1F3D] transition-colors"
         >
           <ArrowLeft size={20} />
-          <span className="text-xs uppercase tracking-widest font-bold">Back</span>
+          <span className="text-xs uppercase tracking-widest font-bold font-sans">Back</span>
         </button>
         
         <div 
@@ -60,19 +63,12 @@ export default function HottieYachtieBrandPage() {
 
         <div className="flex items-center gap-6">
           <button 
-            className="text-[#F6F6F8] hover:text-[#FF1F3D] transition-colors text-xs uppercase tracking-widest font-bold"
-            onClick={scrollToProducts}
+            className="text-[#F6F6F8] hover:text-[#FF1F3D] transition-colors text-xs uppercase tracking-widest font-bold font-sans"
+            onClick={() => scrollToSection('all-products')}
           >
             Shop
           </button>
-          <button className="relative text-[#F6F6F8] hover:text-[#FF1F3D] transition-colors">
-            <ShoppingBag size={24} />
-            {cartCount > 0 && (
-              <span className="absolute -top-2 -right-2 bg-[#FF1F3D] text-[#F6F6F8] text-[10px] w-5 h-5 rounded-full flex items-center justify-center font-bold">
-                {cartCount}
-              </span>
-            )}
-          </button>
+          <HYYCCartDrawer />
         </div>
       </nav>
 
@@ -82,29 +78,24 @@ export default function HottieYachtieBrandPage() {
           bgImage="/hero_deck_party.jpg"
           circleImages={['/circle_1_1.jpg', '/circle_1_2.jpg', '/circle_1_3.jpg']}
           zIndex={10}
-          onShopClick={() => {
-            const productsEl = document.getElementById('all-products');
-            productsEl?.scrollIntoView({ behavior: 'smooth' });
-          }}
+          onShopClick={() => scrollToSection('all-products')}
         />
         
         <div id="all-products">
           <AllProductsSection 
             zIndex={10}
             onProductClick={setSelectedProduct}
-            onAddToCart={() => setCartCount(prev => prev + 1)}
           />
         </div>
 
-        <FooterSection zIndex={5} />
+        <FooterSection zIndex={4} />
       </main>
 
-      {/* Product Detail Modal */}
+      {/* Product Detail View (Original HYYC Design) */}
       {selectedProduct && (
         <ProductDetail
           product={selectedProduct}
           onClose={() => setSelectedProduct(null)}
-          onAddToCart={() => setCartCount(prev => prev + 1)}
         />
       )}
     </div>
