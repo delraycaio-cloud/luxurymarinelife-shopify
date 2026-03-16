@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ShoppingCart, Eye, Plus } from "lucide-react";
 import type { ShopifyProduct } from "@/lib/shopify";
-import { useCartStore } from "@/store/cartStore";
+import { useBrandCart } from "@/store/cartStore";
 import { toast } from "sonner";
 
 interface ProductCardProps {
@@ -14,7 +14,7 @@ interface ProductCardProps {
 
 export const ProductCard = ({ product, onViewDetails }: ProductCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
-  const addItem = useCartStore(state => state.addItem);
+  const { addItem } = useBrandCart('default');
   
   const { node } = product;
   const firstVariant = node.variants.edges[0]?.node;

@@ -1,4 +1,4 @@
-import { useCartStore } from "@/store/cartStore";
+import { useBrandCart, type CartItem } from "@/store/cartStore";
 import { Button } from "@/components/ui/button";
 import { ShoppingCart, X, Minus, Plus, Loader2 } from "lucide-react";
 import {
@@ -12,9 +12,9 @@ import {
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 export function CartDrawer() {
-  const { items, updateQuantity, removeItem, createCheckout, isLoading } = useCartStore();
+  const { items, updateQuantity, removeItem, createCheckout, isLoading } = useBrandCart('default');
   
-  const total = items.reduce((acc, item) => acc + parseFloat(item.price.amount) * item.quantity, 0);
+  const total = items.reduce((acc: number, item: CartItem) => acc + parseFloat(item.price.amount) * item.quantity, 0);
   const currency = items[0]?.price.currencyCode || 'USD';
 
   const handleCheckout = async () => {
@@ -31,7 +31,7 @@ export function CartDrawer() {
           <ShoppingCart className="h-5 w-5" />
           {items.length > 0 && (
             <span className="absolute -top-2 -right-2 bg-gold text-navy text-[10px] font-bold h-5 w-5 rounded-full flex items-center justify-center">
-              {items.reduce((acc, i) => acc + i.quantity, 0)}
+              {items.reduce((acc: number, i: CartItem) => acc + i.quantity, 0)}
             </span>
           )}
         </Button>
@@ -52,7 +52,7 @@ export function CartDrawer() {
             </div>
           ) : (
             <div className="space-y-6 pb-20">
-              {items.map((item) => (
+              {items.map((item: CartItem) => (
                 <div key={item.variantId} className="flex gap-4">
                   <div className="h-20 w-20 rounded-lg overflow-hidden border border-white/10 bg-white/5 flex-shrink-0">
                     {item.product.node.images.edges[0]?.node && (

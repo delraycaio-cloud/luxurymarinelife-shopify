@@ -4,9 +4,10 @@ import {
   Check,
   ShoppingBag,
   Star,
+  Loader2,
 } from "lucide-react";
 import { useStore } from "../context/StoreContext";
-import { products } from "../data/products";
+import { fetchProducts, type ShopifyProduct } from "@/lib/shopify";
 
 export default function FeaturedProduct() {
   const { setSelectedProduct, setCurrentView, addToCart, setIsCartOpen } =
@@ -14,9 +15,25 @@ export default function FeaturedProduct() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [selectedSize, setSelectedSize] = useState("M");
-  const [selectedColor, setSelectedColor] = useState(products[1].colors[0]);
+  const [product, setProduct] = useState<ShopifyProduct | null>(null);
+  const [loading, setLoading] = useState(true);
 
-  const product = products[1];
+  useEffect(() => {
+    const loadProduct = async () => {
+      try {
+        setLoading(true);
+        const data = await fetchProducts(1, 'vendor:"Luxury Marine Life Brand"');
+        if (data.length > 0) {
+          setProduct(data[0]);
+        }
+      } catch (error) {
+        console.error("Failed to load featured product:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadProduct();
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -37,15 +54,33 @@ export default function FeaturedProduct() {
   }, []);
 
   const handleAddToCart = () => {
-    addToCart(product, 1, selectedSize, selectedColor.name);
+    if (!product) return;
+    addToCart(product, 1, selectedSize, "Default");
     setIsCartOpen(true);
   };
 
   const handleViewProduct = () => {
+    if (!product) return;
     setSelectedProduct(product);
     setCurrentView("product");
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
+
+  if (loading) {
+    return (
+      <div className="w-full py-24 flex items-center justify-center bg-[#f8f6f3]">
+        <Loader2 className="w-8 h-8 text-[#c9a962] animate-spin" />
+      </div>
+    );
+  }
+
+  if (!product) return null;
+
+  const { node } = product;
+  const price = parseFloat(node.priceRange.minVariantPrice.amount);
+  const image = node.images.edges[0]?.node?.url;
+  const variants = node.variants.edges;
+  const tags = node.tags || [];
 
   return (
     <section
@@ -75,24 +110,24 @@ export default function FeaturedProduct() {
           >
             <div className="relative aspect-[4/5] overflow-hidden bg-[#e8e6e3]">
               <img
-                src={product.image}
-                alt={product.name}
+                src={image}
+                alt={node.title}
                 className="w-full h-full object-cover"
               />
               <div className="absolute top-6 left-6">
                 <span className="px-4 py-2 bg-[#c9a962] text-[#0a1628] text-xs uppercase tracking-widest font-medium">
-                  Limited Edition
+                  {node.vendor || "Limited Edition"}
                 </span>
               </div>
             </div>
 
             <div className="flex gap-3 mt-4">
-              {product.images.slice(0, 3).map((img, index) => (
+              {node.images.edges.slice(0, 3).map((edge, index) => (
                 <div
                   key={index}
                   className="w-20 h-20 bg-[#e8e6e3] overflow-hidden cursor-pointer hover:opacity-80 transition-opacity"
                 >
-                  <img src={img} alt="" className="w-full h-full object-cover" />
+                  <img src={edge.node.url} alt="" className="w-full h-full object-cover" />
                 </div>
               ))}
             </div>
@@ -114,75 +149,48 @@ export default function FeaturedProduct() {
                   />
                 ))}
               </div>
-              <span className="text-sm text-[#0a1628]/50">(127 reviews)</span>
+              <span className="text-sm text-[#0a1628]/50">(Shopify Verified)</span>
             </div>
 
             <h2 className="text-3xl md:text-4xl lg:text-5xl text-[#0a1628] font-light mb-4">
-              {product.name}
+              {node.title}
             </h2>
 
             <div className="flex items-baseline gap-4 mb-6">
               <span className="text-2xl md:text-3xl text-[#0a1628] font-medium">
-                ${product.price}
+                ${price.toFixed(0)}
               </span>
-              {product.originalPrice && (
-                <span className="text-lg text-[#0a1628]/40 line-through">
-                  ${product.originalPrice}
-                </span>
-              )}
             </div>
 
             <p className="text-[#0a1628]/70 leading-relaxed mb-8">
-              {product.description}
+              {node.description}
             </p>
 
             <div className="grid grid-cols-2 gap-3 mb-8">
-              {product.features.slice(0, 4).map((feature) => (
-                <div key={feature} className="flex items-center gap-2">
+              {tags.slice(0, 4).map((tag) => (
+                <div key={tag} className="flex items-center gap-2">
                   <Check className="w-4 h-4 text-[#1e6b7a]" />
-                  <span className="text-sm text-[#0a1628]/60">{feature}</span>
+                  <span className="text-sm text-[#0a1628]/60">{tag}</span>
                 </div>
               ))}
             </div>
 
-            <div className="mb-6">
-              <label className="text-sm text-[#0a1628]/60 uppercase tracking-wider mb-3 block">
-                Color:{" "}
-                <span className="text-[#0a1628]">{selectedColor.name}</span>
-              </label>
-              <div className="flex gap-3">
-                {product.colors.map((color) => (
-                  <button
-                    key={color.name}
-                    onClick={() => setSelectedColor(color)}
-                    className={`w-10 h-10 rounded-full border-2 transition-all duration-300 ${
-                      selectedColor.name === color.name
-                        ? "border-[#0a1628] scale-110"
-                        : "border-transparent hover:scale-105"
-                    }`}
-                    style={{ backgroundColor: color.hex }}
-                    title={color.name}
-                  />
-                ))}
-              </div>
-            </div>
-
             <div className="mb-8">
               <label className="text-sm text-[#0a1628]/60 uppercase tracking-wider mb-3 block">
-                Size: <span className="text-[#0a1628]">{selectedSize}</span>
+                Option: <span className="text-[#0a1628]">{selectedSize}</span>
               </label>
               <div className="flex flex-wrap gap-2">
-                {product.sizes.map((size) => (
+                {variants.map((edge) => (
                   <button
-                    key={size}
-                    onClick={() => setSelectedSize(size)}
-                    className={`w-12 h-12 flex items-center justify-center text-sm font-medium transition-all duration-300 ${
-                      selectedSize === size
+                    key={edge.node.id}
+                    onClick={() => setSelectedSize(edge.node.title)}
+                    className={`px-4 h-12 flex items-center justify-center text-sm font-medium transition-all duration-300 ${
+                      selectedSize === edge.node.title
                         ? "bg-[#0a1628] text-white"
                         : "bg-white border border-[#0a1628]/20 text-[#0a1628] hover:border-[#0a1628]"
                     }`}
                   >
-                    {size}
+                    {edge.node.title}
                   </button>
                 ))}
               </div>
@@ -225,4 +233,5 @@ export default function FeaturedProduct() {
     </section>
   );
 }
+
 

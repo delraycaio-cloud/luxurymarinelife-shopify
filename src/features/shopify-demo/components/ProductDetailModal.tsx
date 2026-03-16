@@ -1,5 +1,5 @@
 import type { ShopifyProduct } from "@/lib/shopify";
-import { useCartStore } from "@/store/cartStore";
+import { useBrandCart } from "@/store/cartStore";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { 
@@ -21,7 +21,7 @@ interface ProductDetailModalProps {
 export function ProductDetailModal({ product, isOpen, onClose }: ProductDetailModalProps) {
   const [quantity, setQuantity] = useState(1);
   const [selectedVariantId, setSelectedVariantId] = useState<string | null>(null);
-  const addItem = useCartStore((state) => state.addItem);
+  const { addItem } = useBrandCart('default');
 
   if (!product) return null;
 
