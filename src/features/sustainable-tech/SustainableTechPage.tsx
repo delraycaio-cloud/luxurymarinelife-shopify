@@ -15,7 +15,7 @@ const brands: SustainableTechBrand[] = [
     id: "bluetti",
     name: "BLUETTI",
     description:
-      "BLUETTI is a global leader in eco-friendly energy storage, providing high-performance portable power stations and solar generators. Utilizing advanced LiFePO₄ technology, they offer reliable, scalable power solutions for everything from outdoor adventures to total home backup.",
+      "Eco-friendly energy storage built for life on the water. BLUETTI’s LiFePO₄ portable power stations and solar generators deliver quiet, reliable, scalable power—ideal for yachts and charter runs where you need clean backup for onboard essentials.",
     image: "/images/bluetti-logo.png",
   },
   {

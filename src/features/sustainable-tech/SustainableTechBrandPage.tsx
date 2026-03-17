@@ -20,16 +20,16 @@ const bluettiProducts: Product[] = [
     id: "apex-300",
     name: "BLUETTI Apex 300 Versatile Power Station | 3,840W, 2,764.8Wh",
     shortDescription:
-      "Power that adapts — from home to RV to off-grid. Smart 120V/240V portable power with 2.76kWh LiFePO₄, scalable expansion, and 0ms UPS switchover for essentials.",
-    image: "/images/apex-300.png",
+      "Power that adapts — from home to RV to off-grid, and especially yachts + charter operations. Smart 120V/240V portable power with 2.76kWh LiFePO₄, scalable expansion, and 0ms UPS switchover to keep onboard essentials running.",
+    image: "/images/apex-300-yacht.png",
     shopUrl: BLUETTI_APEX_300_AFFILIATE_URL,
   },
   {
     id: "pv350",
     name: "BLUETTI 350W Solar Panel | 350W",
     shortDescription:
-      "Foldable 350W monocrystalline panel with up to 23.4% conversion efficiency, kickstand for easy setup, and durable ETFE surface (IP65 splash-proof). MC4 compatible with BLUETTI power stations and most solar generators.",
-    image: "/images/bluetti-pv350.png",
+      "Foldable 350W monocrystalline panel built for life on the water—great for yachts and charter crews topping off power between runs. Up to 23.4% conversion efficiency, kickstand for quick setup, durable ETFE surface (IP65 splash-proof), and MC4 compatibility.",
+    image: "/images/bluetti-pv350-yacht.png",
     shopUrl: BLUETTI_PV350_AFFILIATE_URL,
   },
 ];
