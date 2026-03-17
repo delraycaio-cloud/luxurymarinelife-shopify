@@ -16,22 +16,27 @@ const brands: SustainableTechBrand[] = [
     name: "BLUETTI",
     description:
       "Eco-friendly energy storage built for life on the water. BLUETTI’s LiFePO₄ portable power stations and solar generators deliver quiet, reliable, scalable power—ideal for yachts and charter runs where you need clean backup for onboard essentials.",
-    image: "/images/bluetti-logo.png",
+    image: "/images/Generated Image March 17, 2026 - 7_16PM.jpg",
+
   },
   {
-    id: "saltwater-solar",
-    name: "Saltwater Solar",
+    id: "sublue",
+    name: "SUBLUE",
     description:
-      "Marine-grade solar and battery systems for vessels and coastal installations. Built to withstand salt, humidity, and constant motion.",
-    image: "/category_tech.webp",
+      "Premium underwater scooters for the ultimate yacht experience. Sublue delivers effortless exploration with sleek, portable sea scooters—perfect for charter guests and luxury vessel water toy collections.",
+
+    image: "/images/sublue-main.jpg",
+
   },
   {
-    id: "reef-sense",
-    name: "Reef Sense",
+    id: "waterdrop",
+    name: "Waterdrop",
     description:
-      "Sensors and monitoring platforms for water quality and reef health. Real-time data to protect the waters you sail and dive.",
-    image: "/category_tech.webp",
+      "Advanced water filtration for pure life on the water. Waterdrop provides high-performance reverse osmosis and UV purification systems, ensuring clean, fresh water for yachts and charter vessels without the need for single-use plastics.",
+    image: "/images/wd-main.jpg",
+
   },
+
   {
     id: "blue-cycle",
     name: "Blue Cycle",
@@ -99,15 +104,16 @@ export function SustainableTechPage() {
                 className="group relative rounded-2xl overflow-hidden bg-marine-800/60 border border-white/10 min-h-[320px] flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-teal focus-visible:ring-offset-2 focus-visible:ring-offset-marine-800 hover:border-white/20 transition-colors"
                 aria-label={`View ${brand.name} products`}
               >
-                <div className="relative aspect-[4/3] overflow-hidden bg-marine-900/40">
+                <div className="relative">
                   <img
                     src={brand.image}
                     alt={brand.name}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="w-full h-auto"
                     loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-marine-900/80 via-marine-900/20 to-transparent" />
                 </div>
+
                 <div className="p-5 lg:p-6 flex flex-col flex-1">
                   <h2 className="text-white font-display font-bold text-lg lg:text-xl leading-tight">
                     {brand.name}

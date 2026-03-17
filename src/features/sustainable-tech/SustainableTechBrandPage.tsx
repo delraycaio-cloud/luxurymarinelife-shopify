@@ -7,6 +7,16 @@ const BLUETTI_APEX_300_AFFILIATE_URL =
 const BLUETTI_PV350_AFFILIATE_URL =
   "https://www.awin1.com/cread.php?awinmid=59271&awinaffid=2804364&campaign=RMNQ1&clickref=lml-shop&ued=https%3A%2F%2Fwww.bluettipower.com%2Fproducts%2Fbluetti-pv350d-solar-panel%3Fvariant%3D46070024995035";
 
+const SUBLUE_MIXPRO_URL =
+  "https://store.sublue.com/en-eu/products/mixpro?ref=dimoioyd&utm_source=goaffpro";
+const SUBLUE_NAVBOW_URL =
+  "https://store.sublue.com/en-eu/products/navbow-plus?ref=dimoioyd&utm_source=goaffpro";
+const WATERDROP_A1_URL =
+  "https://www.waterdropfilter.com/products/ro-hot-cold-water-dispenser-a1?ref=omvzjjzw&utm_medium=affiliate&utm_source=goaffpro";
+
+
+
+
 type Product = {
   id: string;
   name: string;
@@ -14,6 +24,7 @@ type Product = {
   image: string;
   shopUrl: string;
 };
+
 
 const bluettiProducts: Product[] = [
   {
@@ -34,9 +45,48 @@ const bluettiProducts: Product[] = [
   },
 ];
 
+const sublueProducts: Product[] = [
+  {
+    id: "mixpro",
+    name: "MixPro Underwater Scooter",
+    shortDescription:
+      "The ultimate yacht essential. Glide through the blue with effortless power, dual speeds, and 60 minutes of pure marine exploration. Your next charter adventure just got a serious upgrade.",
+    image: "/images/sublue-pro.webp",
+    shopUrl: SUBLUE_MIXPRO_URL,
+  },
+  {
+    id: "navbow-plus",
+    name: "Navbow+ Underwater Scooter",
+    shortDescription:
+      "Elite performance for the serious explorer. Dart like an arrow at 2m/s with the Navbow+, featuring a smart OLED dashboard and premium dual-motor thrust. Get $30 off today and elevate your next charter adventure.",
+    image: "/images/sublue-navbow.webp",
+    shopUrl: SUBLUE_NAVBOW_URL,
+  },
+
+
+];
+
+const waterdropProducts: Product[] = [
+  {
+    id: "a1-dispenser",
+    name: "Reverse Osmosis Hot Cold Water Dispenser, A1",
+    shortDescription:
+      "Pure hydration, on demand. Instant hot and cold RO-filtered water in a sleek, countertop design—perfect for the galley or guest cabins.",
+
+    image: "/images/wd.jpg",
+
+    shopUrl: WATERDROP_A1_URL,
+  },
+];
+
+
+
 const brandMeta: Record<string, { name: string }> = {
   bluetti: { name: "BLUETTI" },
+  sublue: { name: "SUBLUE" },
+  waterdrop: { name: "Waterdrop" },
 };
+
 
 export function SustainableTechBrandPage() {
   const { brandSlug } = useParams<{ brandSlug: string }>();
@@ -44,7 +94,16 @@ export function SustainableTechBrandPage() {
   const now = useMemo(() => new Date(), []);
 
   const brand = brandSlug ? brandMeta[brandSlug] : null;
-  const products = brandSlug === "bluetti" ? bluettiProducts : [];
+  const products =
+    brandSlug === "bluetti"
+      ? bluettiProducts
+      : brandSlug === "sublue"
+      ? sublueProducts
+      : brandSlug === "waterdrop"
+      ? waterdropProducts
+      : [];
+
+
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -82,13 +141,26 @@ export function SustainableTechBrandPage() {
               </span>
             </div>
 
-            <h1 className="heading-display text-white text-[clamp(40px,4.6vw,78px)] mt-4">
-              {brand?.name ?? brandSlug}
+            <h1 className="heading-display text-white text-[clamp(40px,4.6vw,78px)] mt-4 flex flex-wrap items-center gap-x-6 gap-y-2">
+              <span>{brand?.name ?? brandSlug}</span>
+              {brandSlug === "sublue" && (
+                <span className="text-teal font-sans text-sm lg:text-lg tracking-widest uppercase bg-teal/10 px-4 py-1 rounded-full border border-teal/20">
+                  Use Code: <span className="font-bold">DELRAY</span> For 20% Off
+                </span>
+              )}
+
+
             </h1>
+
             <p className="mt-5 text-white/60 text-base lg:text-lg leading-relaxed max-w-[62ch]">
-              {brandSlug === "bluetti"
+            {brandSlug === "bluetti"
                 ? "Eco-friendly energy storage: portable power stations and solar generators with LiFePO₄ technology for home backup, RV, and off-grid."
+                : brandSlug === "sublue"
+                ? "Underwater tech for life on the water—sea scooters and gear built for yacht days, charter experiences, and effortless exploration below the surface."
+                : brandSlug === "waterdrop"
+                ? "Advanced water filtration for pure life on the water: high-performance reverse osmosis and UV purification systems for luxury vessels."
                 : "Explore products from this brand."}
+
             </p>
           </div>
         </div>
@@ -103,15 +175,16 @@ export function SustainableTechBrandPage() {
                   key={product.id}
                   className="group relative rounded-2xl overflow-hidden bg-marine-800/60 border border-white/10 flex flex-col"
                 >
-                  <div className="relative aspect-square overflow-hidden bg-marine-900/40">
+                  <div className="relative">
                     <img
                       src={product.image}
                       alt={product.name}
-                      className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
+                      className="w-full h-auto"
                       loading="lazy"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-marine-900/60 via-transparent to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-marine-900/80 via-marine-900/20 to-transparent" />
                   </div>
+
                   <div className="p-5 lg:p-6 flex flex-col flex-1">
                     <h2 className="text-white font-display font-bold text-lg lg:text-xl leading-tight">
                       {product.name}
