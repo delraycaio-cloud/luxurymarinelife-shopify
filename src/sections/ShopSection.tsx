@@ -9,7 +9,7 @@ gsap.registerPlugin(ScrollTrigger);
 const categories: Category[] = [
   { id: 'learning', name: 'Immersive Learning', description: 'Skills and protocols that keep your edge razor-sharp.', image: '/category_learning.webp', link: '#courses' },
   { id: 'biohacking', name: 'Supplements & Performance', description: 'Nano-emulsified recovery, focus, and longevity essentials.', image: '/category_biohacking.webp', link: '/ultra-shear' },
-  { id: 'tech', name: 'Sustainable Tech', description: 'Protect the water you love — clean innovations that last.', image: '/category_tech.webp', link: '#tech' },
+  { id: 'tech', name: 'Sustainable Tech', description: 'Protect the water you love — clean innovations that last.', image: '/category_tech.webp', link: '/sustainable-tech' },
   { id: 'apparel', name: 'Apparel', description: 'Climate-ready layers engineered for high-performance living.', image: '/category_apparel.webp', link: '#apparel' },
 ];
 
@@ -50,6 +50,11 @@ export function ShopSection({ onCategoryClick }: ShopSectionProps) {
 
     if (cat.id === 'learning') {
       window.location.href = 'https://garmn2.web.app';
+      return;
+    }
+
+    if (cat.id === 'tech') {
+      window.location.href = '/sustainable-tech';
       return;
     }
 

@@ -16,6 +16,8 @@ import { LuxuryMarineLifeBrandPage } from "@/features/apparel-brands/luxury-mari
 import HottieYachtieBrandPage from "@/features/apparel-brands/hottie-yachtie/HottieYachtieBrandPage";
 import AcYachtClubBrandPage from "@/features/apparel-brands/ac-yacht-club/AcYachtClubBrandPage";
 import ShopifyDemoPage from "@/features/shopify-demo/ShopifyDemoPage";
+import { SustainableTechPage } from "@/features/sustainable-tech/SustainableTechPage";
+import { SustainableTechBrandPage } from "@/features/sustainable-tech/SustainableTechBrandPage";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -86,6 +88,7 @@ function RoutedApp() {
   const isLmlRoute = location.pathname === "/luxury-marine-life-brand";
   const isHyycRoute = location.pathname === "/hottie-yachtie-brand";
   const isAcYcRoute = location.pathname === "/ac-yacht-club-apparel";
+  const isSustainableTechRoute = location.pathname === "/sustainable-tech";
 
   useEffect(() => {
     if (location.pathname !== "/") return;
@@ -186,6 +189,12 @@ function RoutedApp() {
         "content",
         "Shop the official AC Yacht Club apparel collection—clean lines, quiet flex.",
       );
+    } else if (isSustainableTechRoute) {
+      document.title = "Sustainable Tech | Luxury Marine Life";
+      metaDescription.setAttribute(
+        "content",
+        "Clean innovations for the water you love—filtration, energy, monitoring, and waste solutions for marine life.",
+      );
     } else {
       document.title = "Luxury Marine Life | Health on the Water";
       metaDescription.setAttribute(
@@ -197,7 +206,7 @@ function RoutedApp() {
     if (!document.querySelector('meta[name="description"]')) {
       document.head.appendChild(metaDescription);
     }
-  }, [location.pathname, isUltraShearRoute, isApparelBrandsRoute, isLmlRoute, isHyycRoute, isAcYcRoute]);
+  }, [location.pathname, isUltraShearRoute, isApparelBrandsRoute, isLmlRoute, isHyycRoute, isAcYcRoute, isSustainableTechRoute]);
 
   if (isLmlRoute) {
     return <LuxuryMarineLifeBrandPage />;
@@ -228,6 +237,8 @@ function RoutedApp() {
             <Route path="/hottie-yachtie-brand" element={<HottieYachtieBrandPage />} />
             <Route path="/ac-yacht-club-apparel" element={<AcYachtClubBrandPage />} />
             <Route path="/shopify-demo" element={<ShopifyDemoPage />} />
+            <Route path="/sustainable-tech" element={<SustainableTechPage />} />
+            <Route path="/sustainable-tech/:brandSlug" element={<SustainableTechBrandPage />} />
           </Routes>
         </main>
       </div>
