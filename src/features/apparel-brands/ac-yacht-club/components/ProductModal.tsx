@@ -135,7 +135,8 @@ export function ProductModal({ product, isOpen, onClose }: ProductModalProps) {
 
             {/* Price */}
             <p className="mt-3 font-mono text-xl text-gold">
-              €{price.toLocaleString()}
+              ${price.toLocaleString()}
+
             </p>
 
             {/* Description */}
@@ -297,7 +298,8 @@ export function ProductModal({ product, isOpen, onClose }: ProductModalProps) {
                   Added to Cart
                 </>
               ) : (
-                `Add to Cart — €${(price * quantity).toLocaleString()}`
+                `Add to Cart — $${(price * quantity).toLocaleString()}`
+
               )}
             </button>
           </div>

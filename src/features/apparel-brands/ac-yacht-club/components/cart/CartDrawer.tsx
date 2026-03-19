@@ -104,7 +104,8 @@ export function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
 
                           {/* Price */}
                           <p className="font-mono text-sm text-gold">
-                            €{(parseFloat(item.price.amount) * item.quantity).toLocaleString()}
+                            ${(parseFloat(item.price.amount) * item.quantity).toLocaleString()}
+
                           </p>
                         </div>
                       </div>
@@ -118,11 +119,13 @@ export function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
                 <div className="flex items-center justify-between">
                   <span className="text-sm text-slate">Subtotal</span>
                   <span className="font-mono text-xl text-gold">
-                    €{totalPrice.toLocaleString()}
+                    ${totalPrice.toLocaleString()}
+
                   </span>
                 </div>
                 <p className="text-xs text-slate/60">
-                  Shipping and taxes calculated at checkout. Complimentary shipping on orders over €500.
+                  Shipping and taxes calculated at checkout. Complimentary shipping on orders over $500.
+
                 </p>
                 <button 
                   onClick={handleCheckout}

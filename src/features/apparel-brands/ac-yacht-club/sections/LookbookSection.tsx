@@ -179,7 +179,8 @@ export function LookbookSection({ onProductClick }: LookbookSectionProps) {
                         <p className="font-serif text-ivory">{product.name}</p>
                         <p className="text-xs text-slate/60">{product.category}</p>
                       </div>
-                      <p className="font-mono text-gold">€{product.price.toLocaleString()}</p>
+                      <p className="font-mono text-gold">${product.price.toLocaleString()}</p>
+
                     </div>
                   ))}
                 </div>

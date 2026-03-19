@@ -214,7 +214,8 @@ export function ShopSection({ onProductClick }: ShopSectionProps) {
                       {product.node.title}
                     </h3>
                     <p className="mt-1 font-mono text-sm text-gold">
-                      €{parseFloat(product.node.priceRange.minVariantPrice.amount).toLocaleString()}
+                      ${parseFloat(product.node.priceRange.minVariantPrice.amount).toLocaleString()}
+
                     </p>
                     
                     {/* Color Swatches from Variants */}

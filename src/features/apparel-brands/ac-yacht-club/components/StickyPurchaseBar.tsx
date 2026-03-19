@@ -43,7 +43,8 @@ export function StickyPurchaseBar({ onShopClick }: StickyPurchaseBarProps) {
               </div>
               <div className="hidden sm:block">
                 <p className="text-sm text-ivory">{totalItems} item{totalItems > 1 ? 's' : ''} in cart</p>
-                <p className="text-xs text-gold">€{totalPrice.toLocaleString()}</p>
+                <p className="text-xs text-gold">${totalPrice.toLocaleString()}</p>
+
               </div>
             </>
           ) : (
@@ -53,7 +54,8 @@ export function StickyPurchaseBar({ onShopClick }: StickyPurchaseBarProps) {
               </div>
               <div>
                 <p className="text-sm text-ivory">Complimentary Shipping</p>
-                <p className="text-xs text-slate/60">On orders over €500</p>
+                <p className="text-xs text-slate/60">On orders over $500</p>
+
               </div>
             </>
           )}

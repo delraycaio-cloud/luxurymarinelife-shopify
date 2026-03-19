@@ -141,7 +141,8 @@ export function NewArrivalsSection({ onProductClick }: NewArrivalsSectionProps) 
                   {product.name}
                 </h3>
                 <p className="mt-1 font-mono text-gold">
-                  €{product.price.toLocaleString()}
+                  ${product.price.toLocaleString()}
+
                 </p>
               </div>
             </div>
