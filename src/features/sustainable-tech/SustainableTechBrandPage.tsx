@@ -19,6 +19,10 @@ const SUBLUE_VAPOR_URL =
 
 const WATERDROP_A1_URL =
   "https://www.waterdropfilter.com/products/ro-hot-cold-water-dispenser-a1?ref=omvzjjzw&utm_medium=affiliate&utm_source=goaffpro";
+const ECOFLOW_DELTA_ULTRA_URL =
+  "https://www.awin1.com/cread.php?awinmid=59181&awinaffid=2804364&clickref=lml-shop&ued=https%3A%2F%2Fus.ecoflow.com%2Fproducts%2Fdelta-pro-ultra-x%3Fref%3Dmainsection%26variant%3D54714781171785";
+
+
 
 
 
@@ -104,13 +108,28 @@ const waterdropProducts: Product[] = [
   },
 ];
 
+const ecoflowProducts: Product[] = [
+  {
+    id: "delta-pro-ultra-x",
+    name: "DELTA Pro Ultra X Whole-Home Backup Power",
+    shortDescription:
+      "Superior whole-vessel power backup. Scaling from 12kW to 36kW output, it ensures your yacht's critical systems stay operational through any adventure with EV-grade safety. Save $2,598 during the Spring Sale.",
+    image: "/images/eco1.jpg",
+
+    shopUrl: ECOFLOW_DELTA_ULTRA_URL,
+  },
+];
+
+
 
 
 const brandMeta: Record<string, { name: string }> = {
   bluetti: { name: "BLUETTI" },
   sublue: { name: "SUBLUE" },
   waterdrop: { name: "Waterdrop" },
+  ecoflow: { name: "EcoFlow" },
 };
+
 
 
 export function SustainableTechBrandPage() {
@@ -126,7 +145,10 @@ export function SustainableTechBrandPage() {
       ? sublueProducts
       : brandSlug === "waterdrop"
       ? waterdropProducts
+      : brandSlug === "ecoflow"
+      ? ecoflowProducts
       : [];
+
 
 
 
@@ -184,7 +206,10 @@ export function SustainableTechBrandPage() {
                 ? "Underwater tech for life on the water—sea scooters and gear built for yacht days, charter experiences, and effortless exploration below the surface."
                 : brandSlug === "waterdrop"
                 ? "Advanced water filtration for pure life on the water: high-performance reverse osmosis and UV purification systems for luxury vessels."
+                : brandSlug === "ecoflow"
+                ? "Portable power solutions, including battery storage systems and solar generators designed for luxury yacht backup and off-grid reliability."
                 : "Explore products from this brand."}
+
 
             </p>
           </div>

@@ -38,12 +38,14 @@ const brands: SustainableTechBrand[] = [
   },
 
   {
-    id: "blue-cycle",
-    name: "Blue Cycle",
+    id: "ecoflow",
+    name: "EcoFlow",
     description:
-      "Waste-to-resource tech for boats and marinas. Compact processing units that turn onboard waste into usable outputs without dumping.",
-    image: "/category_tech.webp",
+      "EcoFlow is a company that develops and manufactures portable power solutions, including battery storage systems, solar generators, and residential energy products. Its technologies are designed to provide reliable, sustainable electricity for off-grid use, backup power, and everyday energy needs.",
+    image: "/images/eco-main.jpg",
+
   },
+
 ];
 
 export function SustainableTechPage() {
