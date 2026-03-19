@@ -11,6 +11,12 @@ const SUBLUE_MIXPRO_URL =
   "https://store.sublue.com/en-eu/products/mixpro?ref=dimoioyd&utm_source=goaffpro";
 const SUBLUE_NAVBOW_URL =
   "https://store.sublue.com/en-eu/products/navbow-plus?ref=dimoioyd&utm_source=goaffpro";
+const SUBLUE_SWII_URL =
+  "https://store.sublue.com/en-eu/products/swii?ref=dimoioyd&utm_source=goaffpro";
+const SUBLUE_VAPOR_URL =
+  "https://store.sublue.com/en-eu/products/vapor?ref=dimoioyd&utm_source=goaffpro";
+
+
 const WATERDROP_A1_URL =
   "https://www.waterdropfilter.com/products/ro-hot-cold-water-dispenser-a1?ref=omvzjjzw&utm_medium=affiliate&utm_source=goaffpro";
 
@@ -59,9 +65,28 @@ const sublueProducts: Product[] = [
     name: "Navbow+ Underwater Scooter",
     shortDescription:
       "Elite performance for the serious explorer. Dart like an arrow at 2m/s with the Navbow+, featuring a smart OLED dashboard and premium dual-motor thrust. Get $30 off today and elevate your next charter adventure.",
-    image: "/images/sublue-navbow.webp",
+    image: "/images/sublue_2.jpg",
+
     shopUrl: SUBLUE_NAVBOW_URL,
   },
+  {
+    id: "vapor-scooter",
+    name: "Vapor Underwater Scooter",
+    shortDescription:
+      "Unrivaled high-end mobility. The Vapor is the lightest and fastest pump-jet scooter on the market, reaching a heart-pounding 10km/h with pro-grade 4.3-inch LCD data tracking. Get $30 off today and redefine your yacht’s underwater potential.",
+    image: "/images/vapor-sublue.webp",
+    shopUrl: SUBLUE_VAPOR_URL,
+  },
+  {
+    id: "swii-kickboard",
+    name: "Swii Electronic Kickboard",
+    shortDescription:
+      "The ultimate aquatic companion for all ages. Swii is a smart electronic kickboard with remarkable buoyancy and dual-speed control. Effortless, stable, and flight-safe—an essential addition to your yacht’s family-friendly toy collection.",
+    image: "/sublue-orange.webp",
+    shopUrl: SUBLUE_SWII_URL,
+  },
+
+
 
 
 ];
