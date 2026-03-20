@@ -182,10 +182,6 @@ export function HeroSection() {
                   <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
                 </a>
               </div>
-
-              <p className="mt-3 lg:mt-4 text-white/35 text-xs tracking-wide">
-                Free shipping on orders over $120 · 30-day guarantee
-              </p>
             </div>
 
             <div
@@ -194,25 +190,25 @@ export function HeroSection() {
               style={{ opacity: 0 }}
             >
               <img
-                src="/hero_wellness_card.webp"
-                alt="Luxury supplement ritual on superyacht"
+                src="/images/sublue_2.jpg"
+                alt="Navbow+ Underwater Scooter"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
               />
               <div className="absolute bottom-4 left-4 right-4 glass-card rounded-lg p-3 flex justify-between items-center">
                 <div>
                   <p className="label-elite text-white/50">
-                    Featured Supplement
+                    Featured Tech
                   </p>
                   <p className="font-display font-bold text-white text-base mt-0.5">
-                    NanoSpray Oil Complex
+                    Navbow+ Underwater Scooter
                   </p>
                 </div>
                 <a
-                  href="/ultra-shear"
+                  href="/sustainable-tech/sublue"
                   className="btn-primary-luxury !py-2 !px-4 !text-[10px]"
-                  aria-label="Buy NanoSpray — $64"
+                  aria-label="Buy Navbow+ Underwater Scooter"
                 >
-                  $64
+                  Buy Now
                 </a>
               </div>
             </div>

@@ -101,8 +101,7 @@ const waterdropProducts: Product[] = [
     name: "Reverse Osmosis Hot Cold Water Dispenser, A1",
     shortDescription:
       "Pure hydration, on demand. Instant hot and cold RO-filtered water in a sleek, countertop design—perfect for the galley or guest cabins.",
-
-    image: "/images/wd.jpg",
+    image: "/images/waterdrop-new-main.jpg",
 
     shopUrl: WATERDROP_A1_URL,
   },
@@ -114,7 +113,7 @@ const ecoflowProducts: Product[] = [
     name: "DELTA Pro Ultra X Whole-Home Backup Power",
     shortDescription:
       "Superior whole-vessel power backup. Scaling from 12kW to 36kW output, it ensures your yacht's critical systems stay operational through any adventure with EV-grade safety. Save $2,598 during the Spring Sale.",
-    image: "/images/eco1.jpg",
+    image: "/images/new-eco.jpg",
 
     shopUrl: ECOFLOW_DELTA_ULTRA_URL,
   },
@@ -123,11 +122,11 @@ const ecoflowProducts: Product[] = [
 
 
 
-const brandMeta: Record<string, { name: string }> = {
-  bluetti: { name: "BLUETTI" },
-  sublue: { name: "SUBLUE" },
-  waterdrop: { name: "Waterdrop" },
-  ecoflow: { name: "EcoFlow" },
+const brandMeta: Record<string, { name: string; viewMoreUrl: string }> = {
+  bluetti: { name: "BLUETTI", viewMoreUrl: "https://www.awin1.com/cread.php?awinmid=59271&awinaffid=2804364&campaign=RMNQ1&clickref=lml-shop&ued=https%3A%2F%2Fwww.bluettipower.com%2F" },
+  sublue: { name: "SUBLUE", viewMoreUrl: "https://store.sublue.com/?ref=dimoioyd&utm_source=goaffpro" },
+  waterdrop: { name: "Waterdrop", viewMoreUrl: "https://www.waterdropfilter.com/?ref=omvzjjzw&utm_medium=affiliate&utm_source=goaffpro" },
+  ecoflow: { name: "EcoFlow", viewMoreUrl: "https://tidd.ly/4uH927I" },
 };
 
 
@@ -265,6 +264,20 @@ export function SustainableTechBrandPage() {
               >
                 Back to Sustainable Tech
               </button>
+            </div>
+          )}
+
+          {brand?.viewMoreUrl && (
+            <div className="mt-12 text-center">
+              <a
+                href={brand.viewMoreUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 rounded-xl px-8 py-4 bg-marine-800 text-white font-semibold text-base hover:bg-marine-700 transition-colors border border-white/10"
+              >
+                View More {brand.name} Products
+                <ArrowUpRight className="w-5 h-5" aria-hidden="true" />
+              </a>
             </div>
           )}
         </div>
