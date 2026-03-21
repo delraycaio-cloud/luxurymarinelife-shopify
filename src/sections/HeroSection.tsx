@@ -204,7 +204,9 @@ export function HeroSection() {
                   </p>
                 </div>
                 <a
-                  href="/sustainable-tech/sublue"
+                  href="https://store.sublue.com/en-eu/products/navbow-plus?ref=dimoioyd&utm_source=goaffpro"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="btn-primary-luxury !py-2 !px-4 !text-[10px]"
                   aria-label="Buy Navbow+ Underwater Scooter"
                 >
