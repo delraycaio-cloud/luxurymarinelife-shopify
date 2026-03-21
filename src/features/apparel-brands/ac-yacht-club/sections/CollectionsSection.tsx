@@ -61,7 +61,7 @@ export function CollectionsSection() {
       collectionId === 'commodore' ? p.collection === 'The Commodore Line' :
       p.collection === 'Summer Edit'
     );
-    return collectionProducts[0]?.image || '/images/product-blazer.jpg';
+    return collectionProducts[0]?.image || '/images/product-blazer.webp';
   };
 
   return (

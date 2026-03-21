@@ -16,7 +16,7 @@ const brands: SustainableTechBrand[] = [
     name: "BLUETTI",
     description:
       "Eco-friendly energy storage built for life on the water. BLUETTI’s LiFePO₄ portable power stations and solar generators deliver quiet, reliable, scalable power—ideal for yachts and charter runs where you need clean backup for onboard essentials.",
-    image: "/images/Generated Image March 17, 2026 - 7_16PM.jpg",
+    image: "/images/Generated Image March 17, 2026 - 7_16PM.webp",
 
   },
   {
@@ -25,7 +25,7 @@ const brands: SustainableTechBrand[] = [
     description:
       "Premium underwater scooters for the ultimate yacht experience. Sublue delivers effortless exploration with sleek, portable sea scooters—perfect for charter guests and luxury vessel water toy collections.",
 
-    image: "/images/sublue-main.jpg",
+    image: "/images/sublue-main.webp",
 
   },
   {
@@ -33,7 +33,7 @@ const brands: SustainableTechBrand[] = [
     name: "Waterdrop",
     description:
       "Advanced water filtration for pure life on the water. Waterdrop provides high-performance reverse osmosis and UV purification systems, ensuring clean, fresh water for yachts and charter vessels without the need for single-use plastics.",
-    image: "/images/wd-main.jpg",
+    image: "/images/wd-main.webp",
 
   },
 
@@ -42,7 +42,7 @@ const brands: SustainableTechBrand[] = [
     name: "EcoFlow",
     description:
       "EcoFlow is a company that develops and manufactures portable power solutions, including battery storage systems, solar generators, and residential energy products. Its technologies are designed to provide reliable, sustainable electricity for off-grid use, backup power, and everyday energy needs.",
-    image: "/images/eco-main.jpg",
+    image: "/images/eco-main.webp",
 
   },
 

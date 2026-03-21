@@ -190,7 +190,7 @@ export function HeroSection() {
               style={{ opacity: 0 }}
             >
               <img
-                src="/images/sublue_2.jpg"
+                src="/images/sublue_2.webp"
                 alt="Navbow+ Underwater Scooter"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
               />

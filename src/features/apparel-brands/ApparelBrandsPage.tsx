@@ -17,7 +17,7 @@ const brands: ApparelBrand[] = [
     blurb:
       "Core essentials for life on the water—engineered, refined, and philanthropic.",
     image: {
-      src: "/images/lml-brand-image.png",
+      src: "/images/lml-brand-image.webp",
       alt: "Luxury Marine Life brand image",
     },
     accent: "teal",
@@ -28,7 +28,7 @@ const brands: ApparelBrand[] = [
     blurb:
       "Clean lines, quiet flex. Minimal palettes with technical performance.",
     image: {
-      src: "/images/ac-brand-image.png",
+      src: "/images/ac-brand-image.webp",
       alt: "Ac Yacht Club brand image",
     },
     accent: "gold",
@@ -39,7 +39,7 @@ const brands: ApparelBrand[] = [
     blurb:
       "After-dark deck energy. Pieces built to read premium from twenty feet away.",
     image: {
-      src: "/images/hyyc-brand.png",
+      src: "/images/hyyc-brand.webp",
       alt: "Hottie Yachtie Yacht Club brand image",
     },
     accent: "crimson",

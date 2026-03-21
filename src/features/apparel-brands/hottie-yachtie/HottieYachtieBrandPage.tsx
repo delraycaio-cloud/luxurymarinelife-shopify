@@ -73,8 +73,8 @@ export default function HottieYachtieBrandPage() {
       {/* Main Content */}
       <main className="pt-20">
         <HeroSection
-          bgImage="/hero_deck_party.jpg"
-          circleImages={['/circle_1_1.jpg', '/circle_1_2.jpg', '/circle_1_3.jpg']}
+          bgImage="/hero_deck_party.webp"
+          circleImages={['/circle_1_1.webp', '/circle_1_2.webp', '/circle_1_3.webp']}
           zIndex={10}
           onShopClick={() => scrollToSection('all-products')}
         />

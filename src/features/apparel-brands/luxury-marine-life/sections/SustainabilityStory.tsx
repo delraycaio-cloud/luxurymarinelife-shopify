@@ -65,7 +65,7 @@ export default function SustainabilityStory() {
     >
       <div
         className="absolute inset-0 bg-cover bg-center bg-fixed"
-        style={{ backgroundImage: "url(/ocean-underwater.jpg)" }}
+        style={{ backgroundImage: "url(/ocean-underwater.webp)" }}
       />
       <div className="absolute inset-0 bg-[#0a1628]/80" />
 

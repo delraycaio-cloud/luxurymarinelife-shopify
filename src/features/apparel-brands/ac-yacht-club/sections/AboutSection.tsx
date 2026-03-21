@@ -90,7 +90,7 @@ export function AboutSection() {
             <div className="relative">
               <div className="aspect-[4/5] overflow-hidden">
                 <img
-                  src="/images/dining-room.jpg"
+                  src="/images/dining-room.webp"
                   alt="AC Yacht Club"
                   className="w-full h-full object-cover"
                 />

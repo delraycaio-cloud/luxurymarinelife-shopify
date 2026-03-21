@@ -42,7 +42,7 @@ const bluettiProducts: Product[] = [
     name: "BLUETTI Apex 300 Versatile Power Station | 3,840W, 2,764.8Wh",
     shortDescription:
       "Power that adapts — from home to RV to off-grid, and especially yachts + charter operations. Smart 120V/240V portable power with 2.76kWh LiFePO₄, scalable expansion, and 0ms UPS switchover to keep onboard essentials running.",
-    image: "/images/apex-300-yacht.png",
+    image: "/images/apex-300-yacht.webp",
     shopUrl: BLUETTI_APEX_300_AFFILIATE_URL,
   },
   {
@@ -50,7 +50,7 @@ const bluettiProducts: Product[] = [
     name: "BLUETTI 350W Solar Panel | 350W",
     shortDescription:
       "Foldable 350W monocrystalline panel built for life on the water—great for yachts and charter crews topping off power between runs. Up to 23.4% conversion efficiency, kickstand for quick setup, durable ETFE surface (IP65 splash-proof), and MC4 compatibility.",
-    image: "/images/bluetti-pv350-yacht.png",
+    image: "/images/bluetti-pv350-yacht.webp",
     shopUrl: BLUETTI_PV350_AFFILIATE_URL,
   },
 ];
@@ -69,7 +69,7 @@ const sublueProducts: Product[] = [
     name: "Navbow+ Underwater Scooter",
     shortDescription:
       "Elite performance for the serious explorer. Dart like an arrow at 2m/s with the Navbow+, featuring a smart OLED dashboard and premium dual-motor thrust. Get $30 off today and elevate your next charter adventure.",
-    image: "/images/sublue_2.jpg",
+    image: "/images/sublue_2.webp",
 
     shopUrl: SUBLUE_NAVBOW_URL,
   },
@@ -101,7 +101,7 @@ const waterdropProducts: Product[] = [
     name: "Reverse Osmosis Hot Cold Water Dispenser, A1",
     shortDescription:
       "Pure hydration, on demand. Instant hot and cold RO-filtered water in a sleek, countertop design—perfect for the galley or guest cabins.",
-    image: "/images/waterdrop-new-main.jpg",
+    image: "/images/waterdrop-new-main.webp",
 
     shopUrl: WATERDROP_A1_URL,
   },
@@ -113,7 +113,7 @@ const ecoflowProducts: Product[] = [
     name: "DELTA Pro Ultra X Whole-Home Backup Power",
     shortDescription:
       "Superior whole-vessel power backup. Scaling from 12kW to 36kW output, it ensures your yacht's critical systems stay operational through any adventure with EV-grade safety. Save $2,598 during the Spring Sale.",
-    image: "/images/new-eco.jpg",
+    image: "/images/new-eco.webp",
 
     shopUrl: ECOFLOW_DELTA_ULTRA_URL,
   },
