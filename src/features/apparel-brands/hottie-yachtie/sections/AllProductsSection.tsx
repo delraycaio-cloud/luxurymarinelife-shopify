@@ -30,7 +30,7 @@ export default function AllProductsSection({ zIndex, onProductClick }: AllProduc
     const loadProducts = async () => {
       try {
         setLoading(true);
-        const data = await fetchProducts(50);
+        const data = await fetchProducts(250, 'vendor:*yachtie* OR vendor:"Hottie Yachtie Yacht Club" OR vendor:"Hottie Yachtie"');
         // Filter by HYYC vendor
         const filtered = data.filter(p => 
           p.node.vendor?.toLowerCase().includes('yachtie') || 
