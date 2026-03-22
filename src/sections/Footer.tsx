@@ -9,6 +9,7 @@ gsap.registerPlugin(ScrollTrigger);
 const footerLinks = {
   shop: [
     { label: 'UltraShear™ NanoSpray', href: '/ultra-shear' },
+    { label: 'Biohacking Bundles', href: '/biohacking-bundles' },
     { label: 'Apparel Brands', href: '/apparel-brands' },
     { label: 'Sustainable Tech', href: '/sustainable-tech' },
   ],

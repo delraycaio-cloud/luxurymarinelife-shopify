@@ -25,6 +25,8 @@ import { SustainableTechPage } from "@/features/sustainable-tech/SustainableTech
 import { SustainableTechBrandPage } from "@/features/sustainable-tech/SustainableTechBrandPage";
 import { PartnersPage } from "@/features/partners/PartnersPage";
 import { BiohackingBundlesPage } from "@/sections/BiohackingBundlesPage";
+import { PrivacyPage } from "@/features/legal/PrivacyPage";
+import { TermsPage } from "@/features/legal/TermsPage";
 
 
 gsap.registerPlugin(ScrollTrigger);
@@ -164,6 +166,8 @@ function RoutedApp() {
   const isSustainableTechRoute = location.pathname === "/sustainable-tech";
   const isPartnersRoute = location.pathname === "/partners";
   const isBiohackingRoute = location.pathname === "/biohacking-bundles";
+  const isPrivacyRoute = location.pathname === "/privacy";
+  const isTermsRoute = location.pathname === "/terms";
   const isSustainableTechBrandRoute = location.pathname.startsWith("/sustainable-tech/");
 
   useEffect(() => {
@@ -283,6 +287,18 @@ function RoutedApp() {
         "content",
         "Biohacker's Stack, Yacht Club Essentials, and Health CEO Annual Supply — clinical-grade NanoSpray bundles with exclusive savings.",
       );
+    } else if (isPrivacyRoute) {
+      document.title = "Privacy Policy | Luxury Marine Life";
+      metaDescription.setAttribute(
+        "content",
+        "Learn how Luxury Marine Life collects, uses, and protects your personal data. Your privacy matters to us.",
+      );
+    } else if (isTermsRoute) {
+      document.title = "Terms of Service | Luxury Marine Life";
+      metaDescription.setAttribute(
+        "content",
+        "Read the Terms of Service for Luxury Marine Life — pricing, shipping, returns, intellectual property, and governing law.",
+      );
     } else if (isSustainableTechBrandRoute) {
       document.title = "Sustainable Tech Brand | Luxury Marine Life";
       metaDescription.setAttribute(
@@ -300,7 +316,7 @@ function RoutedApp() {
     if (!document.querySelector('meta[name="description"]')) {
       document.head.appendChild(metaDescription);
     }
-  }, [location.pathname, isUltraShearRoute, isApparelBrandsRoute, isLmlRoute, isHyycRoute, isAcYcRoute, isSustainableTechRoute, isPartnersRoute, isBiohackingRoute, isSustainableTechBrandRoute]);
+  }, [location.pathname, isUltraShearRoute, isApparelBrandsRoute, isLmlRoute, isHyycRoute, isAcYcRoute, isSustainableTechRoute, isPartnersRoute, isBiohackingRoute, isPrivacyRoute, isTermsRoute, isSustainableTechBrandRoute]);
 
   if (isLmlRoute) {
     return <LuxuryMarineLifeBrandPage />;
@@ -335,6 +351,8 @@ function RoutedApp() {
             <Route path="/sustainable-tech/:brandSlug" element={<SustainableTechBrandPage />} />
             <Route path="/partners" element={<PartnersPage />} />
             <Route path="/biohacking-bundles" element={<BiohackingBundlesPage onBack={() => window.history.back()} />} />
+            <Route path="/privacy" element={<PrivacyPage />} />
+            <Route path="/terms" element={<TermsPage />} />
           </Routes>
         </main>
 
