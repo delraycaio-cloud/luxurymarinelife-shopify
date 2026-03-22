@@ -4,6 +4,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowRight, Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { db } from '@/lib/firebase';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -12,6 +14,7 @@ export function ConnectSection() {
   const contentRef = useRef<HTMLDivElement>(null);
   const [email, setEmail] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useLayoutEffect(() => {
     const section = sectionRef.current;
@@ -41,15 +44,25 @@ export function ConnectSection() {
     return () => ctx.revert();
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (email) {
-      setIsSubmitted(true);
-      setTimeout(() => {
-        setIsSubmitted(false);
-        setEmail('');
-      }, 3000);
+    if (!email || isSubmitting) return;
+    setIsSubmitting(true);
+    try {
+      await addDoc(collection(db, 'shopEmailSubscribers'), {
+        email,
+        subscribedAt: serverTimestamp(),
+        source: 'shop-connect',
+      });
+    } catch (err) {
+      console.error('[ConnectSection] Firestore write failed:', err);
     }
+    setIsSubmitted(true);
+    setIsSubmitting(false);
+    setTimeout(() => {
+      setIsSubmitted(false);
+      setEmail('');
+    }, 3000);
   };
 
   return (

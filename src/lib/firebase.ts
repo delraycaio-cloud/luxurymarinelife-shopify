@@ -1,5 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getFunctions, httpsCallable } from 'firebase/functions';
+import { getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY || 'AIzaSyDw6bnMCxde5UJtP0Zr6A0kmt2D6VGdAn0',
@@ -12,5 +13,6 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const functions = getFunctions(app, 'us-central1');
+const db = getFirestore(app);
 
-export { app, functions, httpsCallable };
+export { app, db, functions, httpsCallable };

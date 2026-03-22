@@ -24,6 +24,7 @@ import ShopifyDemoPage from "@/features/shopify-demo/ShopifyDemoPage";
 import { SustainableTechPage } from "@/features/sustainable-tech/SustainableTechPage";
 import { SustainableTechBrandPage } from "@/features/sustainable-tech/SustainableTechBrandPage";
 import { PartnersPage } from "@/features/partners/PartnersPage";
+import { BiohackingBundlesPage } from "@/sections/BiohackingBundlesPage";
 
 
 gsap.registerPlugin(ScrollTrigger);
@@ -162,6 +163,7 @@ function RoutedApp() {
   const isAcYcRoute = location.pathname === "/ac-yacht-club-apparel";
   const isSustainableTechRoute = location.pathname === "/sustainable-tech";
   const isPartnersRoute = location.pathname === "/partners";
+  const isBiohackingRoute = location.pathname === "/biohacking-bundles";
   const isSustainableTechBrandRoute = location.pathname.startsWith("/sustainable-tech/");
 
   useEffect(() => {
@@ -275,6 +277,12 @@ function RoutedApp() {
         "content",
         "Earn commissions as an affiliate or list your products on Luxury Marine Life. Join our premium marine lifestyle marketplace.",
       );
+    } else if (isBiohackingRoute) {
+      document.title = "Biohacking Bundles | Clinical Luxury Protocols";
+      metaDescription.setAttribute(
+        "content",
+        "Biohacker's Stack, Yacht Club Essentials, and Health CEO Annual Supply — clinical-grade NanoSpray bundles with exclusive savings.",
+      );
     } else if (isSustainableTechBrandRoute) {
       document.title = "Sustainable Tech Brand | Luxury Marine Life";
       metaDescription.setAttribute(
@@ -292,7 +300,7 @@ function RoutedApp() {
     if (!document.querySelector('meta[name="description"]')) {
       document.head.appendChild(metaDescription);
     }
-  }, [location.pathname, isUltraShearRoute, isApparelBrandsRoute, isLmlRoute, isHyycRoute, isAcYcRoute, isSustainableTechRoute, isPartnersRoute, isSustainableTechBrandRoute]);
+  }, [location.pathname, isUltraShearRoute, isApparelBrandsRoute, isLmlRoute, isHyycRoute, isAcYcRoute, isSustainableTechRoute, isPartnersRoute, isBiohackingRoute, isSustainableTechBrandRoute]);
 
   if (isLmlRoute) {
     return <LuxuryMarineLifeBrandPage />;
@@ -326,6 +334,7 @@ function RoutedApp() {
             <Route path="/sustainable-tech" element={<SustainableTechPage />} />
             <Route path="/sustainable-tech/:brandSlug" element={<SustainableTechBrandPage />} />
             <Route path="/partners" element={<PartnersPage />} />
+            <Route path="/biohacking-bundles" element={<BiohackingBundlesPage onBack={() => window.history.back()} />} />
           </Routes>
         </main>
 
