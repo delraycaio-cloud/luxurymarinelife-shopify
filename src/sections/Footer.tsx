@@ -1,36 +1,46 @@
 import { useRef, useLayoutEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Instagram, Youtube, Twitter } from 'lucide-react';
+import { Instagram, Youtube, Music2, Linkedin, Anchor } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const footerLinks = {
   shop: [
     { label: 'UltraShear™ NanoSpray', href: '/ultra-shear' },
-    { label: 'All Supplements', href: '#shop' },
+    { label: 'Apparel Brands', href: '/apparel-brands' },
+    { label: 'Sustainable Tech', href: '/sustainable-tech' },
   ],
-  learn: [
-    { label: 'Bio-Hacking', href: '#learn' },
-    { label: 'Our Framework', href: '#framework' },
+  brands: [
+    { label: 'Luxury Marine Life', href: '/luxury-marine-life-brand' },
+    { label: 'AC Yacht Club', href: '/ac-yacht-club-apparel' },
+    { label: 'Hottie Yachtie', href: '/hottie-yachtie-brand' },
   ],
   company: [
-    { label: 'About', href: '#about' },
-    { label: 'Impact (GARMN)', href: '#impact' },
+    { label: 'Yacht Charters', href: 'https://luxurymarinelife.com/charter', external: true },
+    { label: 'Yacht Club Membership', href: 'https://luxurymarinelife.com/acyachtclub', external: true },
+    { label: 'Impact (GARMN)', href: 'https://garmnconnect.web.app', external: true },
+    { label: 'Become a Partner', href: '/partners' },
+    { label: 'SmartYacht', href: 'https://luxurymarinelife.com', external: true },
   ],
   support: [
-    { label: 'Contact', href: '#contact' },
+    { label: 'Contact', href: 'mailto:hello@luxurymarinelife.com', external: true },
+    { label: 'Privacy Policy', href: '/privacy' },
+    { label: 'Terms of Service', href: '/terms' },
   ],
 };
 
 const socialLinks = [
-  { icon: Instagram, href: '#', label: 'Instagram' },
-  { icon: Youtube, href: '#', label: 'YouTube' },
-  { icon: Twitter, href: '#', label: 'TikTok' },
+  { icon: Instagram, href: 'https://instagram.com/luxurymarinelife', label: 'Instagram' },
+  { icon: Youtube, href: 'https://youtube.com/@luxurymarinelife', label: 'YouTube' },
+  { icon: Music2, href: 'https://tiktok.com/@luxurymarinelife', label: 'TikTok' },
+  { icon: Linkedin, href: 'https://linkedin.com/company/luxury-marine-life', label: 'LinkedIn' },
 ];
 
 export function Footer() {
   const footerRef = useRef<HTMLElement>(null);
+  const navigate = useNavigate();
 
   useLayoutEffect(() => {
     const footer = footerRef.current;
@@ -60,6 +70,13 @@ export function Footer() {
     return () => ctx.revert();
   }, []);
 
+  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string, external?: boolean) => {
+    if (external) return; // Let default behavior handle external links
+    e.preventDefault();
+    navigate(href);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <footer
       ref={footerRef}
@@ -69,11 +86,20 @@ export function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 lg:gap-12">
           {/* Logo & Tagline */}
           <div className="col-span-2 footer-column">
-            <a href="#" className="font-display text-xl font-bold text-white">
-              Health on the Water
+            <a
+              href="/"
+              onClick={(e) => { e.preventDefault(); navigate('/'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+              className="flex items-center gap-3 group"
+            >
+              <Anchor className="w-6 h-6 text-teal group-hover:rotate-12 transition-transform" />
+              <span className="font-display text-xl font-bold text-white">
+                Luxury Marine Life
+              </span>
             </a>
             <p className="mt-4 text-white/60 text-sm leading-relaxed max-w-xs">
               Healthy People. Healthy Water. Healthy Animals.
+              <br />
+              <span className="text-teal/80 text-xs">Premium wellness & lifestyle for the water</span>
             </p>
 
             {/* Social Links */}
@@ -82,6 +108,8 @@ export function Footer() {
                 <a
                   key={social.label}
                   href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="p-2 text-white/60 hover:text-teal transition-colors"
                   aria-label={social.label}
                 >
@@ -99,6 +127,7 @@ export function Footer() {
                 <li key={link.label}>
                   <a
                     href={link.href}
+                    onClick={(e) => handleLinkClick(e, link.href)}
                     className="text-white/60 hover:text-teal text-sm transition-colors"
                   >
                     {link.label}
@@ -108,14 +137,15 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Learn Links */}
+          {/* Brand Links */}
           <div className="footer-column">
-            <h4 className="text-white font-semibold text-sm mb-4">Learn</h4>
+            <h4 className="text-white font-semibold text-sm mb-4">Brands</h4>
             <ul className="space-y-3">
-              {footerLinks.learn.map((link) => (
+              {footerLinks.brands.map((link) => (
                 <li key={link.label}>
                   <a
                     href={link.href}
+                    onClick={(e) => handleLinkClick(e, link.href)}
                     className="text-white/60 hover:text-teal text-sm transition-colors"
                   >
                     {link.label}
@@ -133,6 +163,9 @@ export function Footer() {
                 <li key={link.label}>
                   <a
                     href={link.href}
+                    target={link.external ? '_blank' : undefined}
+                    rel={link.external ? 'noopener noreferrer' : undefined}
+                    onClick={(e) => handleLinkClick(e, link.href, link.external)}
                     className="text-white/60 hover:text-teal text-sm transition-colors"
                   >
                     {link.label}
@@ -150,6 +183,9 @@ export function Footer() {
                 <li key={link.label}>
                   <a
                     href={link.href}
+                    target={link.external ? '_blank' : undefined}
+                    rel={link.external ? 'noopener noreferrer' : undefined}
+                    onClick={(e) => handleLinkClick(e, link.href, link.external)}
                     className="text-white/60 hover:text-teal text-sm transition-colors"
                   >
                     {link.label}
@@ -163,14 +199,15 @@ export function Footer() {
         {/* Bottom Bar */}
         <div className="mt-12 pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-white/40 text-sm">
-            © {new Date().getFullYear()} Health on the Water. All rights reserved.
+            © {new Date().getFullYear()} Luxury Marine Life. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
-            <a href="#" className="text-white/40 hover:text-white/60 text-sm transition-colors">
-              Privacy Policy
-            </a>
-            <a href="#" className="text-white/40 hover:text-white/60 text-sm transition-colors">
-              Terms of Service
+            <a
+              href="/partners"
+              onClick={(e) => handleLinkClick(e, '/partners')}
+              className="text-teal/70 hover:text-teal text-sm transition-colors font-medium"
+            >
+              Become a Partner →
             </a>
           </div>
         </div>
@@ -178,7 +215,15 @@ export function Footer() {
         {/* Impact Badge */}
         <div className="mt-8 flex items-center justify-center gap-2 text-white/40 text-sm">
           <span className="w-2 h-2 bg-teal rounded-full animate-pulse" />
-          10% of every purchase supports ocean restoration through GARMN
+          10% of every purchase supports ocean restoration through{' '}
+          <a
+            href="https://garmnconnect.web.app"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-teal/80 hover:text-teal underline underline-offset-2 transition-colors"
+          >
+            GARMN
+          </a>
         </div>
       </div>
     </footer>

@@ -10,6 +10,10 @@ import { ShopSection } from "@/sections/ShopSection";
 import { FeaturedProductSection } from "@/sections/FeaturedProductSection";
 import { ConnectSection } from "@/sections/ConnectSection";
 import { Footer } from "@/sections/Footer";
+import { FoundersSection } from "@/sections/FoundersSection";
+import { TrustBar } from "@/components/custom/TrustBar";
+import { ServicesSection } from "@/sections/ServicesSection";
+import { ShopChatbot } from "@/components/custom/ShopChatbot";
 import { UltraShearPage } from "@/features/ultra-shear/UltraShearPage";
 import { ApparelBrandsPage } from "@/features/apparel-brands/ApparelBrandsPage";
 import { LuxuryMarineLifeBrandPage } from "@/features/apparel-brands/luxury-marine-life/LuxuryMarineLifeBrandPage";
@@ -18,6 +22,8 @@ import AcYachtClubBrandPage from "@/features/apparel-brands/ac-yacht-club/AcYach
 import ShopifyDemoPage from "@/features/shopify-demo/ShopifyDemoPage";
 import { SustainableTechPage } from "@/features/sustainable-tech/SustainableTechPage";
 import { SustainableTechBrandPage } from "@/features/sustainable-tech/SustainableTechBrandPage";
+import { PartnersPage } from "@/features/partners/PartnersPage";
+
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -37,11 +43,26 @@ function HomePage() {
   return (
     <>
       <HeroSection />
+      <TrustBar />
 
       <StatementSection
         id="impact"
         headline="HEALTHY WATER"
-        body="We fund reef restoration and reduce marine impact-so the places you love stay pristine."
+        body={
+          <>
+            <p>We fund reef restoration and reduce marine impact — so the waters you love stay pristine for generations.</p>
+            <p className="mt-4">
+              <a
+                href="https://www.seakeepers.org/donate/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-teal hover:text-teal-light transition-colors font-semibold underline underline-offset-4"
+              >
+                🌊 Donate to Seakeepers →
+              </a>
+            </p>
+          </>
+        }
         backgroundImage="/statement_water_bg.webp"
         zIndex={20}
       />
@@ -49,7 +70,21 @@ function HomePage() {
       <StatementSection
         id="animals"
         headline="HEALTHY ANIMALS"
-        body="Every purchase supports coral restoration and cleaner coastlines-because thriving ecosystems matter."
+        body={
+          <>
+            <p>Every purchase supports wildlife rehabilitation and cleaner coastlines — because thriving ecosystems begin with healthy animals.</p>
+            <p className="mt-4">
+              <a
+                href="https://www.pelicanharbor.org/donate"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-teal hover:text-teal-light transition-colors font-semibold underline underline-offset-4"
+              >
+                🐦 Donate to Pelican Harbor Seabird Station →
+              </a>
+            </p>
+          </>
+        }
         backgroundImage="/statement_animals_bg.webp"
         zIndex={30}
       />
@@ -57,24 +92,35 @@ function HomePage() {
       <StatementSection
         id="experience"
         headline="THE ERA OF THE SPA YACHT IS OVER. ENTER THE ERA OF THE BIOLOGICAL AMPLIFIER."
-        body="A floating system for recovery, focus, and performance-designed for high performers who refuse to compromise."
+        body="A floating system for recovery, focus, and performance — designed for high performers who refuse to compromise."
         backgroundImage="/experience_yacht_bg.webp"
         zIndex={40}
-        cta={{ text: "Book a Consultation", onClick: scrollToShop }}
-        secondaryCta={{ text: "View the Experience", onClick: scrollToShop }}
+        cta={{ text: "Explore UltraShear™", onClick: () => navigate('/ultra-shear') }}
+        secondaryCta={{ text: "Browse Apparel", onClick: () => navigate('/apparel-brands') }}
       />
 
       <StatementSection
         id="philanthropy"
         headline="10% TO THE OCEAN"
-        body="We donate 10% of every purchase to marine restoration-reefs, coastlines, and the wildlife that depends on them."
+        body={
+          <>
+            <p>Every sale, 10% goes directly to impact.</p>
+            <p className="mt-3 text-white/90 font-semibold">🌊 GARMN Immersive Learning</p>
+            <p className="mt-1 text-white/60 text-sm">Hands-on ocean conservation education for the next generation.</p>
+            <p className="mt-3 text-white/90 font-semibold">🎓 MagicSchoolBox Program</p>
+            <p className="mt-1 text-white/60 text-sm">Immersive STEM learning kits that bring marine science into classrooms worldwide.</p>
+          </>
+        }
         backgroundImage="/impact_reef_bg.webp"
         zIndex={50}
         cta={{ text: "Shop with Purpose", onClick: scrollToShop }}
+        secondaryCta={{ text: "Learn about GARMN →", onClick: () => window.open('https://garmnconnect.web.app', '_blank') }}
       />
 
       <ShopSection onCategoryClick={handleCategoryClick} />
+      <ServicesSection />
       <FeaturedProductSection />
+      <FoundersSection />
       <ConnectSection />
       <Footer />
     </>
@@ -89,6 +135,8 @@ function RoutedApp() {
   const isHyycRoute = location.pathname === "/hottie-yachtie-brand";
   const isAcYcRoute = location.pathname === "/ac-yacht-club-apparel";
   const isSustainableTechRoute = location.pathname === "/sustainable-tech";
+  const isPartnersRoute = location.pathname === "/partners";
+  const isSustainableTechBrandRoute = location.pathname.startsWith("/sustainable-tech/");
 
   useEffect(() => {
     if (location.pathname !== "/") return;
@@ -195,18 +243,30 @@ function RoutedApp() {
         "content",
         "Clean innovations for the water you love—filtration, energy, monitoring, and waste solutions for marine life.",
       );
-    } else {
-      document.title = "Luxury Marine Life | Health on the Water";
+    } else if (isPartnersRoute) {
+      document.title = "Become a Partner | Luxury Marine Life";
       metaDescription.setAttribute(
         "content",
-        "Wellness journeys designed for life on the water—movement, recovery, and mindful routines.",
+        "Earn commissions as an affiliate or list your products on Luxury Marine Life. Join our premium marine lifestyle marketplace.",
+      );
+    } else if (isSustainableTechBrandRoute) {
+      document.title = "Sustainable Tech Brand | Luxury Marine Life";
+      metaDescription.setAttribute(
+        "content",
+        "Explore innovative sustainable technology for marine environments—filtration, energy, and monitoring solutions.",
+      );
+    } else {
+      document.title = "Luxury Marine Life | Premium Wellness & Lifestyle for the Water";
+      metaDescription.setAttribute(
+        "content",
+        "Premium wellness, performance apparel, and sustainable technology for life on the water. 10% of every purchase supports ocean restoration.",
       );
     }
 
     if (!document.querySelector('meta[name="description"]')) {
       document.head.appendChild(metaDescription);
     }
-  }, [location.pathname, isUltraShearRoute, isApparelBrandsRoute, isLmlRoute, isHyycRoute, isAcYcRoute, isSustainableTechRoute]);
+  }, [location.pathname, isUltraShearRoute, isApparelBrandsRoute, isLmlRoute, isHyycRoute, isAcYcRoute, isSustainableTechRoute, isPartnersRoute, isSustainableTechBrandRoute]);
 
   if (isLmlRoute) {
     return <LuxuryMarineLifeBrandPage />;
@@ -239,8 +299,12 @@ function RoutedApp() {
             <Route path="/shopify-demo" element={<ShopifyDemoPage />} />
             <Route path="/sustainable-tech" element={<SustainableTechPage />} />
             <Route path="/sustainable-tech/:brandSlug" element={<SustainableTechBrandPage />} />
+            <Route path="/partners" element={<PartnersPage />} />
           </Routes>
         </main>
+
+        {/* Global AI Chatbot — available on all pages */}
+        <ShopChatbot />
       </div>
     </CartProvider>
   );

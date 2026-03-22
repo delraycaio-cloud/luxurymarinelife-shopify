@@ -1,4 +1,4 @@
-import { useRef, useLayoutEffect } from 'react';
+import { useRef, useLayoutEffect, type ReactNode } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -7,7 +7,7 @@ gsap.registerPlugin(ScrollTrigger);
 interface StatementSectionProps {
   id: string;
   headline: string;
-  body: string;
+  body: ReactNode;
   backgroundImage: string;
   zIndex: number;
   cta?: {
@@ -32,7 +32,7 @@ export function StatementSection({
   const sectionRef = useRef<HTMLElement>(null);
   const bgRef = useRef<HTMLDivElement>(null);
   const headlineRef = useRef<HTMLHeadingElement>(null);
-  const bodyRef = useRef<HTMLParagraphElement>(null);
+  const bodyRef = useRef<HTMLDivElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
@@ -143,12 +143,12 @@ export function StatementSection({
             {headline}
           </h2>
 
-          <p
+          <div
             ref={bodyRef}
             className="mt-6 lg:mt-8 text-white/80 text-base lg:text-lg max-w-[56vw] mx-auto leading-relaxed"
           >
             {body}
-          </p>
+          </div>
 
           {(cta || secondaryCta) && (
             <div ref={ctaRef} className="mt-8 lg:mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">

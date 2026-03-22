@@ -21,9 +21,10 @@ import { Button } from "@/components/ui/button";
 const navLinks = [
   { label: "Shop", href: "#shop" },
   { label: "UltraShear", href: "/ultra-shear" },
-  { label: "Learn", href: "#learn" },
+  { label: "Apparel", href: "/apparel-brands" },
+  { label: "Tech", href: "/sustainable-tech" },
   { label: "Impact", href: "#impact" },
-  { label: "Contact", href: "#contact" },
+  { label: "Partners", href: "/partners" },
 ];
 
 export function Navigation() {

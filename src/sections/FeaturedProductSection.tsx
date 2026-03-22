@@ -7,8 +7,9 @@ import {
   Check,
   Star,
   Shield,
-  Zap,
-  Package,
+  Gift,
+  Anchor,
+  Calendar,
 } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { Button } from "@/components/ui/button";
@@ -37,8 +38,8 @@ const product = {
   ],
   trustBadges: [
     { icon: Shield, label: "3rd Party Tested" },
-    { icon: Zap, label: "3–5 Min Absorption" },
-    { icon: Package, label: "30-Day Guarantee" },
+    { icon: Gift, label: "3–5 Min Absorption" },
+    { icon: Anchor, label: "30-Day Guarantee" },
   ],
 };
 
@@ -99,9 +100,66 @@ export function FeaturedProductSection() {
       ref={sectionRef}
       id="learn"
       className="bg-marine-900 py-20 lg:py-28 overflow-hidden"
-      aria-label="Featured Product"
+      aria-label="Featured Product & Boat Show Offer"
     >
       <div className="px-6 lg:px-[7vw]">
+        {/* ── BOAT SHOW CHARTER GIFT CARD OFFER ── */}
+        <div className="mb-16 lg:mb-24 max-w-4xl mx-auto text-center" data-anim>
+          <div className="relative bg-gradient-to-br from-[rgba(0,173,238,0.08)] to-[rgba(201,169,110,0.08)] border border-teal/20 rounded-3xl p-8 lg:p-12 overflow-hidden">
+            {/* Glow accent */}
+            <div className="absolute -top-20 -right-20 w-60 h-60 bg-teal/5 rounded-full blur-3xl" />
+            <div className="absolute -bottom-20 -left-20 w-60 h-60 bg-[var(--gold-light,#c9a96e)]/5 rounded-full blur-3xl" />
+
+            <div className="relative z-10">
+              <div className="inline-flex items-center gap-2 bg-teal/10 border border-teal/20 rounded-full px-4 py-1.5 mb-6">
+                <Calendar className="w-3.5 h-3.5 text-teal" />
+                <span className="text-teal text-xs font-bold tracking-wider uppercase">2026 West Palm Boat Show Special</span>
+              </div>
+
+              <h3 className="heading-display text-white text-[clamp(26px,3.5vw,48px)] leading-tight">
+                Buy One Charter Gift Card
+                <br />
+                <span className="text-teal">Get One FREE</span>
+              </h3>
+
+              <p className="mt-4 text-white/70 text-lg lg:text-xl font-display">
+                $250 Gift Card — <span className="text-[var(--gold-light,#c9a96e)] font-bold">BOGO</span>
+              </p>
+
+              <div className="mt-6 max-w-lg mx-auto space-y-2.5">
+                {[
+                  "Valid on ANY yacht booked through Luxury Marine Life",
+                  "Book anytime — no blackout dates",
+                  "Offer expires at the end of the show",
+                ].map((item) => (
+                  <div key={item} className="flex items-center gap-3 text-white/75 text-sm">
+                    <Check className="w-4 h-4 text-teal flex-shrink-0" />
+                    <span>{item}</span>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-8">
+                <a
+                  href="https://luxurymarinelife.com/charter"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Button className="btn-primary-luxury !rounded-full min-h-12 px-8 gap-2 text-base">
+                    <Gift className="w-5 h-5" />
+                    Claim Your BOGO Gift Card
+                  </Button>
+                </a>
+              </div>
+
+              <p className="mt-4 text-white/30 text-xs tracking-wide">
+                Limited to 2026 West Palm International Boat Show attendees · While supplies last
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* ── FEATURED PRODUCT (Nano Oil) ── */}
         <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
           <div ref={imageRef} className="w-full lg:w-[48vw] relative">
             <div className="relative lg:h-[72vh] bg-transparent flex items-center justify-center">
@@ -200,6 +258,13 @@ export function FeaturedProductSection() {
               </span>
             </div>
 
+            {/* Member Discount Badge */}
+            <div className="mt-3 inline-flex items-center gap-2 bg-[rgba(201,169,110,0.08)] border border-[rgba(201,169,110,0.25)] rounded-lg px-3 py-2" data-anim>
+              <Star className="w-3.5 h-3.5 text-[var(--gold-light)]" fill="currentColor" />
+              <span className="text-[var(--gold-light)] text-xs font-semibold tracking-wide">Members Save 15%</span>
+              <span className="text-white/40 text-xs">— Use code <code className="text-teal font-mono font-bold">MEMBER15</code></span>
+            </div>
+
             <div className="mt-8 flex flex-col sm:flex-row gap-3" data-anim>
               <a
                 target="_blank"
@@ -226,7 +291,8 @@ export function FeaturedProductSection() {
 
             <p className="mt-5 text-white/30 text-xs tracking-wide" data-anim>
               Free US shipping · 30-day satisfaction guarantee · 10% to ocean
-              restoration
+              restoration ·{" "}
+              <a href="/apparel-brands" className="text-teal/70 hover:text-teal transition-colors underline underline-offset-2">Browse Apparel →</a>
             </p>
           </div>
         </div>
