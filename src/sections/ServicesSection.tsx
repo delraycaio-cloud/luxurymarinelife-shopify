@@ -1,7 +1,7 @@
 import { useRef, useLayoutEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Anchor, Crown, Handshake, Cpu, ExternalLink } from 'lucide-react';
+import { Anchor, Crown, Handshake, Cpu, ExternalLink, GraduationCap } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -46,6 +46,16 @@ const services = [
     href: 'https://luxurymarinelife.com/smartyacht',
     gradient: 'from-blue-500/15 to-indigo-500/10',
   },
+  {
+    id: 'garmn',
+    icon: GraduationCap,
+    title: 'GARMN Adventures',
+    subtitle: 'Tax-deductible educational charters for students & veterans. 501(c)(3).',
+    price: '100% Donated',
+    cta: 'Give an Adventure',
+    href: 'https://garmnconnect.web.app',
+    gradient: 'from-teal/25 to-emerald-500/15',
+  },
 ];
 
 export function ServicesSection() {
@@ -87,7 +97,7 @@ export function ServicesSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5 lg:gap-6">
           {services.map((svc, index) => (
             <a
               key={svc.id}

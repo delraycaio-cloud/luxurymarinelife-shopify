@@ -67,10 +67,10 @@ export function ConnectSection() {
             Join the Movement
           </h2>
           <p className="mt-4 text-white/60 text-base lg:text-lg leading-relaxed">
-            Get early access to new drops, founder-only pricing, conservation updates, and limited experiences.
+            Join 2,400+ ocean advocates getting early access to new drops, founder-only pricing, conservation updates, and tax-deductible giving opportunities.
           </p>
           <p className="mt-2 text-teal font-semibold text-sm">
-            🎁 Be first to know about launch specials and new drops
+            🎁 Be first to know about launch specials, donation gift cards, and GARMN learning adventures
           </p>
 
           {/* Form */}
@@ -105,7 +105,7 @@ export function ConnectSection() {
           </form>
 
           <p className="mt-4 text-white/40 text-sm">
-            🔒 No spam. Unsubscribe anytime. Your data stays private.
+            🔒 No spam. Unsubscribe anytime. 10% of every purchase supports ocean restoration via GARMN.
           </p>
         </div>
       </div>

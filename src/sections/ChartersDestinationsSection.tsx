@@ -1,7 +1,7 @@
 import { useRef, useLayoutEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ArrowRight, MapPin, Compass, Anchor, Sparkles } from 'lucide-react';
+import { ArrowRight, MapPin, Compass, Anchor, Sparkles, GraduationCap } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -35,6 +35,16 @@ const destinations = [
     icon: MapPin,
     gradient: 'from-emerald-500/15 to-teal/10',
     href: 'https://luxurymarinelife.com/charter',
+  },
+  {
+    id: 'learning',
+    name: 'GARMN Learning Adventures',
+    tagline: 'Tax-Deductible · 501(c)(3)',
+    description: 'Immersive STEM education, ocean cleanup, and veteran wellness on the water. Buy One Give One.',
+    price: 'From $50',
+    icon: GraduationCap,
+    gradient: 'from-teal/25 to-emerald-500/15',
+    href: 'https://garmnconnect.web.app',
   },
   {
     id: 'custom',
@@ -98,7 +108,7 @@ export function ChartersDestinationsSection() {
         </div>
 
         {/* Destination Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5 lg:gap-6">
           {destinations.map((dest, index) => (
             <a
               key={dest.id}
@@ -125,11 +135,14 @@ export function ChartersDestinationsSection() {
                 <div className="flex items-baseline gap-2 mb-3">
                   <span className="text-white/30 text-xs font-medium tracking-wider uppercase">From</span>
                   <span className="text-white font-display font-bold text-xl">{dest.price}</span>
-                  {dest.id !== 'custom' && <span className="text-white/30 text-xs">/day</span>}
+                  {dest.id !== 'custom' && dest.id !== 'learning' && <span className="text-white/30 text-xs">/day</span>}
                 </div>
                 <div className="inline-flex items-center gap-2 text-teal font-semibold text-sm group-hover:gap-3 transition-all duration-300">
-                  Book Now <ArrowRight className="w-3.5 h-3.5 opacity-60 group-hover:opacity-100 transition-opacity" />
+                  {dest.id === 'learning' ? 'Donate Now' : 'Book Now'} <ArrowRight className="w-3.5 h-3.5 opacity-60 group-hover:opacity-100 transition-opacity" />
                 </div>
+                {dest.id !== 'learning' && dest.id !== 'custom' && (
+                  <p className="mt-2 text-teal/50 text-[10px] font-semibold tracking-wider uppercase">🤝 Buy One Give One</p>
+                )}
               </div>
 
               {/* Glow on hover */}
@@ -145,6 +158,7 @@ export function ChartersDestinationsSection() {
             { value: '12', label: 'Destinations' },
             { value: '24/7', label: 'Concierge' },
             { value: '100%', label: 'SmartYacht Certified' },
+            { value: '501(c)(3)', label: 'GARMN Tax-Deductible' },
           ].map((stat) => (
             <div key={stat.label} className="text-center">
               <div className="stat-number text-[clamp(1.5rem,3vw,2.5rem)]">{stat.value}</div>

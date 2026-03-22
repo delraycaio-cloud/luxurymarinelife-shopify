@@ -11,6 +11,7 @@ const categories: Category[] = [
   { id: 'biohacking', name: 'Supplements & Performance', description: 'Nano-emulsified recovery, focus, and longevity essentials.', image: '/category_biohacking.webp', link: '/ultra-shear' },
   { id: 'tech', name: 'Sustainable Tech', description: 'Protect the water you love — clean innovations that last.', image: '/category_tech.webp', link: '/sustainable-tech' },
   { id: 'apparel', name: 'Apparel', description: 'Climate-ready layers engineered for high-performance living.', image: '/category_apparel.webp', link: '#apparel' },
+  { id: 'donations', name: 'Donation Gift Cards', description: 'Tax-deductible gifts that fund immersive student & veteran learning adventures on the water.', image: '/impact_reef_bg.webp', link: 'https://garmnconnect.web.app' },
 ];
 
 const priceAnchors: Record<string, string> = {
@@ -18,9 +19,10 @@ const priceAnchors: Record<string, string> = {
   biohacking: 'From $29',
   tech: 'From $149',
   apparel: 'From $39',
+  donations: 'From $50',
 };
 
-const newBadges = ['learning', 'tech'];
+const newBadges = ['learning', 'tech', 'donations'];
 
 type ShopSectionProps = { onCategoryClick?: (categoryId: string) => void; };
 
@@ -64,6 +66,11 @@ export function ShopSection({ onCategoryClick }: ShopSectionProps) {
 
     if (cat.id === 'tech') {
       window.location.href = '/sustainable-tech';
+      return;
+    }
+
+    if (cat.id === 'donations') {
+      window.open('https://garmnconnect.web.app', '_blank');
       return;
     }
 
