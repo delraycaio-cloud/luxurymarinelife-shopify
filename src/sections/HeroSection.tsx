@@ -128,18 +128,20 @@ export function HeroSection() {
               ref={contentRef}
               className="w-full lg:w-[46vw] text-center lg:text-left"
             >
+              <div ref={badgeRef} className="mb-4" style={{ opacity: 0 }}>
+                <span className="badge-urgency">🔥 Now Live — Miami Boat Show 2026 Launch Specials</span>
+              </div>
               <div ref={headlineRef} style={{ opacity: 0 }}>
                 <h1 className="heading-display text-white leading-[0.92] text-[clamp(52px,11vw,110px)] lg:text-[clamp(52px,7vw,110px)]">
-                  HEALTHY
+                  HEALTH ON
                   <br />
-                  <span className="text-gradient">PEOPLE</span>
+                  <span className="text-gradient">THE WATER</span>
                 </h1>
               </div>
 
               <p className="mt-5 lg:mt-8 text-white/70 text-sm sm:text-base lg:text-lg max-w-full lg:max-w-[34vw] leading-relaxed mx-auto lg:mx-0">
-                Wellness journeys engineered for life on the water — movement,
-                recovery, and performance rituals for those who refuse to
-                compromise.
+                Premium wellness, performance tech, and ocean-conscious products
+                for those who live on the water.
               </p>
 
               <div className="mt-5 lg:mt-6 flex items-center gap-3 justify-center lg:justify-start">
@@ -157,8 +159,8 @@ export function HeroSection() {
                   ))}
                 </div>
                 <span className="text-white/50 text-xs font-medium tracking-wide">
-                  5.0 ·{" "}
-                  <span className="text-white/40">47 verified reviews</span>
+                  Miami, FL ·{" "}
+                  <span className="text-white/40">Launching at the 2026 Miami Boat Show</span>
                 </span>
               </div>
 
@@ -169,7 +171,7 @@ export function HeroSection() {
                   id="hero-shop-cta"
                   aria-label="Explore our collection"
                 >
-                  Explore the Collection{" "}
+                  Shop the Collection{" "}
                   <ArrowRight className="w-4 h-4" aria-hidden="true" />
                 </button>
                 <a

@@ -67,7 +67,10 @@ export function ConnectSection() {
             Join the Movement
           </h2>
           <p className="mt-4 text-white/60 text-base lg:text-lg leading-relaxed">
-            Get early access to new drops, conservation updates, and limited experiences.
+            Get early access to new drops, founder-only pricing, conservation updates, and limited experiences.
+          </p>
+          <p className="mt-2 text-teal font-semibold text-sm">
+            🎁 Be first to know about launch specials and new drops
           </p>
 
           {/* Form */}
@@ -102,7 +105,7 @@ export function ConnectSection() {
           </form>
 
           <p className="mt-4 text-white/40 text-sm">
-            No spam. Unsubscribe anytime.
+            🔒 No spam. Unsubscribe anytime. Your data stays private.
           </p>
         </div>
       </div>

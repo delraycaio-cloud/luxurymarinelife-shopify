@@ -11,6 +11,7 @@ const services = [
     icon: Anchor,
     title: 'Private Yacht Charters',
     subtitle: 'SmartYacht-certified experiences in South Florida and the Caribbean.',
+    price: 'From $2,500/day',
     cta: 'Explore Charters',
     href: 'https://luxurymarinelife.com/charter',
     gradient: 'from-teal/20 to-cyan-500/10',
@@ -20,6 +21,7 @@ const services = [
     icon: Crown,
     title: 'Yacht Club Membership',
     subtitle: 'AC Yacht Club & Hottie Yachtie — exclusive access, events, and rewards.',
+    price: 'From $99/mo',
     cta: 'Join the Club',
     href: 'https://luxurymarinelife.com/acyachtclub',
     gradient: 'from-amber-500/15 to-yellow-500/10',
@@ -29,6 +31,7 @@ const services = [
     icon: Handshake,
     title: 'Partner & Earn',
     subtitle: 'Concierge affiliate program with recurring commissions up to 25%.',
+    price: 'Up to 25%',
     cta: 'Become a Partner',
     href: 'https://luxurymarinelife.com/affiliate',
     gradient: 'from-emerald-500/15 to-green-500/10',
@@ -38,6 +41,7 @@ const services = [
     icon: Cpu,
     title: 'AI-Powered Vessels',
     subtitle: 'SmartYacht technology — AI navigation, marine monitoring, fleet intel.',
+    price: 'Enterprise',
     cta: 'Discover SmartYacht',
     href: 'https://luxurymarinelife.com/smartyacht',
     gradient: 'from-blue-500/15 to-indigo-500/10',
@@ -102,6 +106,7 @@ export function ServicesSection() {
               {/* Content */}
               <h3 className="text-white font-display font-bold text-lg leading-tight">{svc.title}</h3>
               <p className="mt-2.5 text-white/45 text-sm leading-relaxed">{svc.subtitle}</p>
+              <p className="mt-1.5 text-teal/70 text-xs font-semibold tracking-wider">{svc.price}</p>
 
               {/* CTA */}
               <div className="mt-5 inline-flex items-center gap-2 text-teal font-semibold text-sm group-hover:gap-3 transition-all duration-300">
@@ -112,6 +117,20 @@ export function ServicesSection() {
               {/* Glow on hover */}
               <div className="absolute -bottom-12 -right-12 w-32 h-32 bg-teal/5 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             </a>
+          ))}
+        </div>
+
+        {/* Stats Row */}
+        <div className="mt-10 lg:mt-14 flex flex-wrap items-center justify-center gap-6 lg:gap-10">
+          {[
+            { value: 'Now Booking', label: 'South Florida & Caribbean' },
+            { value: '12', label: 'Destinations' },
+            { value: '24/7', label: 'Concierge' },
+          ].map((stat) => (
+            <div key={stat.label} className="text-center">
+              <div className="stat-number text-[clamp(1.5rem,2.5vw,2rem)]">{stat.value}</div>
+              <div className="stat-label">{stat.label}</div>
+            </div>
           ))}
         </div>
       </div>

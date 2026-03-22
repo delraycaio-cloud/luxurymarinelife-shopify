@@ -8,7 +8,7 @@ gsap.registerPlugin(ScrollTrigger);
 const badges = [
   { icon: Shield, label: '10% to the Ocean', sub: 'Every Purchase' },
   { icon: Truck, label: 'Free US Shipping', sub: 'Orders $75+' },
-  { icon: Star, label: '5.0 ★ Rated', sub: '200+ Reviews' },
+  { icon: Star, label: 'Made for the Water', sub: 'Est. 2024' },
   { icon: RotateCcw, label: '30-Day Guarantee', sub: 'No Questions Asked' },
 ];
 

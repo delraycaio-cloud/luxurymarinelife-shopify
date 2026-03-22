@@ -191,7 +191,7 @@ export function SustainableTechBrandPage() {
               <span>{brand?.name ?? brandSlug}</span>
               {brandSlug === "sublue" && (
                 <span className="text-teal font-sans text-sm lg:text-lg tracking-widest uppercase bg-teal/10 px-4 py-1 rounded-full border border-teal/20">
-                  Use Code: <span className="font-bold">DELRAY</span> For 20% Off
+                  Exclusive Partner Discounts Available
                 </span>
               )}
 

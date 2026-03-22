@@ -13,6 +13,7 @@ import { Footer } from "@/sections/Footer";
 import { FoundersSection } from "@/sections/FoundersSection";
 import { TrustBar } from "@/components/custom/TrustBar";
 import { ServicesSection } from "@/sections/ServicesSection";
+import { ChartersDestinationsSection } from "@/sections/ChartersDestinationsSection";
 import { ShopChatbot } from "@/components/custom/ShopChatbot";
 import { UltraShearPage } from "@/features/ultra-shear/UltraShearPage";
 import { ApparelBrandsPage } from "@/features/apparel-brands/ApparelBrandsPage";
@@ -50,21 +51,14 @@ function HomePage() {
         headline="HEALTHY WATER"
         body={
           <>
-            <p>We fund reef restoration and reduce marine impact — so the waters you love stay pristine for generations.</p>
-            <p className="mt-4">
-              <a
-                href="https://www.seakeepers.org/donate/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-teal hover:text-teal-light transition-colors font-semibold underline underline-offset-4"
-              >
-                🌊 Donate to Seakeepers →
-              </a>
-            </p>
+            <p>We partner with the International SeaKeepers Society to fund reef restoration, marine debris removal, and ocean science.</p>
+            <p className="mt-3 text-white/90 font-semibold">🌊 37 cleanups · 1,468 volunteers · 5,400 lbs of debris removed in 2024</p>
           </>
         }
         backgroundImage="/statement_water_bg.webp"
         zIndex={20}
+        cta={{ text: "Donate to SeaKeepers", onClick: () => window.open('https://www.seakeepers.org/donate/', '_blank') }}
+        secondaryCta={{ text: "See Our Impact →", onClick: () => window.open('https://garmnconnect.web.app', '_blank') }}
       />
 
       <StatementSection
@@ -72,27 +66,19 @@ function HomePage() {
         headline="HEALTHY ANIMALS"
         body={
           <>
-            <p>Every purchase supports wildlife rehabilitation and cleaner coastlines — because thriving ecosystems begin with healthy animals.</p>
-            <p className="mt-4">
-              <a
-                href="https://www.pelicanharbor.org/donate"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-teal hover:text-teal-light transition-colors font-semibold underline underline-offset-4"
-              >
-                🐦 Donate to Pelican Harbor Seabird Station →
-              </a>
-            </p>
+            <p>We support Pelican Harbor Seabird Station — Miami's only wild bird rescue — rehabilitating injured and orphaned wildlife across South Florida.</p>
+            <p className="mt-3 text-white/90 font-semibold">🐦 2,476 animals treated · 148 species · 14 new species in 2024</p>
           </>
         }
         backgroundImage="/statement_animals_bg.webp"
         zIndex={30}
+        cta={{ text: "Donate to Pelican Harbor", onClick: () => window.open('https://www.pelicanharbor.org/donate', '_blank') }}
       />
 
       <StatementSection
         id="experience"
-        headline="THE ERA OF THE SPA YACHT IS OVER. ENTER THE ERA OF THE BIOLOGICAL AMPLIFIER."
-        body="A floating system for recovery, focus, and performance — designed for high performers who refuse to compromise."
+        headline="YOUR YACHT. YOUR FLOATING WELLNESS SYSTEM."
+        body="SmartYacht-certified vessels combine luxury with performance — cold plunge, recovery protocols, and nano-nutrient delivery on the open water. This isn't a spa day. It's a biological edge."
         backgroundImage="/experience_yacht_bg.webp"
         zIndex={40}
         cta={{ text: "Explore UltraShear™", onClick: () => navigate('/ultra-shear') }}
@@ -104,21 +90,30 @@ function HomePage() {
         headline="10% TO THE OCEAN"
         body={
           <>
-            <p>Every sale, 10% goes directly to impact.</p>
-            <p className="mt-3 text-white/90 font-semibold">🌊 GARMN Immersive Learning</p>
-            <p className="mt-1 text-white/60 text-sm">Hands-on ocean conservation education for the next generation.</p>
-            <p className="mt-3 text-white/90 font-semibold">🎓 MagicSchoolBox Program</p>
-            <p className="mt-1 text-white/60 text-sm">Immersive STEM learning kits that bring marine science into classrooms worldwide.</p>
+            <p>10% of every sale funds conservation and education — healthy water, healthy animals, healthy people.</p>
+            <p className="mt-5 text-teal font-display font-bold text-xl lg:text-2xl">Health on the Water — by GARMN</p>
+            <p className="mt-2 text-white/65 text-sm">GARMN (Global Aquatic Resource Management Network) is our 501(c)(3) non-profit partner powering immersive learning, ocean cleanup, and wellness on the water across Miami-Dade County.</p>
+            <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3 text-left max-w-2xl mx-auto">
+              <p className="text-white/90 font-semibold text-sm">🎓 Healthy Students — Immersive ocean-based STEM education for Miami-Dade youth</p>
+              <p className="text-white/90 font-semibold text-sm">🪄 Magic Adventures — Hands-on field trips and Magic School Box STEM kits</p>
+              <p className="text-white/90 font-semibold text-sm">🧹 Ocean Cleanup — Beach and reef debris removal with student volunteers</p>
+              <p className="text-white/90 font-semibold text-sm">🎣 Fishing &amp; Learning — Guided fishing trips combined with marine science</p>
+              <p className="text-white/90 font-semibold text-sm">🌊 Learning on the Water — Kayak, snorkel, and dive programs for all ages</p>
+              <p className="text-white/90 font-semibold text-sm">🎖️ Veteran Adventures — Ocean recovery and wellness trips for veterans</p>
+            </div>
+            <p className="mt-5 text-white/90 font-semibold">🎁 Donation Gift Cards: $50 · $100 · $250 · $500</p>
+            <p className="mt-1 text-white/60 text-sm">Give the gift of education — 100% of donations fund student and veteran learning adventures.</p>
           </>
         }
         backgroundImage="/impact_reef_bg.webp"
         zIndex={50}
-        cta={{ text: "Shop with Purpose", onClick: scrollToShop }}
-        secondaryCta={{ text: "Learn about GARMN →", onClick: () => window.open('https://garmnconnect.web.app', '_blank') }}
+        cta={{ text: "Donate to GARMN", onClick: () => window.open('https://garmnconnect.web.app', '_blank') }}
+        secondaryCta={{ text: "Shop with Purpose", onClick: scrollToShop }}
       />
 
       <ShopSection onCategoryClick={handleCategoryClick} />
       <ServicesSection />
+      <ChartersDestinationsSection />
       <FeaturedProductSection />
       <FoundersSection />
       <ConnectSection />

@@ -435,3 +435,94 @@
 .animate-float {
   animation: floatY 4s ease-in-out infinite;
 }
+
+/* ── Phase 8: 10/10 Polish Utilities ── */
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 12px rgba(45, 212, 191, 0.3), 0 0 24px rgba(45, 212, 191, 0.15); }
+  50% { box-shadow: 0 0 20px rgba(45, 212, 191, 0.5), 0 0 40px rgba(45, 212, 191, 0.25); }
+}
+
+.btn-primary-glow {
+  animation: pulseGlow 2.5s ease-in-out infinite;
+}
+
+.badge-urgency {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  background: rgba(45, 212, 191, 0.08);
+  border: 1px solid rgba(45, 212, 191, 0.2);
+  border-radius: 9999px;
+  padding: 0.375rem 0.875rem;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--teal-vivid);
+  text-transform: uppercase;
+}
+
+.badge-new {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  background: linear-gradient(135deg, var(--teal-vivid), #5EEAD4);
+  color: #050C18;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.5625rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.625rem;
+  border-radius: 9999px;
+  z-index: 10;
+}
+
+.badge-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.badge-live::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ef4444;
+  animation: pulseGlow 1.5s ease-in-out infinite;
+  box-shadow: 0 0 6px rgba(239, 68, 68, 0.6);
+}
+
+.section-contained {
+  contain: layout style paint;
+}
+
+.destination-card {
+  position: relative;
+  border-radius: 1rem;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform var(--duration-base) var(--ease-luxury), box-shadow var(--duration-base) var(--ease-luxury);
+}
+
+.destination-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+.destination-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(5, 12, 24, 0.85) 0%, rgba(5, 12, 24, 0.3) 40%, transparent 70%);
+  z-index: 1;
+}

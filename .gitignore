@@ -68,3 +68,4 @@ tmp/
 temp/
 
 u2net.onnx
+scripts/.gcp_token

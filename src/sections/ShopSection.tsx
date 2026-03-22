@@ -13,6 +13,15 @@ const categories: Category[] = [
   { id: 'apparel', name: 'Apparel', description: 'Climate-ready layers engineered for high-performance living.', image: '/category_apparel.webp', link: '#apparel' },
 ];
 
+const priceAnchors: Record<string, string> = {
+  learning: 'From Free',
+  biohacking: 'From $29',
+  tech: 'From $149',
+  apparel: 'From $39',
+};
+
+const newBadges = ['learning', 'tech'];
+
 type ShopSectionProps = { onCategoryClick?: (categoryId: string) => void; };
 
 export function ShopSection({ onCategoryClick }: ShopSectionProps) {
@@ -86,13 +95,18 @@ export function ShopSection({ onCategoryClick }: ShopSectionProps) {
               <div className="absolute inset-0 bg-gradient-to-t from-marine-900/90 via-marine-900/30 to-transparent" />
 
               {category.id === 'biohacking' && (
-                <div className="absolute top-3 right-3">
+                <div className="absolute top-3 right-3 z-10">
                   <span className="label-elite bg-teal text-marine-900 px-2.5 py-1 rounded-full">Featured</span>
                 </div>
               )}
 
+              {newBadges.includes(category.id) && (
+                <span className="badge-new">NEW</span>
+              )}
+
               <div className="absolute bottom-0 left-0 right-0 p-5 lg:p-6 transition-transform duration-300 group-hover:-translate-y-1">
                 <h3 className="text-white font-display font-bold text-xl lg:text-2xl leading-tight">{category.name}</h3>
+                <p className="mt-1 text-teal/70 text-xs font-semibold tracking-wider">{priceAnchors[category.id]}</p>
                 <p className="mt-2 text-white/65 text-sm leading-relaxed max-h-0 overflow-hidden transition-all duration-400 group-hover:max-h-12 group-hover:mt-2">{category.description}</p>
                 <div className="mt-4 inline-flex items-center gap-2 text-teal font-semibold text-sm group-hover:gap-3 transition-all duration-300">
                   Shop Now <ArrowRight className="w-4 h-4" aria-hidden="true" />
