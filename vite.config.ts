@@ -13,12 +13,17 @@ export default defineConfig({
     },
   },
   build: {
+    assetsInlineLimit: 0,
+    chunkSizeWarningLimit: 600,
     rollupOptions: {
       output: {
         manualChunks: {
           vendor: ['react', 'react-dom', 'react-router-dom'],
           gsap: ['gsap'],
-          ui: ['lucide-react', 'clsx', 'tailwind-merge']
+          ui: ['lucide-react', 'clsx', 'tailwind-merge'],
+          firebase: ['firebase/app', 'firebase/auth', 'firebase/firestore', 'firebase/functions'],
+          shopify: ['sonner', 'zustand'],
+          charts: ['recharts'],
         }
       }
     }
