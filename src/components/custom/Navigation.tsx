@@ -101,6 +101,7 @@ export function Navigation() {
             {/* Logo */}
             <a
               href="/"
+              aria-label="Luxury Marine Life — Home"
               className="flex flex-col items-center justify-center transition-transform hover:scale-105 shrink-0 z-10"
               onClick={(e) => {
                 e.preventDefault();
@@ -141,7 +142,7 @@ export function Navigation() {
               {/* Cart */}
               <Sheet open={isCartOpen} onOpenChange={setIsCartOpen}>
                 <SheetTrigger asChild>
-                  <button className="p-2 text-white/80 hover:text-white transition-colors relative">
+                  <button className="p-2 text-white/80 hover:text-white transition-colors relative" aria-label="Shopping cart">
                     <ShoppingBag className="w-5 h-5" />
                     {totalItems > 0 && (
                       <span className="absolute -top-1 -right-1 w-5 h-5 bg-teal text-marine-900 text-xs font-bold rounded-full flex items-center justify-center">
@@ -191,6 +192,7 @@ export function Navigation() {
                                       updateQuantity(item.id, item.quantity - 1)
                                     }
                                     className="p-1 hover:bg-white/10 rounded transition-colors"
+                                    aria-label={`Decrease quantity of ${item.name}`}
                                   >
                                     <Minus className="w-4 h-4 text-white/60" />
                                   </button>
@@ -202,12 +204,14 @@ export function Navigation() {
                                       updateQuantity(item.id, item.quantity + 1)
                                     }
                                     className="p-1 hover:bg-white/10 rounded transition-colors"
+                                    aria-label={`Increase quantity of ${item.name}`}
                                   >
                                     <Plus className="w-4 h-4 text-white/60" />
                                   </button>
                                   <button
                                     onClick={() => removeFromCart(item.id)}
                                     className="ml-auto p-1 hover:bg-red-500/20 rounded transition-colors"
+                                    aria-label={`Remove ${item.name} from cart`}
                                   >
                                     <Trash2 className="w-4 h-4 text-red-400" />
                                   </button>
@@ -245,6 +249,8 @@ export function Navigation() {
               <button
                 className="lg:hidden p-2 text-white/80 hover:text-white transition-colors"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+                aria-expanded={isMobileMenuOpen}
               >
                 {isMobileMenuOpen ? (
                   <X className="w-5 h-5" />

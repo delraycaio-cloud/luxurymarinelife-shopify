@@ -91,7 +91,7 @@ export function ServicesSection() {
         <div ref={titleRef} className="max-w-xl mb-12 lg:mb-16">
           <span className="label-elite text-gold">Services & Experiences</span>
           <h2 className="heading-display text-white text-[clamp(28px,3.5vw,52px)] mt-3">Beyond the Shop</h2>
-          <p className="mt-4 text-white/50 text-base lg:text-lg leading-relaxed">
+          <p className="mt-4 text-white/60 text-base lg:text-lg leading-relaxed">
             Charter a SmartYacht, join the yacht club, or partner with the ecosystem —
             every touchpoint is designed for excellence.
           </p>
@@ -115,7 +115,7 @@ export function ServicesSection() {
 
               {/* Content */}
               <h3 className="text-white font-display font-bold text-lg leading-tight">{svc.title}</h3>
-              <p className="mt-2.5 text-white/45 text-sm leading-relaxed">{svc.subtitle}</p>
+              <p className="mt-2.5 text-white/60 text-sm leading-relaxed">{svc.subtitle}</p>
               <p className="mt-1.5 text-teal/70 text-xs font-semibold tracking-wider">{svc.price}</p>
 
               {/* CTA */}

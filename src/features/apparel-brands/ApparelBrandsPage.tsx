@@ -15,21 +15,21 @@ const brands: ApparelBrand[] = [
     id: "luxury-marine-life",
     name: "Luxury Marine Life",
     blurb:
-      "Core essentials for life on the water—engineered, refined, and philanthropic.",
+      "Core essentials for life on the water—UPF 50+ sun protection, sustainable fabrics, and 10% to ocean restoration with every purchase.",
     image: {
       src: "/images/lml-brand-image.webp",
-      alt: "Luxury Marine Life brand image",
+      alt: "Luxury Marine Life sustainable yacht apparel — premium ocean-inspired tees and performance wear",
     },
     accent: "teal",
   },
   {
     id: "ac-yacht-club",
-    name: "Ac Yacht Club",
+    name: "AC Yacht Club",
     blurb:
-      "Clean lines, quiet flex. Minimal palettes with technical performance.",
+      "The Founder Collection—Italian craftsmanship, clean lines, quiet flex. From the deck to the dinner party.",
     image: {
       src: "/images/ac-brand-image.webp",
-      alt: "Ac Yacht Club brand image",
+      alt: "AC Yacht Club elevated gentleman's apparel — Italian craftsmanship yacht wear",
     },
     accent: "gold",
   },
@@ -37,10 +37,10 @@ const brands: ApparelBrand[] = [
     id: "hottie-yachtie-yacht-club",
     name: "Hottie Yachtie Yacht Club",
     blurb:
-      "After-dark deck energy. Pieces built to read premium from twenty feet away.",
+      "After-dark deck energy. Statement pieces built to read premium from twenty feet away.",
     image: {
       src: "/images/hyyc-brand.webp",
-      alt: "Hottie Yachtie Yacht Club brand image",
+      alt: "Hottie Yachtie Yacht Club bold party wear — premium yacht deck nightlife apparel",
     },
     accent: "crimson",
   },
@@ -104,7 +104,7 @@ export function ApparelBrandsPage() {
             <div className="inline-flex items-center gap-3">
               <span className="label-elite text-teal">Apparel</span>
               <span className="h-[1px] w-10 bg-white/10" />
-              <span className="text-xs text-white/40 tracking-[0.18em] uppercase">
+              <span className="text-xs text-white/60 tracking-[0.18em] uppercase">
                 Curated Brands · {now.getFullYear()}
               </span>
             </div>
@@ -167,7 +167,7 @@ export function ApparelBrandsPage() {
                           Brand {String(idx + 1).padStart(2, "0")}
                         </span>
 
-                        <span className="text-white/35 text-xs tracking-[0.2em] uppercase">
+                        <span className="text-white/60 text-xs tracking-[0.2em] uppercase">
                           Capsule
                         </span>
                       </div>
@@ -175,7 +175,7 @@ export function ApparelBrandsPage() {
                       <h2 className="mt-5 text-white font-display font-extrabold uppercase tracking-[0.02em] leading-tight text-[clamp(22px,2.2vw,30px)]">
                         {brand.name}
                       </h2>
-                      <p className="mt-3 text-white/55 leading-relaxed text-sm">
+                      <p className="mt-3 text-white/65 leading-relaxed text-sm">
                         {brand.blurb}
                       </p>
 
@@ -214,7 +214,7 @@ export function ApparelBrandsPage() {
                             >
                               View
                             </span>
-                            <span className="text-white/45">Products</span>
+                            <span className="text-white/60">Products</span>
                           </span>
                           <ArrowUpRight className="w-4 h-4 text-white/50 group-hover:text-white/80 transition-colors" />
                         </button>

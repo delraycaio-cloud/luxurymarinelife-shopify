@@ -41,7 +41,15 @@ export default function HeroSection({ bgImage, circleImages, zIndex, onShopClick
 
   return (
     <section ref={sectionRef} className="hyyc-section-pinned" style={{ zIndex }}>
-      <div ref={bgRef} className="absolute inset-0 w-full h-full" style={{ backgroundImage: `url(${bgImage})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
+      <div ref={bgRef} className="absolute inset-0 w-full h-full">
+        <img
+          src={bgImage}
+          alt="Hottie Yachtie Yacht Club — bold party wear for yacht deck nightlife"
+          className="absolute inset-0 w-full h-full object-cover object-center"
+          fetchPriority="high"
+          loading="eager"
+          decoding="async"
+        />
         <div className="absolute inset-0 bg-[#0B0B0D]/55" />
       </div>
       <div ref={ribbonRef} className="absolute left-0 top-0 w-[62vw] h-full bg-[#FF1F3D]/92 hyyc-ribbon-left" style={{ zIndex: 2 }} />
@@ -63,7 +71,7 @@ export default function HeroSection({ bgImage, circleImages, zIndex, onShopClick
           {circleImages.map((img, i) => (
             <div key={i} className="hyyc-circle absolute w-[clamp(110px,14vw,210px)] h-[clamp(110px,14vw,210px)] rounded-full hyyc-circle-border overflow-hidden"
               style={{ right: `${i * 90}px`, top: i === 0 ? '22px' : i === 1 ? '-10px' : '8px', zIndex: 3 - i }}>
-              <img src={img} alt="" className="w-full h-full object-cover" />
+              <img src={img} alt={`Hottie Yachtie collection showcase ${i + 1}`} className="w-full h-full object-cover" />
             </div>
           ))}
         </div>

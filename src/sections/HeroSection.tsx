@@ -160,7 +160,7 @@ export function HeroSection() {
               </p>
 
               <div className="mt-5 lg:mt-6 flex items-center gap-3 justify-center lg:justify-start">
-                <div className="stars" aria-label="5 out of 5 stars">
+                <div className="stars" role="img" aria-label="5 out of 5 stars">
                   {Array.from({ length: 5 }).map((_, i) => (
                     <svg
                       key={i}

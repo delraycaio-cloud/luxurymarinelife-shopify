@@ -22,12 +22,13 @@ export default function Hero() {
       className="relative w-full h-screen min-h-[700px] overflow-hidden"
     >
       <div className="absolute inset-0 w-full h-full">
-        <div
-          className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat scale-110"
-          style={{
-            backgroundImage: "url(/hero-main.webp)",
-            transform: "scale(1.1)",
-          }}
+        <img
+          src="/hero-main.webp"
+          alt="Luxury Marine Life sustainable yacht apparel — premium ocean-inspired lifestyle clothing"
+          className="absolute inset-0 w-full h-full object-cover object-center scale-110"
+          fetchPriority="high"
+          loading="eager"
+          decoding="async"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-[#0a1628]/40 via-transparent to-[#0a1628]/70" />
         <div className="absolute inset-0 bg-gradient-to-r from-[#0a1628]/50 via-transparent to-transparent" />

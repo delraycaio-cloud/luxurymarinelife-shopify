@@ -39,8 +39,11 @@ export function HeroSection() {
       <div className="absolute inset-0 z-0">
         <img
           src="/images/hero-harbor.webp"
-          alt="Luxury harbor"
+          alt="AC Yacht Club — elevated gentleman's yacht apparel with Italian craftsmanship, harbor view"
           className="w-full h-full object-cover opacity-40"
+          fetchPriority="high"
+          loading="eager"
+          decoding="async"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-harbor/60 via-harbor/40 to-harbor" />
       </div>

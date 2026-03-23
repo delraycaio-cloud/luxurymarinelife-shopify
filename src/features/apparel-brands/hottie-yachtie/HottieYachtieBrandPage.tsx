@@ -47,8 +47,9 @@ export default function HottieYachtieBrandPage() {
         <button 
           onClick={() => navigate(-1)}
           className="flex items-center gap-2 group cursor-pointer text-[#F6F6F8] hover:text-[#FF1F3D] transition-colors"
+          aria-label="Go back to previous page"
         >
-          <ArrowLeft size={20} />
+          <ArrowLeft size={20} aria-hidden="true" />
           <span className="text-xs uppercase tracking-widest font-bold font-sans">Back</span>
         </button>
         
@@ -63,6 +64,7 @@ export default function HottieYachtieBrandPage() {
           <button 
             className="text-[#F6F6F8] hover:text-[#FF1F3D] transition-colors text-xs uppercase tracking-widest font-bold font-sans"
             onClick={() => scrollToSection('all-products')}
+            aria-label="Browse all Hottie Yachtie products"
           >
             Shop
           </button>

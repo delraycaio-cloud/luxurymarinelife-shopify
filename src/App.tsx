@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, lazy, Suspense } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
@@ -15,19 +15,31 @@ import { TrustBar } from "@/components/custom/TrustBar";
 import { ServicesSection } from "@/sections/ServicesSection";
 import { ChartersDestinationsSection } from "@/sections/ChartersDestinationsSection";
 import { ShopChatbot } from "@/components/custom/ShopChatbot";
-import { UltraShearPage } from "@/features/ultra-shear/UltraShearPage";
-import { ApparelBrandsPage } from "@/features/apparel-brands/ApparelBrandsPage";
-import { LuxuryMarineLifeBrandPage } from "@/features/apparel-brands/luxury-marine-life/LuxuryMarineLifeBrandPage";
-import HottieYachtieBrandPage from "@/features/apparel-brands/hottie-yachtie/HottieYachtieBrandPage";
-import AcYachtClubBrandPage from "@/features/apparel-brands/ac-yacht-club/AcYachtClubBrandPage";
-import ShopifyDemoPage from "@/features/shopify-demo/ShopifyDemoPage";
-import { SustainableTechPage } from "@/features/sustainable-tech/SustainableTechPage";
-import { SustainableTechBrandPage } from "@/features/sustainable-tech/SustainableTechBrandPage";
-import { PartnersPage } from "@/features/partners/PartnersPage";
-import { BiohackingBundlesPage } from "@/sections/BiohackingBundlesPage";
-import { PrivacyPage } from "@/features/legal/PrivacyPage";
-import { TermsPage } from "@/features/legal/TermsPage";
-import { GiftCardsPage } from "@/features/gift-cards/GiftCardsPage";
+
+// --- Code-split route pages (lazy loaded) ---
+const UltraShearPage = lazy(() => import("@/features/ultra-shear/UltraShearPage").then(m => ({ default: m.UltraShearPage })));
+const ApparelBrandsPage = lazy(() => import("@/features/apparel-brands/ApparelBrandsPage").then(m => ({ default: m.ApparelBrandsPage })));
+const LuxuryMarineLifeBrandPage = lazy(() => import("@/features/apparel-brands/luxury-marine-life/LuxuryMarineLifeBrandPage").then(m => ({ default: m.LuxuryMarineLifeBrandPage })));
+const HottieYachtieBrandPage = lazy(() => import("@/features/apparel-brands/hottie-yachtie/HottieYachtieBrandPage"));
+const AcYachtClubBrandPage = lazy(() => import("@/features/apparel-brands/ac-yacht-club/AcYachtClubBrandPage"));
+const ShopifyDemoPage = lazy(() => import("@/features/shopify-demo/ShopifyDemoPage"));
+const SustainableTechPage = lazy(() => import("@/features/sustainable-tech/SustainableTechPage").then(m => ({ default: m.SustainableTechPage })));
+const SustainableTechBrandPage = lazy(() => import("@/features/sustainable-tech/SustainableTechBrandPage").then(m => ({ default: m.SustainableTechBrandPage })));
+const PartnersPage = lazy(() => import("@/features/partners/PartnersPage").then(m => ({ default: m.PartnersPage })));
+const BiohackingBundlesPage = lazy(() => import("@/sections/BiohackingBundlesPage").then(m => ({ default: m.BiohackingBundlesPage })));
+const PrivacyPage = lazy(() => import("@/features/legal/PrivacyPage").then(m => ({ default: m.PrivacyPage })));
+const TermsPage = lazy(() => import("@/features/legal/TermsPage").then(m => ({ default: m.TermsPage })));
+const GiftCardsPage = lazy(() => import("@/features/gift-cards/GiftCardsPage").then(m => ({ default: m.GiftCardsPage })));
+
+// Minimal loading fallback for lazy routes
+function LazyFallback() {
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-marine-900">
+      <div className="w-8 h-8 border-2 border-teal border-t-transparent rounded-full animate-spin" />
+    </div>
+  );
+}
+
 
 
 gsap.registerPlugin(ScrollTrigger);
@@ -163,17 +175,9 @@ function HomePage() {
 function RoutedApp() {
   const location = useLocation();
   const isUltraShearRoute = location.pathname === "/ultra-shear";
-  const isApparelBrandsRoute = location.pathname === "/apparel-brands";
   const isLmlRoute = location.pathname === "/luxury-marine-life-brand";
   const isHyycRoute = location.pathname === "/hottie-yachtie-brand";
   const isAcYcRoute = location.pathname === "/ac-yacht-club-apparel";
-  const isSustainableTechRoute = location.pathname === "/sustainable-tech";
-  const isPartnersRoute = location.pathname === "/partners";
-  const isBiohackingRoute = location.pathname === "/biohacking-bundles";
-  const isPrivacyRoute = location.pathname === "/privacy";
-  const isTermsRoute = location.pathname === "/terms";
-  const isGiftCardsRoute = location.pathname === "/gift-cards";
-  const isSustainableTechBrandRoute = location.pathname.startsWith("/sustainable-tech/");
 
   useEffect(() => {
     if (location.pathname !== "/") return;
@@ -226,119 +230,127 @@ function RoutedApp() {
   }, [location.pathname]);
 
   useEffect(() => {
-    // Phase 2: Technical SEO & Agentic Search Dynamic Updates
+    const SITE = "https://luxurymarinelife.shop";
+    const path = location.pathname;
+
+    // --- Canonical ---
     const canonicalLink =
       document.querySelector('link[rel="canonical"]') ||
       document.createElement("link");
     canonicalLink.setAttribute("rel", "canonical");
-    canonicalLink.setAttribute(
-      "href",
-      `https://luxurymarinelife-shopify.web.app${location.pathname}`,
-    );
+    canonicalLink.setAttribute("href", `${SITE}${path}`);
     if (!document.querySelector('link[rel="canonical"]')) {
       document.head.appendChild(canonicalLink);
     }
 
-    const metaDescription =
-      document.querySelector('meta[name="description"]') ||
-      document.createElement("meta");
-    metaDescription.setAttribute("name", "description");
+    // --- Helper: set or create a meta tag ---
+    const setMeta = (attr: string, key: string, value: string) => {
+      const sel = `meta[${attr}="${key}"]`;
+      const el = document.querySelector(sel) || document.createElement("meta");
+      el.setAttribute(attr, key);
+      el.setAttribute("content", value);
+      if (!document.querySelector(sel)) document.head.appendChild(el);
+    };
 
-    if (isUltraShearRoute) {
-      document.title = "UltraShear | Luxury Marine Life Bio-Hacking";
-      metaDescription.setAttribute(
-        "content",
-        "UltraShear Technology™ transforms oil-based supplements into highly bioavailable nanoemulsions for marine life high performers.",
-      );
-    } else if (isApparelBrandsRoute) {
-      document.title = "Apparel Brands | Luxury Marine Life";
-      metaDescription.setAttribute(
-        "content",
-        "Explore our apparel capsules: Hottie Yachtie Yacht Club, Ac Yacht Club, and Luxury Marine Life.",
-      );
-    } else if (isLmlRoute) {
-      document.title = "Luxury Marine Life Apparel | Shop the Collection";
-      metaDescription.setAttribute(
-        "content",
-        "Shop the official Luxury Marine Life apparel collection—premium tees, sustainable fabrics, and ocean-inspired designs.",
-      );
-    } else if (isHyycRoute) {
-      document.title = "Hottie Yachtie | Party Wear for the open sea";
-      metaDescription.setAttribute(
-        "content",
-        "Shop the official Hottie Yachtie apparel collection—party wear for the open sea.",
-      );
-    } else if (isAcYcRoute) {
-      document.title = "AC Yacht Club | High-Performance Apparel";
-      metaDescription.setAttribute(
-        "content",
-        "Shop the official AC Yacht Club apparel collection—clean lines, quiet flex.",
-      );
-    } else if (isSustainableTechRoute) {
-      document.title = "Sustainable Tech | Luxury Marine Life";
-      metaDescription.setAttribute(
-        "content",
-        "Clean innovations for the water you love—filtration, energy, monitoring, and waste solutions for marine life.",
-      );
-    } else if (isPartnersRoute) {
-      document.title = "Become a Partner | Luxury Marine Life";
-      metaDescription.setAttribute(
-        "content",
-        "Earn commissions as an affiliate or list your products on Luxury Marine Life. Join our premium marine lifestyle marketplace.",
-      );
-    } else if (isBiohackingRoute) {
-      document.title = "Biohacking Bundles | Clinical Luxury Protocols";
-      metaDescription.setAttribute(
-        "content",
-        "Biohacker's Stack, Yacht Club Essentials, and Health CEO Annual Supply — clinical-grade NanoSpray bundles with exclusive savings.",
-      );
-    } else if (isPrivacyRoute) {
-      document.title = "Privacy Policy | Luxury Marine Life";
-      metaDescription.setAttribute(
-        "content",
-        "Learn how Luxury Marine Life collects, uses, and protects your personal data. Your privacy matters to us.",
-      );
-    } else if (isTermsRoute) {
-      document.title = "Terms of Service | Luxury Marine Life";
-      metaDescription.setAttribute(
-        "content",
-        "Read the Terms of Service for Luxury Marine Life — pricing, shipping, returns, intellectual property, and governing law.",
-      );
-    } else if (isGiftCardsRoute) {
-      document.title = "Donation Gift Cards | Tax-Deductible | Luxury Marine Life";
-      metaDescription.setAttribute(
-        "content",
-        "Purchase tax-deductible donation gift cards. 100% funds GARMN immersive learning adventures — STEM education, ocean cleanup, and veteran wellness programs.",
-      );
-    } else if (isSustainableTechBrandRoute) {
-      document.title = "Sustainable Tech Brand | Luxury Marine Life";
-      metaDescription.setAttribute(
-        "content",
-        "Explore innovative sustainable technology for marine environments—filtration, energy, and monitoring solutions.",
-      );
-    } else {
-      document.title = "Luxury Marine Life | Premium Wellness & Lifestyle for the Water";
-      metaDescription.setAttribute(
-        "content",
-        "Premium wellness, performance apparel, and sustainable technology for life on the water. 10% of every purchase supports ocean restoration.",
-      );
-    }
+    // --- Route-specific SEO config ---
+    type SEO = { title: string; desc: string; image: string };
+    const seoMap: Record<string, SEO> = {
+      "/ultra-shear": {
+        title: "UltraShear™ Nano-Emulsified Supplements | Luxury Marine Life",
+        desc: "UltraShear Technology™ transforms oil-based supplements into highly bioavailable nanoemulsions. Omega-3, Vitamin D3, CoQ10 & CBD in one precision spray.",
+        image: `${SITE}/images/oil_hero1.webp`,
+      },
+      "/apparel-brands": {
+        title: "Premium Yacht Apparel Brands | Luxury Marine Life Shop",
+        desc: "Shop three luxury yacht apparel capsules — Luxury Marine Life, Hottie Yachtie Yacht Club, and AC Yacht Club. Sustainable fabrics, UPF 50+, built for sun, salt & high-performance living.",
+        image: `${SITE}/images/lml-brand-image.webp`,
+      },
+      "/luxury-marine-life-brand": {
+        title: "Luxury Marine Life Apparel | Sustainable Yacht Wear & Ocean-Inspired Designs",
+        desc: "Shop the official Luxury Marine Life apparel collection — premium tees, performance polos, and ocean-inspired designs. UPF 50+ protection, sustainable fabrics. 10% to ocean restoration.",
+        image: `${SITE}/hero-main.webp`,
+      },
+      "/hottie-yachtie-brand": {
+        title: "Hottie Yachtie Yacht Club | Bold Party Wear for the Open Sea",
+        desc: "Shop Hottie Yachtie Yacht Club — after-dark deck energy meets premium craftsmanship. Statement pieces built to read premium from twenty feet away.",
+        image: `${SITE}/hero_deck_party.webp`,
+      },
+      "/ac-yacht-club-apparel": {
+        title: "AC Yacht Club | Elevated Yacht Club Style & Gentleman's Apparel",
+        desc: "Shop the AC Yacht Club Founder Collection — Italian craftsmanship, clean lines, quiet flex. Premium apparel for the discerning gentleman, from deck to dinner party.",
+        image: `${SITE}/images/hero-harbor.webp`,
+      },
+      "/sustainable-tech": {
+        title: "Sustainable Marine Technology | Luxury Marine Life",
+        desc: "Clean innovations for the water you love — filtration, solar energy, water monitoring, and waste management solutions for marine environments.",
+        image: `${SITE}/hero_wellness_bg.webp`,
+      },
+      "/partners": {
+        title: "Become a Partner | Luxury Marine Life Affiliate Program",
+        desc: "Earn commissions as an affiliate or list your products on Luxury Marine Life. Join our premium marine lifestyle marketplace and grow your brand.",
+        image: `${SITE}/hero_wellness_bg.webp`,
+      },
+      "/biohacking-bundles": {
+        title: "Biohacking Bundles | Clinical-Grade NanoSpray Protocols",
+        desc: "Biohacker's Stack, Yacht Club Essentials, and Health CEO Annual Supply — clinical-grade NanoSpray bundles with exclusive savings up to 30%.",
+        image: `${SITE}/images/oil_hero1.webp`,
+      },
+      "/privacy": {
+        title: "Privacy Policy | Luxury Marine Life",
+        desc: "Learn how Luxury Marine Life collects, uses, and protects your personal data. Your privacy matters to us.",
+        image: `${SITE}/hero_wellness_bg.webp`,
+      },
+      "/terms": {
+        title: "Terms of Service | Luxury Marine Life",
+        desc: "Read the Terms of Service for Luxury Marine Life — pricing, shipping, returns, intellectual property, and governing law.",
+        image: `${SITE}/hero_wellness_bg.webp`,
+      },
+      "/gift-cards": {
+        title: "Donation Gift Cards | Tax-Deductible Ocean Education | Luxury Marine Life",
+        desc: "Purchase tax-deductible donation gift cards. 100% funds GARMN immersive learning adventures — STEM education, ocean cleanup, and veteran wellness programs.",
+        image: `${SITE}/hero_wellness_bg.webp`,
+      },
+    };
 
-    if (!document.querySelector('meta[name="description"]')) {
-      document.head.appendChild(metaDescription);
-    }
-  }, [location.pathname, isUltraShearRoute, isApparelBrandsRoute, isLmlRoute, isHyycRoute, isAcYcRoute, isSustainableTechRoute, isPartnersRoute, isBiohackingRoute, isPrivacyRoute, isTermsRoute, isGiftCardsRoute, isSustainableTechBrandRoute]);
+    const defaultSeo: SEO = {
+      title: "Luxury Marine Life | Premium Wellness & Lifestyle for the Water",
+      desc: "Premium wellness, performance apparel, and sustainable technology for life on the water. 10% of every purchase supports ocean restoration.",
+      image: `${SITE}/hero_wellness_bg.webp`,
+    };
+
+    const seo = seoMap[path] ?? (path.startsWith("/sustainable-tech/")
+      ? { title: "Sustainable Tech Brand | Luxury Marine Life", desc: "Explore innovative sustainable technology for marine environments — filtration, energy, and monitoring solutions.", image: `${SITE}/hero_wellness_bg.webp` }
+      : defaultSeo);
+
+    // --- Apply title + description ---
+    document.title = seo.title;
+    setMeta("name", "description", seo.desc);
+
+    // --- Dynamic Open Graph ---
+    setMeta("property", "og:title", seo.title);
+    setMeta("property", "og:description", seo.desc);
+    setMeta("property", "og:image", seo.image);
+    setMeta("property", "og:url", `${SITE}${path}`);
+    setMeta("property", "og:type", "website");
+    setMeta("property", "og:site_name", "Luxury Marine Life");
+
+    // --- Dynamic Twitter Cards ---
+    setMeta("name", "twitter:card", "summary_large_image");
+    setMeta("name", "twitter:title", seo.title);
+    setMeta("name", "twitter:description", seo.desc);
+    setMeta("name", "twitter:image", seo.image);
+  }, [location.pathname]);
 
   if (isLmlRoute) {
-    return <LuxuryMarineLifeBrandPage />;
+    return <Suspense fallback={<LazyFallback />}><LuxuryMarineLifeBrandPage /></Suspense>;
   }
 
   if (isHyycRoute) {
-    return <HottieYachtieBrandPage />;
+    return <Suspense fallback={<LazyFallback />}><HottieYachtieBrandPage /></Suspense>;
   }
 
   if (isAcYcRoute) {
-    return <AcYachtClubBrandPage />;
+    return <Suspense fallback={<LazyFallback />}><AcYachtClubBrandPage /></Suspense>;
   }
 
   return (
@@ -350,22 +362,24 @@ function RoutedApp() {
         {!isUltraShearRoute && <Navigation />}
 
         <main className="relative">
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/ultra-shear" element={<UltraShearPage />} />
-            <Route path="/apparel-brands" element={<ApparelBrandsPage />} />
-            <Route path="/luxury-marine-life-brand" element={<LuxuryMarineLifeBrandPage />} />
-            <Route path="/hottie-yachtie-brand" element={<HottieYachtieBrandPage />} />
-            <Route path="/ac-yacht-club-apparel" element={<AcYachtClubBrandPage />} />
-            <Route path="/shopify-demo" element={<ShopifyDemoPage />} />
-            <Route path="/sustainable-tech" element={<SustainableTechPage />} />
-            <Route path="/sustainable-tech/:brandSlug" element={<SustainableTechBrandPage />} />
-            <Route path="/partners" element={<PartnersPage />} />
-            <Route path="/biohacking-bundles" element={<BiohackingBundlesPage onBack={() => window.history.back()} />} />
-            <Route path="/privacy" element={<PrivacyPage />} />
-            <Route path="/terms" element={<TermsPage />} />
-            <Route path="/gift-cards" element={<GiftCardsPage />} />
-          </Routes>
+          <Suspense fallback={<LazyFallback />}>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/ultra-shear" element={<UltraShearPage />} />
+              <Route path="/apparel-brands" element={<ApparelBrandsPage />} />
+              <Route path="/luxury-marine-life-brand" element={<LuxuryMarineLifeBrandPage />} />
+              <Route path="/hottie-yachtie-brand" element={<HottieYachtieBrandPage />} />
+              <Route path="/ac-yacht-club-apparel" element={<AcYachtClubBrandPage />} />
+              <Route path="/shopify-demo" element={<ShopifyDemoPage />} />
+              <Route path="/sustainable-tech" element={<SustainableTechPage />} />
+              <Route path="/sustainable-tech/:brandSlug" element={<SustainableTechBrandPage />} />
+              <Route path="/partners" element={<PartnersPage />} />
+              <Route path="/biohacking-bundles" element={<BiohackingBundlesPage onBack={() => window.history.back()} />} />
+              <Route path="/privacy" element={<PrivacyPage />} />
+              <Route path="/terms" element={<TermsPage />} />
+              <Route path="/gift-cards" element={<GiftCardsPage />} />
+            </Routes>
+          </Suspense>
         </main>
 
         {/* Global AI Chatbot — available on all pages */}
