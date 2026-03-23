@@ -110,13 +110,28 @@ export function HeroSection() {
         className="absolute inset-0 z-[1]"
         style={{ opacity: 0 }}
       >
-        <img
-          src="/hero_wellness_bg.webp"
-          alt="Luxury wellness on superyacht"
+        {/* Veo 3 cinematic hero video — loops silently as background */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          poster="/hero_wellness_bg.webp"
           className="w-full h-full object-cover"
-          fetchPriority="high"
-          decoding="async"
-        />
+          aria-hidden="true"
+        >
+          <source
+            src="https://storage.googleapis.com/ac-godmode-titan.firebasestorage.app/hero-videos/shop-hero-health-on-water-v2-2026-03-22.mp4"
+            type="video/mp4"
+          />
+          {/* Fallback image for browsers that don't support video */}
+          <img
+            src="/hero_wellness_bg.webp"
+            alt="Luxury wellness on superyacht"
+            className="w-full h-full object-cover"
+          />
+        </video>
         <div className="absolute inset-0 bg-gradient-to-r from-marine-900/80 via-marine-900/40 to-marine-900/10" />
         <div className="absolute inset-0 bg-gradient-to-t from-marine-900/60 via-transparent to-transparent" />
       </div>
