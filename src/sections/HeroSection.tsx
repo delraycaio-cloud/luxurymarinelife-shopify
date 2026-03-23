@@ -122,7 +122,7 @@ export function HeroSection() {
           aria-hidden="true"
         >
           <source
-            src="https://storage.googleapis.com/ac-godmode-titan.firebasestorage.app/hero-videos/shop-hero-health-on-water-v2-2026-03-22.mp4"
+            src="https://storage.googleapis.com/ac-godmode-titan.firebasestorage.app/hero-videos/shop-hero-health-on-water-v6-2026-03-22.mp4"
             type="video/mp4"
           />
           {/* Fallback image for browsers that don't support video */}
