@@ -15,7 +15,7 @@ const ShopifyDemoPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    document.title = "Shopify Integration Demo | GARMN";
+    document.title = "Shop All Products | Luxury Marine Life";
     loadProducts();
   }, []);
 

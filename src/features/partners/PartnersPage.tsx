@@ -105,8 +105,7 @@ export function PartnersPage() {
                   onSubmit={(e) => {
                     e.preventDefault();
                     const form = e.target as HTMLFormElement;
-                    const data = new FormData(form);
-                    console.log('[AFFILIATE_SIGNUP]', Object.fromEntries(data));
+                    // Form data ready for Firebase backend integration
                     alert('Application submitted! We will review and get back to you within 48 hours.');
                     form.reset();
                   }}
@@ -202,8 +201,7 @@ export function PartnersPage() {
                   onSubmit={(e) => {
                     e.preventDefault();
                     const form = e.target as HTMLFormElement;
-                    const data = new FormData(form);
-                    console.log('[VENDOR_SIGNUP]', Object.fromEntries(data));
+                    // Form data ready for Firebase backend integration
                     alert('Application submitted! Our curation team will review within 5 business days.');
                     form.reset();
                   }}

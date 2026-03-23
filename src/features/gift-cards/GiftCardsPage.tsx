@@ -128,7 +128,7 @@ export function GiftCardsPage() {
                       {/* Badge */}
                       <div className={`inline-flex items-center gap-1.5 rounded-full bg-white/5 px-3 py-1 text-xs font-semibold ${tier.color} self-start`}>
                         <Icon className="w-3.5 h-3.5" />
-                        {product.node.tags?.includes('God Mode') ? 'God Mode' : 'Tax-Deductible'}
+                        Tax-Deductible
                       </div>
 
                       {/* Image */}
