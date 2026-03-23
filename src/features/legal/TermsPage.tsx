@@ -152,7 +152,7 @@ export function TermsPage() {
             <h2>8. Third-Party Links</h2>
             <p>
               Our Site may contain links to third-party websites, including
-              partner organizations such as GARMN (garmnconnect.web.app),
+              partner organizations such as GARMN (luxurymarinelife.com/garmn),
               SeaKeepers, and Pelican Harbor Seabird Station. We are not
               responsible for the content, privacy practices, or terms of those
               third-party sites.

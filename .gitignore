@@ -67,5 +67,5 @@ Desktop.ini
 tmp/
 temp/
 
-u2net.onnx
+*.onnx
 scripts/.gcp_token

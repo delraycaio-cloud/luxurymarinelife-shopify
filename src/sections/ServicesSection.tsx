@@ -53,7 +53,7 @@ const services = [
     subtitle: 'Tax-deductible educational charters for students & veterans. 501(c)(3).',
     price: '100% Donated',
     cta: 'Give an Adventure',
-    href: 'https://garmnconnect.web.app',
+    href: 'https://luxurymarinelife.com/garmn',
     gradient: 'from-teal/25 to-emerald-500/15',
   },
 ];

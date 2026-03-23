@@ -1,7 +1,7 @@
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
-const SHOPIFY_DOMAIN = 'https://9zuae1-uh.myshopify.com';
+const SHOPIFY_DOMAIN = 'https://luxury-marine-life-charter-shop-give-back.myshopify.com';
 
 type Bundle = {
   id: string;

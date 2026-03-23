@@ -12,6 +12,7 @@ const footerLinks = {
     { label: 'Biohacking Bundles', href: '/biohacking-bundles' },
     { label: 'Apparel Brands', href: '/apparel-brands' },
     { label: 'Sustainable Tech', href: '/sustainable-tech' },
+    { label: 'Donation Gift Cards', href: '/gift-cards' },
   ],
   brands: [
     { label: 'Luxury Marine Life', href: '/luxury-marine-life-brand' },
@@ -21,12 +22,12 @@ const footerLinks = {
   company: [
     { label: 'Yacht Charters', href: 'https://luxurymarinelife.com/charter', external: true },
     { label: 'Yacht Club Membership', href: 'https://luxurymarinelife.com/acyachtclub', external: true },
-    { label: 'Impact (GARMN)', href: 'https://garmnconnect.web.app', external: true },
+    { label: 'Impact (GARMN)', href: 'https://luxurymarinelife.com/garmn', external: true },
     { label: 'GARMN.Yacht', href: 'https://luxurymarinelife.com/garmn.yacht', external: true },
     { label: 'GARMN.Boat', href: 'https://luxurymarinelife.com/garmn.boat', external: true },
     { label: 'Tax Advantages', href: 'https://luxurymarinelife.com/garmn/depreciation', external: true },
     { label: 'Become a Partner', href: '/partners' },
-    { label: 'SmartYacht', href: 'https://luxurymarinelife.com', external: true },
+    { label: 'SmartYacht', href: 'https://luxurymarinelife.com/smartyacht', external: true },
   ],
   support: [
     { label: 'Contact', href: 'mailto:hello@luxurymarinelife.com', external: true },
@@ -221,7 +222,7 @@ export function Footer() {
           <span className="w-2 h-2 bg-teal rounded-full animate-pulse" />
           10% of every purchase supports ocean restoration through{' '}
           <a
-            href="https://garmnconnect.web.app"
+            href="https://luxurymarinelife.com/garmn"
             target="_blank"
             rel="noopener noreferrer"
             className="text-teal/80 hover:text-teal underline underline-offset-2 transition-colors"

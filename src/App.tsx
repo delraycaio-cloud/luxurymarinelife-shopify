@@ -27,6 +27,7 @@ import { PartnersPage } from "@/features/partners/PartnersPage";
 import { BiohackingBundlesPage } from "@/sections/BiohackingBundlesPage";
 import { PrivacyPage } from "@/features/legal/PrivacyPage";
 import { TermsPage } from "@/features/legal/TermsPage";
+import { GiftCardsPage } from "@/features/gift-cards/GiftCardsPage";
 
 
 gsap.registerPlugin(ScrollTrigger);
@@ -50,6 +51,21 @@ function HomePage() {
       <TrustBar />
 
       <StatementSection
+        id="people"
+        headline="HEALTHY PEOPLE"
+        body={
+          <>
+            <p>Performance starts from within. UltraShear NanoSpray™ delivers clinical-grade nutrients at 40,000 PSI — creating 20–80nm nanoemulsions that your body actually absorbs. No pills. No powders. Just results.</p>
+            <p className="mt-3 text-white/90 font-semibold">💪 98% bioavailability · 3 clinical protocols · Trusted by elite athletes &amp; executives</p>
+          </>
+        }
+        backgroundImage="/hero_wellness_bg.webp"
+        zIndex={20}
+        cta={{ text: "Explore UltraShear™", onClick: () => navigate('/ultra-shear') }}
+        secondaryCta={{ text: "Shop Biohacking Bundles →", onClick: () => navigate('/biohacking-bundles') }}
+      />
+
+      <StatementSection
         id="impact"
         headline="HEALTHY WATER"
         body={
@@ -59,9 +75,9 @@ function HomePage() {
           </>
         }
         backgroundImage="/statement_water_bg.webp"
-        zIndex={20}
+        zIndex={30}
         cta={{ text: "Donate to SeaKeepers", onClick: () => window.open('https://www.seakeepers.org/donate/', '_blank') }}
-        secondaryCta={{ text: "See Our Impact →", onClick: () => window.open('https://garmnconnect.web.app', '_blank') }}
+        secondaryCta={{ text: "See Our Impact →", onClick: () => window.open('https://luxurymarinelife.com/garmn', '_blank') }}
       />
 
       <StatementSection
@@ -74,18 +90,8 @@ function HomePage() {
           </>
         }
         backgroundImage="/statement_animals_bg.webp"
-        zIndex={30}
-        cta={{ text: "Donate to Pelican Harbor", onClick: () => window.open('https://www.pelicanharbor.org/donate', '_blank') }}
-      />
-
-      <StatementSection
-        id="experience"
-        headline="YOUR YACHT. YOUR FLOATING WELLNESS SYSTEM."
-        body="SmartYacht-certified vessels combine luxury with performance — cold plunge, recovery protocols, and nano-nutrient delivery on the open water. This isn't a spa day. It's a biological edge."
-        backgroundImage="/experience_yacht_bg.webp"
         zIndex={40}
-        cta={{ text: "Explore UltraShear™", onClick: () => navigate('/ultra-shear') }}
-        secondaryCta={{ text: "🎁 Gift a Charter Adventure →", onClick: () => window.open('https://luxurymarinelife.com/charter', '_blank') }}
+        cta={{ text: "Donate to Pelican Harbor", onClick: () => window.open('https://www.pelicanharbor.org/donate', '_blank') }}
       />
 
       <StatementSection
@@ -93,7 +99,7 @@ function HomePage() {
         headline="10% TO THE OCEAN"
         body={
           <>
-            <p>10% of every sale funds conservation and education — healthy water, healthy animals, healthy people.</p>
+            <p>10% of every sale funds conservation and education — healthy people, healthy water, healthy animals.</p>
             <p className="mt-5 text-teal font-display font-bold text-xl lg:text-2xl">Health on the Water — by GARMN</p>
             <p className="mt-2 text-white/65 text-sm">GARMN (Global Aquatic Resource Management Network) is our 501(c)(3) non-profit partner powering immersive learning, ocean cleanup, and wellness on the water across Miami-Dade County.</p>
 
@@ -120,9 +126,7 @@ function HomePage() {
                 {['$50', '$100', '$250', '$500', '$1,000'].map((tier) => (
                   <a
                     key={tier}
-                    href="https://garmnconnect.web.app"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href="/gift-cards"
                     className="rounded-full border border-teal/40 bg-teal/10 px-4 py-1.5 text-xs font-bold text-teal transition hover:bg-teal/20 hover:border-teal/60"
                   >
                     {tier}
@@ -141,7 +145,7 @@ function HomePage() {
         }
         backgroundImage="/impact_reef_bg.webp"
         zIndex={50}
-        cta={{ text: "Donate to GARMN", onClick: () => window.open('https://garmnconnect.web.app', '_blank') }}
+        cta={{ text: "Donate to GARMN", onClick: () => window.open('https://luxurymarinelife.com/garmn', '_blank') }}
         secondaryCta={{ text: "Shop with Purpose", onClick: scrollToShop }}
       />
 
@@ -168,6 +172,7 @@ function RoutedApp() {
   const isBiohackingRoute = location.pathname === "/biohacking-bundles";
   const isPrivacyRoute = location.pathname === "/privacy";
   const isTermsRoute = location.pathname === "/terms";
+  const isGiftCardsRoute = location.pathname === "/gift-cards";
   const isSustainableTechBrandRoute = location.pathname.startsWith("/sustainable-tech/");
 
   useEffect(() => {
@@ -299,6 +304,12 @@ function RoutedApp() {
         "content",
         "Read the Terms of Service for Luxury Marine Life — pricing, shipping, returns, intellectual property, and governing law.",
       );
+    } else if (isGiftCardsRoute) {
+      document.title = "Donation Gift Cards | Tax-Deductible | Luxury Marine Life";
+      metaDescription.setAttribute(
+        "content",
+        "Purchase tax-deductible donation gift cards. 100% funds GARMN immersive learning adventures — STEM education, ocean cleanup, and veteran wellness programs.",
+      );
     } else if (isSustainableTechBrandRoute) {
       document.title = "Sustainable Tech Brand | Luxury Marine Life";
       metaDescription.setAttribute(
@@ -316,7 +327,7 @@ function RoutedApp() {
     if (!document.querySelector('meta[name="description"]')) {
       document.head.appendChild(metaDescription);
     }
-  }, [location.pathname, isUltraShearRoute, isApparelBrandsRoute, isLmlRoute, isHyycRoute, isAcYcRoute, isSustainableTechRoute, isPartnersRoute, isBiohackingRoute, isPrivacyRoute, isTermsRoute, isSustainableTechBrandRoute]);
+  }, [location.pathname, isUltraShearRoute, isApparelBrandsRoute, isLmlRoute, isHyycRoute, isAcYcRoute, isSustainableTechRoute, isPartnersRoute, isBiohackingRoute, isPrivacyRoute, isTermsRoute, isGiftCardsRoute, isSustainableTechBrandRoute]);
 
   if (isLmlRoute) {
     return <LuxuryMarineLifeBrandPage />;
@@ -353,6 +364,7 @@ function RoutedApp() {
             <Route path="/biohacking-bundles" element={<BiohackingBundlesPage onBack={() => window.history.back()} />} />
             <Route path="/privacy" element={<PrivacyPage />} />
             <Route path="/terms" element={<TermsPage />} />
+            <Route path="/gift-cards" element={<GiftCardsPage />} />
           </Routes>
         </main>
 

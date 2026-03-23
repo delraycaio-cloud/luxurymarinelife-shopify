@@ -44,7 +44,7 @@ const destinations = [
     price: 'From $50',
     icon: GraduationCap,
     gradient: 'from-teal/25 to-emerald-500/15',
-    href: 'https://garmnconnect.web.app',
+    href: 'https://luxurymarinelife.com/garmn',
   },
   {
     id: 'custom',

@@ -229,7 +229,7 @@ export function FeaturedProductSection() {
 
               <div className="mt-8">
                 <a
-                  href="https://garmnconnect.web.app"
+                  href="https://luxurymarinelife.com/garmn"
                   target="_blank"
                   rel="noopener noreferrer"
                 >

@@ -24,6 +24,7 @@ const navLinks = [
   { label: "Apparel", href: "/apparel-brands" },
   { label: "Tech", href: "/sustainable-tech" },
   { label: "Impact", href: "#impact" },
+  { label: "Gift Cards", href: "/gift-cards" },
   { label: "Partners", href: "/partners" },
 ];
 
@@ -83,7 +84,7 @@ export function Navigation() {
       .map((item) => `${item.variantId}:${item.quantity}`)
       .join(",");
 
-    const checkoutUrl = `https://9zuae1-uh.myshopify.com/cart/${cartPath}?utm_source=luxurymarinelife&utm_medium=partner&utm_campaign=ultrashear`;
+    const checkoutUrl = `https://luxury-marine-life-charter-shop-give-back.myshopify.com/cart/${cartPath}?utm_source=luxurymarinelife&utm_medium=partner&utm_campaign=ultrashear`;
     window.location.href = checkoutUrl;
   };
 
