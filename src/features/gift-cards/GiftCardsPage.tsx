@@ -75,7 +75,7 @@ export function GiftCardsPage() {
         {/* Impact Stats */}
         <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl">
           {[
-            { stat: '🎓', label: 'Students Funded', value: '240+' },
+            { stat: '🎓', label: 'Help Us Reach Our Goals', value: '240+' },
             { stat: '🌊', label: 'Ocean Cleanups', value: '37' },
             { stat: '🎖️', label: 'Veteran Adventures', value: '48' },
             { stat: '📦', label: 'STEM Kits Shipped', value: '580+' },

@@ -10,11 +10,6 @@
 .hyyc-font-display { font-family: 'League Spartan', sans-serif; }
 .hyyc-font-mono    { font-family: 'Space Mono', monospace; }
 
-/* Ribbon clip-paths */
-.hyyc-ribbon-left   { clip-path: polygon(0 0, 100% 0, 72% 100%, 0 100%); }
-.hyyc-ribbon-right  { clip-path: polygon(28% 0, 100% 0, 100% 100%, 0 100%); }
-.hyyc-ribbon-center { clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%); }
-
 /* Grain overlay */
 .hyyc-grain-overlay {
   position: fixed;
@@ -27,21 +22,15 @@
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
 
-/* Circle border */
-.hyyc-circle-border {
-  border: 3px solid #0B0B0D;
-  box-shadow: 0 18px 40px rgba(0,0,0,0.35);
-}
-
-/* Section base — natural flow instead of pinning */
+/* Section base — full-viewport hero */
 .hyyc-section-pinned {
   position: relative;
   width: 100%;
-  min-height: 80vh;
-  padding: 4rem 0;
+  min-height: 100vh;
   display: flex;
   align-items: center;
-  overflow: visible;
+  justify-content: center;
+  overflow: hidden;
 }
 
 /* Headline display */
@@ -49,14 +38,22 @@
   font-family: 'League Spartan', sans-serif;
   font-weight: 800;
   letter-spacing: -0.02em;
-  line-height: 0.9;
+  line-height: 0.92;
+}
+
+/* Crimson gradient text accent */
+.text-gradient-crimson {
+  background: linear-gradient(135deg, #FF1F3D 0%, #ff6b7f 45%, #FF1F3D 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 /* Micro label */
 .hyyc-micro-label {
   font-family: 'Space Mono', monospace;
   font-size: 12px;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
@@ -72,10 +69,12 @@
   text-transform: uppercase;
   transition: background-color 0.3s, transform 0.3s;
   cursor: pointer;
-  border: none;
+  border: 1px solid rgba(255, 31, 61, 0.25);
+  border-radius: 4px;
 }
 .hyyc-btn-primary:hover {
   background-color: #FF1F3D;
+  border-color: #FF1F3D;
   transform: scale(1.05);
 }
 

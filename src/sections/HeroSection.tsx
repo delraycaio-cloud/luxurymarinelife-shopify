@@ -203,7 +203,7 @@ export function HeroSection() {
 
             <div
               ref={cardRef}
-              className="w-full max-w-[320px] sm:max-w-[400px] lg:max-w-none lg:w-[32vw] h-[300px] sm:h-[380px] lg:h-[66vh] rounded-xl overflow-hidden shadow-[0_32px_80px_rgba(0,0,0,0.5)] mx-auto lg:mx-0 relative group"
+              className="w-full max-w-[280px] sm:max-w-[360px] lg:max-w-none lg:w-[30vw] h-[220px] sm:h-[280px] lg:h-[58vh] rounded-xl overflow-hidden shadow-[0_32px_80px_rgba(0,0,0,0.5)] mx-auto lg:mx-0 relative group"
               style={{ opacity: 0 }}
             >
               <img

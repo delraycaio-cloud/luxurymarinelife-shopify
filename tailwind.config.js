@@ -51,10 +51,10 @@ module.exports = {
           foreground: "hsl(var(--card-foreground))",
         },
         marine: {
-          900: "#0B0F1A",
-          800: "#111827",
-          700: "#1f2937",
-          600: "#374151",
+          900: "#0A1628",
+          800: "#0F1F35",
+          700: "#1a2d4a",
+          600: "#2a3f5f",
         },
         teal: {
           DEFAULT: "#2DD4BF",

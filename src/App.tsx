@@ -15,6 +15,7 @@ import { TrustBar } from "@/components/custom/TrustBar";
 import { ServicesSection } from "@/sections/ServicesSection";
 import { ChartersDestinationsSection } from "@/sections/ChartersDestinationsSection";
 import { ShopChatbot } from "@/components/custom/ShopChatbot";
+import { InfoPopup } from "@/components/custom/InfoPopup";
 
 // --- Code-split route pages (lazy loaded) ---
 const UltraShearPage = lazy(() => import("@/features/ultra-shear/UltraShearPage").then(m => ({ default: m.UltraShearPage })));
@@ -67,14 +68,18 @@ function HomePage() {
         headline="HEALTHY PEOPLE"
         body={
           <>
-            <p>Performance starts from within. UltraShear NanoSpray™ delivers clinical-grade nutrients at 40,000 PSI — creating 20–80nm nanoemulsions that your body actually absorbs. No pills. No powders. Just results.</p>
-            <p className="mt-3 text-white/90 font-semibold">💪 98% bioavailability · 3 clinical protocols · Trusted by elite athletes &amp; executives</p>
+            <p>98% bioavailability. Absorbed in minutes, not hours.</p>
+            <InfoPopup label="How it works">
+              <p className="text-teal font-display font-bold text-lg">UltraShear NanoSpray™</p>
+              <p>Clinical-grade nutrients processed at 40,000 PSI — creating 20–80nm nanoemulsions that bypass the gut and flood your bloodstream in 3–5 minutes.</p>
+              <p>💪 3 clinical protocols · Trusted by elite athletes & executives</p>
+            </InfoPopup>
           </>
         }
         backgroundImage="/hero_wellness_bg.webp"
         zIndex={20}
         cta={{ text: "Explore UltraShear™", onClick: () => navigate('/ultra-shear') }}
-        secondaryCta={{ text: "Shop Biohacking Bundles →", onClick: () => navigate('/biohacking-bundles') }}
+        secondaryCta={{ text: "Shop Bundles →", onClick: () => navigate('/biohacking-bundles') }}
       />
 
       <StatementSection
@@ -82,14 +87,18 @@ function HomePage() {
         headline="HEALTHY WATER"
         body={
           <>
-            <p>We partner with the International SeaKeepers Society to fund reef restoration, marine debris removal, and ocean science.</p>
-            <p className="mt-3 text-white/90 font-semibold">🌊 37 cleanups · 1,468 volunteers · 5,400 lbs of debris removed in 2024</p>
+            <p>37 cleanups · 1,468 volunteers · 5,400 lbs removed in 2024</p>
+            <InfoPopup label="Our partners">
+              <p className="text-teal font-display font-bold text-lg">International SeaKeepers Society</p>
+              <p>We fund reef restoration, marine debris removal, and ocean science across South Florida and the Caribbean.</p>
+              <p>🌊 Every purchase cleans the ocean you love.</p>
+            </InfoPopup>
           </>
         }
         backgroundImage="/statement_water_bg.webp"
         zIndex={30}
         cta={{ text: "Donate to SeaKeepers", onClick: () => window.open('https://www.seakeepers.org/donate/', '_blank') }}
-        secondaryCta={{ text: "See Our Impact →", onClick: () => window.open('https://luxurymarinelife.com/garmn', '_blank') }}
+        secondaryCta={{ text: "Our Impact →", onClick: () => window.open('https://luxurymarinelife.com/garmn', '_blank') }}
       />
 
       <StatementSection
@@ -97,8 +106,12 @@ function HomePage() {
         headline="HEALTHY ANIMALS"
         body={
           <>
-            <p>We support Pelican Harbor Seabird Station — Miami's only wild bird rescue — rehabilitating injured and orphaned wildlife across South Florida.</p>
-            <p className="mt-3 text-white/90 font-semibold">🐦 2,476 animals treated · 148 species · 14 new species in 2024</p>
+            <p>2,476 animals treated · 148 species · Miami's only wild bird rescue</p>
+            <InfoPopup label="About Pelican Harbor">
+              <p className="text-teal font-display font-bold text-lg">Pelican Harbor Seabird Station</p>
+              <p>Rehabilitating injured and orphaned wildlife across South Florida since 1980. 14 new species treated in 2024 alone.</p>
+              <p>🐦 Your purchase supports wildlife rescue and habitat restoration.</p>
+            </InfoPopup>
           </>
         }
         backgroundImage="/statement_animals_bg.webp"
@@ -111,48 +124,21 @@ function HomePage() {
         headline="10% TO THE OCEAN"
         body={
           <>
-            <p>10% of every sale funds conservation and education — healthy people, healthy water, healthy animals.</p>
-            <p className="mt-5 text-teal font-display font-bold text-xl lg:text-2xl">Health on the Water — by GARMN</p>
-            <p className="mt-2 text-white/65 text-sm">GARMN (Global Aquatic Resource Management Network) is our 501(c)(3) non-profit partner powering immersive learning, ocean cleanup, and wellness on the water across Miami-Dade County.</p>
-
-            {/* Buy One Give One Banner */}
-            <div className="mt-5 rounded-xl border border-teal/30 bg-teal/10 px-5 py-3 text-center">
-              <p className="text-teal font-display font-bold text-lg">🤝 BUY ONE · GIVE ONE</p>
-              <p className="mt-1 text-white/70 text-xs">Book a charter or buy a gift card — we fund a student&apos;s learning adventure on the water.</p>
-            </div>
-
-            <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3 text-left max-w-2xl mx-auto">
-              <p className="text-white/90 font-semibold text-sm">🎓 Healthy Students — Immersive ocean-based STEM education for Miami-Dade youth</p>
-              <p className="text-white/90 font-semibold text-sm">🪄 Magic Adventures — Hands-on field trips and Magic School Box STEM kits</p>
-              <p className="text-white/90 font-semibold text-sm">🧹 Ocean Cleanup — Beach and reef debris removal with student volunteers</p>
-              <p className="text-white/90 font-semibold text-sm">🎣 Fishing &amp; Learning — Guided fishing trips combined with marine science</p>
-              <p className="text-white/90 font-semibold text-sm">🌊 Learning on the Water — Kayak, snorkel, and dive programs for all ages</p>
-              <p className="text-white/90 font-semibold text-sm">🎖️ Veteran Adventures — Ocean recovery and wellness trips for veterans</p>
-            </div>
-
-            {/* Tax-Deductible Gift Card Tiers */}
-            <div className="mt-6 rounded-xl border border-white/10 bg-white/5 px-5 py-4">
-              <p className="text-teal font-display font-bold text-base">🎁 Tax-Deductible Donation Gift Cards</p>
-              <p className="mt-1 text-white/50 text-xs">501(c)(3) tax-deductible · 100% funds immersive learning adventures</p>
-              <div className="mt-3 flex flex-wrap justify-center gap-2">
-                {['$50', '$100', '$250', '$500', '$1,000'].map((tier) => (
-                  <a
-                    key={tier}
-                    href="/gift-cards"
-                    className="rounded-full border border-teal/40 bg-teal/10 px-4 py-1.5 text-xs font-bold text-teal transition hover:bg-teal/20 hover:border-teal/60"
-                  >
-                    {tier}
-                  </a>
-                ))}
+            <p>Every sale funds conservation, education, and wildlife rescue.</p>
+            <p className="mt-3 text-teal font-display font-bold text-lg">🤝 BUY ONE · GIVE ONE</p>
+            <InfoPopup label="See all GARMN programs">
+              <p className="text-teal font-display font-bold text-lg">Health on the Water — by GARMN</p>
+              <p>GARMN (Global Aquatic Resource Management Network) is our 501(c)(3) non-profit powering immersive learning across Miami-Dade County.</p>
+              <div className="mt-3 space-y-2">
+                <p>🎓 <strong>Healthy Students</strong> — Ocean-based STEM education for Miami-Dade youth</p>
+                <p>🪄 <strong>Magic Adventures</strong> — Field trips and Magic School Box STEM kits</p>
+                <p>🧹 <strong>Ocean Cleanup</strong> — Beach and reef debris removal</p>
+                <p>🎣 <strong>Fishing & Learning</strong> — Guided fishing trips + marine science</p>
+                <p>🌊 <strong>Learning on the Water</strong> — Kayak, snorkel, and dive programs</p>
+                <p>🎖️ <strong>Veteran Adventures</strong> — Ocean recovery and wellness trips</p>
               </div>
-            </div>
-
-            {/* Cross-link to main site GARMN pages */}
-            <div className="mt-4 flex flex-wrap justify-center gap-3 text-xs">
-              <a href="https://luxurymarinelife.com/garmn.yacht" target="_blank" rel="noopener noreferrer" className="text-teal/70 underline underline-offset-2 hover:text-teal transition">GARMN.Yacht Tax Strategy →</a>
-              <a href="https://luxurymarinelife.com/garmn.boat" target="_blank" rel="noopener noreferrer" className="text-teal/70 underline underline-offset-2 hover:text-teal transition">GARMN.Boat Private Access →</a>
-              <a href="https://luxurymarinelife.com/garmn/depreciation" target="_blank" rel="noopener noreferrer" className="text-teal/70 underline underline-offset-2 hover:text-teal transition">Tax Advantages →</a>
-            </div>
+              <p className="mt-3 text-white/50 text-xs">Book a charter or buy a gift card — we fund a student's learning adventure on the water.</p>
+            </InfoPopup>
           </>
         }
         backgroundImage="/impact_reef_bg.webp"
