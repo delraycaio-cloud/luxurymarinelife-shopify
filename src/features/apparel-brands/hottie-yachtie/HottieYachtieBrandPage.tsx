@@ -11,7 +11,6 @@ import './styles/App.css';
 // COMPONENTS
 import HeroSection from './sections/HeroSection';
 import AllProductsSection from './sections/AllProductsSection';
-import FooterSection from './sections/FooterSection';
 import ProductDetail from './components/ProductDetail';
 import { HYYCCartDrawer } from './components/HYYCCartDrawer';
 
@@ -86,8 +85,6 @@ export default function HottieYachtieBrandPage() {
             onProductClick={setSelectedProduct}
           />
         </div>
-
-        <FooterSection zIndex={4} />
       </main>
 
       {/* Product Detail View (Original HYYC Design) */}

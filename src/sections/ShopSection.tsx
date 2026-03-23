@@ -60,7 +60,7 @@ export function ShopSection({ onCategoryClick }: ShopSectionProps) {
     }
 
     if (cat.id === 'learning') {
-      window.location.href = 'https://garmn2.web.app';
+      window.location.href = 'https://garmn.org';
       return;
     }
 

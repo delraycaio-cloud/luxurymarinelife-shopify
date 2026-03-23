@@ -16,6 +16,8 @@ export default function Hero() {
     element?.scrollIntoView({ behavior: "smooth" });
   };
 
+
+
   return (
     <section
       ref={heroRef}
@@ -100,32 +102,7 @@ export default function Hero() {
         <div className="w-px h-12 bg-gradient-to-b from-white/60 to-transparent animate-pulse" />
       </div>
 
-      <div
-        className={`hidden lg:flex absolute right-12 top-1/2 -translate-y-1/2 flex-col gap-8 transition-all duration-1000 delay-800 ${
-          isLoaded ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"
-        }`}
-      >
-        <div className="text-right">
-          <div className="text-3xl text-white font-light">10%</div>
-          <div className="text-xs text-white/60 uppercase tracking-wider">
-            To Ocean
-          </div>
-        </div>
-        <div className="w-px h-8 bg-white/20 self-end" />
-        <div className="text-right">
-          <div className="text-3xl text-white font-light">UPF 50+</div>
-          <div className="text-xs text-white/60 uppercase tracking-wider">
-            Protection
-          </div>
-        </div>
-        <div className="w-px h-8 bg-white/20 self-end" />
-        <div className="text-right">
-          <div className="text-3xl text-white font-light">100%</div>
-          <div className="text-xs text-white/60 uppercase tracking-wider">
-            Sustainable
-          </div>
-        </div>
-      </div>
+
     </section>
   );
 }

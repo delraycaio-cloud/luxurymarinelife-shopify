@@ -364,7 +364,6 @@ export const sizeGuides: SizeGuide[] = [
 export const navItems: NavItem[] = [
   { label: 'Shop All', href: '#shop' },
   { label: 'New Arrivals', href: '#new' },
-  { label: 'About', href: '#about' },
 ];
 
 export const categories = [

@@ -71,24 +71,6 @@ export function HeroSection() {
                     <ArrowRight className="w-4 h-4" strokeWidth={1.5} />
                   </button>
                 </div>
-
-                {/* Trust Badges */}
-                <div className="mt-16 flex flex-wrap items-center justify-center gap-6 lg:gap-12">
-                  <div>
-                    <p className="font-serif text-2xl text-gold">Free</p>
-                    <p className="text-xs text-slate/60">Global Shipping</p>
-                  </div>
-                  <div className="hidden sm:block w-px h-10 bg-gold/20" />
-                  <div>
-                    <p className="font-serif text-2xl text-gold">30 Day</p>
-                    <p className="text-xs text-slate/60">Easy Returns</p>
-                  </div>
-                  <div className="hidden sm:block w-px h-10 bg-gold/20" />
-                  <div>
-                    <p className="font-serif text-2xl text-gold">Italian</p>
-                    <p className="text-xs text-slate/60">Craftsmanship</p>
-                  </div>
-                </div>
               </div>
           </div>
         </div>

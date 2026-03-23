@@ -1,9 +1,15 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, Users, Store, CheckCircle, ArrowUpRight, Anchor, Send } from 'lucide-react';
+import { ArrowLeft, Users, Store, CheckCircle, ArrowUpRight, Anchor, Send, Loader2 } from 'lucide-react';
+import { db } from '@/lib/firebase';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
 export function PartnersPage() {
   const navigate = useNavigate();
+  const [isAffiliateSubmitting, setIsAffiliateSubmitting] = useState(false);
+  const [isVendorSubmitting, setIsVendorSubmitting] = useState(false);
+  const [isAffiliateSuccess, setIsAffiliateSuccess] = useState(false);
+  const [isVendorSuccess, setIsVendorSuccess] = useState(false);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -100,14 +106,49 @@ export function PartnersPage() {
                 </div>
 
                 {/* Affiliate Form */}
-                <form
+                {isAffiliateSuccess ? (
+                  <div className="mt-10 p-10 rounded-2xl bg-teal/5 border border-teal/20 text-center animate-in fade-in zoom-in duration-500">
+                    <div className="w-16 h-16 rounded-full bg-teal/10 flex items-center justify-center mx-auto mb-4">
+                      <CheckCircle className="w-8 h-8 text-teal" />
+                    </div>
+                    <h3 className="text-white font-display font-bold text-xl">Application Received</h3>
+                    <p className="mt-2 text-white/50 text-sm italic">We will review your submission and contact you within 48 hours.</p>
+                    <button 
+                      type="button"
+                      onClick={() => setIsAffiliateSuccess(false)}
+                      className="mt-6 text-teal/70 hover:text-teal text-xs uppercase tracking-widest font-semibold cursor-pointer"
+                    >
+                      Submit Another
+                    </button>
+                  </div>
+                ) : (
+                  <form
                   className="mt-10 space-y-4"
-                  onSubmit={(e) => {
+                  onSubmit={async (e) => {
                     e.preventDefault();
+                    if (isAffiliateSubmitting) return;
+                    setIsAffiliateSubmitting(true);
+                    
                     const form = e.target as HTMLFormElement;
-                    // Form data ready for Firebase backend integration
-                    alert('Application submitted! We will review and get back to you within 48 hours.');
-                    form.reset();
+                    const formData = new FormData(form);
+                    const data = Object.fromEntries(formData.entries());
+
+                    try {
+                      await addDoc(collection(db, 'partnership_leads'), {
+                        ...data,
+                        type: 'affiliate',
+                        appliedAt: serverTimestamp(),
+                        source: 'partners-page',
+                      });
+                      console.log('[PartnersPage] Affiliate application successful');
+                      setIsAffiliateSuccess(true);
+                      form.reset();
+                    } catch (err) {
+                      console.error('[PartnersPage] Affiliate submission failed:', err);
+                      alert('Something went wrong. Please try again.');
+                    } finally {
+                      setIsAffiliateSubmitting(false);
+                    }
                   }}
                 >
                   <input
@@ -138,14 +179,20 @@ export function PartnersPage() {
                   />
                   <button
                     type="submit"
-                    className="w-full inline-flex items-center justify-center gap-2 bg-teal hover:bg-teal-light text-marine-900 font-semibold px-6 py-3.5 rounded-full transition-all duration-300 hover:translate-y-[-2px]"
+                    disabled={isAffiliateSubmitting}
+                    className="w-full inline-flex items-center justify-center gap-2 bg-teal hover:bg-teal-light text-marine-900 font-semibold px-6 py-3.5 rounded-full transition-all duration-300 hover:translate-y-[-2px] disabled:opacity-70 disabled:cursor-not-allowed"
                   >
-                    <Send className="w-4 h-4" />
-                    Apply as Affiliate
+                    {isAffiliateSubmitting ? (
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                    ) : (
+                      <Send className="w-4 h-4" />
+                    )}
+                    {isAffiliateSubmitting ? 'Submitting...' : 'Apply as Affiliate'}
                   </button>
                 </form>
-              </div>
+              )}
             </div>
+          </div>
 
             {/* Vendor Card */}
             <div className="group relative rounded-2xl overflow-hidden glass-card p-8 lg:p-10">
@@ -196,14 +243,49 @@ export function PartnersPage() {
                 </div>
 
                 {/* Vendor Form */}
-                <form
+                {isVendorSuccess ? (
+                  <div className="mt-10 p-10 rounded-2xl bg-[rgba(201,169,110,0.05)] border border-[rgba(201,169,110,0.2)] text-center animate-in fade-in zoom-in duration-500">
+                    <div className="w-16 h-16 rounded-full bg-[rgba(201,169,110,0.1)] flex items-center justify-center mx-auto mb-4">
+                      <CheckCircle className="w-8 h-8 text-[#C9A96E]" />
+                    </div>
+                    <h3 className="text-white font-display font-bold text-xl">Curation Review Started</h3>
+                    <p className="mt-2 text-white/50 text-sm italic">Our team will review your brand and product fit within 5 business days.</p>
+                    <button 
+                      type="button"
+                      onClick={() => setIsVendorSuccess(false)}
+                      className="mt-6 text-[#C9A96E]/70 hover:text-[#C9A96E] text-xs uppercase tracking-widest font-semibold cursor-pointer"
+                    >
+                      Submit Another
+                    </button>
+                  </div>
+                ) : (
+                  <form
                   className="mt-10 space-y-4"
-                  onSubmit={(e) => {
+                  onSubmit={async (e) => {
                     e.preventDefault();
+                    if (isVendorSubmitting) return;
+                    setIsVendorSubmitting(true);
+                    
                     const form = e.target as HTMLFormElement;
-                    // Form data ready for Firebase backend integration
-                    alert('Application submitted! Our curation team will review within 5 business days.');
-                    form.reset();
+                    const formData = new FormData(form);
+                    const data = Object.fromEntries(formData.entries());
+
+                    try {
+                      await addDoc(collection(db, 'partnership_leads'), {
+                        ...data,
+                        type: 'vendor',
+                        appliedAt: serverTimestamp(),
+                        source: 'partners-page',
+                      });
+                      console.log('[PartnersPage] Vendor application successful');
+                      setIsVendorSuccess(true);
+                      form.reset();
+                    } catch (err) {
+                      console.error('[PartnersPage] Vendor submission failed:', err);
+                      alert('Something went wrong. Please try again.');
+                    } finally {
+                      setIsVendorSubmitting(false);
+                    }
                   }}
                 >
                   <input
@@ -247,14 +329,20 @@ export function PartnersPage() {
                   />
                   <button
                     type="submit"
-                    className="w-full inline-flex items-center justify-center gap-2 bg-[rgba(201,169,110,0.9)] hover:bg-[rgba(201,169,110,1)] text-marine-900 font-semibold px-6 py-3.5 rounded-full transition-all duration-300 hover:translate-y-[-2px]"
+                    disabled={isVendorSubmitting}
+                    className="w-full inline-flex items-center justify-center gap-2 bg-[rgba(201,169,110,0.9)] hover:bg-[rgba(201,169,110,1)] text-marine-900 font-semibold px-6 py-3.5 rounded-full transition-all duration-300 hover:translate-y-[-2px] disabled:opacity-70 disabled:cursor-not-allowed"
                   >
-                    <ArrowUpRight className="w-4 h-4" />
-                    Submit Vendor Application
+                    {isVendorSubmitting ? (
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                    ) : (
+                      <ArrowUpRight className="w-4 h-4" />
+                    )}
+                    {isVendorSubmitting ? 'Submitting...' : 'Submit Vendor Application'}
                   </button>
                 </form>
-              </div>
+              )}
             </div>
+          </div>
 
           </div>
         </div>

@@ -25,31 +25,6 @@ export default function Navigation() {
   const navLinks = [
     { label: "Home", view: "home" as const },
     { label: "Collection", view: "products" as const },
-    {
-      label: "About",
-      action: () => {
-        setCurrentView("home");
-        setIsMobileMenuOpen(false);
-        setTimeout(() => {
-          document
-            .getElementById("collections")
-            ?.scrollIntoView({ behavior: "smooth" });
-        }, 100);
-      },
-    },
-    {
-      label: "Sustainability",
-      action: () => {
-        setCurrentView("home");
-        setIsMobileMenuOpen(false);
-        setTimeout(() => {
-          const sustainabilitySection = document.querySelector(
-            '[class*="bg-[#0a1628]"]',
-          );
-          sustainabilitySection?.scrollIntoView({ behavior: "smooth" });
-        }, 100);
-      },
-    },
   ];
 
   return (
@@ -80,7 +55,7 @@ export default function Navigation() {
               {navLinks.map((link) => (
                 <button
                   key={link.label}
-                  onClick={link.action || (() => handleNavClick(link.view!))}
+                  onClick={() => handleNavClick(link.view)}
                   className={`text-sm uppercase tracking-widest transition-colors duration-300 relative group ${
                     isScrolled ? "text-[#0a1628]" : "text-white"
                   }`}
@@ -150,7 +125,7 @@ export default function Navigation() {
           {navLinks.map((link) => (
             <button
               key={link.label}
-              onClick={link.action || (() => handleNavClick(link.view!))}
+              onClick={() => handleNavClick(link.view)}
               className="text-2xl text-white uppercase tracking-widest hover:text-[#c9a962] transition-colors duration-300"
             >
               {link.label}

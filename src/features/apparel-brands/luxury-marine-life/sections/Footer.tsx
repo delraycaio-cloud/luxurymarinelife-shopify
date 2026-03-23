@@ -1,5 +1,4 @@
 import {
-  ArrowRight,
   Facebook,
   Instagram,
   Mail,
@@ -36,33 +35,6 @@ export default function Footer() {
 
   return (
     <footer className="bg-[#0a1628] text-white">
-      <div className="border-b border-white/10">
-        <div className="container-luxury py-16">
-          <div className="grid lg:grid-cols-2 gap-8 items-center">
-            <div>
-              <h3 className="text-2xl md:text-3xl font-light mb-2">
-                Join the <span className="italic text-[#c9a962]">Crew</span>
-              </h3>
-              <p className="text-white/60">
-                Subscribe for exclusive offers, new arrivals, and ocean
-                conservation updates.
-              </p>
-            </div>
-            <div className="flex gap-4">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-1 px-6 py-4 bg-white/5 border border-white/10 text-white placeholder:text-white/40 focus:border-[#c9a962] outline-none transition-colors"
-              />
-              <button className="px-8 py-4 bg-[#c9a962] text-[#0a1628] font-medium hover:bg-white transition-colors flex items-center gap-2">
-                Subscribe
-                <ArrowRight className="w-4 h-4" />
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <div className="container-luxury py-16">
         <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-12">
           <div className="lg:col-span-2">

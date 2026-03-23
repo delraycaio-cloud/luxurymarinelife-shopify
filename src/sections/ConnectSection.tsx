@@ -54,15 +54,18 @@ export function ConnectSection() {
         subscribedAt: serverTimestamp(),
         source: 'shop-connect',
       });
+      console.log('[ConnectSection] Newsletter subscription successful:', email);
+      setIsSubmitted(true);
+      setTimeout(() => {
+        setIsSubmitted(false);
+        setEmail('');
+      }, 5000);
     } catch (err) {
       console.error('[ConnectSection] Firestore write failed:', err);
+      alert('Unable to subscribe at this time. Please try again later.');
+    } finally {
+      setIsSubmitting(false);
     }
-    setIsSubmitted(true);
-    setIsSubmitting(false);
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setEmail('');
-    }, 3000);
   };
 
   return (

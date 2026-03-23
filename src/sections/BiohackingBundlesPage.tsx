@@ -12,6 +12,7 @@ type Bundle = {
   savings: string;
   quantity: number;
   badge: string;
+  image: string;
 };
 
 const bundles: Bundle[] = [
@@ -24,6 +25,7 @@ const bundles: Bundle[] = [
     savings: 'Save $40',
     quantity: 3,
     badge: 'Most Popular',
+    image: '/images/oil_table3.webp',
   },
   {
     id: 'yacht-club-essentials',
@@ -34,6 +36,7 @@ const bundles: Bundle[] = [
     savings: 'Save $80',
     quantity: 4,
     badge: 'Executive Pick',
+    image: '/images/12b.webp',
   },
   {
     id: 'health-ceo-annual-supply',
@@ -44,6 +47,7 @@ const bundles: Bundle[] = [
     savings: 'Save $110',
     quantity: 12,
     badge: 'Annual Strategy',
+    image: '/images/oil_12.webp',
   },
 ];
 
@@ -84,9 +88,9 @@ export function BiohackingBundlesPage({ onBack }: BiohackingBundlesPageProps) {
           {bundles.map((bundle) => (
             <article
               key={bundle.id}
-              className="relative rounded-2xl border border-white/10 bg-gradient-to-b from-marine-800 to-marine-900 p-6"
+              className="relative rounded-2xl border border-white/10 bg-gradient-to-b from-marine-800 to-marine-900 p-6 flex flex-col"
             >
-              <div className="inline-flex items-center rounded-full bg-teal/15 px-3 py-1 text-xs font-semibold text-teal">
+              <div className="inline-flex items-center self-start rounded-full bg-teal/15 px-3 py-1 text-xs font-semibold text-teal">
                 {bundle.badge}
               </div>
 
@@ -94,11 +98,11 @@ export function BiohackingBundlesPage({ onBack }: BiohackingBundlesPageProps) {
                 {bundle.name}
               </h2>
 
-              <div className="mt-5 h-48 rounded-xl border border-white/10 bg-marine-900/60 overflow-hidden">
+              <div className="mt-5 aspect-square rounded-xl border border-white/5 bg-zinc-950/60 overflow-hidden group">
                 <img
-                  src="/oil.webp"
-                  alt="Super Antioxidant NanoSpray"
-                  className="h-full w-full rounded-2xl object-cover mix-blend-multiply contrast-110 saturate-110"
+                  src={bundle.image}
+                  alt={bundle.name}
+                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
               </div>
 
