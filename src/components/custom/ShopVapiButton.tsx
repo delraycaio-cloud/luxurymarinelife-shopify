@@ -46,6 +46,11 @@ export function ShopVapiButton() {
       });
 
       await vapi.start({
+        transcriber: {
+          provider: 'deepgram' as any,
+          model: 'nova-2' as any,
+          language: 'en',
+        },
         model: {
           provider: 'google' as any,
           model: 'gemini-2.0-flash' as any,

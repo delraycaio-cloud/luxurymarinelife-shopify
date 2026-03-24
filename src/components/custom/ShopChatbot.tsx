@@ -58,13 +58,20 @@ export function ShopChatbot() {
     try {
       const voiceCopilot = httpsCallable(functions, 'voiceCopilotV1');
       const result = await voiceCopilot({
-        message: text.trim(),
-        context: 'shop',
-        systemPrompt: persona.systemPrompt,
-        history: messages.slice(-6).map(m => ({ role: m.role, content: m.content })),
+        utterance: text.trim(),
+        context: { world: 'SHOP' },
+        sessionId: `shop_${Date.now()}`,
       });
-      const data = result.data as { reply?: string; response?: string; text?: string };
-      const reply = data.reply || data.response || data.text || 'I appreciate your question! For detailed assistance, please visit luxurymarinelife.com or call our concierge team.';
+      const data = result.data as {
+        reply?: string; response?: string; text?: string;
+        actionPlan?: string; citations?: Array<{ title?: string; snippet?: string }>;
+      };
+      let reply = data.reply || data.response || data.text || '';
+      if (!reply && data.actionPlan) reply = data.actionPlan;
+      if (!reply && data.citations?.length) {
+        reply = data.citations.map(c => c.snippet || c.title).filter(Boolean).join(' ');
+      }
+      if (!reply) reply = 'Thank you for your question! For detailed assistance, please visit luxurymarinelife.com or call our concierge team.';
 
       setMessages(prev => [...prev, {
         id: `a-${Date.now()}`,
