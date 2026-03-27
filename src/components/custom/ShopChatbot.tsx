@@ -58,13 +58,13 @@ export function ShopChatbot() {
     try {
       const voiceCopilot = httpsCallable(functions, 'voiceCopilotV1');
       const result = await voiceCopilot({
-        message: text.trim(),
+        utterance: text.trim(),
         context: 'shop',
         systemPrompt: persona.systemPrompt,
         history: messages.slice(-6).map(m => ({ role: m.role, content: m.content })),
       });
-      const data = result.data as { reply?: string; response?: string; text?: string };
-      const reply = data.reply || data.response || data.text || 'I appreciate your question! For detailed assistance, please visit luxurymarinelife.com or call our concierge team.';
+      const data = result.data as { reply?: string; response?: string; text?: string; result?: string; message?: string; output?: string };
+      const reply = data.reply || data.response || data.text || data.result || data.message || data.output || 'I appreciate your question! For detailed assistance, please visit luxurymarinelife.com or call our concierge team.';
 
       setMessages(prev => [...prev, {
         id: `a-${Date.now()}`,
@@ -72,12 +72,13 @@ export function ShopChatbot() {
         content: reply,
         timestamp: new Date(),
       }]);
-    } catch (err) {
-      console.error('[ShopChatbot] Error:', err);
+    } catch (err: any) {
+      console.error('[ShopChatbot] Detailed Error:', err);
+      const errorMessage = err?.message || err?.details?.message || err?.toString() || 'Connection failed';
       setMessages(prev => [...prev, {
         id: `a-${Date.now()}`,
         role: 'assistant',
-        content: 'I apologize — I\'m having trouble connecting right now. Please try again in a moment, or reach us directly at luxurymarinelife.com.',
+        content: `Error: ${errorMessage}`,
         timestamp: new Date(),
       }]);
     } finally {
