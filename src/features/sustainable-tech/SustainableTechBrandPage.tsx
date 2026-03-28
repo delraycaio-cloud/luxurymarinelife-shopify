@@ -126,7 +126,7 @@ const garminProducts: Product[] = [
     name: "fēnix® 8 – 47 mm, AMOLED",
     shortDescription:
       "The ultimate GPS smartwatch for athletes and adventurers. Sapphire titanium build, dive-rated to 40m, bright 1.4\" AMOLED display, built-in speaker, mic and LED flashlight. Up to 16 days battery life with advanced training, health monitoring and multi-band GPS—built to push beyond your limits.",
-    image: "/images/garmin1.jpg",
+    image: "/images/garmin1.webp",
     shopUrl: GARMIN_FENIX8_URL,
   },
   {
@@ -134,7 +134,7 @@ const garminProducts: Product[] = [
     name: "GMR Fantom™ 256 Open Array Radar",
     shortDescription:
       "The most powerful 6' consumer solid-state radar. 250W of pulse-compressed power with 20' to 96 nm detection range, MotionScope™ moving-target highlighting, MARPA tracking for up to 30 targets and scan-to-scan clutter reduction—total command of what's out there.",
-    image: "/images/g2.jpg",
+    image: "/images/g2.webp",
     shopUrl: GARMIN_FANTOM256_URL,
   },
 ];
