@@ -22,7 +22,8 @@ const WATERDROP_A1_URL =
 const ECOFLOW_DELTA_ULTRA_URL =
   "https://www.awin1.com/cread.php?awinmid=59181&awinaffid=2804364&clickref=lml-shop&ued=https%3A%2F%2Fus.ecoflow.com%2Fproducts%2Fdelta-pro-ultra-x%3Fref%3Dmainsection%26variant%3D54714781171785";
 
-
+const GARMIN_FENIX8_URL = "https://www.garmin.com/en-US/p/1228429/pn/010-02904-10/";
+const GARMIN_FANTOM256_URL = "https://www.garmin.com/en-US/p/692076/pn/K10-00012-35/";
 
 
 
@@ -119,7 +120,24 @@ const ecoflowProducts: Product[] = [
   },
 ];
 
-
+const garminProducts: Product[] = [
+  {
+    id: "fenix-8",
+    name: "fēnix® 8 – 47 mm, AMOLED",
+    shortDescription:
+      "The ultimate GPS smartwatch for athletes and adventurers. Sapphire titanium build, dive-rated to 40m, bright 1.4\" AMOLED display, built-in speaker, mic and LED flashlight. Up to 16 days battery life with advanced training, health monitoring and multi-band GPS—built to push beyond your limits.",
+    image: "/images/garmin1.jpg",
+    shopUrl: GARMIN_FENIX8_URL,
+  },
+  {
+    id: "fantom-256",
+    name: "GMR Fantom™ 256 Open Array Radar",
+    shortDescription:
+      "The most powerful 6' consumer solid-state radar. 250W of pulse-compressed power with 20' to 96 nm detection range, MotionScope™ moving-target highlighting, MARPA tracking for up to 30 targets and scan-to-scan clutter reduction—total command of what's out there.",
+    image: "/images/g2.jpg",
+    shopUrl: GARMIN_FANTOM256_URL,
+  },
+];
 
 
 const brandMeta: Record<string, { name: string; viewMoreUrl: string }> = {
@@ -127,6 +145,7 @@ const brandMeta: Record<string, { name: string; viewMoreUrl: string }> = {
   sublue: { name: "SUBLUE", viewMoreUrl: "https://store.sublue.com/?ref=dimoioyd&utm_source=goaffpro" },
   waterdrop: { name: "Waterdrop", viewMoreUrl: "https://www.waterdropfilter.com/?ref=omvzjjzw&utm_medium=affiliate&utm_source=goaffpro" },
   ecoflow: { name: "EcoFlow", viewMoreUrl: "https://tidd.ly/4uH927I" },
+  garmin: { name: "GARMIN", viewMoreUrl: "https://www.garmin.com/en-US/c/marine/" },
 };
 
 
@@ -146,6 +165,8 @@ export function SustainableTechBrandPage() {
       ? waterdropProducts
       : brandSlug === "ecoflow"
       ? ecoflowProducts
+      : brandSlug === "garmin"
+      ? garminProducts
       : [];
 
 
@@ -207,6 +228,8 @@ export function SustainableTechBrandPage() {
                 ? "Advanced water filtration for pure life on the water: high-performance reverse osmosis and UV purification systems for luxury vessels."
                 : brandSlug === "ecoflow"
                 ? "Portable power solutions, including battery storage systems and solar generators designed for luxury yacht backup and off-grid reliability."
+                : brandSlug === "garmin"
+                ? "Industry-leading marine electronics—GPS chartplotters, sonar, radar, autopilots, and marine smartwatches trusted by captains worldwide."
                 : "Explore products from this brand."}
 
 

@@ -42,7 +42,16 @@ const brands: SustainableTechBrand[] = [
     name: "EcoFlow",
     description:
       "EcoFlow is a company that develops and manufactures portable power solutions, including battery storage systems, solar generators, and residential energy products. Its technologies are designed to provide reliable, sustainable electricity for off-grid use, backup power, and everyday energy needs.",
-    image: "/images/new-eco.webp",
+    image: "/images/eco-main2.png",
+
+  },
+
+  {
+    id: "garmin",
+    name: "GARMIN",
+    description:
+      "Industry-leading marine electronics and wearable tech. Garmin delivers precision GPS chartplotters, fishfinders, radar, autopilots, and rugged smartwatches built for life on the water—trusted by captains, charter crews, and ocean adventurers worldwide.",
+    image: "/images/garmin.png",
 
   },
 
