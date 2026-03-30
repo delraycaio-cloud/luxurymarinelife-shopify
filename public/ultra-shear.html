@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -364,6 +364,12 @@
             max-width: 180px;
             object-fit: contain;
             filter: drop-shadow(0 12px 50px rgba(0, 212, 232, 0.32)) drop-shadow(0 0 100px rgba(0, 212, 232, 0.13)) brightness(1.04);
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
+        }
+
+        .hero-product-float:hover .hero-bottle {
+            transform: scale(1.05) translateY(-10px);
+            filter: drop-shadow(0 20px 60px rgba(0, 212, 232, 0.5)) drop-shadow(0 0 120px rgba(0, 212, 232, 0.3)) brightness(1.1);
         }
 
         .featured-badge {
@@ -1027,11 +1033,15 @@
         }
 
         .card {
-            background: var(--abyss);
+            background: rgba(2, 6, 9, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(0, 212, 232, 0.08);
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4), inset 0 0 0 1px rgba(255, 255, 255, 0.02);
             padding: 2.5rem 2rem 2.5rem;
             position: relative;
             overflow: hidden;
-            transition: background .4s;
+            transition: all .4s cubic-bezier(.16, 1, .3, 1);
         }
 
         .card::before {
@@ -1048,16 +1058,28 @@
         }
 
         .card:hover {
-            background: rgba(255, 255, 255, .02);
+            background: rgba(10, 20, 30, 0.7);
+            border-color: rgba(0, 212, 232, 0.25);
+            box-shadow: 0 12px 40px rgba(0, 212, 232, 0.15), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+            transform: translateY(-4px);
         }
 
         .card:hover::before {
             transform: scaleX(1);
+            box-shadow: 0 0 20px var(--bio);
         }
 
         .card.anchor {
-            background: rgba(0, 212, 232, .03);
+            background: rgba(0, 212, 232, 0.06);
             border-top: 2px solid var(--bio);
+            box-shadow: 0 0 30px rgba(0, 212, 232, 0.08), inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+            border-color: rgba(0, 212, 232, 0.2);
+        }
+
+        .card.anchor:hover {
+            background: rgba(0, 212, 232, 0.1);
+            box-shadow: 0 15px 50px rgba(0, 212, 232, 0.25), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+            transform: translateY(-4px);
         }
 
         .card.anchor::before {
@@ -1181,6 +1203,18 @@
             letter-spacing: .1em;
             text-transform: uppercase;
             margin-top: .7rem;
+            display: inline-block;
+            padding: 0.4rem 0.8rem;
+            background: rgba(255, 107, 107, 0.1);
+            border: 1px solid rgba(255, 107, 107, 0.3);
+            border-radius: 2px;
+            animation: pulse-glow 2.5s infinite;
+        }
+
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 10px rgba(255, 107, 107, 0.1); }
+            50% { box-shadow: 0 0 20px rgba(255, 107, 107, 0.4); }
+            100% { box-shadow: 0 0 10px rgba(255, 107, 107, 0.1); }
         }
 
         .c-guarantee {
@@ -1550,7 +1584,7 @@
                     <span>See the Science</span>
                 </a>
             </div>
-            <p class="hero-price-pin">Founders single bottle from <strong>$64.00</strong> · 30-day guarantee</p>
+            <p class="hero-price-pin">Founders single bottle from <del style="opacity:0.6">$79.99</del> <strong>$64.00</strong> · 30-day guarantee</p>
         </div>
 
         <div class="scroll-cue" aria-hidden="true">
