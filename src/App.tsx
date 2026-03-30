@@ -3,6 +3,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import { CartProvider } from "@/context/CartContext";
+import { trackPageView } from "@/lib/analytics";
 import { Navigation } from "@/components/custom/Navigation";
 import { HeroSection } from "@/sections/HeroSection";
 import { StatementSection } from "@/sections/StatementSection";
@@ -325,6 +326,9 @@ function RoutedApp() {
     setMeta("name", "twitter:title", seo.title);
     setMeta("name", "twitter:description", seo.desc);
     setMeta("name", "twitter:image", seo.image);
+
+    // --- Google Analytics 4 Page View Tracking ---
+    trackPageView(path);
   }, [location.pathname]);
 
   if (isLmlRoute) {
