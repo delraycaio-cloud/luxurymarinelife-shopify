@@ -97,7 +97,7 @@ export function Pricing() {
           {pricingPlans.map((plan, index) => (
             <div
               key={plan.id}
-              className={`relative bg-white border h-full flex flex-col transition-all duration-700 hover:shadow-xl hover:-translate-y-3 ${plan.popular || plan.bestValue
+              className={`group relative bg-white border h-full flex flex-col transition-all duration-700 hover:shadow-xl hover:-translate-y-3 ${plan.popular || plan.bestValue
                   ? "border-[#D4A84B]"
                   : "border-gray-200"
                 } ${isInView
@@ -138,16 +138,16 @@ export function Pricing() {
                           <img
                             src={plan.defaultImage}
                             alt={`${plan.name} lifestyle`}
-                            className="absolute inset-0 h-full w-full object-contain drop-shadow-xl transition-opacity duration-500 group-hover/media:opacity-0"
+                            className="absolute inset-0 h-full w-full object-contain drop-shadow-xl transition-opacity duration-500 group-hover:opacity-0"
                           />
                           <img
                             src={plan.image}
                             alt={plan.name}
-                            className="absolute inset-0 h-full w-full object-contain drop-shadow-xl transition-opacity duration-500 opacity-0 group-hover/media:opacity-100"
+                            className="hero-bottle-glow absolute inset-0 h-full w-full object-contain drop-shadow-xl opacity-0 group-hover:opacity-100"
                           />
                         </>
                       ) : (
-                        <img src={plan.image} alt={plan.name} className="h-full object-contain drop-shadow-xl transition-transform duration-500 hover:scale-110" />
+                        <img src={plan.image} alt={plan.name} className="hero-bottle-glow h-full w-full object-contain drop-shadow-xl" />
                       )}
                     </div>
                   )}

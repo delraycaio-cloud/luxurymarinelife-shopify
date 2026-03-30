@@ -131,6 +131,19 @@ export function HeroSlideshow({ onNavigate }: HeroSlideshowProps) {
               >
                 {slides[currentSlide].cta}
               </button>
+              
+              <div 
+                className={`mt-8 transition-all duration-700 delay-700 ${
+                  isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+                }`}
+              >
+                <p className="inline-flex items-center gap-2 text-sm md:text-base tracking-widest uppercase text-white/90 bg-black/20 backdrop-blur-md px-4 py-2 rounded-sm border border-white/10">
+                  <span className="text-white/60 line-through">$79.99</span>
+                  <span className="font-semibold text-[#ff6b6b] animate-pulse-glow-red">$55.99 (30% OFF)</span>
+                  <span className="text-white/40">&middot;</span>
+                  <span>30-Day Guarantee</span>
+                </p>
+              </div>
             </div>
           </div>
         </div>

@@ -227,14 +227,14 @@ export function ProductGrid() {
                     <img
                       src={product.image}
                       alt={product.name}
-                      className="absolute inset-0 w-full h-full object-contain p-6 transition-all duration-500 opacity-0 group-hover:opacity-100 group-hover:scale-108 scale-125"
+                      className="hero-bottle-glow absolute inset-0 w-full h-full object-contain p-6 opacity-0 group-hover:opacity-100 scale-125"
                     />
                   </>
                 ) : (
                   <img
                     src={product.image}
                     alt={product.name}
-                    className="w-full h-full object-contain p-6 transition-transform duration-500 group-hover:scale-108 scale-125"
+                    className="hero-bottle-glow w-full h-full object-contain p-6 scale-125"
                   />
                 )}
                 {/* Badge */}

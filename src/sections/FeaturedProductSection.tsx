@@ -23,7 +23,7 @@ const product = {
   description:
     "Patented UST™ technology forces oil through 40,000 PSI to create particles 20–80 nm — small enough to bypass the gut and flood your bloodstream in minutes, not hours.",
   originalPrice: 79.99,
-  price: 64.0,
+  price: 55.99,
   image: "/oil.webp",
   category: "Supplements",
   badge: "Founder's Pricing",
@@ -101,16 +101,27 @@ export function FeaturedProductSection() {
       className="bg-marine-900 py-20 lg:py-28 overflow-hidden"
       aria-label="Featured Product & Boat Show Offer"
     >
+      <style>{`
+        @keyframes bottleSpin3D {
+          0% { transform: rotateY(0deg); }
+          100% { transform: rotateY(360deg); }
+        }
+        .bottle-spin-on-hover:hover {
+          animation: bottleSpin3D 2.5s linear infinite;
+          filter: drop-shadow(0 20px 60px rgba(0, 212, 232, 0.5)) drop-shadow(0 0 120px rgba(0, 212, 232, 0.3)) brightness(1.1);
+        }
+      `}</style>
       <div className="px-6 lg:px-[7vw]">
         {/* ── FEATURED PRODUCT (Nano Oil) ── */}
         <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
           <div ref={imageRef} className="w-full lg:w-[48vw] relative">
             <div className="relative lg:h-[72vh] bg-transparent flex items-center justify-center">
-              <div className="rounded-2xl overflow-hidden inline-block">
+              <div className="rounded-2xl overflow-hidden inline-block" style={{ perspective: '1000px' }}>
                 <img
                   src={product.image}
                   alt={product.name}
-                  className="block max-w-[390px] sm:max-w-[500px] lg:max-w-[620px] w-full h-auto rounded-2xl mix-blend-multiply contrast-110 saturate-110"
+                  className="block max-w-[390px] sm:max-w-[500px] lg:max-w-[620px] w-full h-auto rounded-2xl mix-blend-multiply contrast-110 saturate-110 bottle-spin-on-hover transition-all duration-300 transform-style-3d cursor-pointer"
+                  style={{ transformStyle: 'preserve-3d' }}
                   loading="lazy"
                 />
               </div>
@@ -196,8 +207,8 @@ export function FeaturedProductSection() {
               <span className="text-white font-display font-bold text-4xl">
                 ${product.price.toFixed(2)}
               </span>
-              <span className="label-elite text-teal border border-teal/30 rounded-full px-2 py-1">
-                Save 20%
+              <span className="label-elite text-[#ff6b6b] border border-[#ff6b6b]/30 rounded-full px-2 py-1 animate-pulse-glow-red">
+                Save 30%
               </span>
             </div>
 
@@ -222,7 +233,7 @@ export function FeaturedProductSection() {
                   id="featured-product-buy-cta"
                 >
                   <ShoppingBag className="w-4 h-4" aria-hidden="true" />
-                  Buy Now — $64
+                  Buy Now — $55.99
                 </Button>
               </a>
               <a

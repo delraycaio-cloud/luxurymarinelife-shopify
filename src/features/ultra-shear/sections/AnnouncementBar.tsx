@@ -29,9 +29,9 @@ export function AnnouncementBar() {
             </span>
           </div>
 
-          <span className="inline-flex items-center gap-1 bg-white/10 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs animate-pulse-subtle">
-            <Sparkles className="w-3 h-3" />
-            20% SUPER SALE: Limited Stock
+          <span className="inline-flex items-center gap-1 text-[10px] sm:text-xs text-white animate-pulse-glow-red font-semibold tracking-wider">
+            <Sparkles className="w-3 h-3 text-[#ff6b6b]" />
+            30% SUPER SALE: Limited Stock
           </span>
         </div>
       </div>
